@@ -1,0 +1,626 @@
+
+<!DOCTYPE html>
+<html class="dark" dir="rtl" lang="ar">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>إضافة مريض - عيادة الأثير للبصريات</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;family=Tajawal:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#00BCD4",
+              "secondary": "#64748b",
+              "surface": "#f8fafc",
+              "on-surface": "#0f172a",
+              "background": "#ffffff",
+              "surface-container": "#191f31",
+            },
+            borderRadius: {
+              "DEFAULT": "1rem",
+              "lg": "2rem",
+              "xl": "3rem",
+              "full": "9999px"
+            },
+            fontFamily: {
+              "headline": ["Tajawal", "Manrope"],
+              "body": ["Tajawal", "Plus Jakarta Sans"],
+              "label": ["Tajawal", "Plus Jakarta Sans"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        /* Glassmorphism Logic */
+        .glass-card {
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        .light .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(0, 188, 212, 0.1);
+        }
+
+        /* Glow Effects */
+        .text-glow-primary {
+            text-shadow: 0 0 12px rgba(85, 233, 237, 0.4);
+        }
+        .light .text-glow-primary {
+            text-shadow: 0 0 8px rgba(0, 188, 212, 0.3);
+        }
+        .text-glow-white {
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+        .light .text-glow-white {
+            text-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Backgrounds */
+        .mesh-gradient {
+            transition: background 0.5s ease;
+            background-attachment: fixed;
+        }
+        .dark .mesh-gradient {
+            background: linear-gradient(135deg, #0c1324 0%, #1e1b4b 50%, #312e81 100%);
+        }
+        .light .mesh-gradient {
+            background: radial-gradient(at 0% 0%, rgba(0, 188, 212, 0.05) 0%, transparent 50%),
+                        radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.05) 0%, transparent 50%),
+                        #f8fafc;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        /* Custom Input Styles */
+        .custom-input {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        .light .custom-input {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(0, 188, 212, 0.2);
+        }
+        .custom-input:focus {
+            border-color: #00BCD4;
+            box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.2);
+        }
+        
+        /* Eye Card Gradients */
+        .eye-right-gradient {
+            background: linear-gradient(135deg, rgba(0, 188, 212, 0.2), rgba(6, 182, 212, 0.1));
+        }
+        .light .eye-right-gradient {
+            background: linear-gradient(135deg, rgba(207, 250, 254, 0.9), rgba(165, 243, 252, 0.9));
+        }
+        
+        .eye-left-gradient {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(124, 58, 237, 0.1));
+        }
+        .light .eye-left-gradient {
+            background: linear-gradient(135deg, rgba(245, 243, 255, 0.9), rgba(237, 233, 254, 0.9));
+        }
+        
+        /* Stepper Buttons */
+        .stepper-btn {
+            background: rgba(0, 188, 212, 0.2);
+            border: 1px solid rgba(0, 188, 212, 0.3);
+            transition: all 0.2s ease;
+        }
+        .stepper-btn:hover {
+            background: rgba(0, 188, 212, 0.3);
+        }
+        .stepper-btn:active {
+            transform: scale(0.95);
+        }
+        
+        /* Print Styles */
+        @media print {
+            @page { size: A5; margin: 10mm; }
+            body * { visibility: hidden; }
+            #print-area, #print-area * { visibility: visible; }
+            #print-area {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                background: white !important;
+                color: black !important;
+            }
+            .no-print { display: none !important; }
+        }
+        
+        body {
+          min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+<body class="mesh-gradient min-h-screen pb-32 overflow-x-hidden text-slate-900 dark:text-slate-100">
+
+<!-- TopAppBar -->
+<header class="bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl border-b border-black/5 dark:border-white/5 shadow-sm flex justify-between items-center px-6 h-20 w-full z-50 fixed top-0 left-0 transition-colors">
+<div class="flex items-center gap-4">
+<button class="text-slate-600 dark:text-slate-300 hover:bg-black/5 dark:hover:bg-white/5 transition-colors p-2 rounded-full" id="menu-btn">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="text-2xl font-bold bg-gradient-to-r from-cyan-600 to-purple-600 dark:from-cyan-400 dark:to-purple-400 bg-clip-text text-transparent font-headline tracking-tight">The Ethereal Clinic</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="text-cyan-600 dark:text-cyan-400 p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button class="text-slate-600 dark:text-slate-300 p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/5 transition-colors" id="theme-toggle">
+<span class="material-symbols-outlined dark:hidden">dark_mode</span>
+<span class="material-symbols-outlined hidden dark:block">light_mode</span>
+</button>
+</div>
+</header>
+
+<main class="px-4 pt-28 space-y-6 max-w-lg mx-auto">
+
+<!-- Page Title -->
+<section class="space-y-1 no-print">
+<p class="text-slate-500 dark:text-secondary text-sm font-medium">صفحة جديدة</p>
+<h2 class="text-3xl font-extrabold text-slate-900 dark:text-white dark:text-glow-white">إضافة مريض جديد</h2>
+</section>
+
+<!-- Patient Form -->
+<section class="space-y-4 no-print">
+
+<!-- Personal Info Card -->
+<div class="glass-card rounded-2xl p-6 space-y-4">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 rounded-full bg-cyan-100 dark:bg-cyan-500/20 flex items-center justify-center text-cyan-600 dark:text-cyan-400">
+<span class="material-symbols-outlined">person</span>
+</div>
+<h3 class="text-lg font-bold text-slate-900 dark:text-white">المعلومات الشخصية</h3>
+</div>
+
+<!-- Full Name -->
+<div class="space-y-2">
+<label class="text-sm font-medium text-slate-700 dark:text-slate-300">الاسم الكامل</label>
+<input class="custom-input w-full rounded-xl px-4 py-3 text-right outline-none bg-transparent text-slate-900 dark:text-white placeholder-slate-400" id="fullName" placeholder="أدخل الاسم الكامل للمريض" type="text"/>
+</div>
+
+<!-- Birth Date -->
+<div class="space-y-2">
+<label class="text-sm font-medium text-slate-700 dark:text-slate-300">تاريخ الميلاد</label>
+<input class="custom-input w-full rounded-xl px-4 py-3 text-right outline-none bg-transparent text-slate-900 dark:text-white" id="birthDate" type="date"/>
+</div>
+
+<!-- Address -->
+<div class="space-y-2">
+<label class="text-sm font-medium text-slate-700 dark:text-slate-300">العنوان</label>
+<input class="custom-input w-full rounded-xl px-4 py-3 text-right outline-none bg-transparent text-slate-900 dark:text-white placeholder-slate-400" id="address" placeholder="المنطقة / الحي / أقرب نقطة دالة" type="text"/>
+</div>
+
+<!-- Phone -->
+<div class="space-y-2">
+<label class="text-sm font-medium text-slate-700 dark:text-slate-300">رقم الهاتف</label>
+<input class="custom-input w-full rounded-xl px-4 py-3 text-right outline-none bg-transparent text-slate-900 dark:text-white placeholder-slate-400" id="phone" placeholder="07XX XXX XXXX" type="tel"/>
+</div>
+</div>
+
+<!-- Eye Prescription Section -->
+<div class="glass-card rounded-2xl p-6 space-y-4">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-500/20 flex items-center justify-center text-purple-600 dark:text-purple-300">
+<span class="material-symbols-outlined">visibility</span>
+</div>
+<h3 class="text-lg font-bold text-slate-900 dark:text-white">النظرة الطبية</h3>
+</div>
+
+<!-- Right Eye -->
+<div class="eye-right-gradient rounded-xl p-4 border border-cyan-200 dark:border-cyan-500/20">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-cyan-600 dark:text-cyan-400">visibility</span>
+<h4 class="font-bold text-cyan-700 dark:text-cyan-400">العين اليمنى (OD)</h4>
+</div>
+
+<div class="grid grid-cols-2 gap-3">
+<!-- SPH -->
+<div class="space-y-2">
+<label class="text-xs font-medium text-slate-600 dark:text-slate-400">SPH (Sphere)</label>
+<div class="flex items-center gap-2">
+<button class="stepper-btn w-8 h-8 rounded-lg flex items-center justify-center text-cyan-600 dark:text-cyan-400 text-lg font-bold" onclick="adjustValue('rightSph', -0.25)">−</button>
+<input class="custom-input flex-1 rounded-lg px-2 py-2 text-center text-sm outline-none bg-transparent" id="rightSph" readonly="" type="text" value="+0.00"/>
+<button class="stepper-btn w-8 h-8 rounded-lg flex items-center justify-center text-cyan-600 dark:text-cyan-400 text-lg font-bold" onclick="adjustValue('rightSph', 0.25)">+</button>
+</div>
+</div>
+
+<!-- CYL -->
+<div class="space-y-2">
+<label class="text-xs font-medium text-slate-600 dark:text-slate-400">CYL (Cylinder)</label>
+<div class="flex items-center gap-2">
+<button class="stepper-btn w-8 h-8 rounded-lg flex items-center justify-center text-cyan-600 dark:text-cyan-400 text-lg font-bold" onclick="adjustValue('rightCyl', -0.25)">−</button>
+<input class="custom-input flex-1 rounded-lg px-2 py-2 text-center text-sm outline-none bg-transparent" id="rightCyl" readonly="" type="text" value="+0.00"/>
+<button class="stepper-btn w-8 h-8 rounded-lg flex items-center justify-center text-cyan-600 dark:text-cyan-400 text-lg font-bold" onclick="adjustValue('rightCyl', 0.25)">+</button>
+</div>
+</div>
+
+<!-- AXIS -->
+<div class="space-y-2">
+<label class="text-xs font-medium text-slate-600 dark:text-slate-400">AXIS (1-180°)</label>
+<div class="flex items-center gap-2">
+<button class="stepper-btn w-8 h-8 rounded-lg flex items-center justify-center text-cyan-600 dark:text-cyan-400 text-lg font-bold" onclick="adjustAxis('rightAxis', -1)">−</button>
+<input class="custom-input flex-1 rounded-lg px-2 py-2 text-center text-sm outline-none bg-transparent" id="rightAxis" readonly="" type="text" value="0"/>
+<button class="stepper-btn w-8 h-8 rounded-lg flex items-center justify-center text-cyan-600 dark:text-cyan-400 text-lg font-bold" onclick="adjustAxis('rightAxis', 1)">+</button>
+</div>
+</div>
+
+<!-- ADD -->
+<div class="space-y-2">
+<label class="text-xs font-medium text-slate-600 dark:text-slate-400">ADD (+0.50 to +4.00)</label>
+<div class="flex items-center gap-2">
+<button class="stepper-btn w-8 h-8 rounded-lg flex items-center justify-center text-cyan-600 dark:text-cyan-400 text-lg font-bold" onclick="adjustAdd('rightAdd', -0.25)">−</button>
+<input class="custom-input flex-1 rounded-lg px-2 py-2 text-center text-sm outline-none bg-transparent" id="rightAdd" readonly="" type="text" value="+0.00"/>
+<button class="stepper-btn w-8 h-8 rounded-lg flex items-center justify-center text-cyan-600 dark:text-cyan-400 text-lg font-bold" onclick="adjustAdd('rightAdd', 0.25)">+</button>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Left Eye -->
+<div class="eye-left-gradient rounded-xl p-4 border border-purple-200 dark:border-purple-500/20">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-purple-600 dark:text-purple-300">visibility</span>
+<h4 class="font-bold text-purple-700 dark:text-purple-400">العين اليسرى (OS)</h4>
+</div>
+
+<div class="grid grid-cols-2 gap-3">
+<!-- SPH -->
+<div class="space-y-2">
+<label class="text-xs font-medium text-slate-600 dark:text-slate-400">SPH (Sphere)</label>
+<div class="flex items-center gap-2">
+<button class="stepper-btn w-8 h-8 rounded-lg flex items-center justify-center text-purple-600 dark:text-purple-400 text-lg font-bold" onclick="adjustValue('leftSph', -0.25)">−</button>
+<input class="custom-input flex-1 rounded-lg px-2 py-2 text-center text-sm outline-none bg-transparent" id="leftSph" readonly="" type="text" value="+0.00"/>
+<button class="stepper-btn w-8 h-8 rounded-lg flex items-center justify-center text-purple-600 dark:text-purple-400 text-lg font-bold" onclick="adjustValue('leftSph', 0.25)">+</button>
+</div>
+</div>
+
+<!-- CYL -->
+<div class="space-y-2">
+<label class="text-xs font-medium text-slate-600 dark:text-slate-400">CYL (Cylinder)</label>
+<div class="flex items-center gap-2">
+<button class="stepper-btn w-8 h-8 rounded-lg flex items-center justify-center text-purple-600 dark:text-purple-400 text-lg font-bold" onclick="adjustValue('leftCyl', -0.25)">−</button>
+<input class="custom-input flex-1 rounded-lg px-2 py-2 text-center text-sm outline-none bg-transparent" id="leftCyl" readonly="" type="text" value="+0.00"/>
+<button class="stepper-btn w-8 h-8 rounded-lg flex items-center justify-center text-purple-600 dark:text-purple-400 text-lg font-bold" onclick="adjustValue('leftCyl', 0.25)">+</button>
+</div>
+</div>
+
+<!-- AXIS -->
+<div class="space-y-2">
+<label class="text-xs font-medium text-slate-600 dark:text-slate-400">AXIS (1-180°)</label>
+<div class="flex items-center gap-2">
+<button class="stepper-btn w-8 h-8 rounded-lg flex items-center justify-center text-purple-600 dark:text-purple-400 text-lg font-bold" onclick="adjustAxis('leftAxis', -1)">−</button>
+<input class="custom-input flex-1 rounded-lg px-2 py-2 text-center text-sm outline-none bg-transparent" id="leftAxis" readonly="" type="text" value="0"/>
+<button class="stepper-btn w-8 h-8 rounded-lg flex items-center justify-center text-purple-600 dark:text-purple-400 text-lg font-bold" onclick="adjustAxis('leftAxis', 1)">+</button>
+</div>
+</div>
+
+<!-- ADD -->
+<div class="space-y-2">
+<label class="text-xs font-medium text-slate-600 dark:text-slate-400">ADD (+0.50 to +4.00)</label>
+<div class="flex items-center gap-2">
+<button class="stepper-btn w-8 h-8 rounded-lg flex items-center justify-center text-purple-600 dark:text-purple-400 text-lg font-bold" onclick="adjustAdd('leftAdd', -0.25)">−</button>
+<input class="custom-input flex-1 rounded-lg px-2 py-2 text-center text-sm outline-none bg-transparent" id="leftAdd" readonly="" type="text" value="+0.00"/>
+<button class="stepper-btn w-8 h-8 rounded-lg flex items-center justify-center text-purple-600 dark:text-purple-400 text-lg font-bold" onclick="adjustAdd('leftAdd', 0.25)">+</button>
+</div>
+</div>
+</div>
+</div>
+
+<!-- PD (Pupillary Distance) -->
+<div class="bg-gradient-to-r from-amber-100/50 to-orange-100/50 dark:from-amber-500/10 dark:to-orange-500/10 rounded-xl p-4 border border-amber-200 dark:border-amber-500/20">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-amber-600 dark:text-amber-400">straighten</span>
+<h4 class="font-bold text-amber-700 dark:text-amber-400">المسافة بين الحدقتين (PD)</h4>
+</div>
+<span class="text-xs text-slate-500 dark:text-slate-400">mm</span>
+</div>
+<div class="flex items-center gap-3">
+<button class="stepper-btn w-10 h-10 rounded-lg flex items-center justify-center text-amber-600 dark:text-amber-400 text-xl font-bold" onclick="adjustPD(-1)">−</button>
+<input class="custom-input flex-1 rounded-lg px-4 py-3 text-center text-xl font-bold outline-none bg-transparent text-amber-700 dark:text-amber-400" id="pd" readonly="" type="text" value="62"/>
+<button class="stepper-btn w-10 h-10 rounded-lg flex items-center justify-center text-amber-600 dark:text-amber-400 text-xl font-bold" onclick="adjustPD(1)">+</button>
+</div>
+</div>
+
+</div>
+
+<!-- Action Buttons -->
+<div class="grid grid-cols-2 gap-4 no-print">
+<button class="glass-card bg-gradient-to-br from-cyan-500/20 to-cyan-600/20 dark:from-cyan-500/30 dark:to-cyan-600/30 rounded-xl py-4 flex items-center justify-center gap-2 hover:scale-105 active:scale-95 transition-all border-cyan-200 dark:border-cyan-500/30" onclick="savePatient()">
+<span class="material-symbols-outlined text-cyan-600 dark:text-cyan-400">save</span>
+<span class="font-bold text-cyan-700 dark:text-cyan-400">حفظ في الأرشيف</span>
+</button>
+<button class="glass-card bg-gradient-to-br from-purple-500/20 to-purple-600/20 dark:from-purple-500/30 dark:to-purple-600/30 rounded-xl py-4 flex items-center justify-center gap-2 hover:scale-105 active:scale-95 transition-all border-purple-200 dark:border-purple-500/30" onclick="printPrescription()">
+<span class="material-symbols-outlined text-purple-600 dark:text-purple-400">print</span>
+<span class="font-bold text-purple-700 dark:text-purple-400">طباعة (A5)</span>
+</button>
+</div>
+
+</section>
+
+<!-- Print Area (Hidden until print) -->
+<div class="hidden" id="print-area">
+<div class="p-8" style="font-family: 'Tajawal', sans-serif; background: white; color: black;">
+<div class="text-center mb-6">
+<h1 style="font-size: 24px; font-weight: bold; color: #00BCD4; margin-bottom: 8px;">عيادة الأثير للبصريات</h1>
+<p style="font-size: 14px; color: #666;">The Ethereal Clinic</p>
+<p style="font-size: 12px; color: #999; margin-top: 4px;">وصفة طبية للنظارات</p>
+</div>
+
+<div style="border: 2px solid #00BCD4; border-radius: 12px; padding: 16px; margin-bottom: 20px;">
+<h3 style="font-size: 16px; font-weight: bold; margin-bottom: 12px; color: #333;">معلومات المريض</h3>
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 13px;">
+<div><strong>الاسم:</strong> <span id="printName">-</span></div>
+<div><strong>تاريخ الميلاد:</strong> <span id="printBirth">-</span></div>
+<div><strong>العنوان:</strong> <span id="printAddress">-</span></div>
+<div><strong>الهاتف:</strong> <span id="printPhone">-</span></div>
+</div>
+</div>
+
+<div style="border: 2px solid #8B5CF6; border-radius: 12px; padding: 16px; margin-bottom: 20px;">
+<h3 style="font-size: 16px; font-weight: bold; margin-bottom: 12px; color: #333;">النظرة الطبية</h3>
+<table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+<thead>
+<tr style="background: #f0f0f0;">
+<th style="border: 1px solid #ddd; padding: 8px;">العين</th>
+<th style="border: 1px solid #ddd; padding: 8px;">SPH</th>
+<th style="border: 1px solid #ddd; padding: 8px;">CYL</th>
+<th style="border: 1px solid #ddd; padding: 8px;">AXIS</th>
+<th style="border: 1px solid #ddd; padding: 8px;">ADD</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border: 1px solid #ddd; padding: 8px; text-align: center;">اليمنى (OD)</td>
+<td style="border: 1px solid #ddd; padding: 8px; text-align: center;" id="printRightSph">-</td>
+<td style="border: 1px solid #ddd; padding: 8px; text-align: center;" id="printRightCyl">-</td>
+<td style="border: 1px solid #ddd; padding: 8px; text-align: center;" id="printRightAxis">-</td>
+<td style="border: 1px solid #ddd; padding: 8px; text-align: center;" id="printRightAdd">-</td>
+</tr>
+<tr>
+<td style="border: 1px solid #ddd; padding: 8px; text-align: center;">اليسرى (OS)</td>
+<td style="border: 1px solid #ddd; padding: 8px; text-align: center;" id="printLeftSph">-</td>
+<td style="border: 1px solid #ddd; padding: 8px; text-align: center;" id="printLeftCyl">-</td>
+<td style="border: 1px solid #ddd; padding: 8px; text-align: center;" id="printLeftAxis">-</td>
+<td style="border: 1px solid #ddd; padding: 8px; text-align: center;" id="printLeftAdd">-</td>
+</tr>
+</tbody>
+</table>
+<div style="margin-top: 12px; text-align: center;">
+<strong>PD (المسافة بين الحدقتين):</strong> <span id="printPD">-</span> mm
+</div>
+</div>
+
+<div style="text-align: center; font-size: 11px; color: #999; margin-top: 30px;">
+<p>تم إصدار هذه الوصفة بتاريخ: <span id="printDate">-</span></p>
+<p>عيادة الأثير للبصريات - جميع الحقوق محفوظة</p>
+</div>
+</div>
+</div>
+
+</main>
+
+<!-- BottomNavBar -->
+<nav class="bg-white/80 dark:bg-slate-900/40 backdrop-blur-lg fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 pb-safe rounded-t-[2rem] border-t border-slate-200 dark:border-white/5 shadow-[0_-10px_30px_rgba(0,0,0,0.4)] transition-colors">
+<a class="flex flex-col items-center justify-center text-slate-400 py-2 hover:text-cyan-600 dark:hover:text-cyan-300 active:scale-90 transition-transform" href="index.html">
+<span class="material-symbols-outlined text-2xl">home</span>
+<span class="font-label text-xs font-medium mt-1">الرئيسية</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-gradient-to-br from-cyan-500/20 to-purple-500/20 dark:from-cyan-500/30 dark:to-purple-500/30 text-cyan-600 dark:text-cyan-400 rounded-lg px-6 py-2 active:scale-95 transition-all border border-white/20 dark:border-white/10 backdrop-blur-md shadow-lg shadow-cyan-500/10" href="add-patient.html">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">person_add</span>
+<span class="font-label text-xs font-medium mt-1">إضافة مريض</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 py-2 hover:text-cyan-600 dark:hover:text-cyan-300 active:scale-90 transition-transform" href="archive.html">
+<span class="material-symbols-outlined text-2xl">inventory</span>
+<span class="font-label text-xs font-medium mt-1">الأرشيف</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 py-2 hover:text-cyan-600 dark:hover:text-cyan-300 active:scale-90 transition-transform" href="settings.html">
+<span class="material-symbols-outlined text-2xl">settings</span>
+<span class="font-label text-xs font-medium mt-1">الإعدادات</span>
+</a>
+</nav>
+
+<!-- Sidebar Overlay -->
+<div class="fixed inset-0 bg-slate-900/40 dark:bg-black/60 backdrop-blur-sm z-[55] opacity-0 pointer-events-none transition-opacity duration-300" id="sidebar-overlay"></div>
+
+<!-- NavigationDrawer (Sidebar) -->
+<div class="fixed inset-y-0 right-0 z-[60] flex flex-col bg-white dark:bg-slate-900/90 backdrop-blur-2xl h-full w-80 rounded-l-3xl border-l border-slate-100 dark:border-white/10 shadow-2xl translate-x-full transition-transform duration-300" id="sidebar">
+<div class="p-8 space-y-8">
+<div class="text-xl font-black bg-gradient-to-r from-cyan-600 to-purple-600 dark:from-cyan-400 dark:to-purple-400 bg-clip-text text-transparent">Ethereal Menu</div>
+<div class="space-y-4 px-2">
+<a class="flex items-center gap-4 p-3 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-lg" href="index.html">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body font-medium text-right">الرئيسية</span>
+</a>
+<div class="flex items-center gap-4 p-3 bg-cyan-50 dark:bg-white/10 text-cyan-600 dark:text-cyan-400 border-r-4 border-cyan-600 dark:border-cyan-400 rounded-lg">
+<span class="material-symbols-outlined">person_add</span>
+<span class="font-body font-medium text-right">إضافة مريض</span>
+</div>
+<a class="flex items-center gap-4 p-3 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-lg" href="archive.html">
+<span class="material-symbols-outlined">inventory</span>
+<span class="font-body font-medium text-right">أرشيف المرضى</span>
+</a>
+<a class="flex items-center gap-4 p-3 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-lg" href="expenses.html">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-body font-medium text-right">إضافة مصروف</span>
+</a>
+<a class="flex items-center gap-4 p-3 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-lg" href="reports.html">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-body font-medium text-right">التقارير</span>
+</a>
+<div class="border-t border-slate-100 dark:border-white/10 mt-4 pt-4 space-y-4">
+<a class="flex items-center gap-4 p-3 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-lg" href="settings.html">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body font-medium text-right">الإعدادات</span>
+</a>
+<button class="flex items-center gap-4 p-3 text-red-500 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10 transition-all rounded-lg w-full">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-body font-medium text-right">تسجيل الخروج</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+
+<script>
+    // Theme Toggle
+    const html = document.documentElement;
+    const themeToggle = document.getElementById('theme-toggle');
+    const sidebar = document.getElementById('sidebar');
+    const menuBtn = document.getElementById('menu-btn');
+    const overlay = document.getElementById('sidebar-overlay');
+
+    themeToggle.addEventListener('click', () => {
+        if (html.classList.contains('dark')) {
+            html.classList.remove('dark');
+            html.classList.add('light');
+        } else {
+            html.classList.remove('light');
+            html.classList.add('dark');
+        }
+    });
+
+    menuBtn.addEventListener('click', () => {
+        sidebar.classList.remove('translate-x-full');
+        overlay.classList.remove('opacity-0', 'pointer-events-none');
+    });
+
+    overlay.addEventListener('click', () => {
+        sidebar.classList.add('translate-x-full');
+        overlay.classList.add('opacity-0', 'pointer-events-none');
+    });
+
+    // Value Adjustment Functions
+    function adjustValue(id, delta) {
+        const input = document.getElementById(id);
+        let value = parseFloat(input.value) || 0;
+        value += delta;
+        
+        // Limits
+        const max = id.includes('Sph') ? 25 : 8;
+        const min = id.includes('Sph') ? -25 : -8;
+        
+        if (value > max) value = max;
+        if (value < min) value = min;
+        
+        // Format with sign
+        const sign = value >= 0 ? '+' : '';
+        input.value = sign + value.toFixed(2);
+    }
+
+    function adjustAxis(id, delta) {
+        const input = document.getElementById(id);
+        let value = parseInt(input.value) || 0;
+        value += delta;
+        
+        if (value > 180) value = 180;
+        if (value < 1) value = 1;
+        
+        input.value = value;
+    }
+
+    function adjustAdd(id, delta) {
+        const input = document.getElementById(id);
+        let value = parseFloat(input.value) || 0;
+        value += delta;
+        
+        if (value > 4.00) value = 4.00;
+        if (value < 0.50) value = 0.00;
+        
+        const sign = value >= 0 ? '+' : '';
+        input.value = sign + value.toFixed(2);
+    }
+
+    function adjustPD(delta) {
+        const input = document.getElementById('pd');
+        let value = parseInt(input.value) || 62;
+        value += delta;
+        
+        if (value > 75) value = 75;
+        if (value < 1) value = 1;
+        
+        input.value = value;
+    }
+
+    // Save Patient
+    function savePatient() {
+        const patient = {
+            id: Date.now(),
+            fullName: document.getElementById('fullName').value,
+            birthDate: document.getElementById('birthDate').value,
+            address: document.getElementById('address').value,
+            phone: document.getElementById('phone').value,
+            rightEye: {
+                sph: document.getElementById('rightSph').value,
+                cyl: document.getElementById('rightCyl').value,
+                axis: document.getElementById('rightAxis').value,
+                add: document.getElementById('rightAdd').value
+            },
+            leftEye: {
+                sph: document.getElementById('leftSph').value,
+                cyl: document.getElementById('leftCyl').value,
+                axis: document.getElementById('leftAxis').value,
+                add: document.getElementById('leftAdd').value
+            },
+            pd: document.getElementById('pd').value,
+            createdAt: new Date().toISOString()
+        };
+
+        // Get existing patients
+        let patients = JSON.parse(localStorage.getItem('patients') || '[]');
+        patients.push(patient);
+        localStorage.setItem('patients', JSON.stringify(patients));
+
+        alert('تم حفظ المريض بنجاح في الأرشيف!');
+    }
+
+    // Print Prescription
+    function printPrescription() {
+        // Fill print area
+        document.getElementById('printName').textContent = document.getElementById('fullName').value || '-';
+        document.getElementById('printBirth').textContent = document.getElementById('birthDate').value || '-';
+        document.getElementById('printAddress').textContent = document.getElementById('address').value || '-';
+        document.getElementById('printPhone').textContent = document.getElementById('phone').value || '-';
+        
+        document.getElementById('printRightSph').textContent = document.getElementById('rightSph').value;
+        document.getElementById('printRightCyl').textContent = document.getElementById('rightCyl').value;
+        document.getElementById('printRightAxis').textContent = document.getElementById('rightAxis').value;
+        document.getElementById('printRightAdd').textContent = document.getElementById('rightAdd').value;
+        
+        document.getElementById('printLeftSph').textContent = document.getElementById('leftSph').value;
+        document.getElementById('printLeftCyl').textContent = document.getElementById('leftCyl').value;
+        document.getElementById('printLeftAxis').textContent = document.getElementById('leftAxis').value;
+        document.getElementById('printLeftAdd').textContent = document.getElementById('leftAdd').value;
+        
+        document.getElementById('printPD').textContent = document.getElementById('pd').value;
+        document.getElementById('printDate').textContent = new Date().toLocaleDateString('ar-IQ');
+
+        window.print();
+    }
+</script>
+
+</body>
+</html>
+
