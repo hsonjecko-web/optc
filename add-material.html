@@ -1,0 +1,267 @@
+
+# إنشاء الملفات المتبقية بسرعة
+
+# 2. add-material.html
+add_material_html = '''<!DOCTYPE html>
+<html class="dark" dir="rtl" lang="ar">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>إضافة مواد - عيادة الأثير للبصريات</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;family=Tajawal:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: { "primary": "#00BCD4", "secondary": "#64748b", "surface": "#f8fafc", "on-surface": "#0f172a", "background": "#ffffff", "surface-container": "#191f31" },
+      borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" },
+      fontFamily: { "headline": ["Tajawal", "Manrope"], "body": ["Tajawal", "Plus Jakarta Sans"], "label": ["Tajawal", "Plus Jakarta Sans"] }
+    },
+  },
+}
+</script>
+<style>
+body { font-family: 'Tajawal', sans-serif; transition: background-color 0.3s ease, color 0.3s ease; }
+.glass-card { backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); transition: all 0.3s ease; }
+.light .glass-card { background: rgba(255,255,255,0.7); border: 1px solid rgba(0,188,212,0.1); }
+.text-glow-white { text-shadow: 0 0 10px rgba(255,255,255,0.3); }
+.light .text-glow-white { text-shadow: 0 0 8px rgba(0,0,0,0.1); }
+.mesh-gradient { transition: background 0.5s ease; background-attachment: fixed; }
+.dark .mesh-gradient { background: linear-gradient(135deg, #0c1324 0%, #1e1b4b 50%, #312e81 100%); }
+.light .mesh-gradient { background: radial-gradient(at 0% 0%, rgba(0,188,212,0.05) 0%, transparent 50%), radial-gradient(at 100% 100%, rgba(139,92,246,0.05) 0%, transparent 50%), #f8fafc; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+body { min-height: max(884px, 100dvh); }
+.sidebar-compact { width: 280px !important; }
+.sidebar-compact .nav-item { padding: 0.5rem 0.75rem !important; }
+.sidebar-compact .nav-icon { font-size: 1.25rem !important; }
+.sidebar-compact .nav-text { font-size: 0.875rem !important; }
+</style>
+</head>
+<body class="mesh-gradient min-h-screen pb-32 overflow-x-hidden text-slate-900 dark:text-slate-100">
+
+<header class="bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl border-b border-black/5 dark:border-white/5 shadow-sm flex justify-between items-center px-6 h-20 w-full z-50 fixed top-0 left-0">
+  <div class="flex items-center gap-4">
+    <button class="text-slate-600 dark:text-slate-300 hover:bg-black/5 dark:hover:bg-white/5 transition-colors p-2 rounded-full" id="menu-btn">
+      <span class="material-symbols-outlined">menu</span>
+    </button>
+    <h1 class="text-xl font-bold bg-gradient-to-r from-cyan-600 to-purple-600 dark:from-cyan-400 dark:to-purple-400 bg-clip-text text-transparent font-headline" id="appTitle">The Ethereal Clinic</h1>
+  </div>
+  <div class="flex items-center gap-2">
+    <button class="text-slate-600 dark:text-slate-300 p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/5 transition-colors" id="theme-toggle">
+      <span class="material-symbols-outlined dark:hidden">dark_mode</span>
+      <span class="material-symbols-outlined hidden dark:block">light_mode</span>
+    </button>
+  </div>
+</header>
+
+<main class="px-4 pt-28 space-y-6 max-w-lg mx-auto">
+  <section class="space-y-1">
+    <p class="text-slate-500 dark:text-secondary text-sm font-medium">إضافة للمخزون</p>
+    <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white dark:text-glow-white">إضافة مواد جديدة</h2>
+  </section>
+
+  <section class="space-y-4">
+    <div class="glass-card rounded-2xl p-6 space-y-4">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-full bg-cyan-100 dark:bg-cyan-500/20 flex items-center justify-center text-cyan-600 dark:text-cyan-400">
+          <span class="material-symbols-outlined">add_box</span>
+        </div>
+        <h3 class="text-lg font-bold text-slate-900 dark:text-white">بيانات المادة</h3>
+      </div>
+
+      <div class="space-y-4">
+        <div class="space-y-2">
+          <label class="text-sm font-medium text-slate-700 dark:text-slate-300">اسم المادة</label>
+          <input class="w-full bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-right outline-none focus:border-cyan-500 text-slate-900 dark:text-white" id="materialName" placeholder="اسم المادة" type="text"/>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div class="space-y-2">
+            <label class="text-sm font-medium text-slate-700 dark:text-slate-300">الفئة</label>
+            <select class="w-full bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-right outline-none focus:border-cyan-500 text-slate-900 dark:text-white" id="materialCategory">
+              <option value="">اختر الفئة</option>
+              <option value="عدسات">عدسات</option>
+              <option value="إطارات">إطارات</option>
+              <option value="مستلزمات طبية">مستلزمات طبية</option>
+              <option value="مواد نظافة">مواد نظافة</option>
+              <option value="أخرى">أخرى</option>
+            </select>
+          </div>
+          <div class="space-y-2">
+            <label class="text-sm font-medium text-slate-700 dark:text-slate-300">الوحدة</label>
+            <select class="w-full bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-right outline-none focus:border-cyan-500 text-slate-900 dark:text-white" id="materialUnit">
+              <option value="قطعة">قطعة</option>
+              <option value="زوج">زوج</option>
+              <option value="علبة">علبة</option>
+              <option value="حبة">حبة</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div class="space-y-2">
+            <label class="text-sm font-medium text-slate-700 dark:text-slate-300">الكمية</label>
+            <input class="w-full bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-right outline-none focus:border-cyan-500 text-slate-900 dark:text-white" id="materialQuantity" placeholder="0" type="number" min="0"/>
+          </div>
+          <div class="space-y-2">
+            <label class="text-sm font-medium text-slate-700 dark:text-slate-300">الحد الأدنى</label>
+            <input class="w-full bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-right outline-none focus:border-cyan-500 text-slate-900 dark:text-white" id="materialMin" placeholder="5" type="number" min="0"/>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <label class="text-sm font-medium text-slate-700 dark:text-slate-300">سعر الوحدة (د.ع)</label>
+          <input class="w-full bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-right outline-none focus:border-cyan-500 text-slate-900 dark:text-white" id="materialPrice" placeholder="0.00" type="number" step="0.01"/>
+        </div>
+      </div>
+
+      <button class="w-full mt-6 bg-gradient-to-r from-cyan-500 to-cyan-600 text-white rounded-xl py-4 font-bold hover:shadow-lg hover:shadow-cyan-500/30 transition-all active:scale-95 flex items-center justify-center gap-2" onclick="saveMaterial()">
+        <span class="material-symbols-outlined">save</span>
+        <span>حفظ المادة</span>
+      </button>
+    </div>
+  </section>
+</main>
+
+<nav class="bg-white/80 dark:bg-slate-900/40 backdrop-blur-lg fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 rounded-t-[2rem] border-t border-slate-200 dark:border-white/5">
+  <a href="home.html" class="flex flex-col items-center justify-center text-slate-400 py-2 hover:text-cyan-600 dark:hover:text-cyan-300 active:scale-90 transition-transform">
+    <span class="material-symbols-outlined text-2xl">home</span>
+    <span class="font-label text-xs font-medium mt-1">الرئيسية</span>
+  </a>
+  <a href="add-patient.html" class="flex flex-col items-center justify-center text-slate-400 py-2 hover:text-cyan-600 dark:hover:text-cyan-300 active:scale-90 transition-transform">
+    <span class="material-symbols-outlined text-2xl">person_add</span>
+    <span class="font-label text-xs font-medium mt-1">إضافة مريض</span>
+  </a>
+  <a href="archive.html" class="flex flex-col items-center justify-center text-slate-400 py-2 hover:text-cyan-600 dark:hover:text-cyan-300 active:scale-90 transition-transform">
+    <span class="material-symbols-outlined text-2xl">inventory</span>
+    <span class="font-label text-xs font-medium mt-1">الأرشيف</span>
+  </a>
+  <a href="settings.html" class="flex flex-col items-center justify-center text-slate-400 py-2 hover:text-cyan-600 dark:hover:text-cyan-300 active:scale-90 transition-transform">
+    <span class="material-symbols-outlined text-2xl">settings</span>
+    <span class="font-label text-xs font-medium mt-1">الإعدادات</span>
+  </a>
+</nav>
+
+<div class="fixed inset-0 bg-slate-900/40 dark:bg-black/60 backdrop-blur-sm z-[55] opacity-0 pointer-events-none transition-opacity duration-300" id="sidebar-overlay"></div>
+<div class="fixed inset-y-0 right-0 z-[60] flex flex-col bg-white dark:bg-slate-900/90 backdrop-blur-2xl h-full w-80 rounded-l-3xl border-l border-slate-100 dark:border-white/10 shadow-2xl translate-x-full transition-transform duration-300 sidebar-compact" id="sidebar">
+  <div class="p-6 space-y-4 text-3xl">
+    <div class="text-lg font-black bg-gradient-to-r from-cyan-600 to-purple-600 dark:from-cyan-400 dark:to-purple-400 bg-clip-text text-transparent">Ethereal Menu</div>
+    <div class="space-y-1">
+      <a class="nav-item flex items-center gap-3 p-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-lg" href="home.html">
+        <span class="material-symbols-outlined nav-icon">dashboard</span><span class="nav-text font-body font-medium">الرئيسية</span>
+      </a>
+      <a class="nav-item flex items-center gap-3 p-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-lg" href="add-patient.html">
+        <span class="material-symbols-outlined nav-icon">person_add</span><span class="nav-text font-body font-medium">إضافة مريض</span>
+      </a>
+      <a class="nav-item flex items-center gap-3 p-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-lg" href="archive.html">
+        <span class="material-symbols-outlined nav-icon">inventory</span><span class="nav-text font-body font-medium">أرشيف المرضى</span>
+      </a>
+      <a class="nav-item flex items-center gap-3 p-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-lg" href="expenses.html">
+        <span class="material-symbols-outlined nav-icon">payments</span><span class="nav-text font-body font-medium">إضافة مصروف</span>
+      </a>
+      <a class="nav-item flex items-center gap-3 p-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-lg" href="inventory.html">
+        <span class="material-symbols-outlined nav-icon">warehouse</span><span class="nav-text font-body font-medium">الجرد والمواد</span>
+      </a>
+      <div class="nav-item flex items-center gap-3 p-2 bg-cyan-50 dark:bg-white/10 text-cyan-600 dark:text-cyan-400 border-r-4 border-cyan-600 dark:border-cyan-400 rounded-lg">
+        <span class="material-symbols-outlined nav-icon">add_box</span><span class="nav-text font-body font-medium">إضافة مواد</span>
+      </div>
+      <a class="nav-item flex items-center gap-3 p-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-lg" href="reports.html">
+        <span class="material-symbols-outlined nav-icon">analytics</span><span class="nav-text font-body font-medium">التقارير</span>
+      </a>
+      <a class="nav-item flex items-center gap-3 p-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-lg" href="support.html">
+        <span class="material-symbols-outlined nav-icon">support_agent</span><span class="nav-text font-body font-medium">الدعم الفني</span>
+      </a>
+      <a class="nav-item flex items-center gap-3 p-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-lg" href="export-excel.html">
+        <span class="material-symbols-outlined nav-icon">table</span><span class="nav-text font-body font-medium">تصدير Excel</span>
+      </a>
+      <div class="border-t border-slate-100 dark:border-white/10 my-2 pt-2"></div>
+      <a class="nav-item flex items-center gap-3 p-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-lg" href="settings.html">
+        <span class="material-symbols-outlined nav-icon">settings</span><span class="nav-text font-body font-medium">الإعدادات</span>
+      </a>
+      <button class="nav-item flex items-center gap-3 p-2 text-red-500 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10 transition-all rounded-lg w-full" onclick="logout()">
+        <span class="material-symbols-outlined nav-icon">logout</span><span class="nav-text font-body font-medium">تسجيل الخروج</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+function initTheme() {
+  const savedTheme = localStorage.getItem('theme') || 'dark';
+  if (savedTheme === 'dark') {
+    document.documentElement.classList.add('dark');
+    document.documentElement.classList.remove('light');
+  } else {
+    document.documentElement.classList.add('light');
+    document.documentElement.classList.remove('dark');
+  }
+}
+initTheme();
+
+document.getElementById('theme-toggle').addEventListener('click', () => {
+  const isDark = document.documentElement.classList.toggle('dark');
+  document.documentElement.classList.toggle('light', !isDark);
+  localStorage.setItem('theme', isDark ? 'dark' : 'light');
+});
+
+const sidebar = document.getElementById('sidebar');
+const menuBtn = document.getElementById('menu-btn');
+const overlay = document.getElementById('sidebar-overlay');
+
+menuBtn.addEventListener('click', () => {
+  sidebar.classList.remove('translate-x-full');
+  overlay.classList.remove('opacity-0', 'pointer-events-none');
+});
+
+overlay.addEventListener('click', () => {
+  sidebar.classList.add('translate-x-full');
+  overlay.classList.add('opacity-0', 'pointer-events-none');
+});
+
+function saveMaterial() {
+  const material = {
+    id: Date.now(),
+    name: document.getElementById('materialName').value,
+    category: document.getElementById('materialCategory').value,
+    unit: document.getElementById('materialUnit').value,
+    quantity: document.getElementById('materialQuantity').value,
+    minQuantity: document.getElementById('materialMin').value || 5,
+    price: document.getElementById('materialPrice').value,
+    createdAt: new Date().toISOString()
+  };
+
+  if (!material.name || !material.quantity || !material.price) {
+    alert('الرجاء ملء جميع الحقول المطلوبة');
+    return;
+  }
+
+  let materials = JSON.parse(localStorage.getItem('materials') || '[]');
+  materials.push(material);
+  localStorage.setItem('materials', JSON.stringify(materials));
+
+  alert('تم حفظ المادة بنجاح!');
+  
+  document.getElementById('materialName').value = '';
+  document.getElementById('materialQuantity').value = '';
+  document.getElementById('materialPrice').value = '';
+}
+
+function logout() {
+  if (confirm('هل تريد تسجيل الخروج؟')) alert('تم تسجيل الخروج');
+}
+
+function loadClinicSettings() {
+  const settings = JSON.parse(localStorage.getItem('clinicSettings') || '{}');
+  if (settings.clinicName) document.getElementById('appTitle').textContent = settings.clinicName;
+}
+
+document.addEventListener('DOMContentLoaded', loadClinicSettings);
+</script>
+</body>
+</html>
+
+

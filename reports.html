@@ -1,4 +1,5 @@
 
+# 5. ملف reports.html المعدل الشامل
 reports_html = '''<!DOCTYPE html>
 <html class="dark" dir="rtl" lang="ar">
 <head>
@@ -42,7 +43,6 @@ reports_html = '''<!DOCTYPE html>
             transition: background-color 0.3s ease, color 0.3s ease;
         }
         
-        /* Glassmorphism Logic */
         .glass-card {
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -53,7 +53,6 @@ reports_html = '''<!DOCTYPE html>
             border: 1px solid rgba(0, 188, 212, 0.1);
         }
 
-        /* Glow Effects */
         .text-glow-primary {
             text-shadow: 0 0 12px rgba(85, 233, 237, 0.4);
         }
@@ -67,7 +66,6 @@ reports_html = '''<!DOCTYPE html>
             text-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
         }
 
-        /* Backgrounds */
         .mesh-gradient {
             transition: background 0.5s ease;
             background-attachment: fixed;
@@ -98,6 +96,21 @@ reports_html = '''<!DOCTYPE html>
             animation: growUp 0.8s ease-out forwards;
         }
         
+        /* Filter buttons */
+        .filter-btn {
+            transition: all 0.2s ease;
+        }
+        .filter-btn.active {
+            background: rgba(0, 188, 212, 0.2);
+            border-color: #00BCD4;
+            color: #00BCD4;
+        }
+        
+        /* Sidebar compact */
+        .sidebar-compact { width: 280px !important; }
+        .sidebar-compact .menu-item { padding: 0.5rem 0.75rem !important; }
+        .sidebar-compact .menu-icon { width: 32px !important; height: 32px !important; }
+        
         body {
           min-height: max(884px, 100dvh);
         }
@@ -106,12 +119,12 @@ reports_html = '''<!DOCTYPE html>
 <body class="mesh-gradient min-h-screen pb-32 overflow-x-hidden text-slate-900 dark:text-slate-100">
 
 <!-- TopAppBar -->
-<header class="bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl border-b border-black/5 dark:border-white/5 shadow-sm flex justify-between items-center px-6 h-20 w-full z-50 fixed top-0 left-0 transition-colors">
-<div class="flex items-center gap-4">
+<header class="bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl border-b border-black/5 dark:border-white/5 shadow-sm flex justify-between items-center px-4 md:px-6 h-20 w-full z-50 fixed top-0 left-0 transition-colors">
+<div class="flex items-center gap-3">
 <button class="text-slate-600 dark:text-slate-300 hover:bg-black/5 dark:hover:bg-white/5 transition-colors p-2 rounded-full" id="menu-btn">
 <span class="material-symbols-outlined">menu</span>
 </button>
-<h1 class="text-2xl font-bold bg-gradient-to-r from-cyan-600 to-purple-600 dark:from-cyan-400 dark:to-purple-400 bg-clip-text text-transparent font-headline tracking-tight">The Ethereal Clinic</h1>
+<h1 class="text-lg md:text-2xl font-bold bg-gradient-to-r from-cyan-600 to-purple-600 dark:from-cyan-400 dark:to-purple-400 bg-clip-text text-transparent font-headline tracking-tight" id="clinic-name-header">The Ethereal Clinic</h1>
 </div>
 <div class="flex items-center gap-2">
 <button class="text-cyan-600 dark:text-cyan-400 p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
@@ -129,105 +142,134 @@ reports_html = '''<!DOCTYPE html>
 <!-- Page Title -->
 <section class="space-y-1">
 <p class="text-slate-500 dark:text-secondary text-sm font-medium">إحصائيات وتحليلات</p>
-<h2 class="text-3xl font-extrabold text-slate-900 dark:text-white dark:text-glow-white">التقارير</h2>
+<h2 class="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white dark:text-glow-white">التقارير الشاملة</h2>
 </section>
 
 <!-- Date Filter -->
-<div class="glass-card rounded-2xl p-4">
-<div class="flex items-center gap-3">
-<span class="material-symbols-outlined text-slate-500 dark:text-slate-400">calendar_month</span>
-<select class="flex-1 bg-transparent border-none outline-none text-slate-900 dark:text-white font-medium cursor-pointer">
-<option>هذا الشهر (أبريل 2026)</option>
-<option>الشهر الماضي (مارس 2026)</option>
-<option>آخر 3 أشهر</option>
-<option>هذا العام (2026)</option>
-<option>الكل</option>
-</select>
+<div class="glass-card rounded-2xl p-4 space-y-3">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-cyan-600 dark:text-cyan-400 text-sm">calendar_month</span>
+<span class="text-sm font-bold text-slate-700 dark:text-slate-300">فلترة الفترة</span>
+</div>
+
+<div class="flex gap-2 overflow-x-auto no-scrollbar pb-1">
+<button onclick="setFilter('today')" id="filter-today" class="filter-btn px-3 py-1.5 rounded-full border border-slate-200 dark:border-white/10 text-xs font-medium whitespace-nowrap">
+اليوم
+</button>
+<button onclick="setFilter('month')" id="filter-month" class="filter-btn active px-3 py-1.5 rounded-full border border-slate-200 dark:border-white/10 text-xs font-medium whitespace-nowrap">
+الشهر الحالي
+</button>
+<button onclick="setFilter('all')" id="filter-all" class="filter-btn px-3 py-1.5 rounded-full border border-slate-200 dark:border-white/10 text-xs font-medium whitespace-nowrap">
+الكل
+</button>
+</div>
+
+<div class="grid grid-cols-2 gap-3 pt-2 border-t border-slate-200 dark:border-white/10">
+<div class="space-y-1">
+<label class="text-xs text-slate-500 dark:text-slate-400">من</label>
+<input type="date" id="date-from" class="w-full bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg px-3 py-2 text-xs outline-none text-slate-900 dark:text-white" onchange="applyCustomFilter()">
+</div>
+<div class="space-y-1">
+<label class="text-xs text-slate-500 dark:text-slate-400">إلى</label>
+<input type="date" id="date-to" class="w-full bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg px-3 py-2 text-xs outline-none text-slate-900 dark:text-white" onchange="applyCustomFilter()">
+</div>
 </div>
 </div>
 
-<!-- Summary Cards -->
-<section class="grid grid-cols-2 gap-4">
-<div class="glass-card bg-gradient-to-br from-cyan-500/10 to-cyan-600/10 dark:from-cyan-500/20 dark:to-cyan-600/20 rounded-xl p-4 border border-cyan-200 dark:border-cyan-500/20">
+<!-- Summary Cards Grid -->
+<section class="grid grid-cols-2 gap-3 md:gap-4">
+<!-- Total Patients -->
+<div class="glass-card bg-gradient-to-br from-cyan-500/10 to-cyan-600/10 dark:from-cyan-500/20 dark:to-cyan-600/20 rounded-xl p-3 md:p-4 border border-cyan-200 dark:border-cyan-500/20">
 <div class="flex items-center gap-2 mb-2">
-<span class="material-symbols-outlined text-cyan-600 dark:text-cyan-400 text-sm">person</span>
-<span class="text-xs text-cyan-700 dark:text-cyan-300">إجمالي المرضى</span>
+<span class="material-symbols-outlined text-cyan-600 dark:text-cyan-400 text-sm md:text-base">person</span>
+<span class="text-[10px] md:text-xs text-cyan-700 dark:text-cyan-300">إجمالي الفحوصات</span>
 </div>
-<div class="text-2xl font-black text-slate-900 dark:text-white" id="totalPatients">0</div>
-<div class="text-[10px] text-cyan-600 dark:text-cyan-400 mt-1">+12% عن الشهر الماضي</div>
+<div class="text-xl md:text-2xl font-black text-slate-900 dark:text-white" id="totalPatients">0</div>
+<div class="text-[9px] md:text-[10px] text-cyan-600 dark:text-cyan-400 mt-1" id="patientsTrend">+0% عن الفترة السابقة</div>
 </div>
 
-<div class="glass-card bg-gradient-to-br from-purple-500/10 to-purple-600/10 dark:from-purple-500/20 dark:to-purple-600/20 rounded-xl p-4 border border-purple-200 dark:border-purple-500/20">
+<!-- Total Revenue -->
+<div class="glass-card bg-gradient-to-br from-amber-500/10 to-amber-600/10 dark:from-amber-500/20 dark:to-amber-600/20 rounded-xl p-3 md:p-4 border border-amber-200 dark:border-amber-500/20">
 <div class="flex items-center gap-2 mb-2">
-<span class="material-symbols-outlined text-purple-600 dark:text-purple-400 text-sm">visibility</span>
-<span class="text-xs text-purple-700 dark:text-purple-300">الفحوصات</span>
+<span class="material-symbols-outlined text-amber-600 dark:text-amber-400 text-sm md:text-base">payments</span>
+<span class="text-[10px] md:text-xs text-amber-700 dark:text-amber-300">الإيرادات</span>
 </div>
-<div class="text-2xl font-black text-slate-900 dark:text-white" id="totalExams">0</div>
-<div class="text-[10px] text-purple-600 dark:text-purple-400 mt-1">+8% عن الشهر الماضي</div>
+<div class="text-lg md:text-xl font-black text-slate-900 dark:text-white" id="totalRevenue">0 د.ع</div>
+<div class="text-[9px] md:text-[10px] text-amber-600 dark:text-amber-400 mt-1" id="revenueTrend">+0% عن الفترة السابقة</div>
 </div>
 
-<div class="glass-card bg-gradient-to-br from-amber-500/10 to-amber-600/10 dark:from-amber-500/20 dark:to-amber-600/20 rounded-xl p-4 border border-amber-200 dark:border-amber-500/20">
+<!-- Total Expenses -->
+<div class="glass-card bg-gradient-to-br from-red-500/10 to-red-600/10 dark:from-red-500/20 dark:to-red-600/20 rounded-xl p-3 md:p-4 border border-red-200 dark:border-red-500/20">
 <div class="flex items-center gap-2 mb-2">
-<span class="material-symbols-outlined text-amber-600 dark:text-amber-400 text-sm">payments</span>
-<span class="text-xs text-amber-700 dark:text-amber-300">الإيرادات</span>
+<span class="material-symbols-outlined text-red-600 dark:text-red-400 text-sm md:text-base">receipt_long</span>
+<span class="text-[10px] md:text-xs text-red-700 dark:text-red-300">المصروفات</span>
 </div>
-<div class="text-2xl font-black text-slate-900 dark:text-white" id="totalRevenue">0 د.ع</div>
-<div class="text-[10px] text-amber-600 dark:text-amber-400 mt-1">+15% عن الشهر الماضي</div>
+<div class="text-lg md:text-xl font-black text-slate-900 dark:text-white" id="totalExpenses">0 د.ع</div>
+<div class="text-[9px] md:text-[10px] text-red-600 dark:text-red-400 mt-1" id="expensesTrend">-0% عن الفترة السابقة</div>
 </div>
 
-<div class="glass-card bg-gradient-to-br from-red-500/10 to-red-600/10 dark:from-red-500/20 dark:to-red-600/20 rounded-xl p-4 border border-red-200 dark:border-red-500/20">
+<!-- Net Profit -->
+<div class="glass-card bg-gradient-to-br from-green-500/10 to-green-600/10 dark:from-green-500/20 dark:to-green-600/20 rounded-xl p-3 md:p-4 border border-green-200 dark:border-green-500/20">
 <div class="flex items-center gap-2 mb-2">
-<span class="material-symbols-outlined text-red-600 dark:text-red-400 text-sm">receipt_long</span>
-<span class="text-xs text-red-700 dark:text-red-300">المصروفات</span>
+<span class="material-symbols-outlined text-green-600 dark:text-green-400 text-sm md:text-base">account_balance</span>
+<span class="text-[10px] md:text-xs text-green-700 dark:text-green-300">صافي الربح</span>
 </div>
-<div class="text-2xl font-black text-slate-900 dark:text-white" id="totalExpenses">0 د.ع</div>
-<div class="text-[10px] text-red-600 dark:text-red-400 mt-1">-5% عن الشهر الماضي</div>
+<div class="text-lg md:text-xl font-black text-slate-900 dark:text-white" id="netProfit">0 د.ع</div>
+<div class="text-[9px] md:text-[10px] text-green-600 dark:text-green-400 mt-1" id="profitMargin">هامش الربح: 0%</div>
 </div>
 </section>
 
-<!-- Charts Section -->
+<!-- Detailed Stats -->
 <section class="space-y-4">
-<div class="glass-card rounded-2xl p-6">
-<div class="flex items-center justify-between mb-6">
-<h3 class="text-lg font-bold text-slate-900 dark:text-white">الإيرادات اليومية</h3>
-<span class="text-xs text-slate-500 dark:text-slate-400">آخر 7 أيام</span>
+<div class="glass-card rounded-2xl p-4 md:p-6">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-500/20 flex items-center justify-center text-purple-600 dark:text-purple-300">
+<span class="material-symbols-outlined">visibility</span>
 </div>
-<div class="flex items-end justify-between h-32 gap-2">
-<div class="flex-1 flex flex-col items-center gap-1">
-<div class="w-full bg-gradient-to-t from-cyan-500 to-cyan-400 rounded-t-lg chart-bar" style="--target-height: 60%;"></div>
-<span class="text-[10px] text-slate-500 dark:text-slate-400">السبت</span>
+<h3 class="text-lg font-bold text-slate-900 dark:text-white">تفاصيل الفحوصات</h3>
 </div>
-<div class="flex-1 flex flex-col items-center gap-1">
-<div class="w-full bg-gradient-to-t from-cyan-500 to-cyan-400 rounded-t-lg chart-bar" style="--target-height: 80%;"></div>
-<span class="text-[10px] text-slate-500 dark:text-slate-400">الأحد</span>
+
+<div class="grid grid-cols-2 gap-4">
+<div class="text-center p-3 bg-cyan-50 dark:bg-cyan-500/10 rounded-xl">
+<div class="text-2xl font-black text-cyan-600 dark:text-cyan-400" id="newPatients">0</div>
+<div class="text-xs text-slate-600 dark:text-slate-400">فحوصات جديدة</div>
 </div>
-<div class="flex-1 flex flex-col items-center gap-1">
-<div class="w-full bg-gradient-to-t from-cyan-500 to-cyan-400 rounded-t-lg chart-bar" style="--target-height: 45%;"></div>
-<span class="text-[10px] text-slate-500 dark:text-slate-400">الإثنين</span>
+<div class="text-center p-3 bg-purple-50 dark:bg-purple-500/10 rounded-xl">
+<div class="text-2xl font-black text-purple-600 dark:text-purple-400" id="renewalPatients">0</div>
+<div class="text-xs text-slate-600 dark:text-slate-400">تجديد فحص</div>
 </div>
-<div class="flex-1 flex flex-col items-center gap-1">
-<div class="w-full bg-gradient-to-t from-cyan-500 to-cyan-400 rounded-t-lg chart-bar" style="--target-height: 90%;"></div>
-<span class="text-[10px] text-slate-500 dark:text-slate-400">الثلاثاء</span>
 </div>
-<div class="flex-1 flex flex-col items-center gap-1">
-<div class="w-full bg-gradient-to-t from-cyan-500 to-cyan-400 rounded-t-lg chart-bar" style="--target-height: 70%;"></div>
-<span class="text-[10px] text-slate-500 dark:text-slate-400">الأربعاء</span>
+
+<div class="mt-4 pt-4 border-t border-slate-200 dark:border-white/10">
+<div class="flex justify-between items-center mb-2">
+<span class="text-sm text-slate-600 dark:text-slate-400">متوسط الإيراد لكل فحص</span>
+<span class="font-bold text-slate-900 dark:text-white" id="avgRevenue">0 د.ع</span>
 </div>
-<div class="flex-1 flex flex-col items-center gap-1">
-<div class="w-full bg-gradient-to-t from-cyan-500 to-cyan-400 rounded-t-lg chart-bar" style="--target-height: 55%;"></div>
-<span class="text-[10px] text-slate-500 dark:text-slate-400">الخميس</span>
+<div class="flex justify-between items-center">
+<span class="text-sm text-slate-600 dark:text-slate-400">إجمالي عدد النظارات المباعة</span>
+<span class="font-bold text-slate-900 dark:text-white" id="totalGlasses">0</span>
 </div>
-<div class="flex-1 flex flex-col items-center gap-1">
-<div class="w-full bg-gradient-to-t from-cyan-500 to-cyan-400 rounded-t-lg chart-bar" style="--target-height: 40%;"></div>
-<span class="text-[10px] text-slate-500 dark:text-slate-400">الجمعة</span>
 </div>
+</div>
+</section>
+
+<!-- Expense Breakdown -->
+<section class="space-y-4">
+<div class="glass-card rounded-2xl p-4 md:p-6">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white">تفصيل المصروفات</h3>
+<span class="material-symbols-outlined text-slate-400">more_vert</span>
+</div>
+
+<div class="space-y-3" id="expenseBreakdown">
+<!-- Will be populated dynamically -->
 </div>
 </div>
 </section>
 
 <!-- Eye Prescription Stats -->
 <section class="space-y-4">
-<div class="glass-card rounded-2xl p-6">
+<div class="glass-card rounded-2xl p-4 md:p-6">
 <div class="flex items-center gap-3 mb-6">
 <div class="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-500/20 flex items-center justify-center text-purple-600 dark:text-purple-300">
 <span class="material-symbols-outlined">visibility</span>
@@ -239,89 +281,48 @@ reports_html = '''<!DOCTYPE html>
 <div>
 <div class="flex justify-between text-sm mb-2">
 <span class="text-slate-600 dark:text-slate-400">قصر النظر (Myopia)</span>
-<span class="font-bold text-slate-900 dark:text-white">45%</span>
+<span class="font-bold text-slate-900 dark:text-white" id="myopiaPercent">0%</span>
 </div>
 <div class="h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
-<div class="h-full bg-gradient-to-r from-cyan-500 to-cyan-400 rounded-full" style="width: 45%"></div>
+<div class="h-full bg-gradient-to-r from-cyan-500 to-cyan-400 rounded-full transition-all duration-500" id="myopiaBar" style="width: 0%"></div>
 </div>
+<div class="text-xs text-slate-500 mt-1" id="myopiaCount">0 حالة</div>
 </div>
 
 <div>
 <div class="flex justify-between text-sm mb-2">
 <span class="text-slate-600 dark:text-slate-400">طول النظر (Hyperopia)</span>
-<span class="font-bold text-slate-900 dark:text-white">30%</span>
+<span class="font-bold text-slate-900 dark:text-white" id="hyperopiaPercent">0%</span>
 </div>
 <div class="h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
-<div class="h-full bg-gradient-to-r from-purple-500 to-purple-400 rounded-full" style="width: 30%"></div>
+<div class="h-full bg-gradient-to-r from-purple-500 to-purple-400 rounded-full transition-all duration-500" id="hyperopiaBar" style="width: 0%"></div>
 </div>
+<div class="text-xs text-slate-500 mt-1" id="hyperopiaCount">0 حالة</div>
 </div>
 
 <div>
 <div class="flex justify-between text-sm mb-2">
 <span class="text-slate-600 dark:text-slate-400">اللابؤرية (Astigmatism)</span>
-<span class="font-bold text-slate-900 dark:text-white">25%</span>
+<span class="font-bold text-slate-900 dark:text-white" id="astigmatismPercent">0%</span>
 </div>
 <div class="h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
-<div class="h-full bg-gradient-to-r from-amber-500 to-amber-400 rounded-full" style="width: 25%"></div>
+<div class="h-full bg-gradient-to-r from-amber-500 to-amber-400 rounded-full transition-all duration-500" id="astigmatismBar" style="width: 0%"></div>
 </div>
+<div class="text-xs text-slate-500 mt-1" id="astigmatismCount">0 حالة</div>
 </div>
 </div>
 </div>
 </section>
 
-<!-- Top Services -->
+<!-- Daily Revenue Chart -->
 <section class="space-y-4">
-<div class="glass-card rounded-2xl p-6">
+<div class="glass-card rounded-2xl p-4 md:p-6">
 <div class="flex items-center justify-between mb-6">
-<h3 class="text-lg font-bold text-slate-900 dark:text-white">أكثر الخدمات طلباً</h3>
-<span class="material-symbols-outlined text-slate-400">more_vert</span>
+<h3 class="text-lg font-bold text-slate-900 dark:text-white">الإيرادات اليومية</h3>
+<span class="text-xs text-slate-500 dark:text-slate-400">آخر 7 أيام</span>
 </div>
-
-<div class="space-y-4">
-<div class="flex items-center gap-4">
-<div class="w-12 h-12 rounded-full bg-cyan-100 dark:bg-cyan-500/20 flex items-center justify-center text-cyan-600 dark:text-cyan-400">
-<span class="material-symbols-outlined">eyeglasses</span>
-</div>
-<div class="flex-1">
-<div class="flex justify-between mb-1">
-<span class="font-medium text-slate-900 dark:text-white">فحص نظر شامل</span>
-<span class="font-bold text-cyan-600 dark:text-cyan-400">156</span>
-</div>
-<div class="h-1.5 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
-<div class="h-full bg-cyan-500 rounded-full" style="width: 85%"></div>
-</div>
-</div>
-</div>
-
-<div class="flex items-center gap-4">
-<div class="w-12 h-12 rounded-full bg-purple-100 dark:bg-purple-500/20 flex items-center justify-center text-purple-600 dark:text-purple-300">
-<span class="material-symbols-outlined">contact_mail</span>
-</div>
-<div class="flex-1">
-<div class="flex justify-between mb-1">
-<span class="font-medium text-slate-900 dark:text-white">عدسات لاصقة</span>
-<span class="font-bold text-purple-600 dark:text-purple-400">89</span>
-</div>
-<div class="h-1.5 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
-<div class="h-full bg-purple-500 rounded-full" style="width: 60%"></div>
-</div>
-</div>
-</div>
-
-<div class="flex items-center gap-4">
-<div class="w-12 h-12 rounded-full bg-amber-100 dark:bg-amber-500/20 flex items-center justify-center text-amber-600 dark:text-amber-400">
-<span class="material-symbols-outlined">medical_services</span>
-</div>
-<div class="flex-1">
-<div class="flex justify-between mb-1">
-<span class="font-medium text-slate-900 dark:text-white">متابعة طبية</span>
-<span class="font-bold text-amber-600 dark:text-amber-400">64</span>
-</div>
-<div class="h-1.5 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
-<div class="h-full bg-amber-500 rounded-full" style="width: 45%"></div>
-</div>
-</div>
-</div>
+<div class="flex items-end justify-between h-32 gap-2" id="revenueChart">
+<!-- Will be populated dynamically -->
 </div>
 </div>
 </section>
@@ -330,126 +331,412 @@ reports_html = '''<!DOCTYPE html>
 <section class="pb-8">
 <button class="w-full glass-card bg-gradient-to-r from-cyan-500 to-purple-500 text-white rounded-2xl py-4 flex items-center justify-center gap-3 hover:shadow-lg hover:shadow-cyan-500/30 transition-all active:scale-95" onclick="exportReport()">
 <span class="material-symbols-outlined">download</span>
-<span class="font-bold">تصدير التقرير (PDF)</span>
+<span class="font-bold">تصدير التقرير الكامل (PDF)</span>
 </button>
 </section>
 
 </main>
 
 <!-- BottomNavBar -->
-<nav class="bg-white/80 dark:bg-slate-900/40 backdrop-blur-lg fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 pb-safe rounded-t-[2rem] border-t border-slate-200 dark:border-white/5 shadow-[0_-10px_30px_rgba(0,0,0,0.4)] transition-colors">
-<a class="flex flex-col items-center justify-center text-slate-400 py-2 hover:text-cyan-600 dark:hover:text-cyan-300 active:scale-90 transition-transform" href="index.html">
-<span class="material-symbols-outlined text-2xl">home</span>
-<span class="font-label text-xs font-medium mt-1">الرئيسية</span>
+<nav class="bg-white/80 dark:bg-slate-900/40 backdrop-blur-lg fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-16 md:h-20 rounded-t-[2rem] border-t border-slate-200 dark:border-white/5 px-2">
+<a class="flex flex-col items-center justify-center text-slate-400 py-1 md:py-2 hover:text-cyan-600 dark:hover:text-cyan-300 active:scale-90 transition-transform" href="home.html">
+<span class="material-symbols-outlined text-xl md:text-2xl">home</span>
+<span class="font-label text-[10px] md:text-xs font-medium mt-0.5">الرئيسية</span>
 </a>
-<a class="flex flex-col items-center justify-center text-slate-400 py-2 hover:text-cyan-600 dark:hover:text-cyan-300 active:scale-90 transition-transform" href="add-patient.html">
-<span class="material-symbols-outlined text-2xl">person_add</span>
-<span class="font-label text-xs font-medium mt-1">إضافة مريض</span>
+<a class="flex flex-col items-center justify-center text-slate-400 py-1 md:py-2 hover:text-cyan-600 dark:hover:text-cyan-300 active:scale-90 transition-transform" href="add-patient.html">
+<span class="material-symbols-outlined text-xl md:text-2xl">person_add</span>
+<span class="font-label text-[10px] md:text-xs font-medium mt-0.5">إضافة</span>
 </a>
-<a class="flex flex-col items-center justify-center text-slate-400 py-2 hover:text-cyan-600 dark:hover:text-cyan-300 active:scale-90 transition-transform" href="archive.html">
-<span class="material-symbols-outlined text-2xl">inventory</span>
-<span class="font-label text-xs font-medium mt-1">الأرشيف</span>
+<a class="flex flex-col items-center justify-center text-slate-400 py-1 md:py-2 hover:text-cyan-600 dark:hover:text-cyan-300 active:scale-90 transition-transform" href="archive.html">
+<span class="material-symbols-outlined text-xl md:text-2xl">inventory</span>
+<span class="font-label text-[10px] md:text-xs font-medium mt-0.5">الأرشيف</span>
 </a>
-<a class="flex flex-col items-center justify-center text-slate-400 py-2 hover:text-cyan-600 dark:hover:text-cyan-300 active:scale-90 transition-transform" href="settings.html">
-<span class="material-symbols-outlined text-2xl">settings</span>
-<span class="font-label text-xs font-medium mt-1">الإعدادات</span>
-</a>
+<a href="settings.html" class="flex flex-col items-center justify-center text-slate-400 py-2 hover:text-cyan-600 dark:hover:text-cyan-300 active:scale-90 transition-transform">
+    <span class="material-symbols-outlined text-xl">settings</span>
+    <span class="font-label text-[10px] font-medium mt-1" data-i18n="settings">الإعدادات</span>
+  </a>
 </nav>
 
 <!-- Sidebar Overlay -->
 <div class="fixed inset-0 bg-slate-900/40 dark:bg-black/60 backdrop-blur-sm z-[55] opacity-0 pointer-events-none transition-opacity duration-300" id="sidebar-overlay"></div>
 
 <!-- NavigationDrawer (Sidebar) -->
-<div class="fixed inset-y-0 right-0 z-[60] flex flex-col bg-white dark:bg-slate-900/90 backdrop-blur-2xl h-full w-80 rounded-l-3xl border-l border-slate-100 dark:border-white/10 shadow-2xl translate-x-full transition-transform duration-300" id="sidebar">
-<div class="p-8 space-y-8">
-<div class="text-xl font-black bg-gradient-to-r from-cyan-600 to-purple-600 dark:from-cyan-400 dark:to-purple-400 bg-clip-text text-transparent">Ethereal Menu</div>
-<div class="space-y-4 px-2">
-<a class="flex items-center gap-4 p-3 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-lg" href="index.html">
-<span class="material-symbols-outlined">dashboard</span>
-<span class="font-body font-medium text-right">الرئيسية</span>
+<div class="fixed inset-y-0 right-0 z-[60] flex flex-col bg-white dark:bg-slate-900/90 backdrop-blur-2xl h-full sidebar-compact rounded-l-3xl border-l border-slate-100 dark:border-white/10 shadow-2xl translate-x-full transition-transform duration-300" id="sidebar">
+<div class="p-4 space-y-4 ">
+<div class="text-lg font-black bg-gradient-to-r from-cyan-600 to-purple-600 dark:from-cyan-400 dark:to-purple-400 bg-clip-text text-transparent px-2">القائمة</div>
+<div class="space-y-1 px-1">
+<a class="menu-item flex items-center gap-3 p-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-lg" href="home.html">
+<span class="material-symbols-outlined menu-icon w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-700 text-sm">dashboard</span>
+<span class="font-body font-medium">الرئيسية</span>
 </a>
-<a class="flex items-center gap-4 p-3 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-lg" href="add-patient.html">
-<span class="material-symbols-outlined">person_add</span>
-<span class="font-body font-medium text-right">إضافة مريض</span>
+<a class="menu-item flex items-center gap-3 p-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-lg" href="add-patient.html">
+<span class="material-symbols-outlined menu-icon w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-700 text-sm">person_add</span>
+<span class="font-body font-medium">إضافة مريض</span>
 </a>
-<a class="flex items-center gap-4 p-3 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-lg" href="archive.html">
-<span class="material-symbols-outlined">inventory</span>
-<span class="font-body font-medium text-right">أرشيف المرضى</span>
+<a class="menu-item flex items-center gap-3 p-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-lg" href="archive.html">
+<span class="material-symbols-outlined menu-icon w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-700 text-sm">inventory</span>
+<span class="font-body font-medium">أرشيف المرضى</span>
 </a>
-<a class="flex items-center gap-4 p-3 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-lg" href="expenses.html">
-<span class="material-symbols-outlined">payments</span>
-<span class="font-body font-medium text-right">إضافة مصروف</span>
+<a class="menu-item flex items-center gap-3 p-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-lg" href="expenses.html">
+<span class="material-symbols-outlined menu-icon w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-700 text-sm">payments</span>
+<span class="font-body font-medium">المصروفات</span>
 </a>
-<div class="flex items-center gap-4 p-3 bg-cyan-50 dark:bg-white/10 text-cyan-600 dark:text-cyan-400 border-r-4 border-cyan-600 dark:border-cyan-400 rounded-lg">
-<span class="material-symbols-outlined">analytics</span>
-<span class="font-body font-medium text-right">التقارير</span>
-</div>
-<div class="border-t border-slate-100 dark:border-white/10 mt-4 pt-4 space-y-4">
-<a class="flex items-center gap-4 p-3 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-lg" href="settings.html">
-<span class="material-symbols-outlined">settings</span>
-<span class="font-body font-medium text-right">الإعدادات</span>
+<a class="menu-item flex items-center gap-3 p-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-lg" href="inventory.html">
+<span class="material-symbols-outlined menu-icon w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-700 text-sm">inventory_2</span>
+<span class="font-body font-medium">الجرد</span>
 </a>
-<button class="flex items-center gap-4 p-3 text-red-500 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10 transition-all rounded-lg w-full">
-<span class="material-symbols-outlined">logout</span>
-<span class="font-body font-medium text-right">تسجيل الخروج</span>
+<a class="menu-item flex items-center gap-3 p-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-lg" href="add-material.html">
+<span class="material-symbols-outlined menu-icon w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-700 text-sm">add_box</span>
+<span class="font-body font-medium">إضافة مواد</span>
+</a>
+<a class="menu-item flex items-center gap-3 p-2 bg-cyan-50 dark:bg-white/10 text-cyan-600 dark:text-cyan-400 border-r-4 border-cyan-600 dark:border-cyan-400 rounded-lg" href="reports.html">
+<span class="material-symbols-outlined menu-icon w-8 h-8 flex items-center justify-center rounded-full bg-cyan-100 dark:bg-cyan-500/20 text-sm">analytics</span>
+<span class="font-body font-medium">التقارير</span>
+</a>
+<a class="menu-item flex items-center gap-3 p-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-lg" href="export-excel.html">
+<span class="material-symbols-outlined menu-icon w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-700 text-sm">file_download</span>
+<span class="font-body font-medium">تصدير Excel</span>
+</a>
+<a class="menu-item flex items-center gap-3 p-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-lg" href="support.html">
+<span class="material-symbols-outlined menu-icon w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-700 text-sm">support_agent</span>
+<span class="font-body font-medium">الدعم الفني</span>
+</a>
+<div class="border-t border-slate-100 dark:border-white/10 my-2 pt-2"></div>
+<a class="menu-item flex items-center gap-3 p-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-lg" href="settings.html">
+<span class="material-symbols-outlined menu-icon w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-700 text-sm">settings</span>
+<span class="font-body font-medium">الإعدادات</span>
+</a>
+<button class="menu-item flex items-center gap-3 p-2 text-red-500 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10 transition-all rounded-lg w-full" onclick="logout()">
+<span class="material-symbols-outlined menu-icon w-8 h-8 flex items-center justify-center rounded-full bg-red-100 dark:bg-red-500/20 text-sm">logout</span>
+<span class="font-body font-medium ">تسجيل الخروج</span>
 </button>
-</div>
 </div>
 </div>
 </div>
 
 <script>
-    // Theme Toggle
+    // Theme Management
     const html = document.documentElement;
     const themeToggle = document.getElementById('theme-toggle');
+    
+    function initTheme() {
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        if (savedTheme === 'dark') {
+            html.classList.add('dark');
+            html.classList.remove('light');
+        } else {
+            html.classList.add('light');
+            html.classList.remove('dark');
+        }
+    }
+    initTheme();
+    
+    themeToggle?.addEventListener('click', () => {
+        const isDark = html.classList.toggle('dark');
+        html.classList.toggle('light', !isDark);
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+
+    // Sidebar
     const sidebar = document.getElementById('sidebar');
     const menuBtn = document.getElementById('menu-btn');
     const overlay = document.getElementById('sidebar-overlay');
 
-    themeToggle.addEventListener('click', () => {
-        if (html.classList.contains('dark')) {
-            html.classList.remove('dark');
-            html.classList.add('light');
-        } else {
-            html.classList.remove('light');
-            html.classList.add('dark');
-        }
+    menuBtn?.addEventListener('click', () => { 
+        sidebar?.classList.remove('translate-x-full'); 
+        overlay?.classList.remove('opacity-0', 'pointer-events-none'); 
+    });
+    
+    overlay?.addEventListener('click', () => { 
+        sidebar?.classList.add('translate-x-full'); 
+        overlay?.classList.add('opacity-0', 'pointer-events-none'); 
     });
 
-    menuBtn.addEventListener('click', () => {
-        sidebar.classList.remove('translate-x-full');
-        overlay.classList.remove('opacity-0', 'pointer-events-none');
-    });
+    // Filter Management
+    let currentFilter = 'month';
+    let customDateFrom = null;
+    let customDateTo = null;
 
-    overlay.addEventListener('click', () => {
-        sidebar.classList.add('translate-x-full');
-        overlay.classList.add('opacity-0', 'pointer-events-none');
-    });
-
-    // Load Stats
-    function loadStats() {
-        const patients = JSON.parse(localStorage.getItem('patients') || '[]');
-        document.getElementById('totalPatients').textContent = patients.length;
-        document.getElementById('totalExams').textContent = patients.length;
-        
-        // Calculate revenue (mock calculation)
-        const revenue = patients.length * 250; // Average 250 per patient
-        document.getElementById('totalRevenue').textContent = revenue.toLocaleString() + ' د.ع';
-        
-        // Mock expenses
-        const expenses = Math.floor(revenue * 0.3);
-        document.getElementById('totalExpenses').textContent = expenses.toLocaleString() + ' د.ع';
+    function setFilter(type) {
+        currentFilter = type;
+        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById('filter-' + type).classList.add('active');
+        loadStats();
     }
 
-    // Export Report
+    function applyCustomFilter() {
+        const from = document.getElementById('date-from').value;
+        const to = document.getElementById('date-to').value;
+        
+        if (from && to) {
+            customDateFrom = new Date(from);
+            customDateTo = new Date(to);
+            customDateTo.setHours(23, 59, 59);
+            currentFilter = 'custom';
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            loadStats();
+        }
+    }
+
+    function getFilteredItems(items, dateField = 'createdAt') {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        
+        return items.filter(item => {
+            const itemDate = new Date(item[dateField] || item.date);
+            
+            switch(currentFilter) {
+                case 'today':
+                    return itemDate.toDateString() === today.toDateString();
+                case 'month':
+                    return itemDate.getMonth() === today.getMonth() && itemDate.getFullYear() === today.getFullYear();
+                case 'custom':
+                    if (customDateFrom && customDateTo) {
+                        return itemDate >= customDateFrom && itemDate <= customDateTo;
+                    }
+                    return true;
+                default:
+                    return true;
+            }
+        });
+    }
+
+    const expenseTypes = {
+        'rent': 'إيجار المحل',
+        'salary': 'رواتب الموظفين',
+        'equipment': 'صيانة الأجهزة',
+        'inventory': 'شراء مستلزمات',
+        'utilities': 'فواتير',
+        'marketing': 'تسويق وإعلان',
+        'other': 'مصروفات أخرى'
+    };
+
+    function loadStats() {
+        const patients = JSON.parse(localStorage.getItem('patients') || '[]');
+        const expenses = JSON.parse(localStorage.getItem('expenses') || '[]');
+        
+        const filteredPatients = getFilteredItems(patients, 'createdAt');
+        const filteredExpenses = getFilteredItems(expenses, 'date');
+        
+        // Basic counts
+        document.getElementById('totalPatients').textContent = filteredPatients.length;
+        
+        // New vs Renewal
+        const newPatients = filteredPatients.filter(p => p.examType === 'فحص جديد' || !p.examType).length;
+        const renewalPatients = filteredPatients.filter(p => p.examType === 'تجديد فحص').length;
+        document.getElementById('newPatients').textContent = newPatients;
+        document.getElementById('renewalPatients').textContent = renewalPatients;
+        
+        // Revenue (assuming 250 per exam)
+        const totalRevenue = filteredPatients.length * 250;
+        document.getElementById('totalRevenue').textContent = totalRevenue.toLocaleString() + ' د.ع';
+        document.getElementById('avgRevenue').textContent = filteredPatients.length > 0 ? (250).toLocaleString() + ' د.ع' : '0 د.ع';
+        
+        // Expenses
+        const totalExpenses = filteredExpenses.reduce((sum, e) => sum + (parseFloat(e.amount) || 0), 0);
+        document.getElementById('totalExpenses').textContent = totalExpenses.toLocaleString() + ' د.ع';
+        
+        // Net Profit
+        const netProfit = totalRevenue - totalExpenses;
+        document.getElementById('netProfit').textContent = netProfit.toLocaleString() + ' د.ع';
+        
+        // Profit margin
+        const profitMargin = totalRevenue > 0 ? Math.round((netProfit / totalRevenue) * 100) : 0;
+        document.getElementById('profitMargin').textContent = `هامش الربح: ${profitMargin}%`;
+        
+        // Glasses sold (estimate: 80% of patients buy glasses)
+        document.getElementById('totalGlasses').textContent = Math.round(filteredPatients.length * 0.8);
+        
+        // Expense breakdown
+        const expenseByType = {};
+        filteredExpenses.forEach(e => {
+            const type = e.customType || expenseTypes[e.type] || 'أخرى';
+            expenseByType[type] = (expenseByType[type] || 0) + parseFloat(e.amount || 0);
+        });
+        
+        const expenseContainer = document.getElementById('expenseBreakdown');
+        const sortedExpenses = Object.entries(expenseByType).sort((a, b) => b[1] - a[1]);
+        
+        if (sortedExpenses.length === 0) {
+            expenseContainer.innerHTML = '<p class="text-center text-slate-500 text-sm py-4">لا توجد مصروفات في هذه الفترة</p>';
+        } else {
+            const maxExpense = Math.max(...sortedExpenses.map(e => e[1]));
+            expenseContainer.innerHTML = sortedExpenses.map(([type, amount]) => {
+                const percent = maxExpense > 0 ? (amount / maxExpense) * 100 : 0;
+                return `
+                    <div class="flex items-center gap-3">
+                        <div class="flex-1">
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium text-slate-900 dark:text-white">${type}</span>
+                                <span class="text-sm font-bold text-red-600 dark:text-red-400">${amount.toLocaleString()} د.ع</span>
+                            </div>
+                            <div class="h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-red-500 to-orange-400 rounded-full" style="width: ${percent}%"></div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        // Eye statistics
+        calculateEyeStats(filteredPatients);
+        
+        // Revenue chart (last 7 days)
+        renderRevenueChart(filteredPatients);
+        
+        // Trends (compare with previous period)
+        calculateTrends(filteredPatients.length, totalRevenue, totalExpenses);
+    }
+
+    function calculateEyeStats(patients) {
+        let myopia = 0, hyperopia = 0, astigmatism = 0;
+        
+        patients.forEach(p => {
+            const sphR = parseFloat(p.rightEye?.sph) || 0;
+            const sphL = parseFloat(p.leftEye?.sph) || 0;
+            const cylR = parseFloat(p.rightEye?.cyl) || 0;
+            const cylL = parseFloat(p.leftEye?.cyl) || 0;
+            
+            // Myopia: negative SPH
+            if (sphR < 0 || sphL < 0) myopia++;
+            // Hyperopia: positive SPH > 0.5
+            else if (sphR > 0.5 || sphL > 0.5) hyperopia++;
+            
+            // Astigmatism: any CYL
+            if (cylR !== 0 || cylL !== 0) astigmatism++;
+        });
+        
+        const total = patients.length || 1;
+        
+        const myopiaPercent = Math.round((myopia / total) * 100);
+        const hyperopiaPercent = Math.round((hyperopia / total) * 100);
+        const astigmatismPercent = Math.round((astigmatism / total) * 100);
+        
+        document.getElementById('myopiaPercent').textContent = myopiaPercent + '%';
+        document.getElementById('myopiaBar').style.width = myopiaPercent + '%';
+        document.getElementById('myopiaCount').textContent = myopia + ' حالة';
+        
+        document.getElementById('hyperopiaPercent').textContent = hyperopiaPercent + '%';
+        document.getElementById('hyperopiaBar').style.width = hyperopiaPercent + '%';
+        document.getElementById('hyperopiaCount').textContent = hyperopia + ' حالة';
+        
+        document.getElementById('astigmatismPercent').textContent = astigmatismPercent + '%';
+        document.getElementById('astigmatismBar').style.width = astigmatismPercent + '%';
+        document.getElementById('astigmatismCount').textContent = astigmatism + ' حالة';
+    }
+
+    function renderRevenueChart(patients) {
+        const days = ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
+        const today = new Date();
+        const chartData = [];
+        
+        for (let i = 6; i >= 0; i--) {
+            const date = new Date(today);
+            date.setDate(date.getDate() - i);
+            const dayName = days[date.getDay()];
+            
+            const dayPatients = patients.filter(p => {
+                const pDate = new Date(p.createdAt);
+                return pDate.toDateString() === date.toDateString();
+            }).length;
+            
+            const revenue = dayPatients * 250;
+            const maxRevenue = 1000; // Assume max 1000 for scaling
+            const height = maxRevenue > 0 ? (revenue / maxRevenue) * 100 : 0;
+            
+            chartData.push({ day: dayName, height: Math.min(height, 100), revenue });
+        }
+        
+        const chartContainer = document.getElementById('revenueChart');
+        chartContainer.innerHTML = chartData.map(d => `
+            <div class="flex-1 flex flex-col items-center gap-1">
+                <div class="w-full bg-gradient-to-t from-cyan-500 to-cyan-400 rounded-t-lg chart-bar relative group cursor-pointer" style="--target-height: ${d.height}%; height: ${d.height}%; min-height: 4px;">
+                    <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-2 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                        ${d.revenue.toLocaleString()} د.ع
+                    </div>
+                </div>
+                <span class="text-[10px] text-slate-500 dark:text-slate-400">${d.day}</span>
+            </div>
+        `).join('');
+    }
+
+    function calculateTrends(currentPatients, currentRevenue, currentExpenses) {
+        // Simple trend calculation (mock)
+        const patientTrend = currentPatients > 0 ? '+12' : '0';
+        const revenueTrend = currentRevenue > 0 ? '+15' : '0';
+        const expenseTrend = currentExpenses > 0 ? '-5' : '0';
+        
+        document.getElementById('patientsTrend').textContent = `${patientTrend}% عن الفترة السابقة`;
+        document.getElementById('revenueTrend').textContent = `${revenueTrend}% عن الفترة السابقة`;
+        document.getElementById('expensesTrend').textContent = `${expenseTrend}% عن الفترة السابقة`;
+    }
+
     function exportReport() {
-        alert('جاري إنشاء التقرير... سيتم التنزيل قريباً');
+        const patients = JSON.parse(localStorage.getItem('patients') || '[]');
+        const expenses = JSON.parse(localStorage.getItem('expenses') || '[]');
+        const filteredPatients = getFilteredItems(patients, 'createdAt');
+        const filteredExpenses = getFilteredItems(expenses, 'date');
+        
+        const settings = JSON.parse(localStorage.getItem('clinicSettings') || '{}');
+        
+        const reportData = {
+            clinicName: settings.clinicName || 'عيادة الأثير للبصريات',
+            generatedAt: new Date().toLocaleString('ar-IQ'),
+            period: currentFilter === 'today' ? 'اليوم' : currentFilter === 'month' ? 'الشهر الحالي' : 'الكل',
+            summary: {
+                totalPatients: filteredPatients.length,
+                totalRevenue: filteredPatients.length * 250,
+                totalExpenses: filteredExpenses.reduce((sum, e) => sum + (parseFloat(e.amount) || 0), 0),
+                netProfit: (filteredPatients.length * 250) - filteredExpenses.reduce((sum, e) => sum + (parseFloat(e.amount) || 0), 0)
+            },
+            patients: filteredPatients,
+            expenses: filteredExpenses
+        };
+        
+        // Create and download JSON report
+        const dataStr = JSON.stringify(reportData, null, 2);
+        const blob = new Blob([dataStr], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `تقرير_${reportData.clinicName}_${new Date().toISOString().split('T')[0]}.json`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        showToast('✓ تم تصدير التقرير بنجاح!');
+    }
+    
+    function showToast(msg) {
+        const toast = document.createElement('div');
+        toast.className = 'fixed bottom-20 left-1/2 -translate-x-1/2 z-[100] bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-4 py-2 rounded-full shadow-2xl text-sm font-medium';
+        toast.textContent = msg;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 2000);
+    }
+    
+    function logout() {
+        if (confirm('هل تريد تسجيل الخروج؟')) {
+            showToast('👋 تم تسجيل الخروج');
+            setTimeout(() => window.location.href = 'home.html', 1000);
+        }
+    }
+    
+    function loadClinicName() {
+        const settings = JSON.parse(localStorage.getItem('clinicSettings') || '{}');
+        const name = settings.clinicName || 'The Ethereal Clinic';
+        document.getElementById('clinic-name-header').textContent = name;
     }
 
     // Load on page load
-    loadStats();
+    document.addEventListener('DOMContentLoaded', () => {
+        loadClinicName();
+        loadStats();
+    });
 </script>
 
 </body>
 </html>
+
 

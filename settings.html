@@ -1,494 +1,739 @@
-
 <!DOCTYPE html>
 <html class="dark" dir="rtl" lang="ar">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>الإعدادات - عيادة الأثير للبصريات</title>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;family=Tajawal:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              "primary": "#00BCD4",
-              "secondary": "#64748b",
-              "surface": "#f8fafc",
-              "on-surface": "#0f172a",
-              "background": "#ffffff",
-              "surface-container": "#191f31",
-            },
-            borderRadius: {
-              "DEFAULT": "1rem",
-              "lg": "2rem",
-              "xl": "3rem",
-              "full": "9999px"
-            },
-            fontFamily: {
-              "headline": ["Tajawal", "Manrope"],
-              "body": ["Tajawal", "Plus Jakarta Sans"],
-              "label": ["Tajawal", "Plus Jakarta Sans"]
-            }
-          },
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "primary": "#00BCD4", "secondary": "#64748b", "surface": "#f8fafc",
+          "on-surface": "#0f172a", "background": "#ffffff", "surface-container": "#191f31",
         },
-      }
-    </script>
+        borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" },
+        fontFamily: {
+          "headline": ["Tajawal", "Manrope"],
+          "body": ["Tajawal", "Plus Jakarta Sans"],
+          "label": ["Tajawal", "Plus Jakarta Sans"]
+        }
+      },
+    },
+  }
+</script>
 <style>
-        body {
-            font-family: 'Tajawal', sans-serif;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-        
-        /* Glassmorphism Logic */
-        .glass-card {
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-        .light .glass-card {
-            background: rgba(255, 255, 255, 0.7);
-            border: 1px solid rgba(0, 188, 212, 0.1);
-        }
-
-        /* Glow Effects */
-        .text-glow-primary {
-            text-shadow: 0 0 12px rgba(85, 233, 237, 0.4);
-        }
-        .light .text-glow-primary {
-            text-shadow: 0 0 8px rgba(0, 188, 212, 0.3);
-        }
-        .text-glow-white {
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-        }
-        .light .text-glow-white {
-            text-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Backgrounds */
-        .mesh-gradient {
-            transition: background 0.5s ease;
-            background-attachment: fixed;
-        }
-        .dark .mesh-gradient {
-            background: linear-gradient(135deg, #0c1324 0%, #1e1b4b 50%, #312e81 100%);
-        }
-        .light .mesh-gradient {
-            background: radial-gradient(at 0% 0%, rgba(0, 188, 212, 0.05) 0%, transparent 50%),
-                        radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.05) 0%, transparent 50%),
-                        #f8fafc;
-        }
-
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-        
-        /* Toggle Switch */
-        .toggle-switch {
-            position: relative;
-            width: 52px;
-            height: 28px;
-            background: rgba(100, 116, 139, 0.3);
-            border-radius: 14px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .toggle-switch.active {
-            background: #00BCD4;
-        }
-        .toggle-switch::after {
-            content: '';
-            position: absolute;
-            width: 24px;
-            height: 24px;
-            background: white;
-            border-radius: 50%;
-            top: 2px;
-            right: 2px;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-        .toggle-switch.active::after {
-            right: 26px;
-        }
-        
-        /* Menu Item Hover */
-        .menu-item {
-            transition: all 0.3s ease;
-        }
-        .menu-item:hover {
-            background: rgba(0, 188, 212, 0.1);
-            border-right: 3px solid #00BCD4;
-        }
-        
-        body {
-          min-height: max(884px, 100dvh);
-        }
-    </style>
+  body { font-family: 'Tajawal', sans-serif; transition: background-color 0.3s ease, color 0.3s ease; }
+  .glass-card { backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease; }
+  .light .glass-card { background: rgba(255, 255, 255, 0.7); border: 1px solid rgba(0, 188, 212, 0.1); }
+  .mesh-gradient { transition: background 0.5s ease; background-attachment: fixed; }
+  .dark .mesh-gradient { background: linear-gradient(135deg, #0c1324 0%, #1e1b4b 50%, #312e81 100%); }
+  .light .mesh-gradient { background: radial-gradient(at 0% 0%, rgba(0, 188, 212, 0.05) 0%, transparent 50%), radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.05) 0%, transparent 50%), #f8fafc; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  
+  .toggle-switch { position: relative; width: 52px; height: 28px; background: rgba(100, 116, 139, 0.3); border-radius: 14px; cursor: pointer; transition: all 0.3s ease; }
+  .toggle-switch.active { background: #00BCD4; }
+  .toggle-switch::after { content: ''; position: absolute; width: 24px; height: 24px; background: white; border-radius: 50%; top: 2px; right: 2px; transition: all 0.3s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+  .toggle-switch.active::after { right: 26px; }
+  
+  .template-card { transition: all 0.3s ease; cursor: pointer; }
+  .template-card:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+  .template-card.selected { border-color: #00BCD4; box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.3); }
+  
+  /* A5 Preview Container */
+  .a5-preview-container {
+    width: 100%; max-width: 400px; margin: 0 auto;
+    border: 2px dashed rgba(0,188,212,0.3); border-radius: 16px;
+    padding: 12px; cursor: pointer; transition: all 0.3s ease;
+  }
+  .a5-preview-container:hover { border-color: #00BCD4; background: rgba(0,188,212,0.05); }
+  
+  /* A5 Card Base Styles */
+  .a5-card {
+    width: 148mm; height: 210mm; background: white; color: #1e293b;
+    padding: 15mm; box-sizing: border-box; font-family: 'Tajawal', sans-serif;
+    border-radius: 8px; margin: 0 auto; box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    transform: scale(0.35); transform-origin: top center; transition: transform 0.3s ease;
+  }
+  .a5-preview-container:hover .a5-card { transform: scale(0.4); }
+  
+  .a5-card .header { text-align: center; padding-bottom: 12px; margin-bottom: 15px; }
+  .a5-card .clinic-name { font-size: 18px; font-weight: bold; }
+  .a5-card .clinic-info { font-size: 10px; color: #64748b; margin-top: 4px; }
+  .a5-card .optics-icon { width: 40px; height: 40px; margin: 0 auto 8px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+  .a5-card .optics-icon span { font-size: 24px; color: white; }
+  .a5-card .patient-section { padding: 10px; border-radius: 8px; margin-bottom: 12px; border-right: 3px solid; }
+  .a5-card .patient-title { font-size: 12px; font-weight: bold; margin-bottom: 6px; }
+  .a5-card .patient-row { font-size: 9px; display: flex; justify-content: space-between; margin: 2px 0; }
+  .a5-card .prescription-table { width: 100%; border-collapse: collapse; font-size: 9px; margin: 10px 0; }
+  .a5-card .prescription-table th { padding: 6px 4px; border: 1px solid; }
+  .a5-card .prescription-table td { padding: 6px 4px; border: 1px solid; text-align: center; }
+  .a5-card .pd-section { text-align: center; padding: 8px; border-radius: 6px; margin: 10px 0; font-size: 10px; }
+  .a5-card .footer { text-align: center; font-size: 8px; color: #64748b; margin-top: 20px; padding-top: 10px; }
+  .a5-card .signature { margin-top: 25px; text-align: left; font-size: 10px; }
+  .a5-card .signature-line { border-top: 1px solid; width: 120px; margin-top: 20px; padding-top: 4px; }
+  
+  /* Template 1: Modern Cyan */
+  .template-1 .a5-card { border: 2px solid #00BCD4; }
+  .template-1 .header { border-bottom: 2px solid #00BCD4; }
+  .template-1 .optics-icon { background: linear-gradient(135deg, #00BCD4, #7c3aed); }
+  .template-1 .patient-section { background: #f8fafc; border-color: #00BCD4; }
+  .template-1 .prescription-table th { background: #00BCD4; color: white; border-color: #cbd5e1; }
+  .template-1 .prescription-table td { border-color: #cbd5e1; }
+  .template-1 .pd-section { background: #f0fdfa; }
+  .template-1 .signature-line { border-color: #334155; }
+  .template-1 .footer { border-top: 1px dashed #cbd5e1; }
+  
+  /* Template 2: Classic Elegant */
+  .template-2 .a5-card { border: 3px double #1e293b; background: #fffef9; }
+  .template-2 .header { border-bottom: 3px double #1e293b; }
+  .template-2 .clinic-name { color: #1e293b; font-family: serif; }
+  .template-2 .optics-icon { background: linear-gradient(135deg, #1e293b, #475569); border: 2px solid #cbd5e1; }
+  .template-2 .patient-section { background: #fffef9; border-color: #1e293b; }
+  .template-2 .prescription-table { border: 2px solid #1e293b; }
+  .template-2 .prescription-table th { background: #1e293b; color: white; border-color: #1e293b; }
+  .template-2 .prescription-table td { border-color: #cbd5e1; }
+  .template-2 .pd-section { background: #fffef9; border: 1px solid #1e293b; }
+  .template-2 .signature-line { border-color: #1e293b; }
+  .template-2 .footer { border-top: 2px solid #1e293b; color: #1e293b; }
+  
+  /* Template 3: Minimal Purple */
+  .template-3 .a5-card { border: none; background: linear-gradient(180deg, #faf5ff 0%, white 100%); }
+  .template-3 .header { border-bottom: none; }
+  .template-3 .clinic-name { color: #7c3aed; }
+  .template-3 .optics-icon { background: linear-gradient(135deg, #7c3aed, #a78bfa); }
+  .template-3 .patient-section { background: white; border-color: #7c3aed; box-shadow: 0 2px 8px rgba(124,58,237,0.1); }
+  .template-3 .prescription-table th { background: linear-gradient(135deg, #7c3aed, #a78bfa); color: white; border: none; }
+  .template-3 .prescription-table td { border-color: #e9d5ff; }
+  .template-3 .pd-section { background: white; border: 1px solid #e9d5ff; }
+  .template-3 .signature-line { border-color: #7c3aed; }
+  .template-3 .footer { border-top: 1px solid #e9d5ff; }
+  
+  /* Template 4: Bold Medical */
+  .template-4 .a5-card { border: 4px solid #dc2626; background: white; }
+  .template-4 .header { border-bottom: 4px solid #dc2626; background: #fef2f2; padding: 15px; margin: -15mm -15mm 15mm -15mm; border-radius: 4px 4px 0 0; }
+  .template-4 .clinic-name { color: #dc2626; font-size: 20px; }
+  .template-4 .optics-icon { background: #dc2626; width: 50px; height: 50px; }
+  .template-4 .patient-section { background: #fef2f2; border-color: #dc2626; border-right-width: 4px; }
+  .template-4 .prescription-table th { background: #dc2626; color: white; border-color: #dc2626; font-weight: bold; }
+  .template-4 .prescription-table td { border-color: #fecaca; font-weight: 500; }
+  .template-4 .pd-section { background: #fef2f2; border: 2px solid #dc2626; font-weight: bold; }
+  .template-4 .signature-line { border-color: #dc2626; border-width: 2px; }
+  .template-4 .footer { border-top: 3px solid #dc2626; color: #dc2626; font-weight: bold; }
+  
+  /* Full Preview Modal */
+  .preview-modal { 
+    position: fixed; inset: 0; background: rgba(0,0,0,0.8); 
+    z-index: 200; display: none; align-items: center; justify-content: center;
+    padding: 20px; overflow: auto;
+  }
+  .preview-modal.active { display: flex; }
+  .preview-modal .a5-card { transform: scale(1); box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+  
+  .sidebar-compact { width: 280px !important; }
+  .sidebar-compact .menu-item { padding: 0.5rem 0.75rem !important; }
+  .sidebar-compact .menu-icon { width: 32px !important; height: 32px !important; }
+  body { min-height: max(884px, 100dvh); }
+  
+  @media print {
+    @page { size: A5; margin: 0; }
+    body { background: white !important; }
+    .no-print { display: none !important; }
+    .a5-card { transform: scale(1) !important; box-shadow: none !important; border: none !important; width: 100%; height: auto; }
+  }
+</style>
 </head>
 <body class="mesh-gradient min-h-screen pb-32 overflow-x-hidden text-slate-900 dark:text-slate-100">
 
 <!-- TopAppBar -->
-<header class="bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl border-b border-black/5 dark:border-white/5 shadow-sm flex justify-between items-center px-6 h-20 w-full z-50 fixed top-0 left-0 transition-colors">
-<div class="flex items-center gap-4">
-<button class="text-slate-600 dark:text-slate-300 hover:bg-black/5 dark:hover:bg-white/5 transition-colors p-2 rounded-full" id="menu-btn">
-<span class="material-symbols-outlined">menu</span>
-</button>
-<h1 class="text-2xl font-bold bg-gradient-to-r from-cyan-600 to-purple-600 dark:from-cyan-400 dark:to-purple-400 bg-clip-text text-transparent font-headline tracking-tight">The Ethereal Clinic</h1>
-</div>
-<div class="flex items-center gap-2">
-<button class="text-cyan-600 dark:text-cyan-400 p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
-<span class="material-symbols-outlined">search</span>
-</button>
-<button class="text-slate-600 dark:text-slate-300 p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/5 transition-colors" id="theme-toggle">
-<span class="material-symbols-outlined dark:hidden">dark_mode</span>
-<span class="material-symbols-outlined hidden dark:block">light_mode</span>
-</button>
-</div>
+<header class="bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl border-b border-black/5 dark:border-white/5 shadow-sm flex justify-between items-center px-4 md:px-6 h-20 w-full z-50 fixed top-0 left-0 transition-colors">
+  <div class="flex items-center gap-3">
+    <button class="text-slate-600 dark:text-slate-300 hover:bg-black/5 dark:hover:bg-white/5 transition-colors p-2 rounded-full" id="menu-btn">
+      <span class="material-symbols-outlined">menu</span>
+    </button>
+    <h1 class="text-lg md:text-2xl font-bold bg-gradient-to-r from-cyan-600 to-purple-600 dark:from-cyan-400 dark:to-purple-400 bg-clip-text text-transparent font-headline tracking-tight" id="clinic-name-header">The Ethereal Clinic</h1>
+  </div>
+  <div class="flex items-center gap-2">
+    <button class="text-cyan-600 dark:text-cyan-400 p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+      <span class="material-symbols-outlined">search</span>
+    </button>
+    <button class="text-slate-600 dark:text-slate-300 p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/5 transition-colors" id="theme-toggle">
+      <span class="material-symbols-outlined dark:hidden">dark_mode</span>
+      <span class="material-symbols-outlined hidden dark:block">light_mode</span>
+    </button>
+  </div>
 </header>
 
 <main class="px-4 pt-28 space-y-6 max-w-lg mx-auto">
 
 <!-- Page Title -->
 <section class="space-y-1">
-<p class="text-slate-500 dark:text-secondary text-sm font-medium">إدارة النظام</p>
-<h2 class="text-3xl font-extrabold text-slate-900 dark:text-white dark:text-glow-white">الإعدادات</h2>
+  <p class="text-slate-500 dark:text-secondary text-sm font-medium">إدارة النظام</p>
+  <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white">الإعدادات</h2>
 </section>
 
 <!-- Settings Menu -->
 <section class="space-y-4">
 
-<!-- Clinic Info Card -->
-<div class="glass-card rounded-2xl p-6 space-y-4">
-<div class="flex items-center gap-3 mb-4">
-<div class="w-10 h-10 rounded-full bg-cyan-100 dark:bg-cyan-500/20 flex items-center justify-center text-cyan-600 dark:text-cyan-400">
-<span class="material-symbols-outlined">business</span>
-</div>
-<h3 class="text-lg font-bold text-slate-900 dark:text-white">معلومات العيادة</h3>
+<!-- Clinic Info -->
+<div class="glass-card rounded-2xl p-4 md:p-6 space-y-4">
+  <div class="flex items-center gap-3 mb-4">
+    <div class="w-10 h-10 rounded-full bg-cyan-100 dark:bg-cyan-500/20 flex items-center justify-center text-cyan-600 dark:text-cyan-400">
+      <span class="material-symbols-outlined">business</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 dark:text-white">معلومات العيادة</h3>
+  </div>
+  <div class="space-y-3">
+    <div>
+      <label class="text-xs font-medium text-slate-600 dark:text-slate-400 mb-1 block">اسم العيادة</label>
+      <input class="w-full bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-right outline-none focus:border-cyan-500 transition-colors text-slate-900 dark:text-white" type="text" id="clinicName" value="عيادة الأثير للبصريات"/>
+    </div>
+    <div>
+      <label class="text-xs font-medium text-slate-600 dark:text-slate-400 mb-1 block">العنوان</label>
+      <input class="w-full bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-right outline-none focus:border-cyan-500 transition-colors text-slate-900 dark:text-white" type="text" id="clinicAddress" value="بغداد - المنصور - شارع 14 رمضان"/>
+    </div>
+    <div class="grid grid-cols-2 gap-3">
+      <div>
+        <label class="text-xs font-medium text-slate-600 dark:text-slate-400 mb-1 block">رقم الهاتف</label>
+        <input class="w-full bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-right outline-none focus:border-cyan-500 transition-colors text-slate-900 dark:text-white" type="tel" id="clinicPhone" value="0770 123 4567"/>
+      </div>
+      <div>
+        <label class="text-xs font-medium text-slate-600 dark:text-slate-400 mb-1 block">العملة</label>
+        <select class="w-full bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-right outline-none focus:border-cyan-500 transition-colors text-slate-900 dark:text-white" id="currency" disabled>
+          <option value="IQD">الدينار العراقي (IQD)</option>
+        </select>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div class="space-y-3">
-<div>
-<label class="text-xs font-medium text-slate-600 dark:text-slate-400 mb-1 block">اسم العيادة</label>
-<input class="w-full bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-right outline-none focus:border-cyan-500 transition-colors text-slate-900 dark:text-white" type="text" value="عيادة الأثير للبصريات"/>
-</div>
-<div>
-<label class="text-xs font-medium text-slate-600 dark:text-slate-400 mb-1 block">العنوان</label>
-<input class="w-full bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-right outline-none focus:border-cyan-500 transition-colors text-slate-900 dark:text-white" type="text" value="بغداد - المنصور - شارع 14 رمضان"/>
-</div>
-<div class="grid grid-cols-2 gap-3">
-<div>
-<label class="text-xs font-medium text-slate-600 dark:text-slate-400 mb-1 block">رقم الهاتف</label>
-<input class="w-full bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-right outline-none focus:border-cyan-500 transition-colors text-slate-900 dark:text-white" type="tel" value="0770 123 4567"/>
-</div>
-<div>
-<label class="text-xs font-medium text-slate-600 dark:text-slate-400 mb-1 block">البريد الإلكتروني</label>
-<input class="w-full bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-right outline-none focus:border-cyan-500 transition-colors text-slate-900 dark:text-white" type="email" value="info@ethereal-clinic.com"/>
-</div>
-</div>
+<!-- Social Media -->
+<div class="glass-card rounded-2xl p-4 md:p-6 space-y-4">
+  <div class="flex items-center gap-3 mb-4">
+    <div class="w-10 h-10 rounded-full bg-pink-100 dark:bg-pink-500/20 flex items-center justify-center text-pink-600 dark:text-pink-400">
+      <span class="material-symbols-outlined">share</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 dark:text-white">مواقع التواصل الاجتماعي</h3>
+  </div>
+  <div class="space-y-3">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-600 to-pink-500 flex items-center justify-center text-white">
+        <span class="material-symbols-outlined text-sm">photo_camera</span>
+      </div>
+      <input class="flex-1 bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-right outline-none focus:border-cyan-500 transition-colors text-slate-900 dark:text-white text-sm" type="text" id="instagram" placeholder="@username"/>
+    </div>
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white">
+        <span class="material-symbols-outlined text-sm">facebook</span>
+      </div>
+      <input class="flex-1 bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-right outline-none focus:border-cyan-500 transition-colors text-slate-900 dark:text-white text-sm" type="text" id="facebook" placeholder="صفحة الفيسبوك"/>
+    </div>
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-full bg-black flex items-center justify-center text-white border border-slate-600">
+        <span class="material-symbols-outlined text-sm">music_note</span>
+      </div>
+      <input class="flex-1 bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-right outline-none focus:border-cyan-500 transition-colors text-slate-900 dark:text-white text-sm" type="text" id="tiktok" placeholder="@username"/>
+    </div>
+  </div>
 </div>
 
-<button class="w-full mt-4 bg-gradient-to-r from-cyan-500 to-cyan-600 text-white rounded-xl py-3 font-bold hover:shadow-lg hover:shadow-cyan-500/30 transition-all active:scale-95">
-حفظ التغييرات
-</button>
+<!-- Follow-up Interval Setting -->
+<div class="glass-card rounded-2xl p-4 md:p-6 space-y-4">
+  <div class="flex items-center gap-3 mb-4">
+    <div class="w-10 h-10 rounded-full bg-amber-100 dark:bg-amber-500/20 flex items-center justify-center text-amber-600 dark:text-amber-400">
+      <span class="material-symbols-outlined">calendar_clock</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 dark:text-white">موعد الفحص القادم</h3>
+  </div>
+  <div class="space-y-3">
+    <p class="text-xs text-slate-500 dark:text-slate-400">حدد الفترة الافتراضية بين الفحوصات للمرضى:</p>
+    <div class="grid grid-cols-2 gap-3">
+      <label class="glass-card rounded-xl p-4 cursor-pointer border-2 border-transparent hover:border-cyan-300 transition-all" id="interval-3">
+        <input type="radio" name="followupInterval" value="3" class="hidden" onchange="updateInterval(this.value)" checked/>
+        <div class="text-center">
+          <div class="text-2xl font-bold text-cyan-600 dark:text-cyan-400">3</div>
+          <div class="text-xs text-slate-600 dark:text-slate-400">أشهر</div>
+        </div>
+      </label>
+      <label class="glass-card rounded-xl p-4 cursor-pointer border-2 border-transparent hover:border-cyan-300 transition-all" id="interval-6">
+        <input type="radio" name="followupInterval" value="6" class="hidden" onchange="updateInterval(this.value)"/>
+        <div class="text-center">
+          <div class="text-2xl font-bold text-purple-600 dark:text-purple-400">6</div>
+          <div class="text-xs text-slate-600 dark:text-slate-400">أشهر</div>
+        </div>
+      </label>
+    </div>
+  </div>
+</div>
+
+<!-- Invoice Templates with 4 Designs -->
+<div class="glass-card rounded-2xl p-4 md:p-6 space-y-4">
+  <div class="flex items-center gap-3 mb-4">
+    <div class="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-500/20 flex items-center justify-center text-purple-600 dark:text-purple-300">
+      <span class="material-symbols-outlined">palette</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 dark:text-white">تصاميم كارت المريض (A5)</h3>
+  </div>
+
+  <!-- Template Selection Grid -->
+  <div class="grid grid-cols-4 gap-2">
+    <div class="template-card glass-card rounded-xl p-2 border-2 border-transparent text-center" onclick="selectTemplate('1')" id="template-1">
+      <div class="aspect-[3/4] rounded-lg mb-1 border-2 border-cyan-400" style="background: linear-gradient(135deg, #e0f7fa, #b2ebf2);"></div>
+      <div class="text-[10px] font-medium">عصري</div>
+    </div>
+    <div class="template-card glass-card rounded-xl p-2 border-2 border-transparent text-center" onclick="selectTemplate('2')" id="template-2">
+      <div class="aspect-[3/4] rounded-lg mb-1 border-2 border-slate-600" style="background: linear-gradient(135deg, #fffef9, #f5f5f4);"></div>
+      <div class="text-[10px] font-medium">كلاسيكي</div>
+    </div>
+    <div class="template-card glass-card rounded-xl p-2 border-2 border-transparent text-center" onclick="selectTemplate('3')" id="template-3">
+      <div class="aspect-[3/4] rounded-lg mb-1 border-2 border-purple-400" style="background: linear-gradient(135deg, #faf5ff, #f3e8ff);"></div>
+      <div class="text-[10px] font-medium">مينيمال</div>
+    </div>
+    <div class="template-card glass-card rounded-xl p-2 border-2 border-transparent text-center" onclick="selectTemplate('4')" id="template-4">
+      <div class="aspect-[3/4] rounded-lg mb-1 border-2 border-red-500" style="background: linear-gradient(135deg, #fef2f2, #fecaca);"></div>
+      <div class="text-[10px] font-medium">طبي</div>
+    </div>
+  </div>
+
+  <!-- A5 Preview (Clickable to Expand) -->
+  <div class="mt-4">
+    <p class="text-xs font-medium text-slate-600 dark:text-slate-400 mb-2 text-center">🔍 اضغط للمعاينة الكاملة</p>
+    <div class="a5-preview-container template-1" id="a5PreviewContainer" onclick="openFullPreview()">
+      <div class="a5-card template-1" id="a5Preview">
+        <div class="header">
+          <div class="optics-icon"><span class="material-symbols-outlined">eyeglasses</span></div>
+          <div class="clinic-name" id="previewClinicName">عيادة الأثير للبصريات</div>
+          <div class="clinic-info" id="previewClinicInfo">
+            <div>📍 بغداد - المنصور - شارع 14 رمضان</div>
+            <div>📞 0770 123 4567</div>
+            <div>📱 @ethereal_optics</div>
+          </div>
+        </div>
+        <div class="patient-section">
+          <div class="patient-title">👤 معلومات المريض</div>
+          <div class="patient-row"><span>الاسم:</span><span>محمد أحمد</span></div>
+          <div class="patient-row"><span>العمر:</span><span>28 سنة</span></div>
+          <div class="patient-row"><span>التاريخ:</span><span>2024/04/11</span></div>
+          <div class="patient-row"><span>الفحص القادم:</span><span>2024/07/11</span></div>
+        </div>
+        <table class="prescription-table">
+          <thead><tr><th>العين</th><th>SPH</th><th>CYL</th><th>AXIS</th><th>ADD</th><th>VA</th></tr></thead>
+          <tbody>
+            <tr><td>👁️ يمنى</td><td>+1.25</td><td>-0.50</td><td>90°</td><td>+1.50</td><td>6/6</td></tr>
+            <tr><td>👁️ يسرى</td><td>+1.00</td><td>-0.75</td><td>85°</td><td>+1.50</td><td>6/6</td></tr>
+          </tbody>
+        </table>
+        <div class="pd-section"><strong>📏 PD:</strong> 63 mm</div>
+        <div class="patient-section">
+          <div class="patient-title">📝 ملاحظات</div>
+          <div style="font-size: 9px;">عدسات مضادة للانعكاس - مراجعة سنوية</div>
+        </div>
+        <div class="signature">
+          <div class="signature-line">توقيع فاحص البصر</div>
+          <div style="margin-top: 4px; font-size: 9px; color: #64748b;">د. سارة البصري</div>
+        </div>
+        <div class="footer">
+          <div id="previewFooter">✨ عيادة الأثير للبصريات - جميع الحقوق محفوظة ✨</div>
+          <div style="margin-top: 4px;" id="previewSocial">🌐 instagram.com/ethereal_optics</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Data Management -->
+<div class="glass-card rounded-2xl p-4 md:p-6 space-y-4">
+  <div class="flex items-center gap-3 mb-4">
+    <div class="w-10 h-10 rounded-full bg-green-100 dark:bg-green-500/20 flex items-center justify-center text-green-600 dark:text-green-400">
+      <span class="material-symbols-outlined">database</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 dark:text-white">إدارة البيانات</h3>
+  </div>
+  <div class="space-y-3">
+    <button class="w-full flex items-center justify-between p-4 bg-white/50 dark:bg-white/5 rounded-xl border border-slate-200 dark:border-white/10 hover:border-green-500 transition-colors" onclick="exportToExcel()">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-green-100 dark:bg-green-500/20 flex items-center justify-center text-green-600 dark:text-green-400">
+          <span class="material-symbols-outlined">file_download</span>
+        </div>
+        <div class="text-right">
+          <p class="font-medium text-slate-900 dark:text-white">تصدير إلى Excel/JSON</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400">حفظ جميع البيانات</p>
+        </div>
+      </div>
+      <span class="material-symbols-outlined text-slate-400">arrow_back_ios</span>
+    </button>
+    <button class="w-full flex items-center justify-between p-4 bg-white/50 dark:bg-white/5 rounded-xl border border-slate-200 dark:border-white/10 hover:border-blue-500 transition-colors" onclick="document.getElementById('import-file').click()">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-500/20 flex items-center justify-center text-blue-600 dark:text-blue-400">
+          <span class="material-symbols-outlined">file_upload</span>
+        </div>
+        <div class="text-right">
+          <p class="font-medium text-slate-900 dark:text-white">استيراد من Excel/JSON</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400">استعادة البيانات</p>
+        </div>
+      </div>
+      <span class="material-symbols-outlined text-slate-400">arrow_back_ios</span>
+    </button>
+    <input type="file" id="import-file" class="hidden" accept=".json,.xlsx,.xls,.csv" onchange="importFromFile(event)">
+    <button class="w-full flex items-center justify-between p-4 bg-white/50 dark:bg-white/5 rounded-xl border border-slate-200 dark:border-white/10 hover:border-red-500 transition-colors" onclick="clearAllData()">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-red-100 dark:bg-red-500/20 flex items-center justify-center text-red-600 dark:text-red-400">
+          <span class="material-symbols-outlined">delete_forever</span>
+        </div>
+        <div class="text-right">
+          <p class="font-medium text-slate-900 dark:text-white">مسح جميع البيانات</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400">حذف الأرشيف والإعدادات</p>
+        </div>
+      </div>
+      <span class="material-symbols-outlined text-slate-400">arrow_back_ios</span>
+    </button>
+  </div>
+</div>
+
+<!-- Support & Legal -->
+<div class="glass-card rounded-2xl p-4 md:p-6 space-y-4">
+  <div class="flex items-center gap-3 mb-4">
+    <div class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300">
+      <span class="material-symbols-outlined">shield</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 dark:text-white">الدعم والقوانين</h3>
+  </div>
+  <div class="space-y-2">
+    <a href="support.html" class="flex items-center justify-between p-3 hover:bg-white/50 dark:hover:bg-white/5 rounded-xl transition-colors">
+      <div class="flex items-center gap-3">
+        <span class="material-symbols-outlined text-cyan-600 dark:text-cyan-400">support_agent</span>
+        <span class="text-sm text-slate-700 dark:text-slate-300">الدعم الفني والمساعدة</span>
+      </div>
+      <span class="material-symbols-outlined text-slate-400">arrow_back_ios</span>
+    </a>
+    <a href="#" onclick="showModal('privacy')" class="flex items-center justify-between p-3 hover:bg-white/50 dark:hover:bg-white/5 rounded-xl transition-colors">
+      <div class="flex items-center gap-3">
+        <span class="material-symbols-outlined text-purple-600 dark:text-purple-400">privacy_tip</span>
+        <span class="text-sm text-slate-700 dark:text-slate-300">سياسة الخصوصية</span>
+      </div>
+      <span class="material-symbols-outlined text-slate-400">arrow_back_ios</span>
+    </a>
+    <a href="#" onclick="showModal('terms')" class="flex items-center justify-between p-3 hover:bg-white/50 dark:hover:bg-white/5 rounded-xl transition-colors">
+      <div class="flex items-center gap-3">
+        <span class="material-symbols-outlined text-amber-600 dark:text-amber-400">gavel</span>
+        <span class="text-sm text-slate-700 dark:text-slate-300">الشروط والأحكام</span>
+      </div>
+      <span class="material-symbols-outlined text-slate-400">arrow_back_ios</span>
+    </a>
+  </div>
 </div>
 
 <!-- Appearance Settings -->
-<div class="glass-card rounded-2xl p-6 space-y-4">
-<div class="flex items-center gap-3 mb-4">
-<div class="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-500/20 flex items-center justify-center text-purple-600 dark:text-purple-300">
-<span class="material-symbols-outlined">palette</span>
-</div>
-<h3 class="text-lg font-bold text-slate-900 dark:text-white">المظهر والعرض</h3>
-</div>
-
-<div class="space-y-4">
-<div class="flex items-center justify-between">
-<div class="flex items-center gap-3">
-<span class="material-symbols-outlined text-slate-500 dark:text-slate-400">dark_mode</span>
-<div>
-<p class="font-medium text-slate-900 dark:text-white">الوضع الداكن</p>
-<p class="text-xs text-slate-500 dark:text-slate-400">تفعيل المظهر الليلي للتطبيق</p>
-</div>
-</div>
-<div class="toggle-switch active" id="darkModeToggle" onclick="toggleDarkMode()"></div>
-</div>
-
-<div class="flex items-center justify-between">
-<div class="flex items-center gap-3">
-<span class="material-symbols-outlined text-slate-500 dark:text-slate-400">notifications</span>
-<div>
-<p class="font-medium text-slate-900 dark:text-white">الإشعارات</p>
-<p class="text-xs text-slate-500 dark:text-slate-400">تفعيل تنبيهات المواعيد</p>
-</div>
-</div>
-<div class="toggle-switch active" onclick="this.classList.toggle('active')"></div>
+<div class="glass-card rounded-2xl p-4 md:p-6 space-y-4">
+  <div class="flex items-center gap-3 mb-4">
+    <div class="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-500/20 flex items-center justify-center text-purple-600 dark:text-purple-300">
+      <span class="material-symbols-outlined">palette</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 dark:text-white">المظهر</h3>
+  </div>
+  <div class="flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <span class="material-symbols-outlined text-slate-500 dark:text-slate-400">dark_mode</span>
+      <div>
+        <p class="font-medium text-slate-900 dark:text-white">الوضع الداكن</p>
+        <p class="text-xs text-slate-500 dark:text-slate-400">تفعيل المظهر الليلي</p>
+      </div>
+    </div>
+    <div class="toggle-switch active" id="darkModeToggle" onclick="toggleDarkMode()"></div>
+  </div>
 </div>
 
-<div class="flex items-center justify-between">
-<div class="flex items-center gap-3">
-<span class="material-symbols-outlined text-slate-500 dark:text-slate-400">vibration</span>
-<div>
-<p class="font-medium text-slate-900 dark:text-white">الاهتزاز</p>
-<p class="text-xs text-slate-500 dark:text-slate-400">تفعيل الاهتزاز عند الضغط</p>
-</div>
-</div>
-<div class="toggle-switch" onclick="this.classList.toggle('active')"></div>
-</div>
-</div>
-</div>
-
-<!-- Language & Region -->
-<div class="glass-card rounded-2xl p-6 space-y-4">
-<div class="flex items-center gap-3 mb-4">
-<div class="w-10 h-10 rounded-full bg-amber-100 dark:bg-amber-500/20 flex items-center justify-center text-amber-600 dark:text-amber-400">
-<span class="material-symbols-outlined">language</span>
-</div>
-<h3 class="text-lg font-bold text-slate-900 dark:text-white">اللغة والمنطقة</h3>
-</div>
-
-<div class="space-y-3">
-<div class="flex items-center justify-between p-3 bg-white/50 dark:bg-white/5 rounded-xl border border-slate-200 dark:border-white/10 cursor-pointer hover:border-cyan-500 transition-colors">
-<div class="flex items-center gap-3">
-<span class="text-2xl">🇸🇦</span>
-<div>
-<p class="font-medium text-slate-900 dark:text-white">العربية</p>
-<p class="text-xs text-slate-500 dark:text-slate-400">اللغة الحالية</p>
-</div>
-</div>
-<span class="material-symbols-outlined text-cyan-600 dark:text-cyan-400">check_circle</span>
-</div>
-
-<div class="flex items-center justify-between p-3 bg-white/50 dark:bg-white/5 rounded-xl border border-slate-200 dark:border-white/10 cursor-pointer hover:border-cyan-500 transition-colors opacity-60">
-<div class="flex items-center gap-3">
-<span class="text-2xl">🇺🇸</span>
-<div>
-<p class="font-medium text-slate-900 dark:text-white">English</p>
-<p class="text-xs text-slate-500 dark:text-slate-400">قريباً</p>
-</div>
-</div>
-</div>
-</div>
-
-<div class="pt-3 border-t border-slate-200 dark:border-white/10">
-<label class="text-xs font-medium text-slate-600 dark:text-slate-400 mb-2 block">العملة الافتراضية</label>
-<select class="w-full bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-right outline-none focus:border-cyan-500 transition-colors text-slate-900 dark:text-white">
-<option value="IQD">دينار عراقي (IQD)</option>
-<option value="USD">دولار أمريكي (USD)</option>
-<option value="SAR">ريال سعودي (SAR)</option>
-<option value="AED">درهم إماراتي (AED)</option>
-</select>
-</div>
-</div>
-
-<!-- Backup & Data -->
-<div class="glass-card rounded-2xl p-6 space-y-4">
-<div class="flex items-center gap-3 mb-4">
-<div class="w-10 h-10 rounded-full bg-green-100 dark:bg-green-500/20 flex items-center justify-center text-green-600 dark:text-green-400">
-<span class="material-symbols-outlined">backup</span>
-</div>
-<h3 class="text-lg font-bold text-slate-900 dark:text-white">النسخ الاحتياطي والبيانات</h3>
-</div>
-
-<div class="space-y-3">
-<button class="w-full flex items-center justify-between p-4 bg-white/50 dark:bg-white/5 rounded-xl border border-slate-200 dark:border-white/10 hover:border-green-500 transition-colors group">
-<div class="flex items-center gap-3">
-<div class="w-10 h-10 rounded-full bg-green-100 dark:bg-green-500/20 flex items-center justify-center text-green-600 dark:text-green-400 group-hover:scale-110 transition-transform">
-<span class="material-symbols-outlined">download</span>
-</div>
-<div class="text-right">
-<p class="font-medium text-slate-900 dark:text-white">تصدير البيانات</p>
-<p class="text-xs text-slate-500 dark:text-slate-400">حفظ نسخة من أرشيف المرضى</p>
-</div>
-</div>
-<span class="material-symbols-outlined text-slate-400">arrow_back_ios</span>
+<!-- Save Button -->
+<button onclick="saveSettings()" class="w-full bg-gradient-to-r from-cyan-500 to-purple-500 text-white rounded-2xl py-4 font-bold hover:shadow-lg hover:shadow-cyan-500/30 transition-all active:scale-95 flex items-center justify-center gap-2">
+  <span class="material-symbols-outlined">save</span>
+  <span>حفظ جميع الإعدادات</span>
 </button>
-
-<button class="w-full flex items-center justify-between p-4 bg-white/50 dark:bg-white/5 rounded-xl border border-slate-200 dark:border-white/10 hover:border-blue-500 transition-colors group">
-<div class="flex items-center gap-3">
-<div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-500/20 flex items-center justify-center text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform">
-<span class="material-symbols-outlined">upload</span>
-</div>
-<div class="text-right">
-<p class="font-medium text-slate-900 dark:text-white">استيراد البيانات</p>
-<p class="text-xs text-slate-500 dark:text-slate-400">استعادة نسخة سابقة</p>
-</div>
-</div>
-<span class="material-symbols-outlined text-slate-400">arrow_back_ios</span>
-</button>
-
-<button class="w-full flex items-center justify-between p-4 bg-white/50 dark:bg-white/5 rounded-xl border border-slate-200 dark:border-white/10 hover:border-red-500 transition-colors group" onclick="clearAllData()">
-<div class="flex items-center gap-3">
-<div class="w-10 h-10 rounded-full bg-red-100 dark:bg-red-500/20 flex items-center justify-center text-red-600 dark:text-red-400 group-hover:scale-110 transition-transform">
-<span class="material-symbols-outlined">delete_forever</span>
-</div>
-<div class="text-right">
-<p class="font-medium text-slate-900 dark:text-white">مسح جميع البيانات</p>
-<p class="text-xs text-slate-500 dark:text-slate-400">حذف الأرشيف والإعدادات</p>
-</div>
-</div>
-<span class="material-symbols-outlined text-slate-400">arrow_back_ios</span>
-</button>
-</div>
-</div>
-
-<!-- About App -->
-<div class="glass-card rounded-2xl p-6 space-y-4">
-<div class="flex items-center gap-3 mb-4">
-<div class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300">
-<span class="material-symbols-outlined">info</span>
-</div>
-<h3 class="text-lg font-bold text-slate-900 dark:text-white">حول التطبيق</h3>
-</div>
-
-<div class="text-center space-y-3">
-<div class="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-cyan-400 to-purple-500 flex items-center justify-center shadow-lg shadow-cyan-500/30">
-<span class="material-symbols-outlined text-4xl text-white">visibility</span>
-</div>
-<h4 class="text-xl font-bold text-slate-900 dark:text-white">عيادة الأثير للبصريات</h4>
-<p class="text-sm text-slate-500 dark:text-slate-400">الإصدار 1.0.0</p>
-</div>
-
-<div class="space-y-2 pt-4 border-t border-slate-200 dark:border-white/10">
-<a class="flex items-center justify-between p-3 hover:bg-white/50 dark:hover:bg-white/5 rounded-xl transition-colors" href="#">
-<span class="text-sm text-slate-700 dark:text-slate-300">شروط الاستخدام</span>
-<span class="material-symbols-outlined text-slate-400">arrow_back_ios</span>
-</a>
-<a class="flex items-center justify-between p-3 hover:bg-white/50 dark:hover:bg-white/5 rounded-xl transition-colors" href="#">
-<span class="text-sm text-slate-700 dark:text-slate-300">سياسة الخصوصية</span>
-<span class="material-symbols-outlined text-slate-400">arrow_back_ios</span>
-</a>
-<a class="flex items-center justify-between p-3 hover:bg-white/50 dark:hover:bg-white/5 rounded-xl transition-colors" href="#">
-<span class="text-sm text-slate-700 dark:text-slate-300">تواصل مع الدعم</span>
-<span class="material-symbols-outlined text-slate-400">arrow_back_ios</span>
-</a>
-</div>
-</div>
 
 </section>
-
 </main>
 
+<!-- Full Preview Modal -->
+<div class="preview-modal" id="fullPreviewModal" onclick="closeFullPreview(event)">
+  <div class="a5-card" id="fullPreviewCard"></div>
+</div>
+
+<!-- Legal Modals -->
+<div class="fixed inset-0 bg-slate-900/60 dark:bg-black/80 backdrop-blur-sm z-[150] opacity-0 pointer-events-none transition-opacity duration-300" id="legalOverlay" onclick="closeLegalModal()"></div>
+<div class="fixed inset-x-0 bottom-0 z-[160] translate-y-full transition-transform duration-300" id="legalModal">
+  <div class="bg-white dark:bg-slate-900 rounded-t-[2rem] max-w-lg mx-auto max-h-[70vh] overflow-y-auto">
+    <div class="sticky top-0 bg-white dark:bg-slate-900 p-6 border-b border-slate-100 dark:border-white/10 flex items-center justify-between">
+      <h3 class="text-xl font-bold text-slate-900 dark:text-white" id="legalTitle">عنوان</h3>
+      <button class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center" onclick="closeLegalModal()">
+        <span class="material-symbols-outlined text-slate-600 dark:text-slate-400">close</span>
+      </button>
+    </div>
+    <div class="p-6 text-sm text-slate-600 dark:text-slate-300 space-y-4" id="legalContent"></div>
+  </div>
+</div>
+
 <!-- BottomNavBar -->
-<nav class="bg-white/80 dark:bg-slate-900/40 backdrop-blur-lg fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 pb-safe rounded-t-[2rem] border-t border-slate-200 dark:border-white/5 shadow-[0_-10px_30px_rgba(0,0,0,0.4)] transition-colors">
-<a class="flex flex-col items-center justify-center text-slate-400 py-2 hover:text-cyan-600 dark:hover:text-cyan-300 active:scale-90 transition-transform" href="index.html">
-<span class="material-symbols-outlined text-2xl">home</span>
-<span class="font-label text-xs font-medium mt-1">الرئيسية</span>
-</a>
-<a class="flex flex-col items-center justify-center text-slate-400 py-2 hover:text-cyan-600 dark:hover:text-cyan-300 active:scale-90 transition-transform" href="add-patient.html">
-<span class="material-symbols-outlined text-2xl">person_add</span>
-<span class="font-label text-xs font-medium mt-1">إضافة مريض</span>
-</a>
-<a class="flex flex-col items-center justify-center text-slate-400 py-2 hover:text-cyan-600 dark:hover:text-cyan-300 active:scale-90 transition-transform" href="archive.html">
-<span class="material-symbols-outlined text-2xl">inventory</span>
-<span class="font-label text-xs font-medium mt-1">الأرشيف</span>
-</a>
-<a class="flex flex-col items-center justify-center bg-gradient-to-br from-cyan-500/20 to-purple-500/20 dark:from-cyan-500/30 dark:to-purple-500/30 text-cyan-600 dark:text-cyan-400 rounded-lg px-6 py-2 active:scale-95 transition-all border border-white/20 dark:border-white/10 backdrop-blur-md shadow-lg shadow-cyan-500/10" href="settings.html">
-<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">settings</span>
-<span class="font-label text-xs font-medium mt-1">الإعدادات</span>
-</a>
+<nav class="bg-white/80 dark:bg-slate-900/40 backdrop-blur-lg fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-16 md:h-20 rounded-t-[2rem] border-t border-slate-200 dark:border-white/5 px-2">
+  <a class="flex flex-col items-center justify-center text-slate-400 py-1 md:py-2 hover:text-cyan-600 dark:hover:text-cyan-300 active:scale-90 transition-transform" href="home.html">
+    <span class="material-symbols-outlined text-xl md:text-2xl">home</span>
+    <span class="font-label text-[10px] md:text-xs font-medium mt-0.5">الرئيسية</span>
+  </a>
+  <a class="flex flex-col items-center justify-center text-slate-400 py-1 md:py-2 hover:text-cyan-600 dark:hover:text-cyan-300 active:scale-90 transition-transform" href="add-patient.html">
+    <span class="material-symbols-outlined text-xl md:text-2xl">person_add</span>
+    <span class="font-label text-[10px] md:text-xs font-medium mt-0.5">إضافة</span>
+  </a>
+  <a class="flex flex-col items-center justify-center text-slate-400 py-1 md:py-2 hover:text-cyan-600 dark:hover:text-cyan-300 active:scale-90 transition-transform" href="archive.html">
+    <span class="material-symbols-outlined text-xl md:text-2xl">inventory</span>
+    <span class="font-label text-[10px] md:text-xs font-medium mt-0.5">الأرشيف</span>
+  </a>
+  <a class="flex flex-col items-center justify-center bg-gradient-to-br from-cyan-500/20 to-purple-500/20 dark:from-cyan-500/30 dark:to-purple-500/30 text-cyan-600 dark:text-cyan-400 rounded-lg px-3 md:px-6 py-1 md:py-2 active:scale-95 transition-all border border-white/20 dark:border-white/10 backdrop-blur-md shadow-lg shadow-cyan-500/10" href="settings.html">
+    <span class="material-symbols-outlined text-xl md:text-2xl" style="font-variation-settings: 'FILL' 1;">settings</span>
+    <span class="font-label text-[10px] md:text-xs font-medium mt-0.5">الإعدادات</span>
+  </a>
 </nav>
 
-<!-- Sidebar Overlay -->
-<div class="fixed inset-0 bg-slate-900/40 dark:bg-black/60 backdrop-blur-sm z-[55] opacity-0 pointer-events-none transition-opacity duration-300" id="sidebar-overlay"></div>
-
-<!-- NavigationDrawer (Sidebar) -->
-<div class="fixed inset-y-0 right-0 z-[60] flex flex-col bg-white dark:bg-slate-900/90 backdrop-blur-2xl h-full w-80 rounded-l-3xl border-l border-slate-100 dark:border-white/10 shadow-2xl translate-x-full transition-transform duration-300" id="sidebar">
-<div class="p-8 space-y-8">
-<div class="text-xl font-black bg-gradient-to-r from-cyan-600 to-purple-600 dark:from-cyan-400 dark:to-purple-400 bg-clip-text text-transparent">Ethereal Menu</div>
-<div class="space-y-4 px-2">
-<a class="flex items-center gap-4 p-3 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-lg" href="index.html">
-<span class="material-symbols-outlined">dashboard</span>
-<span class="font-body font-medium text-right">الرئيسية</span>
-</a>
-<a class="flex items-center gap-4 p-3 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-lg" href="add-patient.html">
-<span class="material-symbols-outlined">person_add</span>
-<span class="font-body font-medium text-right">إضافة مريض</span>
-</a>
-<a class="flex items-center gap-4 p-3 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-lg" href="archive.html">
-<span class="material-symbols-outlined">inventory</span>
-<span class="font-body font-medium text-right">أرشيف المرضى</span>
-</a>
-<a class="flex items-center gap-4 p-3 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-lg" href="expenses.html">
-<span class="material-symbols-outlined">payments</span>
-<span class="font-body font-medium text-right">إضافة مصروف</span>
-</a>
-<a class="flex items-center gap-4 p-3 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-lg" href="reports.html">
-<span class="material-symbols-outlined">analytics</span>
-<span class="font-body font-medium text-right">التقارير</span>
-</a>
-<div class="border-t border-slate-100 dark:border-white/10 mt-4 pt-4 space-y-4">
-<div class="flex items-center gap-4 p-3 bg-cyan-50 dark:bg-white/10 text-cyan-600 dark:text-cyan-400 border-r-4 border-cyan-600 dark:border-cyan-400 rounded-lg">
-<span class="material-symbols-outlined">settings</span>
-<span class="font-body font-medium text-right">الإعدادات</span>
-</div>
-<button class="flex items-center gap-4 p-3 text-red-500 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10 transition-all rounded-lg w-full">
-<span class="material-symbols-outlined">logout</span>
-<span class="font-body font-medium text-right">تسجيل الخروج</span>
-</button>
-</div>
-</div>
-</div>
-</div>
-
+<!-- Sidebar & Scripts -->
 <script>
-    // Theme Toggle
-    const html = document.documentElement;
-    const themeToggle = document.getElementById('theme-toggle');
-    const sidebar = document.getElementById('sidebar');
-    const menuBtn = document.getElementById('menu-btn');
-    const overlay = document.getElementById('sidebar-overlay');
-    const darkModeToggle = document.getElementById('darkModeToggle');
+  // Theme Management
+  const html = document.documentElement;
+  const themeToggle = document.getElementById('theme-toggle');
+  const darkModeToggle = document.getElementById('darkModeToggle');
+  
+  function initTheme() {
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    if (savedTheme === 'dark') { html.classList.add('dark'); html.classList.remove('light'); darkModeToggle.classList.add('active'); }
+    else { html.classList.add('light'); html.classList.remove('dark'); darkModeToggle.classList.remove('active'); }
+  }
+  initTheme();
+  
+  themeToggle?.addEventListener('click', () => {
+    const isDark = html.classList.toggle('dark');
+    html.classList.toggle('light', !isDark);
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    darkModeToggle.classList.toggle('active', isDark);
+  });
 
-    themeToggle.addEventListener('click', () => {
-        if (html.classList.contains('dark')) {
-            html.classList.remove('dark');
-            html.classList.add('light');
-            darkModeToggle.classList.remove('active');
-        } else {
-            html.classList.remove('light');
-            html.classList.add('dark');
-            darkModeToggle.classList.add('active');
-        }
-    });
+  function toggleDarkMode() {
+    const isDark = !html.classList.contains('dark');
+    if (isDark) { html.classList.add('dark'); html.classList.remove('light'); }
+    else { html.classList.add('light'); html.classList.remove('dark'); }
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    darkModeToggle.classList.toggle('active', isDark);
+  }
 
-    function toggleDarkMode() {
-        if (html.classList.contains('dark')) {
-            html.classList.remove('dark');
-            html.classList.add('light');
-            darkModeToggle.classList.remove('active');
-        } else {
-            html.classList.remove('light');
-            html.classList.add('dark');
-            darkModeToggle.classList.add('active');
-        }
+  // Template Selection
+  function selectTemplate(num) {
+    document.querySelectorAll('.template-card').forEach(card => card.classList.remove('selected'));
+    document.getElementById('template-' + num).classList.add('selected');
+    
+    // Update preview container class
+    const container = document.getElementById('a5PreviewContainer');
+    const preview = document.getElementById('a5Preview');
+    container.className = 'a5-preview-container template-' + num;
+    preview.className = 'a5-card template-' + num;
+    
+    localStorage.setItem('invoiceTemplate', num);
+  }
+
+  // Full Preview Modal
+  function openFullPreview() {
+    const template = localStorage.getItem('invoiceTemplate') || '1';
+    const fullPreview = document.getElementById('fullPreviewCard');
+    fullPreview.className = 'a5-card template-' + template;
+    fullPreview.innerHTML = document.getElementById('a5Preview').innerHTML;
+    document.getElementById('fullPreviewModal').classList.add('active');
+  }
+  
+  function closeFullPreview(event) {
+    if (event.target.id === 'fullPreviewModal') {
+      document.getElementById('fullPreviewModal').classList.remove('active');
     }
+  }
 
-    menuBtn.addEventListener('click', () => {
-        sidebar.classList.remove('translate-x-full');
-        overlay.classList.remove('opacity-0', 'pointer-events-none');
-    });
+  // Follow-up Interval
+  function updateInterval(months) {
+    document.getElementById('interval-3').classList.toggle('border-cyan-400', months === '3');
+    document.getElementById('interval-6').classList.toggle('border-cyan-400', months === '6');
+    localStorage.setItem('followupInterval', months);
+  }
 
-    overlay.addEventListener('click', () => {
-        sidebar.classList.add('translate-x-full');
-        overlay.classList.add('opacity-0', 'pointer-events-none');
-    });
+  // Save Settings
+  function saveSettings() {
+    const settings = {
+      clinicName: document.getElementById('clinicName').value,
+      clinicAddress: document.getElementById('clinicAddress').value,
+      clinicPhone: document.getElementById('clinicPhone').value,
+      currency: document.getElementById('currency').value,
+      instagram: document.getElementById('instagram').value,
+      facebook: document.getElementById('facebook').value,
+      tiktok: document.getElementById('tiktok').value,
+      invoiceTemplate: localStorage.getItem('invoiceTemplate') || '1',
+      followupInterval: localStorage.getItem('followupInterval') || '3',
+      savedAt: new Date().toISOString()
+    };
+    localStorage.setItem('clinicSettings', JSON.stringify(settings));
+    
+    // Update preview
+    document.getElementById('clinic-name-header').textContent = settings.clinicName;
+    document.getElementById('previewClinicName').textContent = settings.clinicName;
+    document.getElementById('previewFooter').textContent = `✨ ${settings.clinicName} - جميع الحقوق محفوظة ✨`;
+    
+    const social = [];
+    if (settings.instagram) social.push(`🌐 instagram.com/${settings.instagram.replace('@','')}`);
+    if (settings.facebook) social.push(`📘 fb.com/${settings.facebook}`);
+    document.getElementById('previewSocial').textContent = social.join(' | ') || '🌐 instagram.com/ethereal_optics';
+    
+    document.getElementById('previewClinicInfo').innerHTML = `
+      <div>📍 ${settings.clinicAddress || 'عنوان العيادة'}</div>
+      <div>📞 ${settings.clinicPhone || 'رقم الهاتف'}</div>
+      <div>📱 ${settings.instagram || '@username'}</div>
+    `;
+    
+    showToast('✓ تم حفظ الإعدادات بنجاح!');
+  }
 
-    // Clear All Data
-    function clearAllData() {
-        if (confirm('هل أنت متأكد من حذف جميع البيانات؟ لا يمكن التراجع عن هذا الإجراء.')) {
-            localStorage.clear();
-            alert('تم مسح جميع البيانات بنجاح');
-        }
+  // Load Settings
+  function loadSettings() {
+    const settings = JSON.parse(localStorage.getItem('clinicSettings') || '{}');
+    
+    if (settings.clinicName) {
+      document.getElementById('clinicName').value = settings.clinicName;
+      document.getElementById('clinic-name-header').textContent = settings.clinicName;
+      document.getElementById('previewClinicName').textContent = settings.clinicName;
+      document.getElementById('previewFooter').textContent = `✨ ${settings.clinicName} - جميع الحقوق محفوظة ✨`;
     }
+    if (settings.clinicAddress) document.getElementById('clinicAddress').value = settings.clinicAddress;
+    if (settings.clinicPhone) document.getElementById('clinicPhone').value = settings.clinicPhone;
+    if (settings.instagram) document.getElementById('instagram').value = settings.instagram;
+    if (settings.facebook) document.getElementById('facebook').value = settings.facebook;
+    if (settings.tiktok) document.getElementById('tiktok').value = settings.tiktok;
+    
+    // Load template
+    const template = settings.invoiceTemplate || localStorage.getItem('invoiceTemplate') || '1';
+    selectTemplate(template);
+    
+    // Load interval
+    const interval = settings.followupInterval || localStorage.getItem('followupInterval') || '3';
+    document.querySelector(`input[value="${interval}"]`).checked = true;
+    updateInterval(interval);
+    
+    // Update preview social
+    const social = [];
+    if (settings.instagram) social.push(`🌐 instagram.com/${settings.instagram.replace('@','')}`);
+    if (settings.facebook) social.push(`📘 fb.com/${settings.facebook}`);
+    document.getElementById('previewSocial').textContent = social.join(' | ') || '🌐 instagram.com/ethereal_optics';
+    
+    document.getElementById('previewClinicInfo').innerHTML = `
+      <div>📍 ${settings.clinicAddress || 'عنوان العيادة'}</div>
+      <div>📞 ${settings.clinicPhone || 'رقم الهاتف'}</div>
+      <div>📱 ${settings.instagram || '@username'}</div>
+    `;
+  }
+
+  // Export/Import
+  function exportToExcel() {
+    const data = {
+      clinicSettings: JSON.parse(localStorage.getItem('clinicSettings') || '{}'),
+      patients: JSON.parse(localStorage.getItem('patients') || '[]'),
+      expenses: JSON.parse(localStorage.getItem('expenses') || '[]'),
+      exportedAt: new Date().toISOString()
+    };
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `clinic_backup_${new Date().toISOString().split('T')[0]}.json`;
+    link.click();
+    showToast('✓ تم تصدير البيانات!');
+  }
+
+  function importFromFile(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      try {
+        const data = JSON.parse(e.target.result);
+        if (data.clinicSettings) localStorage.setItem('clinicSettings', JSON.stringify(data.clinicSettings));
+        if (data.patients) localStorage.setItem('patients', JSON.stringify(data.patients));
+        if (data.expenses) localStorage.setItem('expenses', JSON.stringify(data.expenses));
+        showToast('✓ تم استيراد البيانات!');
+        loadSettings();
+      } catch(err) { alert('خطأ: ' + err.message); }
+    };
+    reader.readAsText(file);
+  }
+
+  function clearAllData() {
+    if (confirm('⚠️ هل أنت متأكد من حذف جميع البيانات؟ لا يمكن التراجع!')) {
+      localStorage.clear();
+      showToast('✓ تم مسح جميع البيانات');
+      setTimeout(() => location.reload(), 1500);
+    }
+  }
+
+  // Legal Modals
+  function showModal(type) {
+    const overlay = document.getElementById('legalOverlay');
+    const modal = document.getElementById('legalModal');
+    const title = document.getElementById('legalTitle');
+    const content = document.getElementById('legalContent');
+    
+    if (type === 'privacy') {
+      title.textContent = 'سياسة الخصوصية';
+      content.innerHTML = `
+        <p>1. نجمع فقط البيانات الضرورية لتقديم الخدمة الطبية.</p>
+        <p>2. بيانات المرضى محمية ولا تُشارك مع أطراف ثالثة.</p>
+        <p>3. يتم تخزين البيانات محلياً على جهازك فقط.</p>
+        <p>4. لك الحق في طلب حذف بياناتك في أي وقت.</p>
+        <p>5. نستخدم بيانات التواصل فقط لإرسال تذكيرات المواعيد.</p>
+      `;
+    } else {
+      title.textContent = 'الشروط والأحكام';
+      content.innerHTML = `
+        <p>1. هذا النظام مخصص للاستخدام الطبي المهني فقط.</p>
+        <p>2. المسؤول عن دقة البيانات المدخلة هو المستخدم.</p>
+        <p>3. لا نتحمل مسؤولية الأخطاء الناتجة عن إدخال بيانات غير صحيحة.</p>
+        <p>4. يحظر استخدام النظام لأغراض غير طبية.</p>
+        <p>5. باستخدامك للنظام توافق على هذه الشروط.</p>
+      `;
+    }
+    
+    overlay.classList.remove('opacity-0', 'pointer-events-none');
+    modal.classList.remove('translate-y-full');
+  }
+  
+  function closeLegalModal() {
+    document.getElementById('legalOverlay').classList.add('opacity-0', 'pointer-events-none');
+    document.getElementById('legalModal').classList.add('translate-y-full');
+  }
+
+  function showToast(msg) {
+    const toast = document.createElement('div');
+    toast.className = 'fixed bottom-20 left-1/2 -translate-x-1/2 z-[100] bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-4 py-2 rounded-full shadow-2xl text-sm font-medium';
+    toast.textContent = msg;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 2000);
+  }
+
+  // Sidebar
+  const sidebar = document.getElementById('sidebar');
+  const menuBtn = document.getElementById('menu-btn');
+  const overlay = document.getElementById('sidebar-overlay');
+  menuBtn?.addEventListener('click', () => { 
+    sidebar?.classList.remove('translate-x-full'); 
+    overlay?.classList.remove('opacity-0', 'pointer-events-none'); 
+  });
+  overlay?.addEventListener('click', () => { 
+    sidebar?.classList.add('translate-x-full'); 
+    overlay?.classList.add('opacity-0', 'pointer-events-none'); 
+  });
+
+  document.addEventListener('DOMContentLoaded', loadSettings);
 </script>
-
 </body>
 </html>
-
