@@ -47,7 +47,7 @@
   
   /* A5 Preview Container */
   .a5-preview-container {
-    width: 100%; max-width: 400px; margin: 0 auto;
+    width: 100%; max-width: min(90vw, 400px); margin: 0 auto;
     border: 2px dashed rgba(0,188,212,0.3); border-radius: 16px;
     padding: 12px; cursor: pointer; transition: all 0.3s ease;
   }
@@ -55,7 +55,7 @@
   
   /* A5 Card Base Styles */
   .a5-card {
-    width: 148mm; height: 210mm; background: white; color: #1e293b;
+    width: min(148mm, 95vw); height: auto; min-height: 210mm; background: white; color: #1e293b;
     padding: 15mm; box-sizing: border-box; font-family: 'Tajawal', sans-serif;
     border-radius: 8px; margin: 0 auto; box-shadow: 0 4px 20px rgba(0,0,0,0.15);
     transform: scale(0.35); transform-origin: top center; transition: transform 0.3s ease;
@@ -130,10 +130,38 @@
   .preview-modal { 
     position: fixed; inset: 0; background: rgba(0,0,0,0.8); 
     z-index: 200; display: none; align-items: center; justify-content: center;
-    padding: 20px; overflow: auto;
+    padding: max(10px, 4vw); overflow: auto;
   }
   .preview-modal.active { display: flex; }
   .preview-modal .a5-card { transform: scale(1); box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+  
+  /* Mobile Responsive Preview */
+  @media (max-width: 480px) {
+    .preview-modal {
+      padding: 8px;
+    }
+    .preview-modal .a5-card {
+      transform: scale(0.85) !important;
+      width: 100% !important;
+      max-width: 350px;
+      height: auto;
+    }
+    .a5-preview-container {
+      max-width: 100%;
+      width: 100%;
+      padding: 8px;
+    }
+    .a5-card {
+      width: min(95vw, 148mm);
+      height: auto;
+      min-height: 210mm;
+      font-size: 0.9em;
+      transform: scale(calc(0.4 * min(1, 100vw / 400px)));
+    }
+    .a5-preview-container:hover .a5-card {
+      transform: scale(calc(0.45 * min(1, 100vw / 400px)));
+    }
+  }
   
   .sidebar-compact { width: 280px !important; }
   body { min-height: max(884px, 100dvh); }
@@ -300,6 +328,7 @@
 
   <!-- A5 Preview (Clickable to Expand) -->
   <div class="mt-6">
+    
     <p class="text-xs sm:text-sm font-medium text-slate-600 dark:text-slate-400 mb-3 text-center">🔍 اضغط للمعاينة الكاملة</p>
     <div class="a5-preview-container template-1 cursor-pointer" id="a5PreviewContainer" onclick="openFullPreview()">
       <div class="a5-card template-1" id="a5Preview">
@@ -483,6 +512,10 @@
   <a class="flex flex-col items-center justify-center text-slate-400 py-1 sm:py-2 hover:text-cyan-600 dark:hover:text-cyan-300 active:scale-90 transition-transform" href="add-patient.html">
     <span class="material-symbols-outlined text-xl sm:text-2xl">person_add</span>
     <span class="font-label text-[10px] sm:text-xs font-medium mt-0.5">إضافة</span>
+  </a>
+  <a class="flex flex-col items-center justify-center bg-gradient-to-br from-emerald-500/20 to-green-600/20 text-emerald-600 dark:text-emerald-400 rounded-lg px-3 sm:px-6 py-1 sm:py-2 active:scale-95 transition-all shadow-lg border border-emerald-200 dark:border-emerald-500/30 backdrop-blur-md" href="invoice.html">
+    <span class="material-symbols-outlined text-xl sm:text-2xl" style="font-variation-settings: 'FILL' 1;">receipt_long</span>
+    <span class="font-label text-[10px] sm:text-xs font-bold mt-0.5">فاتورة</span>
   </a>
   <a class="flex flex-col items-center justify-center text-slate-400 py-1 sm:py-2 hover:text-cyan-600 dark:hover:text-cyan-300 active:scale-90 transition-transform" href="archive.html">
     <span class="material-symbols-outlined text-xl sm:text-2xl">inventory</span>

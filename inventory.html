@@ -119,6 +119,10 @@ body { min-height: max(884px, 100dvh); }
     <span class="material-symbols-outlined text-2xl">person_add</span>
     <span class="font-label text-xs font-medium mt-1">إضافة مريض</span>
   </a>
+  <a href="invoice.html" class="flex flex-col items-center justify-center bg-gradient-to-br from-emerald-500/20 to-green-600/20 text-emerald-600 dark:text-emerald-400 rounded-lg px-4 py-2 active:scale-95 transition-all shadow-lg border border-emerald-200 dark:border-emerald-500/30 backdrop-blur-md">
+    <span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">receipt_long</span>
+    <span class="font-label text-xs font-bold mt-1">فاتورة</span>
+  </a>
   <a href="archive.html" class="flex flex-col items-center justify-center text-slate-400 py-2 hover:text-cyan-600 dark:hover:text-cyan-300 active:scale-90 transition-transform">
     <span class="material-symbols-outlined text-2xl">inventory</span>
     <span class="font-label text-xs font-medium mt-1">الأرشيف</span>
@@ -220,7 +224,7 @@ overlay.addEventListener('click', () => {
 });
 
 function loadMaterials() {
-  const materials = JSON.parse(localStorage.getItem('materials') || '[]');
+  const inventory = JSON.parse(localStorage.getItem('inventory') || '[]');
   
   document.getElementById('totalItems').textContent = materials.length;
   
@@ -272,8 +276,8 @@ function loadMaterials() {
 
 function searchMaterials() {
   const query = document.getElementById('searchInput').value.toLowerCase();
-  const materials = JSON.parse(localStorage.getItem('materials') || '[]');
-  const filtered = materials.filter(m => m.name.toLowerCase().includes(query) || (m.category && m.category.toLowerCase().includes(query)));
+  const inventory = JSON.parse(localStorage.getItem('inventory') || '[]');
+  const filtered = inventory.filter(m => m.name.toLowerCase().includes(query) || (m.category && m.category.toLowerCase().includes(query)));
   
   const listContainer = document.getElementById('materialsList');
   if (filtered.length === 0) {

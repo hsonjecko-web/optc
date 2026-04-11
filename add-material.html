@@ -137,6 +137,10 @@ body { min-height: max(884px, 100dvh); }
     <span class="material-symbols-outlined text-2xl">inventory</span>
     <span class="font-label text-xs font-medium mt-1">الأرشيف</span>
   </a>
+  <a href="invoice.html" class="flex flex-col items-center justify-center bg-gradient-to-br from-emerald-500/20 to-green-600/20 text-emerald-600 dark:text-emerald-400 rounded-lg px-4 py-2 active:scale-95 transition-all shadow-lg border border-emerald-200 dark:border-emerald-500/30 backdrop-blur-md">
+    <span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">receipt_long</span>
+    <span class="font-label text-xs font-bold mt-1">فاتورة</span>
+  </a>
   <a href="settings.html" class="flex flex-col items-center justify-center text-slate-400 py-2 hover:text-cyan-600 dark:hover:text-cyan-300 active:scale-90 transition-transform">
     <span class="material-symbols-outlined text-2xl">settings</span>
     <span class="font-label text-xs font-medium mt-1">الإعدادات</span>
@@ -250,9 +254,9 @@ function saveMaterial() {
     return;
   }
 
-  let materials = JSON.parse(localStorage.getItem('materials') || '[]');
-  materials.push(material);
-  localStorage.setItem('materials', JSON.stringify(materials));
+  let inventory = JSON.parse(localStorage.getItem('inventory') || '[]');
+  inventory.push(material);
+  localStorage.setItem('inventory', JSON.stringify(inventory));
 
   showToast('✓ تم حفظ المادة بنجاح!');
   
