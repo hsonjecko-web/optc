@@ -136,8 +136,6 @@
   .preview-modal .a5-card { transform: scale(1); box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
   
   .sidebar-compact { width: 280px !important; }
-  .sidebar-compact .menu-item { padding: 0.5rem 0.75rem !important; }
-  .sidebar-compact .menu-icon { width: 32px !important; height: 32px !important; }
   body { min-height: max(884px, 100dvh); }
   
   @media print {
@@ -148,19 +146,19 @@
   }
 </style>
 </head>
-<body class="mesh-gradient min-h-screen pb-32 overflow-x-hidden text-slate-900 dark:text-slate-100">
+<body class="mesh-gradient min-h-screen pb-24 lg:pb-20 overflow-x-hidden text-slate-900 dark:text-slate-100">
 
 <!-- TopAppBar -->
-<header class="bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl border-b border-black/5 dark:border-white/5 shadow-sm flex justify-between items-center px-4 md:px-6 h-20 w-full z-50 fixed top-0 left-0 transition-colors">
+<header class="bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl border-b border-black/5 dark:border-white/5 shadow-sm flex justify-between items-center px-4 sm:px-6 lg:px-8 h-20 w-full z-50 fixed top-0 left-0 lg:flex-row-reverse transition-colors">
   <div class="flex items-center gap-3">
-    <button class="text-slate-600 dark:text-slate-300 hover:bg-black/5 dark:hover:bg-white/5 transition-colors p-2 rounded-full" id="menu-btn">
+    <button class="text-slate-600 dark:text-slate-300 hover:bg-black/5 dark:hover:bg-white/5 transition-colors p-2 rounded-full lg:hidden" id="menu-btn">
       <span class="material-symbols-outlined">menu</span>
     </button>
-    <h1 class="text-lg md:text-2xl font-bold bg-gradient-to-r from-cyan-600 to-purple-600 dark:from-cyan-400 dark:to-purple-400 bg-clip-text text-transparent font-headline tracking-tight" id="clinic-name-header">The Ethereal Clinic</h1>
+    <h1 class="text-lg sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-cyan-600 to-purple-600 dark:from-cyan-400 dark:to-purple-400 bg-clip-text text-transparent font-headline tracking-tight" id="clinic-name-header">The Ethereal Clinic</h1>
   </div>
   <div class="flex items-center gap-2">
     <button class="text-cyan-600 dark:text-cyan-400 p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
-      <span class="material-symbols-outlined">search</span>
+      <span class="material-symbols-outlined lg:text-lg">search</span>
     </button>
     <button class="text-slate-600 dark:text-slate-300 p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/5 transition-colors" id="theme-toggle">
       <span class="material-symbols-outlined dark:hidden">dark_mode</span>
@@ -169,41 +167,41 @@
   </div>
 </header>
 
-<main class="px-4 pt-28 space-y-6 max-w-lg mx-auto">
+<main class="px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 space-y-6 max-w-lg lg:max-w-4xl mx-auto">
 
 <!-- Page Title -->
 <section class="space-y-1">
-  <p class="text-slate-500 dark:text-secondary text-sm font-medium">إدارة النظام</p>
-  <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white">الإعدادات</h2>
+  <p class="text-slate-500 dark:text-secondary text-sm sm:text-base font-medium">إدارة النظام</p>
+  <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white">الإعدادات</h2>
 </section>
 
 <!-- Settings Menu -->
-<section class="space-y-4">
+<section class="space-y-4 lg:grid lg:grid-cols-2 lg:gap-6 lg:col-span-full">
 
 <!-- Clinic Info -->
-<div class="glass-card rounded-2xl p-4 md:p-6 space-y-4">
+<div class="glass-card rounded-2xl p-4 sm:p-6 lg:p-8 space-y-4">
   <div class="flex items-center gap-3 mb-4">
     <div class="w-10 h-10 rounded-full bg-cyan-100 dark:bg-cyan-500/20 flex items-center justify-center text-cyan-600 dark:text-cyan-400">
-      <span class="material-symbols-outlined">business</span>
+      <span class="material-symbols-outlined lg:text-lg">business</span>
     </div>
-    <h3 class="text-lg font-bold text-slate-900 dark:text-white">معلومات العيادة</h3>
+    <h3 class="text-lg sm:text-xl lg:text-2xl font-bold text-slate-900 dark:text-white">معلومات العيادة</h3>
   </div>
   <div class="space-y-3">
     <div>
-      <label class="text-xs font-medium text-slate-600 dark:text-slate-400 mb-1 block">اسم العيادة</label>
+      <label class="text-xs sm:text-sm font-medium text-slate-600 dark:text-slate-400 mb-1 block">اسم العيادة</label>
       <input class="w-full bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-right outline-none focus:border-cyan-500 transition-colors text-slate-900 dark:text-white" type="text" id="clinicName" value="عيادة الأثير للبصريات"/>
     </div>
     <div>
-      <label class="text-xs font-medium text-slate-600 dark:text-slate-400 mb-1 block">العنوان</label>
+      <label class="text-xs sm:text-sm font-medium text-slate-600 dark:text-slate-400 mb-1 block">العنوان</label>
       <input class="w-full bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-right outline-none focus:border-cyan-500 transition-colors text-slate-900 dark:text-white" type="text" id="clinicAddress" value="بغداد - المنصور - شارع 14 رمضان"/>
     </div>
-    <div class="grid grid-cols-2 gap-3">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
       <div>
-        <label class="text-xs font-medium text-slate-600 dark:text-slate-400 mb-1 block">رقم الهاتف</label>
+        <label class="text-xs sm:text-sm font-medium text-slate-600 dark:text-slate-400 mb-1 block">رقم الهاتف</label>
         <input class="w-full bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-right outline-none focus:border-cyan-500 transition-colors text-slate-900 dark:text-white" type="tel" id="clinicPhone" value="0770 123 4567"/>
       </div>
       <div>
-        <label class="text-xs font-medium text-slate-600 dark:text-slate-400 mb-1 block">العملة</label>
+        <label class="text-xs sm:text-sm font-medium text-slate-600 dark:text-slate-400 mb-1 block">العملة</label>
         <select class="w-full bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-right outline-none focus:border-cyan-500 transition-colors text-slate-900 dark:text-white" id="currency" disabled>
           <option value="IQD">الدينار العراقي (IQD)</option>
         </select>
@@ -213,58 +211,58 @@
 </div>
 
 <!-- Social Media -->
-<div class="glass-card rounded-2xl p-4 md:p-6 space-y-4">
+<div class="glass-card rounded-2xl p-4 sm:p-6 lg:p-8 space-y-4">
   <div class="flex items-center gap-3 mb-4">
     <div class="w-10 h-10 rounded-full bg-pink-100 dark:bg-pink-500/20 flex items-center justify-center text-pink-600 dark:text-pink-400">
-      <span class="material-symbols-outlined">share</span>
+      <span class="material-symbols-outlined lg:text-lg">share</span>
     </div>
-    <h3 class="text-lg font-bold text-slate-900 dark:text-white">مواقع التواصل الاجتماعي</h3>
+    <h3 class="text-lg sm:text-xl lg:text-2xl font-bold text-slate-900 dark:text-white">مواقع التواصل الاجتماعي</h3>
   </div>
   <div class="space-y-3">
     <div class="flex items-center gap-3">
       <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-600 to-pink-500 flex items-center justify-center text-white">
-        <span class="material-symbols-outlined text-sm">photo_camera</span>
+        <span class="material-symbols-outlined text-sm lg:text-base">photo_camera</span>
       </div>
-      <input class="flex-1 bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-right outline-none focus:border-cyan-500 transition-colors text-slate-900 dark:text-white text-sm" type="text" id="instagram" placeholder="@username"/>
+      <input class="flex-1 bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-right outline-none focus:border-cyan-500 transition-colors text-slate-900 dark:text-white" type="text" id="instagram" placeholder="@username"/>
     </div>
     <div class="flex items-center gap-3">
       <div class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white">
-        <span class="material-symbols-outlined text-sm">facebook</span>
+        <span class="material-symbols-outlined text-sm lg:text-base">facebook</span>
       </div>
-      <input class="flex-1 bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-right outline-none focus:border-cyan-500 transition-colors text-slate-900 dark:text-white text-sm" type="text" id="facebook" placeholder="صفحة الفيسبوك"/>
+      <input class="flex-1 bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-right outline-none focus:border-cyan-500 transition-colors text-slate-900 dark:text-white" type="text" id="facebook" placeholder="صفحة الفيسبوك"/>
     </div>
     <div class="flex items-center gap-3">
       <div class="w-10 h-10 rounded-full bg-black flex items-center justify-center text-white border border-slate-600">
-        <span class="material-symbols-outlined text-sm">music_note</span>
+        <span class="material-symbols-outlined text-sm lg:text-base">music_note</span>
       </div>
-      <input class="flex-1 bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-right outline-none focus:border-cyan-500 transition-colors text-slate-900 dark:text-white text-sm" type="text" id="tiktok" placeholder="@username"/>
+      <input class="flex-1 bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-right outline-none focus:border-cyan-500 transition-colors text-slate-900 dark:text-white" type="text" id="tiktok" placeholder="@username"/>
     </div>
   </div>
 </div>
 
 <!-- Follow-up Interval Setting -->
-<div class="glass-card rounded-2xl p-4 md:p-6 space-y-4">
+<div class="glass-card rounded-2xl p-4 sm:p-6 lg:p-8 space-y-4">
   <div class="flex items-center gap-3 mb-4">
     <div class="w-10 h-10 rounded-full bg-amber-100 dark:bg-amber-500/20 flex items-center justify-center text-amber-600 dark:text-amber-400">
-      <span class="material-symbols-outlined">calendar_clock</span>
+      <span class="material-symbols-outlined lg:text-lg">calendar_clock</span>
     </div>
-    <h3 class="text-lg font-bold text-slate-900 dark:text-white">موعد الفحص القادم</h3>
+    <h3 class="text-lg sm:text-xl lg:text-2xl font-bold text-slate-900 dark:text-white">موعد الفحص القادم</h3>
   </div>
   <div class="space-y-3">
-    <p class="text-xs text-slate-500 dark:text-slate-400">حدد الفترة الافتراضية بين الفحوصات للمرضى:</p>
+    <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">حدد الفترة الافتراضية بين الفحوصات للمرضى:</p>
     <div class="grid grid-cols-2 gap-3">
       <label class="glass-card rounded-xl p-4 cursor-pointer border-2 border-transparent hover:border-cyan-300 transition-all" id="interval-3">
         <input type="radio" name="followupInterval" value="3" class="hidden" onchange="updateInterval(this.value)" checked/>
         <div class="text-center">
-          <div class="text-2xl font-bold text-cyan-600 dark:text-cyan-400">3</div>
-          <div class="text-xs text-slate-600 dark:text-slate-400">أشهر</div>
+          <div class="text-2xl sm:text-3xl lg:text-4xl font-bold text-cyan-600 dark:text-cyan-400">3</div>
+          <div class="text-xs sm:text-sm text-slate-600 dark:text-slate-400">أشهر</div>
         </div>
       </label>
       <label class="glass-card rounded-xl p-4 cursor-pointer border-2 border-transparent hover:border-cyan-300 transition-all" id="interval-6">
         <input type="radio" name="followupInterval" value="6" class="hidden" onchange="updateInterval(this.value)"/>
         <div class="text-center">
-          <div class="text-2xl font-bold text-purple-600 dark:text-purple-400">6</div>
-          <div class="text-xs text-slate-600 dark:text-slate-400">أشهر</div>
+          <div class="text-2xl sm:text-3xl lg:text-4xl font-bold text-purple-600 dark:text-purple-400">6</div>
+          <div class="text-xs sm:text-sm text-slate-600 dark:text-slate-400">أشهر</div>
         </div>
       </label>
     </div>
@@ -272,38 +270,38 @@
 </div>
 
 <!-- Invoice Templates with 4 Designs -->
-<div class="glass-card rounded-2xl p-4 md:p-6 space-y-4">
+<div class="glass-card rounded-2xl p-4 sm:p-6 lg:p-8 space-y-4 lg:col-span-2">
   <div class="flex items-center gap-3 mb-4">
     <div class="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-500/20 flex items-center justify-center text-purple-600 dark:text-purple-300">
-      <span class="material-symbols-outlined">palette</span>
+      <span class="material-symbols-outlined lg:text-lg">palette</span>
     </div>
-    <h3 class="text-lg font-bold text-slate-900 dark:text-white">تصاميم كارت المريض (A5)</h3>
+    <h3 class="text-lg sm:text-xl lg:text-2xl font-bold text-slate-900 dark:text-white">تصاميم كارت المريض (A5)</h3>
   </div>
 
   <!-- Template Selection Grid -->
-  <div class="grid grid-cols-4 gap-2">
-    <div class="template-card glass-card rounded-xl p-2 border-2 border-transparent text-center" onclick="selectTemplate('1')" id="template-1">
-      <div class="aspect-[3/4] rounded-lg mb-1 border-2 border-cyan-400" style="background: linear-gradient(135deg, #e0f7fa, #b2ebf2);"></div>
-      <div class="text-[10px] font-medium">عصري</div>
+  <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
+    <div class="template-card glass-card rounded-xl p-3 border-2 border-transparent text-center cursor-pointer hover:scale-105 transition-all" onclick="selectTemplate('1')" id="template-1">
+      <div class="aspect-[3/4] rounded-lg mb-2 border-2 border-cyan-400 mx-auto" style="background: linear-gradient(135deg, #e0f7fa, #b2ebf2);"></div>
+      <div class="text-xs sm:text-sm font-medium">عصري</div>
     </div>
-    <div class="template-card glass-card rounded-xl p-2 border-2 border-transparent text-center" onclick="selectTemplate('2')" id="template-2">
-      <div class="aspect-[3/4] rounded-lg mb-1 border-2 border-slate-600" style="background: linear-gradient(135deg, #fffef9, #f5f5f4);"></div>
-      <div class="text-[10px] font-medium">كلاسيكي</div>
+    <div class="template-card glass-card rounded-xl p-3 border-2 border-transparent text-center cursor-pointer hover:scale-105 transition-all" onclick="selectTemplate('2')" id="template-2">
+      <div class="aspect-[3/4] rounded-lg mb-2 border-2 border-slate-600 mx-auto" style="background: linear-gradient(135deg, #fffef9, #f5f5f4);"></div>
+      <div class="text-xs sm:text-sm font-medium">كلاسيكي</div>
     </div>
-    <div class="template-card glass-card rounded-xl p-2 border-2 border-transparent text-center" onclick="selectTemplate('3')" id="template-3">
-      <div class="aspect-[3/4] rounded-lg mb-1 border-2 border-purple-400" style="background: linear-gradient(135deg, #faf5ff, #f3e8ff);"></div>
-      <div class="text-[10px] font-medium">مينيمال</div>
+    <div class="template-card glass-card rounded-xl p-3 border-2 border-transparent text-center cursor-pointer hover:scale-105 transition-all" onclick="selectTemplate('3')" id="template-3">
+      <div class="aspect-[3/4] rounded-lg mb-2 border-2 border-purple-400 mx-auto" style="background: linear-gradient(135deg, #faf5ff, #f3e8ff);"></div>
+      <div class="text-xs sm:text-sm font-medium">مينيمال</div>
     </div>
-    <div class="template-card glass-card rounded-xl p-2 border-2 border-transparent text-center" onclick="selectTemplate('4')" id="template-4">
-      <div class="aspect-[3/4] rounded-lg mb-1 border-2 border-red-500" style="background: linear-gradient(135deg, #fef2f2, #fecaca);"></div>
-      <div class="text-[10px] font-medium">طبي</div>
+    <div class="template-card glass-card rounded-xl p-3 border-2 border-transparent text-center cursor-pointer hover:scale-105 transition-all" onclick="selectTemplate('4')" id="template-4">
+      <div class="aspect-[3/4] rounded-lg mb-2 border-2 border-red-500 mx-auto" style="background: linear-gradient(135deg, #fef2f2, #fecaca);"></div>
+      <div class="text-xs sm:text-sm font-medium">طبي</div>
     </div>
   </div>
 
   <!-- A5 Preview (Clickable to Expand) -->
-  <div class="mt-4">
-    <p class="text-xs font-medium text-slate-600 dark:text-slate-400 mb-2 text-center">🔍 اضغط للمعاينة الكاملة</p>
-    <div class="a5-preview-container template-1" id="a5PreviewContainer" onclick="openFullPreview()">
+  <div class="mt-6">
+    <p class="text-xs sm:text-sm font-medium text-slate-600 dark:text-slate-400 mb-3 text-center">🔍 اضغط للمعاينة الكاملة</p>
+    <div class="a5-preview-container template-1 cursor-pointer" id="a5PreviewContainer" onclick="openFullPreview()">
       <div class="a5-card template-1" id="a5Preview">
         <div class="header">
           <div class="optics-icon"><span class="material-symbols-outlined">eyeglasses</span></div>
@@ -347,101 +345,101 @@
 </div>
 
 <!-- Data Management -->
-<div class="glass-card rounded-2xl p-4 md:p-6 space-y-4">
+<div class="glass-card rounded-2xl p-4 sm:p-6 lg:p-8 space-y-4">
   <div class="flex items-center gap-3 mb-4">
     <div class="w-10 h-10 rounded-full bg-green-100 dark:bg-green-500/20 flex items-center justify-center text-green-600 dark:text-green-400">
-      <span class="material-symbols-outlined">database</span>
+      <span class="material-symbols-outlined lg:text-lg">database</span>
     </div>
-    <h3 class="text-lg font-bold text-slate-900 dark:text-white">إدارة البيانات</h3>
+    <h3 class="text-lg sm:text-xl lg:text-2xl font-bold text-slate-900 dark:text-white">إدارة البيانات</h3>
   </div>
   <div class="space-y-3">
     <button class="w-full flex items-center justify-between p-4 bg-white/50 dark:bg-white/5 rounded-xl border border-slate-200 dark:border-white/10 hover:border-green-500 transition-colors" onclick="exportToExcel()">
       <div class="flex items-center gap-3">
         <div class="w-10 h-10 rounded-full bg-green-100 dark:bg-green-500/20 flex items-center justify-center text-green-600 dark:text-green-400">
-          <span class="material-symbols-outlined">file_download</span>
+          <span class="material-symbols-outlined lg:text-lg">file_download</span>
         </div>
         <div class="text-right">
           <p class="font-medium text-slate-900 dark:text-white">تصدير إلى Excel/JSON</p>
-          <p class="text-xs text-slate-500 dark:text-slate-400">حفظ جميع البيانات</p>
+          <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">حفظ جميع البيانات</p>
         </div>
       </div>
-      <span class="material-symbols-outlined text-slate-400">arrow_back_ios</span>
+      <span class="material-symbols-outlined text-slate-400 lg:text-lg">arrow_back_ios</span>
     </button>
     <button class="w-full flex items-center justify-between p-4 bg-white/50 dark:bg-white/5 rounded-xl border border-slate-200 dark:border-white/10 hover:border-blue-500 transition-colors" onclick="document.getElementById('import-file').click()">
       <div class="flex items-center gap-3">
         <div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-500/20 flex items-center justify-center text-blue-600 dark:text-blue-400">
-          <span class="material-symbols-outlined">file_upload</span>
+          <span class="material-symbols-outlined lg:text-lg">file_upload</span>
         </div>
         <div class="text-right">
           <p class="font-medium text-slate-900 dark:text-white">استيراد من Excel/JSON</p>
-          <p class="text-xs text-slate-500 dark:text-slate-400">استعادة البيانات</p>
+          <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">استعادة البيانات</p>
         </div>
       </div>
-      <span class="material-symbols-outlined text-slate-400">arrow_back_ios</span>
+      <span class="material-symbols-outlined text-slate-400 lg:text-lg">arrow_back_ios</span>
     </button>
     <input type="file" id="import-file" class="hidden" accept=".json,.xlsx,.xls,.csv" onchange="importFromFile(event)">
     <button class="w-full flex items-center justify-between p-4 bg-white/50 dark:bg-white/5 rounded-xl border border-slate-200 dark:border-white/10 hover:border-red-500 transition-colors" onclick="clearAllData()">
       <div class="flex items-center gap-3">
         <div class="w-10 h-10 rounded-full bg-red-100 dark:bg-red-500/20 flex items-center justify-center text-red-600 dark:text-red-400">
-          <span class="material-symbols-outlined">delete_forever</span>
+          <span class="material-symbols-outlined lg:text-lg">delete_forever</span>
         </div>
         <div class="text-right">
           <p class="font-medium text-slate-900 dark:text-white">مسح جميع البيانات</p>
-          <p class="text-xs text-slate-500 dark:text-slate-400">حذف الأرشيف والإعدادات</p>
+          <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">حذف الأرشيف والإعدادات</p>
         </div>
       </div>
-      <span class="material-symbols-outlined text-slate-400">arrow_back_ios</span>
+      <span class="material-symbols-outlined text-slate-400 lg:text-lg">arrow_back_ios</span>
     </button>
   </div>
 </div>
 
 <!-- Support & Legal -->
-<div class="glass-card rounded-2xl p-4 md:p-6 space-y-4">
+<div class="glass-card rounded-2xl p-4 sm:p-6 lg:p-8 space-y-4 lg:col-span-2">
   <div class="flex items-center gap-3 mb-4">
     <div class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300">
-      <span class="material-symbols-outlined">shield</span>
+      <span class="material-symbols-outlined lg:text-lg">shield</span>
     </div>
-    <h3 class="text-lg font-bold text-slate-900 dark:text-white">الدعم والقوانين</h3>
+    <h3 class="text-lg sm:text-xl lg:text-2xl font-bold text-slate-900 dark:text-white">الدعم والقوانين</h3>
   </div>
   <div class="space-y-2">
     <a href="support.html" class="flex items-center justify-between p-3 hover:bg-white/50 dark:hover:bg-white/5 rounded-xl transition-colors">
       <div class="flex items-center gap-3">
-        <span class="material-symbols-outlined text-cyan-600 dark:text-cyan-400">support_agent</span>
-        <span class="text-sm text-slate-700 dark:text-slate-300">الدعم الفني والمساعدة</span>
+        <span class="material-symbols-outlined text-cyan-600 dark:text-cyan-400 lg:text-lg">support_agent</span>
+        <span class="text-sm lg:text-lg text-slate-700 dark:text-slate-300">الدعم الفني والمساعدة</span>
       </div>
-      <span class="material-symbols-outlined text-slate-400">arrow_back_ios</span>
+      <span class="material-symbols-outlined text-slate-400 lg:text-lg">arrow_back_ios</span>
     </a>
     <a href="#" onclick="showModal('privacy')" class="flex items-center justify-between p-3 hover:bg-white/50 dark:hover:bg-white/5 rounded-xl transition-colors">
       <div class="flex items-center gap-3">
-        <span class="material-symbols-outlined text-purple-600 dark:text-purple-400">privacy_tip</span>
-        <span class="text-sm text-slate-700 dark:text-slate-300">سياسة الخصوصية</span>
+        <span class="material-symbols-outlined text-purple-600 dark:text-purple-400 lg:text-lg">privacy_tip</span>
+        <span class="text-sm lg:text-lg text-slate-700 dark:text-slate-300">سياسة الخصوصية</span>
       </div>
-      <span class="material-symbols-outlined text-slate-400">arrow_back_ios</span>
+      <span class="material-symbols-outlined text-slate-400 lg:text-lg">arrow_back_ios</span>
     </a>
     <a href="#" onclick="showModal('terms')" class="flex items-center justify-between p-3 hover:bg-white/50 dark:hover:bg-white/5 rounded-xl transition-colors">
       <div class="flex items-center gap-3">
-        <span class="material-symbols-outlined text-amber-600 dark:text-amber-400">gavel</span>
-        <span class="text-sm text-slate-700 dark:text-slate-300">الشروط والأحكام</span>
+        <span class="material-symbols-outlined text-amber-600 dark:text-amber-400 lg:text-lg">gavel</span>
+        <span class="text-sm lg:text-lg text-slate-700 dark:text-slate-300">الشروط والأحكام</span>
       </div>
-      <span class="material-symbols-outlined text-slate-400">arrow_back_ios</span>
+      <span class="material-symbols-outlined text-slate-400 lg:text-lg">arrow_back_ios</span>
     </a>
   </div>
 </div>
 
 <!-- Appearance Settings -->
-<div class="glass-card rounded-2xl p-4 md:p-6 space-y-4">
+<div class="glass-card rounded-2xl p-4 sm:p-6 lg:p-8 space-y-4">
   <div class="flex items-center gap-3 mb-4">
     <div class="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-500/20 flex items-center justify-center text-purple-600 dark:text-purple-300">
-      <span class="material-symbols-outlined">palette</span>
+      <span class="material-symbols-outlined lg:text-lg">palette</span>
     </div>
-    <h3 class="text-lg font-bold text-slate-900 dark:text-white">المظهر</h3>
+    <h3 class="text-lg sm:text-xl lg:text-2xl font-bold text-slate-900 dark:text-white">المظهر</h3>
   </div>
   <div class="flex items-center justify-between">
     <div class="flex items-center gap-3">
-      <span class="material-symbols-outlined text-slate-500 dark:text-slate-400">dark_mode</span>
+      <span class="material-symbols-outlined text-slate-500 dark:text-slate-400 lg:text-lg">dark_mode</span>
       <div>
         <p class="font-medium text-slate-900 dark:text-white">الوضع الداكن</p>
-        <p class="text-xs text-slate-500 dark:text-slate-400">تفعيل المظهر الليلي</p>
+        <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">تفعيل المظهر الليلي</p>
       </div>
     </div>
     <div class="toggle-switch active" id="darkModeToggle" onclick="toggleDarkMode()"></div>
@@ -449,9 +447,9 @@
 </div>
 
 <!-- Save Button -->
-<button onclick="saveSettings()" class="w-full bg-gradient-to-r from-cyan-500 to-purple-500 text-white rounded-2xl py-4 font-bold hover:shadow-lg hover:shadow-cyan-500/30 transition-all active:scale-95 flex items-center justify-center gap-2">
-  <span class="material-symbols-outlined">save</span>
-  <span>حفظ جميع الإعدادات</span>
+<button onclick="saveSettings()" class="w-full lg:col-span-2 bg-gradient-to-r from-cyan-500 to-purple-500 text-white rounded-2xl py-4 font-bold hover:shadow-lg hover:shadow-cyan-500/30 transition-all active:scale-95 flex items-center justify-center gap-2">
+  <span class="material-symbols-outlined lg:text-lg">save</span>
+  <span class="text-lg lg:text-xl">حفظ جميع الإعدادات</span>
 </button>
 
 </section>
@@ -465,34 +463,34 @@
 <!-- Legal Modals -->
 <div class="fixed inset-0 bg-slate-900/60 dark:bg-black/80 backdrop-blur-sm z-[150] opacity-0 pointer-events-none transition-opacity duration-300" id="legalOverlay" onclick="closeLegalModal()"></div>
 <div class="fixed inset-x-0 bottom-0 z-[160] translate-y-full transition-transform duration-300" id="legalModal">
-  <div class="bg-white dark:bg-slate-900 rounded-t-[2rem] max-w-lg mx-auto max-h-[70vh] overflow-y-auto">
+  <div class="bg-white dark:bg-slate-900 rounded-t-[2rem] max-w-lg mx-auto max-h-[70vh] sm:max-h-[80vh] lg:max-h-[90vh] overflow-y-auto">
     <div class="sticky top-0 bg-white dark:bg-slate-900 p-6 border-b border-slate-100 dark:border-white/10 flex items-center justify-between">
-      <h3 class="text-xl font-bold text-slate-900 dark:text-white" id="legalTitle">عنوان</h3>
+      <h3 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white" id="legalTitle">عنوان</h3>
       <button class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center" onclick="closeLegalModal()">
         <span class="material-symbols-outlined text-slate-600 dark:text-slate-400">close</span>
       </button>
     </div>
-    <div class="p-6 text-sm text-slate-600 dark:text-slate-300 space-y-4" id="legalContent"></div>
+    <div class="p-6 text-sm sm:text-base text-slate-600 dark:text-slate-300 space-y-4" id="legalContent"></div>
   </div>
 </div>
 
-<!-- BottomNavBar -->
-<nav class="bg-white/80 dark:bg-slate-900/40 backdrop-blur-lg fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-16 md:h-20 rounded-t-[2rem] border-t border-slate-200 dark:border-white/5 px-2">
-  <a class="flex flex-col items-center justify-center text-slate-400 py-1 md:py-2 hover:text-cyan-600 dark:hover:text-cyan-300 active:scale-90 transition-transform" href="home.html">
-    <span class="material-symbols-outlined text-xl md:text-2xl">home</span>
-    <span class="font-label text-[10px] md:text-xs font-medium mt-0.5">الرئيسية</span>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="bg-white/80 dark:bg-slate-900/40 backdrop-blur-lg fixed bottom-0 left-0 w-full z-50 lg:hidden flex justify-around items-center h-16 sm:h-20 rounded-t-[2rem] border-t border-slate-200 dark:border-white/5 px-2">
+  <a class="flex flex-col items-center justify-center text-slate-400 py-1 sm:py-2 hover:text-cyan-600 dark:hover:text-cyan-300 active:scale-90 transition-transform" href="home.html">
+    <span class="material-symbols-outlined text-xl sm:text-2xl">home</span>
+    <span class="font-label text-[10px] sm:text-xs font-medium mt-0.5">الرئيسية</span>
   </a>
-  <a class="flex flex-col items-center justify-center text-slate-400 py-1 md:py-2 hover:text-cyan-600 dark:hover:text-cyan-300 active:scale-90 transition-transform" href="add-patient.html">
-    <span class="material-symbols-outlined text-xl md:text-2xl">person_add</span>
-    <span class="font-label text-[10px] md:text-xs font-medium mt-0.5">إضافة</span>
+  <a class="flex flex-col items-center justify-center text-slate-400 py-1 sm:py-2 hover:text-cyan-600 dark:hover:text-cyan-300 active:scale-90 transition-transform" href="add-patient.html">
+    <span class="material-symbols-outlined text-xl sm:text-2xl">person_add</span>
+    <span class="font-label text-[10px] sm:text-xs font-medium mt-0.5">إضافة</span>
   </a>
-  <a class="flex flex-col items-center justify-center text-slate-400 py-1 md:py-2 hover:text-cyan-600 dark:hover:text-cyan-300 active:scale-90 transition-transform" href="archive.html">
-    <span class="material-symbols-outlined text-xl md:text-2xl">inventory</span>
-    <span class="font-label text-[10px] md:text-xs font-medium mt-0.5">الأرشيف</span>
+  <a class="flex flex-col items-center justify-center text-slate-400 py-1 sm:py-2 hover:text-cyan-600 dark:hover:text-cyan-300 active:scale-90 transition-transform" href="archive.html">
+    <span class="material-symbols-outlined text-xl sm:text-2xl">inventory</span>
+    <span class="font-label text-[10px] sm:text-xs font-medium mt-0.5">الأرشيف</span>
   </a>
-  <a class="flex flex-col items-center justify-center bg-gradient-to-br from-cyan-500/20 to-purple-500/20 dark:from-cyan-500/30 dark:to-purple-500/30 text-cyan-600 dark:text-cyan-400 rounded-lg px-3 md:px-6 py-1 md:py-2 active:scale-95 transition-all border border-white/20 dark:border-white/10 backdrop-blur-md shadow-lg shadow-cyan-500/10" href="settings.html">
-    <span class="material-symbols-outlined text-xl md:text-2xl" style="font-variation-settings: 'FILL' 1;">settings</span>
-    <span class="font-label text-[10px] md:text-xs font-medium mt-0.5">الإعدادات</span>
+  <a class="flex flex-col items-center justify-center bg-gradient-to-br from-cyan-500/20 to-purple-500/20 dark:from-cyan-500/30 dark:to-purple-500/30 text-cyan-600 dark:text-cyan-400 rounded-lg px-3 sm:px-6 py-1 sm:py-2 active:scale-95 transition-all border border-white/20 dark:border-white/10 backdrop-blur-md shadow-lg shadow-cyan-500/10" href="settings.html">
+    <span class="material-symbols-outlined text-xl sm:text-2xl" style="font-variation-settings: 'FILL' 1;">settings</span>
+    <span class="font-label text-[10px] sm:text-xs font-medium mt-0.5">الإعدادات</span>
   </a>
 </nav>
 
@@ -663,7 +661,7 @@
         if (data.expenses) localStorage.setItem('expenses', JSON.stringify(data.expenses));
         showToast('✓ تم استيراد البيانات!');
         loadSettings();
-      } catch(err) { alert('خطأ: ' + err.message); }
+      } catch(err) { showToast('خطأ في الملف: ' + err.message); }
     };
     reader.readAsText(file);
   }
@@ -714,13 +712,13 @@
 
   function showToast(msg) {
     const toast = document.createElement('div');
-    toast.className = 'fixed bottom-20 left-1/2 -translate-x-1/2 z-[100] bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-4 py-2 rounded-full shadow-2xl text-sm font-medium';
+    toast.className = 'fixed bottom-24 left-1/2 -translate-x-1/2 z-[100] bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-6 py-3 rounded-full shadow-2xl text-sm sm:text-base font-medium';
     toast.textContent = msg;
     document.body.appendChild(toast);
-    setTimeout(() => toast.remove(), 2000);
+    setTimeout(() => toast.remove(), 2500);
   }
 
-  // Sidebar
+  // Sidebar (mobile slide, desktop static)
   const sidebar = document.getElementById('sidebar');
   const menuBtn = document.getElementById('menu-btn');
   const overlay = document.getElementById('sidebar-overlay');

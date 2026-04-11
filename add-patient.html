@@ -142,15 +142,15 @@
   .template-4 .footer { border-top: 3px solid #dc2626; color: #dc2626; font-weight: bold; }
 </style>
 </head>
-<body class="mesh-gradient min-h-screen pb-32 overflow-x-hidden text-slate-900 dark:text-slate-100">
+<body class="mesh-gradient min-h-screen pb-24 lg:pb-20 overflow-x-hidden text-slate-900 dark:text-slate-100">
 
 <!-- TopAppBar -->
-<header class="bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl border-b border-black/5 dark:border-white/5 shadow-sm flex justify-between items-center px-6 h-20 w-full z-50 fixed top-0 left-0 transition-colors">
+<header class="bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl border-b border-black/5 dark:border-white/5 shadow-sm flex justify-between items-center px-4 sm:px-6 lg:px-8 h-20 w-full z-50 fixed top-0 left-0 transition-colors">
   <div class="flex items-center gap-4">
-    <button class="text-slate-600 dark:text-slate-300 hover:bg-black/5 dark:hover:bg-white/5 transition-colors p-2 rounded-full" id="menu-btn">
+    <button class="text-slate-600 dark:text-slate-300 hover:bg-black/5 dark:hover:bg-white/5 transition-colors p-2 rounded-full lg:hidden" id="menu-btn">
       <span class="material-symbols-outlined">menu</span>
     </button>
-    <h1 class="text-xl font-bold bg-gradient-to-r from-cyan-600 to-purple-600 dark:from-cyan-400 dark:to-purple-400 bg-clip-text text-transparent font-headline tracking-tight" id="appTitle">The Ethereal Clinic</h1>
+    <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-cyan-600 to-purple-600 dark:from-cyan-400 dark:to-purple-400 bg-clip-text text-transparent font-headline tracking-tight" id="appTitle">The Ethereal Clinic</h1>
   </div>
   <div class="flex items-center gap-2">
     <button class="text-cyan-600 dark:text-cyan-400 p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
@@ -163,40 +163,40 @@
   </div>
 </header>
 
-<main class="px-4 pt-28 space-y-6 max-w-lg mx-auto">
+<main class="px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 space-y-6 max-w-lg lg:max-w-4xl mx-auto">
 
 <!-- Page Title -->
-<section class="space-y-1 no-print">
+<section class="space-y-1 no-print lg:col-span-1">
   <p class="text-slate-500 dark:text-secondary text-sm font-medium">صفحة جديدة</p>
-  <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white">إضافة مريض</h2>
+  <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white">إضافة مريض</h2>
 </section>
 
 <!-- Choice Buttons -->
-<section class="grid grid-cols-2 gap-4 no-print" id="choiceSection">
-  <button onclick="showNewPatientForm()" class="glass-card rounded-2xl p-6 flex flex-col items-center gap-3 hover:scale-105 active:scale-95 transition-all border-cyan-200 dark:border-cyan-500/30">
-    <div class="w-16 h-16 rounded-full bg-cyan-100 dark:bg-cyan-500/20 flex items-center justify-center text-cyan-600 dark:text-cyan-400">
-      <span class="material-symbols-outlined text-3xl">person_add</span>
+<section class="grid grid-cols-1 sm:grid-cols-2 gap-4 no-print">
+  <button onclick="showNewPatientForm()" class="glass-card rounded-2xl p-4 sm:p-6 lg:p-8 flex flex-col items-center gap-3 hover:scale-105 active:scale-95 transition-all border-cyan-200 dark:border-cyan-500/30">
+    <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-cyan-100 dark:bg-cyan-500/20 flex items-center justify-center text-cyan-600 dark:text-cyan-400">
+      <span class="material-symbols-outlined text-3xl sm:text-4xl">person_add</span>
     </div>
-    <span class="font-bold text-cyan-700 dark:text-cyan-400">مريض جديد</span>
+    <span class="font-bold text-cyan-700 dark:text-cyan-400 text-sm sm:text-lg">مريض جديد</span>
   </button>
-  <button onclick="showExistingPatients()" class="glass-card rounded-2xl p-6 flex flex-col items-center gap-3 hover:scale-105 active:scale-95 transition-all border-purple-200 dark:border-purple-500/30">
-    <div class="w-16 h-16 rounded-full bg-purple-100 dark:bg-purple-500/20 flex items-center justify-center text-purple-600 dark:text-purple-400">
-      <span class="material-symbols-outlined text-3xl">refresh</span>
+  <button onclick="showExistingPatients()" class="glass-card rounded-2xl p-4 sm:p-6 lg:p-8 flex flex-col items-center gap-3 hover:scale-105 active:scale-95 transition-all border-purple-200 dark:border-purple-500/30">
+    <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-purple-100 dark:bg-purple-500/20 flex items-center justify-center text-purple-600 dark:text-purple-400">
+      <span class="material-symbols-outlined text-3xl sm:text-4xl">refresh</span>
     </div>
-    <span class="font-bold text-purple-700 dark:text-purple-400">تجديد فحص</span>
+    <span class="font-bold text-purple-700 dark:text-purple-400 text-sm sm:text-lg">تجديد فحص</span>
   </button>
 </section>
 
 <!-- Patient Form -->
-<section class="space-y-4 no-print hidden" id="patientFormSection">
+<section class="space-y-4 no-print max-h-[70vh] sm:max-h-[80vh] lg:max-h-[90vh] overflow-y-auto no-scrollbar" id="patientFormSection">
 
 <!-- Personal Info -->
-<div class="glass-card rounded-2xl p-6 space-y-4">
+<div class="glass-card rounded-2xl p-4 sm:p-6 lg:p-8 space-y-4">
   <div class="flex items-center gap-3 mb-4">
     <div class="w-10 h-10 rounded-full bg-cyan-100 dark:bg-cyan-500/20 flex items-center justify-center text-cyan-600 dark:text-cyan-400">
       <span class="material-symbols-outlined">person</span>
     </div>
-    <h3 class="text-lg font-bold text-slate-900 dark:text-white">المعلومات الشخصية</h3>
+    <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">المعلومات الشخصية</h3>
   </div>
   <div class="space-y-2">
     <label class="text-sm font-medium text-slate-700 dark:text-slate-300">الاسم الكامل</label>
@@ -217,21 +217,21 @@
 </div>
 
 <!-- Prescription Section -->
-<div class="glass-card rounded-2xl p-6 space-y-4">
+<div class="glass-card rounded-2xl p-4 sm:p-6 lg:p-8 space-y-4">
   <div class="flex items-center gap-3 mb-4">
     <div class="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-500/20 flex items-center justify-center text-purple-600 dark:text-purple-300">
       <span class="material-symbols-outlined">visibility</span>
     </div>
-    <h3 class="text-lg font-bold text-slate-900 dark:text-white">النظرة الطبية</h3>
+    <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">النظرة الطبية</h3>
   </div>
 
   <!-- Right Eye -->
   <div class="eye-right-gradient rounded-xl p-4 border border-cyan-200 dark:border-cyan-500/20">
     <div class="flex items-center gap-2 mb-4">
       <span class="material-symbols-outlined text-cyan-600 dark:text-cyan-400">visibility</span>
-      <h4 class="font-bold text-cyan-700 dark:text-cyan-400">العين اليمنى (OD)</h4>
+      <h4 class="font-bold text-cyan-700 dark:text-cyan-400 text-sm sm:text-lg">العين اليمنى (OD)</h4>
     </div>
-    <div class="grid grid-cols-2 gap-4 mb-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
       <div class="space-y-2">
         <label class="text-xs font-medium text-slate-600 dark:text-slate-400">SPH</label>
         <div class="flex items-center gap-2">
@@ -249,7 +249,7 @@
         </div>
       </div>
     </div>
-    <div class="grid grid-cols-2 gap-4 mb-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
       <div class="space-y-2">
         <label class="text-xs font-medium text-slate-600 dark:text-slate-400">AXIS (1-180°)</label>
         <div class="flex items-center gap-2">
@@ -277,9 +277,9 @@
   <div class="eye-left-gradient rounded-xl p-4 border border-purple-200 dark:border-purple-500/20">
     <div class="flex items-center gap-2 mb-4">
       <span class="material-symbols-outlined text-purple-600 dark:text-purple-300">visibility</span>
-      <h4 class="font-bold text-purple-700 dark:text-purple-400">العين اليسرى (OS)</h4>
+      <h4 class="font-bold text-purple-700 dark:text-purple-400 text-sm sm:text-lg">العين اليسرى (OS)</h4>
     </div>
-    <div class="grid grid-cols-2 gap-4 mb-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
       <div class="space-y-2">
         <label class="text-xs font-medium text-slate-600 dark:text-slate-400">SPH</label>
         <div class="flex items-center gap-2">
@@ -297,7 +297,7 @@
         </div>
       </div>
     </div>
-    <div class="grid grid-cols-2 gap-4 mb-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
       <div class="space-y-2">
         <label class="text-xs font-medium text-slate-600 dark:text-slate-400">AXIS (1-180°)</label>
         <div class="flex items-center gap-2">
@@ -326,7 +326,7 @@
     <div class="flex items-center justify-between mb-3">
       <div class="flex items-center gap-2">
         <span class="material-symbols-outlined text-amber-600 dark:text-amber-400">straighten</span>
-        <h4 class="font-bold text-amber-700 dark:text-amber-400">المسافة بين الحدقتين (PD)</h4>
+        <h4 class="font-bold text-amber-700 dark:text-amber-400 text-sm sm:text-lg">المسافة بين الحدقتين (PD)</h4>
       </div>
       <span class="text-xs text-slate-500 dark:text-slate-400">mm</span>
     </div>
@@ -351,18 +351,18 @@
   </div>
 
   <!-- View Old Exam Button -->
-  <button id="viewOldExamBtn" class="w-full glass-card bg-gradient-to-br from-slate-500/20 to-slate-600/20 dark:from-slate-500/30 dark:to-slate-600/30 rounded-xl py-3 flex items-center justify-center gap-2 hover:scale-105 active:scale-95 transition-all border-slate-200 dark:border-slate-500/30 hidden" onclick="showOldExam()">
+  <button id="viewOldExamBtn" class="w-full glass-card bg-gradient-to-br from-slate-500/20 to-slate-600/20 dark:from-slate-500/30 dark:to-slate-600/30 rounded-xl py-3 flex items-center justify-center gap-2 hover:scale-105 active:scale-95 transition-all border-slate-200 dark:border-slate-500/30 hidden lg:text-lg" onclick="showOldExam()">
     <span class="material-symbols-outlined text-slate-600 dark:text-slate-400">history</span>
-    <span class="font-bold text-slate-700 dark:text-slate-400">عرض الفحص القديم</span>
+    <span class="font-bold text-slate-700 dark:text-slate-400 text-sm lg:text-base">عرض الفحص القديم</span>
   </button>
 
   <!-- Action Buttons -->
-  <div class="grid grid-cols-2 gap-4 no-print">
-    <button class="glass-card bg-gradient-to-br from-cyan-500/20 to-cyan-600/20 dark:from-cyan-500/30 dark:to-cyan-600/30 rounded-xl py-4 flex items-center justify-center gap-2 hover:scale-105 active:scale-95 transition-all border-cyan-200 dark:border-cyan-500/30" onclick="savePatient()">
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 no-print">
+    <button class="glass-card bg-gradient-to-br from-cyan-500/20 to-cyan-600/20 dark:from-cyan-500/30 dark:to-cyan-600/30 rounded-xl py-4 flex items-center justify-center gap-2 hover:scale-105 active:scale-95 transition-all border-cyan-200 dark:border-cyan-500/30 text-sm lg:text-lg" onclick="savePatient()">
       <span class="material-symbols-outlined text-cyan-600 dark:text-cyan-400">save</span>
       <span class="font-bold text-cyan-700 dark:text-cyan-400">حفظ في الأرشيف</span>
     </button>
-    <button class="glass-card bg-gradient-to-br from-purple-500/20 to-purple-600/20 dark:from-purple-500/30 dark:to-purple-600/30 rounded-xl py-4 flex items-center justify-center gap-2 hover:scale-105 active:scale-95 transition-all border-purple-200 dark:border-purple-500/30" onclick="printPrescription()">
+    <button class="glass-card bg-gradient-to-br from-purple-500/20 to-purple-600/20 dark:from-purple-500/30 dark:to-purple-600/30 rounded-xl py-4 flex items-center justify-center gap-2 hover:scale-105 active:scale-95 transition-all border-purple-200 dark:border-purple-500/30 text-sm lg:text-lg" onclick="printPrescription()">
       <span class="material-symbols-outlined text-purple-600 dark:text-purple-400">print</span>
       <span class="font-bold text-purple-700 dark:text-purple-400">طباعة (A5)</span>
     </button>
@@ -372,7 +372,7 @@
 <!-- Patient Selection Modal -->
 <div class="fixed inset-0 bg-slate-900/60 dark:bg-black/80 backdrop-blur-sm z-[70] opacity-0 pointer-events-none transition-opacity duration-300" id="patientSelectOverlay" onclick="closePatientSelect()"></div>
 <div class="fixed inset-x-0 bottom-0 z-[80] translate-y-full transition-transform duration-300" id="patientSelectModal">
-  <div class="bg-white dark:bg-slate-900 rounded-t-[2rem] max-w-lg mx-auto max-h-[70vh] overflow-y-auto">
+  <div class="bg-white dark:bg-slate-900 rounded-t-[2rem] max-w-lg mx-auto max-h-[70vh] sm:max-h-[80vh] lg:max-h-[90vh] overflow-y-auto">
     <div class="sticky top-0 bg-white dark:bg-slate-900 p-6 border-b border-slate-100 dark:border-white/10 flex items-center justify-between">
       <h3 class="text-xl font-bold text-slate-900 dark:text-white">اختر المريض لتجديد الفحص</h3>
       <button class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center" onclick="closePatientSelect()">
@@ -386,7 +386,7 @@
 <!-- Old Exam Modal -->
 <div class="fixed inset-0 bg-slate-900/60 dark:bg-black/80 backdrop-blur-sm z-[70] opacity-0 pointer-events-none transition-opacity duration-300" id="oldExamOverlay" onclick="closeOldExam()"></div>
 <div class="fixed inset-x-0 bottom-0 z-[80] translate-y-full transition-transform duration-300" id="oldExamModal">
-  <div class="bg-white dark:bg-slate-900 rounded-t-[2rem] max-w-lg mx-auto max-h-[70vh] overflow-y-auto">
+  <div class="bg-white dark:bg-slate-900 rounded-t-[2rem] max-w-lg mx-auto max-h-[70vh] sm:max-h-[80vh] lg:max-h-[90vh] overflow-y-auto">
     <div class="sticky top-0 bg-white dark:bg-slate-900 p-6 border-b border-slate-100 dark:border-white/10 flex items-center justify-between">
       <h3 class="text-xl font-bold text-slate-900 dark:text-white">الفحص السابق</h3>
       <button class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center" onclick="closeOldExam()">
@@ -464,8 +464,8 @@
 
 </main>
 
-<!-- BottomNavBar -->
-<nav class="bg-white/80 dark:bg-slate-900/40 backdrop-blur-lg fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 pb-safe rounded-t-[2rem] border-t border-slate-200 dark:border-white/5">
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="bg-white/80 dark:bg-slate-900/40 backdrop-blur-lg fixed bottom-0 left-0 w-full z-50 lg:hidden flex justify-around items-center h-20 pb-safe rounded-t-[2rem] border-t border-slate-200 dark:border-white/5">
   <a class="flex flex-col items-center justify-center text-slate-400 py-2 hover:text-cyan-600 dark:hover:text-cyan-300 active:scale-90 transition-transform" href="home.html">
     <span class="material-symbols-outlined text-2xl">home</span>
     <span class="font-label text-xs font-medium mt-1">الرئيسية</span>
@@ -675,7 +675,7 @@
         <div class="text-center text-xs text-slate-500 dark:text-slate-400 mb-4">
           تاريخ الفحص: ${new Date(oldExamData.createdAt).toLocaleDateString('ar-IQ')}
         </div>
-        <div class="grid grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div class="bg-cyan-50 dark:bg-cyan-500/10 rounded-lg p-3">
             <div class="text-xs font-bold text-cyan-600 dark:text-cyan-400 mb-2">العين اليمنى</div>
             <div class="space-y-1 text-sm">

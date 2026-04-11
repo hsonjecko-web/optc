@@ -1,8 +1,4 @@
-
-# سأبدأ بإنشاء ملفات HTML المحدثة وفقاً للمتطلبات
-# أولاً: ملف home.html (الرئيسية المحدثة)
-
-home_html = '''<!DOCTYPE html>
+<!DOCTYPE html>
 <html class="dark" dir="rtl" lang="ar">
 <head>
   <meta charset="utf-8"/>
@@ -71,12 +67,12 @@ home_html = '''<!DOCTYPE html>
     .sidebar-compact .nav-text { font-size: 0.875rem !important; }
   </style>
 </head>
-<body class="mesh-gradient min-h-screen pb-24 overflow-x-hidden text-slate-900 dark:text-slate-100">
+<body class="mesh-gradient min-h-screen pb-24 lg:pb-20 overflow-x-hidden text-slate-900 dark:text-slate-100">
 
 <!-- Header -->
-<header class="bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl border-b border-black/5 dark:border-white/5 shadow-sm flex justify-between items-center px-6 h-20 w-full z-50 fixed top-0 left-0">
+<header class="bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl border-b border-black/5 dark:border-white/5 shadow-sm flex justify-between items-center px-4 sm:px-6 lg:px-8 h-20 w-full z-50 fixed top-0 left-0">
   <div class="flex items-center gap-4">
-    <button class="text-slate-600 dark:text-slate-300 hover:bg-black/5 dark:hover:bg-white/5 transition-colors p-2 rounded-full" id="menu-btn">
+    <button class="text-slate-600 dark:text-slate-300 hover:bg-black/5 dark:hover:bg-white/5 transition-colors p-2 rounded-full lg:hidden" id="menu-btn">
       <span class="material-symbols-outlined">menu</span>
     </button>
     <h1 class="text-xl font-bold bg-gradient-to-r from-cyan-600 to-purple-600 dark:from-cyan-400 dark:to-purple-400 bg-clip-text text-transparent font-headline" id="appTitle">The Ethereal Clinic</h1>
@@ -93,89 +89,89 @@ home_html = '''<!DOCTYPE html>
 </header>
 
 <!-- Main Content -->
-<main class="px-6 pt-28 space-y-6 max-w-lg mx-auto">
+<main class="px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 space-y-6 max-w-lg lg:max-w-4xl mx-auto lg:grid lg:grid-cols-2 lg:gap-8">
   
   <!-- Welcome -->
-  <section class="space-y-1 animate-fade-in">
+  <section class="space-y-1 animate-fade-in lg:col-span-2">
     <p class="text-slate-500 dark:text-secondary text-sm font-medium" data-i18n="welcome_back">أهلاً بك مجدداً في</p>
-    <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white dark:text-glow-white" id="clinicName">عيادة الأثير للبصريات</h2>
+    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white dark:text-glow-white" id="clinicName">عيادة الأثير للبصريات</h2>
   </section>
 
   <!-- Stats Row 1: Customers & Exams -->
-  <section class="grid grid-cols-2 gap-4 animate-fade-in" style="animation-delay: 0.1s">
-    <div class="glass-card silver-gradient rounded-lg p-5 flex flex-col justify-between h-36 border-slate-200 dark:border-slate-400/20">
+  <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 animate-fade-in" style="animation-delay: 0.1s">
+    <div class="glass-card silver-gradient rounded-lg p-4 sm:p-6 lg:p-8 flex flex-col justify-between h-36 border-slate-200 dark:border-slate-400/20">
       <div class="flex items-center justify-between">
-        <span class="material-symbols-outlined text-slate-500 dark:text-slate-300" style="font-variation-settings: 'FILL' 1;">group</span>
-        <span class="text-xs text-slate-600 dark:text-slate-300 font-medium" data-i18n="total_customers">إجمالي الزبائن</span>
+        <span class="material-symbols-outlined text-slate-500 dark:text-slate-300 lg:text-lg" style="font-variation-settings: 'FILL' 1;">group</span>
+        <span class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-medium" data-i18n="total_customers">إجمالي الزبائن</span>
       </div>
       <div>
-        <div class="text-4xl font-bold text-slate-900 dark:text-white" id="totalCustomers">0</div>
-        <div class="text-[10px] text-slate-500 dark:text-slate-300 mt-1 font-semibold">+12% <span data-i18n="this_month">هذا الشهر</span></div>
+        <div class="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 dark:text-white" id="totalCustomers">0</div>
+        <div class="text-[10px] sm:text-xs text-slate-500 dark:text-slate-300 mt-1 font-semibold">+12% <span data-i18n="this_month">هذا الشهر</span></div>
       </div>
     </div>
-    <div class="glass-card purple-gradient rounded-lg p-5 flex flex-col justify-between h-36 border-purple-200 dark:border-purple-400/20">
+    <div class="glass-card purple-gradient rounded-lg p-4 sm:p-6 lg:p-8 flex flex-col justify-between h-36 border-purple-200 dark:border-purple-400/20">
       <div class="flex items-center justify-between">
-        <span class="material-symbols-outlined text-purple-600 dark:text-purple-300" style="font-variation-settings: 'FILL' 1;">visibility</span>
-        <span class="text-xs text-purple-700 dark:text-purple-100/70 font-medium" data-i18n="today_exams">فحوصات اليوم</span>
+        <span class="material-symbols-outlined text-purple-600 dark:text-purple-300 lg:text-lg" style="font-variation-settings: 'FILL' 1;">visibility</span>
+        <span class="text-xs sm:text-sm text-purple-700 dark:text-purple-100/70 font-medium" data-i18n="today_exams">فحوصات اليوم</span>
       </div>
       <div>
-        <div class="text-4xl font-bold text-slate-900 dark:text-white" id="todayExams">0</div>
-        <div class="text-[10px] text-purple-600 dark:text-purple-200 mt-1"><span data-i18n="remaining">المتبقي</span>: 8 <span data-i18n="appointments">مواعيد</span></div>
+        <div class="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 dark:text-white" id="todayExams">0</div>
+        <div class="text-[10px] sm:text-xs text-purple-600 dark:text-purple-200 mt-1">المتبقي: 8 مواعيد</div>
       </div>
     </div>
   </section>
 
   <!-- Stats Row 2: Today's Revenue -->
-  <section class="animate-fade-in" style="animation-delay: 0.2s">
-    <div class="glass-card golden-gradient rounded-lg p-6 relative overflow-hidden border-yellow-200 dark:border-yellow-500/20">
+  <section class="animate-fade-in lg:col-span-2" style="animation-delay: 0.2s">
+    <div class="glass-card golden-gradient rounded-lg p-6 lg:p-8 relative overflow-hidden border-yellow-200 dark:border-yellow-500/20">
       <div class="flex justify-between items-start">
         <div>
-          <p class="text-sm text-yellow-800/70 dark:text-yellow-100/60 mb-1" data-i18n="today_revenue">إيرادات اليوم</p>
-          <h4 class="text-3xl font-black text-yellow-700 dark:text-yellow-400 dark:text-glow-gold" id="todayRevenue">0 د.ع</h4>
+          <p class="text-sm lg:text-base text-yellow-800/70 dark:text-yellow-100/60 mb-1" data-i18n="today_revenue">إيرادات اليوم</p>
+          <h4 class="text-3xl sm:text-4xl lg:text-5xl font-black text-yellow-700 dark:text-yellow-400 dark:text-glow-gold" id="todayRevenue">0 د.ع</h4>
         </div>
-        <div class="bg-yellow-200 dark:bg-yellow-500/20 p-2 rounded-xl text-yellow-700 dark:text-yellow-400">
-          <span class="material-symbols-outlined">payments</span>
+        <div class="bg-yellow-200 dark:bg-yellow-500/20 p-3 lg:p-4 rounded-xl text-yellow-700 dark:text-yellow-400">
+          <span class="material-symbols-outlined text-lg">payments</span>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Stats Row 3: Monthly Expenses & Revenue -->
-  <section class="grid grid-cols-2 gap-4 animate-fade-in" style="animation-delay: 0.3s">
-    <div class="glass-card red-gradient rounded-lg p-5 flex flex-col justify-between h-32 border-red-200 dark:border-red-500/20">
+  <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 animate-fade-in lg:col-span-2" style="animation-delay: 0.3s">
+    <div class="glass-card red-gradient rounded-lg p-4 sm:p-6 lg:p-8 flex flex-col justify-between h-32 border-red-200 dark:border-red-500/20">
       <div class="flex items-center justify-between">
-        <span class="material-symbols-outlined text-red-600 dark:text-red-400">receipt_long</span>
-        <span class="text-xs text-red-700 dark:text-red-100/70 font-medium" data-i18n="month_expenses">مصروفات الشهر</span>
+        <span class="material-symbols-outlined text-red-600 dark:text-red-400 lg:text-lg">receipt_long</span>
+        <span class="text-xs sm:text-sm text-red-700 dark:text-red-100/70 font-medium" data-i18n="month_expenses">مصروفات الشهر</span>
       </div>
       <div>
-        <div class="text-2xl font-black text-red-700 dark:text-red-400" id="monthExpenses">0 د.ع</div>
+        <div class="text-xl sm:text-2xl lg:text-3xl font-black text-red-700 dark:text-red-400" id="monthExpenses">0 د.ع</div>
       </div>
     </div>
-    <div class="glass-card bg-gradient-to-br from-green-500/10 to-emerald-600/10 dark:from-green-500/20 dark:to-emerald-600/20 rounded-lg p-5 flex flex-col justify-between h-32 border-green-200 dark:border-green-500/20">
+    <div class="glass-card bg-gradient-to-br from-green-500/10 to-emerald-600/10 dark:from-green-500/20 dark:to-emerald-600/20 rounded-lg p-4 sm:p-6 lg:p-8 flex flex-col justify-between h-32 border-green-200 dark:border-green-500/20">
       <div class="flex items-center justify-between">
-        <span class="material-symbols-outlined text-green-600 dark:text-green-400">account_balance</span>
-        <span class="text-xs text-green-700 dark:text-green-100/70 font-medium" data-i18n="month_revenue">إيرادات الشهر</span>
+        <span class="material-symbols-outlined text-green-600 dark:text-green-400 lg:text-lg">account_balance</span>
+        <span class="text-xs sm:text-sm text-green-700 dark:text-green-100/70 font-medium" data-i18n="month_revenue">إيرادات الشهر</span>
       </div>
       <div>
-        <div class="text-2xl font-black text-green-700 dark:text-green-400" id="monthRevenue">0 د.ع</div>
+        <div class="text-xl sm:text-2xl lg:text-3xl font-black text-green-700 dark:text-green-400" id="monthRevenue">0 د.ع</div>
       </div>
     </div>
   </section>
 
   <!-- Recent Transactions -->
-  <section class="space-y-4 animate-fade-in" style="animation-delay: 0.4s">
+  <section class="space-y-4 animate-fade-in lg:col-span-2" style="animation-delay: 0.4s">
     <div class="flex justify-between items-end px-1">
-      <h3 class="text-lg font-bold text-slate-900 dark:text-white" data-i18n="recent_operations">آخر العمليات</h3>
-      <a href="archive.html" class="text-xs text-cyan-600 dark:text-cyan-400 font-bold" data-i18n="view_all">عرض الكل</a>
+      <h3 class="text-lg font-bold text-slate-900 dark:text-white lg:text-xl" data-i18n="recent_operations">آخر العمليات</h3>
+      <a href="archive.html" class="text-xs lg:text-sm text-cyan-600 dark:text-cyan-400 font-bold" data-i18n="view_all">عرض الكل</a>
     </div>
-    <div class="space-y-3" id="recentTransactions">
-      <p class="glass-card p-6 rounded-xl text-center text-secondary text-sm" data-i18n="loading">جاري تحميل البيانات...</p>
+    <div class="space-y-3 max-h-[70vh] sm:max-h-[80vh] lg:max-h-[90vh] overflow-y-auto no-scrollbar" id="recentTransactions">
+      <p class="glass-card p-6 rounded-xl text-center text-secondary text-sm lg:text-base" data-i18n="loading">جاري تحميل البيانات...</p>
     </div>
   </section>
 </main>
 
-<!-- Bottom Nav -->
-<nav class="bg-white/80 dark:bg-slate-900/40 backdrop-blur-lg fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 rounded-t-[2rem] border-t border-slate-200 dark:border-white/5">
+<!-- Bottom Nav (Mobile Only) -->
+<nav class="bg-white/80 dark:bg-slate-900/40 backdrop-blur-lg fixed bottom-0 left-0 w-full z-50 lg:hidden flex justify-around items-center h-20 rounded-t-[2rem] border-t border-slate-200 dark:border-white/5">
   <a href="home.html" class="flex flex-col items-center justify-center bg-gradient-to-br from-cyan-500/20 to-purple-500/20 dark:from-cyan-500/30 dark:to-purple-500/30 text-cyan-600 dark:text-cyan-400 rounded-lg px-4 py-2 active:scale-95 transition-all border border-white/20 dark:border-white/10 backdrop-blur-md">
     <span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">home</span>
     <span class="font-label text-[10px] font-medium mt-1" data-i18n="home">الرئيسية</span>
@@ -198,8 +194,8 @@ home_html = '''<!DOCTYPE html>
 <div class="fixed inset-0 bg-slate-900/40 dark:bg-black/60 backdrop-blur-sm z-[55] opacity-0 pointer-events-none transition-opacity duration-300" id="sidebar-overlay"></div>
 
 <!-- Sidebar -->
-<div class="fixed inset-y-0 right-0 z-[60] flex flex-col bg-white dark:bg-slate-900/90 backdrop-blur-2xl h-full w-80 rounded-l-3xl border-l border-slate-100 dark:border-white/10 shadow-2xl translate-x-full transition-transform duration-300 sidebar-compact" id="sidebar">
-  <div class="p-6 space-y-4 text-3xl">
+<div class="fixed inset-y-0 right-0 z-[60] lg:translate-x-0 lg:relative lg:w-64 flex flex-col bg-white dark:bg-slate-900/90 backdrop-blur-2xl h-screen w-80 rounded-l-3xl border-l border-slate-100 dark:border-white/10 shadow-2xl translate-x-full transition-transform duration-300 sidebar-compact lg:shadow-none lg:border-none" id="sidebar">
+  <div class="p-6 space-y-4">
     <div class="text-lg font-black bg-gradient-to-r from-cyan-600 to-purple-600 dark:from-cyan-400 dark:to-purple-400 bg-clip-text text-transparent">Ethereal Menu</div>
     <div class="space-y-1">
       
@@ -335,22 +331,22 @@ home_html = '''<!DOCTYPE html>
     
     const recent = patients.slice(-3).reverse();
     if (recent.length === 0) {
-      container.innerHTML = '<p class="glass-card p-6 rounded-xl text-center text-secondary text-sm" data-i18n="no_recent">لا توجد عمليات حديثة</p>';
+      container.innerHTML = '<p class="glass-card p-6 rounded-xl text-center text-secondary text-sm lg:text-base" data-i18n="no_recent">لا توجد عمليات حديثة</p>';
       return;
     }
     
     container.innerHTML = recent.map(p => `
       <div class="glass-card bg-white/60 dark:bg-white/5 rounded-lg p-4 flex items-center justify-between hover:bg-white/90 dark:hover:bg-white/10 transition-colors border-slate-100 dark:border-white/5">
         <div class="flex items-center gap-4">
-          <div class="w-12 h-12 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center border border-white dark:border-white/10">
-            <span class="text-lg font-bold text-primary">${(p.fullName||'?').slice(0,2).toUpperCase()}</span>
+          <div class="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-400 to-purple-500 flex items-center justify-center text-white font-bold">
+            ${p.fullName ? p.fullName.charAt(0).toUpperCase() : '?'}
           </div>
           <div>
-            <div class="text-sm font-bold text-slate-900 dark:text-white">${p.fullName||'مريض'}</div>
-            <div class="text-[10px] text-slate-500 dark:text-secondary">${new Date(p.createdAt).toLocaleDateString('ar-IQ')} • ${p.phone||''}</div>
+            <div class="text-sm lg:text-base font-bold text-slate-900 dark:text-white">${p.fullName||'مريض'}</div>
+            <div class="text-[10px] lg:text-xs text-slate-500 dark:text-secondary">${new Date(p.createdAt).toLocaleDateString('ar-IQ')} • ${p.phone||''}</div>
           </div>
         </div>
-        <div class="text-sm font-bold text-slate-700 dark:text-white">250 د.ع</div>
+        <div class="text-sm lg:text-base font-bold text-slate-700 dark:text-white">250 د.ع</div>
       </div>
     `).join('');
   }

@@ -1,15 +1,11 @@
-
-# إنشاء الملفات الجديدة: inventory.html, add-material.html, support.html, export-excel.html, reports.html, settings.html
-
-# 1. inventory.html - صفحة الجرد
-inventory_html = '''<!DOCTYPE html>
+<!DOCTYPE html>
 <html class="dark" dir="rtl" lang="ar">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>الجرد والمواد - عيادة الأثير للبصريات</title>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;family=Tajawal:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script>
 tailwind.config = {
@@ -54,14 +50,14 @@ body { min-height: max(884px, 100dvh); }
 .sidebar-compact .nav-text { font-size: 0.875rem !important; }
 </style>
 </head>
-<body class="mesh-gradient min-h-screen pb-32 overflow-x-hidden text-slate-900 dark:text-slate-100">
+<body class="mesh-gradient min-h-screen pb-24 lg:pb-20 overflow-x-hidden text-slate-900 dark:text-slate-100">
 
-<header class="bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl border-b border-black/5 dark:border-white/5 shadow-sm flex justify-between items-center px-6 h-20 w-full z-50 fixed top-0 left-0">
+<header class="bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl border-b border-black/5 dark:border-white/5 shadow-sm flex justify-between items-center px-4 sm:px-6 lg:px-8 h-20 w-full z-50 fixed top-0 left-0 lg:flex-row-reverse">
   <div class="flex items-center gap-4">
-    <button class="text-slate-600 dark:text-slate-300 hover:bg-black/5 dark:hover:bg-white/5 transition-colors p-2 rounded-full" id="menu-btn">
+    <button class="text-slate-600 dark:text-slate-300 hover:bg-black/5 dark:hover:bg-white/5 transition-colors p-2 rounded-full lg:hidden" id="menu-btn">
       <span class="material-symbols-outlined">menu</span>
     </button>
-    <h1 class="text-xl font-bold bg-gradient-to-r from-cyan-600 to-purple-600 dark:from-cyan-400 dark:to-purple-400 bg-clip-text text-transparent font-headline" id="appTitle">The Ethereal Clinic</h1>
+    <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-cyan-600 to-purple-600 dark:from-cyan-400 dark:to-purple-400 bg-clip-text text-transparent font-headline tracking-tight" id="appTitle">The Ethereal Clinic</h1>
   </div>
   <div class="flex items-center gap-2">
     <button class="text-slate-600 dark:text-slate-300 p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/5 transition-colors" id="theme-toggle">
@@ -71,49 +67,50 @@ body { min-height: max(884px, 100dvh); }
   </div>
 </header>
 
-<main class="px-4 pt-28 space-y-6 max-w-lg mx-auto">
+<main class="px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 space-y-6 max-w-lg lg:max-w-4xl mx-auto">
   <section class="space-y-1">
-    <p class="text-slate-500 dark:text-secondary text-sm font-medium">إدارة المخزون</p>
-    <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white dark:text-glow-white">الجرد والمواد</h2>
+    <p class="text-slate-500 dark:text-secondary text-sm sm:text-base font-medium">إدارة المخزون</p>
+    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white dark:text-glow-white">الجرد والمواد</h2>
   </section>
 
   <!-- Stats -->
-  <div class="grid grid-cols-3 gap-3">
-    <div class="glass-card rounded-xl p-3 text-center">
-      <div class="text-2xl font-black text-cyan-600 dark:text-cyan-400" id="totalItems">0</div>
-      <div class="text-[10px] text-slate-500 dark:text-slate-400">إجمالي المواد</div>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div class="glass-card rounded-xl p-3 sm:p-4 lg:p-6 text-center">
+      <div class="text-2xl sm:text-3xl lg:text-4xl font-black text-cyan-600 dark:text-cyan-400" id="totalItems">0</div>
+      <div class="text-[10px] sm:text-sm lg:text-base text-slate-500 dark:text-slate-400">إجمالي المواد</div>
     </div>
-    <div class="glass-card rounded-xl p-3 text-center">
-      <div class="text-2xl font-black text-amber-600 dark:text-amber-400" id="lowStock">0</div>
-      <div class="text-[10px] text-slate-500 dark:text-slate-400">مخزون منخفض</div>
+    <div class="glass-card rounded-xl p-3 sm:p-4 lg:p-6 text-center">
+      <div class="text-2xl sm:text-3xl lg:text-4xl font-black text-amber-600 dark:text-amber-400" id="lowStock">0</div>
+      <div class="text-[10px] sm:text-sm lg:text-base text-slate-500 dark:text-slate-400">مخزون منخفض</div>
     </div>
-    <div class="glass-card rounded-xl p-3 text-center">
-      <div class="text-2xl font-black text-purple-600 dark:text-purple-400" id="stockValue">0</div>
-      <div class="text-[10px] text-slate-500 dark:text-slate-400">القيمة (د.ع)</div>
+    <div class="glass-card rounded-xl p-3 sm:p-4 lg:p-6 text-center">
+      <div class="text-2xl sm:text-3xl lg:text-4xl font-black text-purple-600 dark:text-purple-400" id="stockValue">0</div>
+      <div class="text-[10px] sm:text-sm lg:text-base text-slate-500 dark:text-slate-400">القيمة (د.ع)</div>
     </div>
   </div>
 
   <!-- Search -->
-  <div class="glass-card rounded-2xl p-4">
+  <div class="glass-card rounded-2xl p-4 sm:p-6 lg:p-8">
     <div class="flex items-center gap-3">
-      <span class="material-symbols-outlined text-slate-400">search</span>
-      <input class="flex-1 bg-transparent border-none outline-none text-slate-900 dark:text-white placeholder-slate-400 text-right" id="searchInput" onkeyup="searchMaterials()" placeholder="البحث في المواد..." type="text"/>
+      <span class="material-symbols-outlined text-slate-400 lg:text-lg">search</span>
+      <input class="flex-1 bg-transparent border-none outline-none text-slate-900 dark:text-white placeholder-slate-400 text-right text-sm lg:text-base" id="searchInput" onkeyup="searchMaterials()" placeholder="البحث في المواد..." type="text"/>
     </div>
   </div>
 
   <!-- Materials List -->
-  <section class="space-y-3" id="materialsList">
+  <section class="space-y-3 max-h-[70vh] sm:max-h-[80vh] lg:max-h-[90vh] overflow-y-auto no-scrollbar" id="materialsList">
     <div class="glass-card rounded-2xl p-8 text-center">
-      <div class="w-16 h-16 mx-auto rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center mb-4">
-        <span class="material-symbols-outlined text-3xl text-slate-400">warehouse</span>
+      <div class="w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center mb-4">
+        <span class="material-symbols-outlined text-3xl sm:text-4xl text-slate-400">warehouse</span>
       </div>
-      <p class="text-slate-500 dark:text-slate-400">لا توجد مواد في المخزون</p>
-      <a href="add-material.html" class="inline-block mt-4 text-cyan-600 dark:text-cyan-400 text-sm font-bold">إضافة مادة جديدة</a>
+      <p class="text-slate-500 dark:text-slate-400 text-sm sm:text-lg">لا توجد مواد في المخزون</p>
+      <a href="add-material.html" class="inline-block mt-4 text-cyan-600 dark:text-cyan-400 text-sm sm:text-lg font-bold hover:underline">إضافة مادة جديدة</a>
     </div>
   </section>
 </main>
 
-<nav class="bg-white/80 dark:bg-slate-900/40 backdrop-blur-lg fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 rounded-t-[2rem] border-t border-slate-200 dark:border-white/5">
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="bg-white/80 dark:bg-slate-900/40 backdrop-blur-lg fixed bottom-0 left-0 w-full z-50 lg:hidden flex justify-around items-center h-20 rounded-t-[2rem] border-t border-slate-200 dark:border-white/5">
   <a href="home.html" class="flex flex-col items-center justify-center text-slate-400 py-2 hover:text-cyan-600 dark:hover:text-cyan-300 active:scale-90 transition-transform">
     <span class="material-symbols-outlined text-2xl">home</span>
     <span class="font-label text-xs font-medium mt-1">الرئيسية</span>
@@ -132,44 +129,58 @@ body { min-height: max(884px, 100dvh); }
   </a>
 </nav>
 
-<div class="fixed inset-0 bg-slate-900/40 dark:bg-black/60 backdrop-blur-sm z-[55] opacity-0 pointer-events-none transition-opacity duration-300" id="sidebar-overlay"></div>
-<div class="fixed inset-y-0 right-0 z-[60] flex flex-col bg-white dark:bg-slate-900/90 backdrop-blur-2xl h-full w-80 rounded-l-3xl border-l border-slate-100 dark:border-white/10 shadow-2xl translate-x-full transition-transform duration-300 sidebar-compact" id="sidebar">
-  <div class="p-6 space-y-4 text-3xl">
+<!-- Sidebar Overlay (Mobile) -->
+<div class="fixed inset-0 bg-slate-900/40 dark:bg-black/60 backdrop-blur-sm z-[55] opacity-0 pointer-events-none transition-opacity duration-300 lg:hidden" id="sidebar-overlay"></div>
+
+<!-- NavigationDrawer (Sidebar - Mobile slide, Desktop static) -->
+<div class="fixed inset-y-0 right-0 z-[60] flex flex-col bg-white dark:bg-slate-900/90 backdrop-blur-2xl h-full w-80 rounded-l-3xl border-l border-slate-100 dark:border-white/10 shadow-2xl translate-x-full lg:translate-x-0 lg:static lg:z-auto sidebar-compact" id="sidebar">
+  <div class="p-6 space-y-4">
     <div class="text-lg font-black bg-gradient-to-r from-cyan-600 to-purple-600 dark:from-cyan-400 dark:to-purple-400 bg-clip-text text-transparent">Ethereal Menu</div>
     <div class="space-y-1">
       <a class="nav-item flex items-center gap-3 p-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-lg" href="home.html">
-        <span class="material-symbols-outlined nav-icon">dashboard</span><span class="nav-text font-body font-medium">الرئيسية</span>
+        <span class="material-symbols-outlined nav-icon">dashboard</span>
+        <span class="nav-text font-body font-medium">الرئيسية</span>
       </a>
       <a class="nav-item flex items-center gap-3 p-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-lg" href="add-patient.html">
-        <span class="material-symbols-outlined nav-icon">person_add</span><span class="nav-text font-body font-medium">إضافة مريض</span>
+        <span class="material-symbols-outlined nav-icon">person_add</span>
+        <span class="nav-text font-body font-medium">إضافة مريض</span>
       </a>
       <a class="nav-item flex items-center gap-3 p-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-lg" href="archive.html">
-        <span class="material-symbols-outlined nav-icon">inventory</span><span class="nav-text font-body font-medium">أرشيف المرضى</span>
+        <span class="material-symbols-outlined nav-icon">inventory</span>
+        <span class="nav-text font-body font-medium">أرشيف المرضى</span>
       </a>
       <a class="nav-item flex items-center gap-3 p-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-lg" href="expenses.html">
-        <span class="material-symbols-outlined nav-icon">payments</span><span class="nav-text font-body font-medium">إضافة مصروف</span>
+        <span class="material-symbols-outlined nav-icon">payments</span>
+        <span class="nav-text font-body font-medium">إضافة مصروف</span>
       </a>
       <div class="nav-item flex items-center gap-3 p-2 bg-cyan-50 dark:bg-white/10 text-cyan-600 dark:text-cyan-400 border-r-4 border-cyan-600 dark:border-cyan-400 rounded-lg">
-        <span class="material-symbols-outlined nav-icon">warehouse</span><span class="nav-text font-body font-medium">الجرد والمواد</span>
+        <span class="material-symbols-outlined nav-icon">warehouse</span>
+        <span class="nav-text font-body font-medium">الجرد والمواد</span>
       </div>
       <a class="nav-item flex items-center gap-3 p-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-lg" href="add-material.html">
-        <span class="material-symbols-outlined nav-icon">add_box</span><span class="nav-text font-body font-medium">إضافة مواد</span>
+        <span class="material-symbols-outlined nav-icon">add_box</span>
+        <span class="nav-text font-body font-medium">إضافة مواد</span>
       </a>
       <a class="nav-item flex items-center gap-3 p-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-lg" href="reports.html">
-        <span class="material-symbols-outlined nav-icon">analytics</span><span class="nav-text font-body font-medium">التقارير</span>
+        <span class="material-symbols-outlined nav-icon">analytics</span>
+        <span class="nav-text font-body font-medium">التقارير</span>
       </a>
       <a class="nav-item flex items-center gap-3 p-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-lg" href="support.html">
-        <span class="material-symbols-outlined nav-icon">support_agent</span><span class="nav-text font-body font-medium">الدعم الفني</span>
+        <span class="material-symbols-outlined nav-icon">support_agent</span>
+        <span class="nav-text font-body font-medium">الدعم الفني</span>
       </a>
       <a class="nav-item flex items-center gap-3 p-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-lg" href="export-excel.html">
-        <span class="material-symbols-outlined nav-icon">table</span><span class="nav-text font-body font-medium">تصدير Excel</span>
+        <span class="material-symbols-outlined nav-icon">table</span>
+        <span class="nav-text font-body font-medium">تصدير Excel</span>
       </a>
       <div class="border-t border-slate-100 dark:border-white/10 my-2 pt-2"></div>
       <a class="nav-item flex items-center gap-3 p-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-lg" href="settings.html">
-        <span class="material-symbols-outlined nav-icon">settings</span><span class="nav-text font-body font-medium">الإعدادات</span>
+        <span class="material-symbols-outlined nav-icon">settings</span>
+        <span class="nav-text font-body font-medium">الإعدادات</span>
       </a>
       <button class="nav-item flex items-center gap-3 p-2 text-red-500 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10 transition-all rounded-lg w-full" onclick="logout()">
-        <span class="material-symbols-outlined nav-icon">logout</span><span class="nav-text font-body font-medium">تسجيل الخروج</span>
+        <span class="material-symbols-outlined nav-icon">logout</span>
+        <span class="nav-text font-body font-medium">تسجيل الخروج</span>
       </button>
     </div>
   </div>
@@ -223,12 +234,12 @@ function loadMaterials() {
   
   if (materials.length === 0) {
     listContainer.innerHTML = `
-      <div class="glass-card rounded-2xl p-8 text-center">
-        <div class="w-16 h-16 mx-auto rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center mb-4">
-          <span class="material-symbols-outlined text-3xl text-slate-400">warehouse</span>
+      <div class="glass-card rounded-2xl p-4 sm:p-6 lg:p-8 text-center">
+        <div class="w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center mb-4">
+          <span class="material-symbols-outlined text-3xl sm:text-4xl text-slate-400">warehouse</span>
         </div>
-        <p class="text-slate-500 dark:text-slate-400">لا توجد مواد في المخزون</p>
-        <a href="add-material.html" class="inline-block mt-4 text-cyan-600 dark:text-cyan-400 text-sm font-bold">إضافة مادة جديدة</a>
+        <p class="text-slate-500 dark:text-slate-400 text-sm sm:text-lg">لا توجد مواد في المخزون</p>
+        <a href="add-material.html" class="inline-block mt-4 text-cyan-600 dark:text-cyan-400 text-sm sm:text-lg font-bold hover:underline">إضافة مادة جديدة</a>
       </div>
     `;
     return;
@@ -237,23 +248,23 @@ function loadMaterials() {
   listContainer.innerHTML = materials.map(m => {
     const isLow = parseInt(m.quantity) <= parseInt(m.minQuantity);
     return `
-      <div class="glass-card rounded-xl p-4 ${isLow ? 'border-red-300 dark:border-red-500/50' : ''}">
+      <div class="glass-card rounded-xl p-4 hover:bg-white/80 dark:hover:bg-white/10 transition-all active:scale-[0.99] ${isLow ? 'border-red-300 dark:border-red-500/50' : ''}">
         <div class="flex items-center justify-between mb-2">
           <div class="flex items-center gap-3">
             <div class="w-10 h-10 rounded-full ${isLow ? 'bg-red-100 dark:bg-red-500/20 text-red-600 dark:text-red-400' : 'bg-cyan-100 dark:bg-cyan-500/20 text-cyan-600 dark:text-cyan-400'} flex items-center justify-center">
               <span class="material-symbols-outlined">inventory_2</span>
             </div>
             <div>
-              <div class="font-bold text-slate-900 dark:text-white">${m.name}</div>
-              <div class="text-xs text-slate-500 dark:text-slate-400">${m.category || 'غير مصنف'}</div>
+              <div class="font-bold text-slate-900 dark:text-white text-sm sm:text-lg">${m.name}</div>
+              <div class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">${m.category || 'غير مصنف'}</div>
             </div>
           </div>
           <div class="text-left">
-            <div class="font-bold text-slate-900 dark:text-white">${m.quantity} ${m.unit}</div>
-            <div class="text-xs text-slate-500 dark:text-slate-400">${parseFloat(m.price).toLocaleString()} د.ع</div>
+            <div class="font-bold text-slate-900 dark:text-white text-sm sm:text-lg">${m.quantity} ${m.unit}</div>
+            <div class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">${parseFloat(m.price).toLocaleString()} د.ع</div>
           </div>
         </div>
-        ${isLow ? '<div class="text-xs text-red-600 dark:text-red-400 font-bold">⚠️ مخزون منخفض</div>' : ''}
+        ${isLow ? '<div class="text-xs sm:text-sm text-red-600 dark:text-red-400 font-bold mt-1">⚠️ مخزون منخفض</div>' : ''}
       </div>
     `;
   }).join('');
@@ -266,37 +277,48 @@ function searchMaterials() {
   
   const listContainer = document.getElementById('materialsList');
   if (filtered.length === 0) {
-    listContainer.innerHTML = '<div class="glass-card rounded-2xl p-8 text-center"><p class="text-slate-500 dark:text-slate-400">لا توجد نتائج</p></div>';
+    listContainer.innerHTML = '<div class="glass-card rounded-2xl p-4 sm:p-6 lg:p-8 text-center"><p class="text-slate-500 dark:text-slate-400 text-sm sm:text-lg">لا توجد نتائج للبحث</p></div>';
     return;
   }
   
   listContainer.innerHTML = filtered.map(m => {
     const isLow = parseInt(m.quantity) <= parseInt(m.minQuantity);
     return `
-      <div class="glass-card rounded-xl p-4 ${isLow ? 'border-red-300 dark:border-red-500/50' : ''}">
+      <div class="glass-card rounded-xl p-4 hover:bg-white/80 dark:hover:bg-white/10 transition-all active:scale-[0.99] ${isLow ? 'border-red-300 dark:border-red-500/50' : ''}">
         <div class="flex items-center justify-between mb-2">
           <div class="flex items-center gap-3">
             <div class="w-10 h-10 rounded-full ${isLow ? 'bg-red-100 dark:bg-red-500/20 text-red-600 dark:text-red-400' : 'bg-cyan-100 dark:bg-cyan-500/20 text-cyan-600 dark:text-cyan-400'} flex items-center justify-center">
               <span class="material-symbols-outlined">inventory_2</span>
             </div>
             <div>
-              <div class="font-bold text-slate-900 dark:text-white">${m.name}</div>
-              <div class="text-xs text-slate-500 dark:text-slate-400">${m.category || 'غير مصنف'}</div>
+              <div class="font-bold text-slate-900 dark:text-white text-sm sm:text-lg">${m.name}</div>
+              <div class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">${m.category || 'غير مصنف'}</div>
             </div>
           </div>
           <div class="text-left">
-            <div class="font-bold text-slate-900 dark:text-white">${m.quantity} ${m.unit}</div>
-            <div class="text-xs text-slate-500 dark:text-slate-400">${parseFloat(m.price).toLocaleString()} د.ع</div>
+            <div class="font-bold text-slate-900 dark:text-white text-sm sm:text-lg">${m.quantity} ${m.unit}</div>
+            <div class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">${parseFloat(m.price).toLocaleString()} د.ع</div>
           </div>
         </div>
-        ${isLow ? '<div class="text-xs text-red-600 dark:text-red-400 font-bold">⚠️ مخزون منخفض</div>' : ''}
+        ${isLow ? '<div class="text-xs sm:text-sm text-red-600 dark:text-red-400 font-bold mt-1">⚠️ مخزون منخفض</div>' : ''}
       </div>
     `;
   }).join('');
 }
 
 function logout() {
-  if (confirm('هل تريد تسجيل الخروج؟')) alert('تم تسجيل الخروج');
+  if (confirm('هل تريد تسجيل الخروج؟')) {
+    showToast('تم تسجيل الخروج');
+    setTimeout(() => window.location.href = 'index.html', 1000);
+  }
+}
+
+function showToast(message) {
+  const toast = document.createElement('div');
+  toast.className = 'fixed bottom-24 left-1/2 -translate-x-1/2 z-[100] bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-6 py-3 rounded-full shadow-2xl text-sm font-medium';
+  toast.textContent = message;
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 2500);
 }
 
 function loadClinicSettings() {
@@ -311,4 +333,3 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
-

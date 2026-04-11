@@ -74,15 +74,15 @@
   .a5-card .signature-line { border-top: 1px solid #334155; width: 120px; margin-top: 20px; padding-top: 4px; }
 </style>
 </head>
-<body class="mesh-gradient min-h-screen pb-32 overflow-x-hidden text-slate-900 dark:text-slate-100">
+<body class="mesh-gradient min-h-screen pb-24 lg:pb-20 overflow-x-hidden text-slate-900 dark:text-slate-100">
 
 <!-- TopAppBar -->
-<header class="bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl border-b border-black/5 dark:border-white/5 shadow-sm flex justify-between items-center px-6 h-20 w-full z-50 fixed top-0 left-0 transition-colors">
+<header class="bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl border-b border-black/5 dark:border-white/5 shadow-sm flex justify-between items-center px-4 sm:px-6 lg:px-8 h-20 w-full z-50 fixed top-0 left-0 transition-colors">
   <div class="flex items-center gap-4">
-    <button class="text-slate-600 dark:text-slate-300 hover:bg-black/5 dark:hover:bg-white/5 transition-colors p-2 rounded-full" id="menu-btn">
+    <button class="text-slate-600 dark:text-slate-300 hover:bg-black/5 dark:hover:bg-white/5 transition-colors p-2 rounded-full lg:hidden" id="menu-btn">
       <span class="material-symbols-outlined">menu</span>
     </button>
-    <h1 class="text-xl font-bold bg-gradient-to-r from-cyan-600 to-purple-600 dark:from-cyan-400 dark:to-purple-400 bg-clip-text text-transparent font-headline tracking-tight" id="appTitle">The Ethereal Clinic</h1>
+    <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-cyan-600 to-purple-600 dark:from-cyan-400 dark:to-purple-400 bg-clip-text text-transparent font-headline tracking-tight" id="appTitle">The Ethereal Clinic</h1>
   </div>
   <div class="flex items-center gap-2">
     <button class="text-cyan-600 dark:text-cyan-400 p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
@@ -95,24 +95,24 @@
   </div>
 </header>
 
-<main class="px-4 pt-28 space-y-6 max-w-lg mx-auto">
+<main class="px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 space-y-6 max-w-lg lg:max-w-4xl mx-auto">
 
 <!-- Page Title -->
 <section class="space-y-1">
   <p class="text-slate-500 dark:text-secondary text-sm font-medium">سجلات المرضى</p>
-  <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white">أرشيف المرضى</h2>
+  <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white">أرشيف المرضى</h2>
 </section>
 
 <!-- Search & Filters -->
-<div class="glass-card rounded-2xl p-4 space-y-4">
+<div class="glass-card rounded-2xl p-4 sm:p-6 lg:p-8 space-y-4">
   <div class="flex items-center gap-3">
-    <span class="material-symbols-outlined text-slate-400">search</span>
-    <input class="flex-1 bg-transparent border-none outline-none text-slate-900 dark:text-white placeholder-slate-400 text-right" id="searchInput" onkeyup="searchPatients()" placeholder="البحث بالاسم أو رقم الهاتف..." type="text"/>
+    <span class="material-symbols-outlined text-slate-400 lg:text-lg">search</span>
+    <input class="flex-1 bg-transparent border-none outline-none text-slate-900 dark:text-white placeholder-slate-400 text-right text-sm lg:text-base" id="searchInput" onkeyup="searchPatients()" placeholder="البحث بالاسم أو رقم الهاتف..." type="text"/>
   </div>
   
   <div class="flex items-center gap-2 mb-2">
-    <span class="material-symbols-outlined text-cyan-600 dark:text-cyan-400 text-sm">filter_list</span>
-    <span class="text-sm font-bold text-slate-900 dark:text-white">فلترة حسب التاريخ</span>
+    <span class="material-symbols-outlined text-cyan-600 dark:text-cyan-400 text-sm lg:text-lg">filter_list</span>
+    <span class="text-sm lg:text-lg font-bold text-slate-900 dark:text-white">فلترة حسب التاريخ</span>
   </div>
   
   <div class="flex gap-2 overflow-x-auto no-scrollbar pb-1">
@@ -136,37 +136,37 @@
 </div>
 
 <!-- Stats -->
-<div class="grid grid-cols-3 gap-3">
-  <div class="glass-card rounded-xl p-3 text-center">
-    <div class="text-2xl font-black text-cyan-600 dark:text-cyan-400" id="totalCount">0</div>
-    <div class="text-[10px] text-slate-500 dark:text-slate-400">إجمالي المرضى</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-3">
+  <div class="glass-card rounded-xl p-3 sm:p-4 lg:p-5 text-center">
+    <div class="text-2xl sm:text-3xl lg:text-4xl font-black text-cyan-600 dark:text-cyan-400" id="totalCount">0</div>
+    <div class="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400">إجمالي المرضى</div>
   </div>
-  <div class="glass-card rounded-xl p-3 text-center">
-    <div class="text-2xl font-black text-purple-600 dark:text-purple-400" id="filteredCount">0</div>
-    <div class="text-[10px] text-slate-500 dark:text-slate-400">النتائج</div>
+  <div class="glass-card rounded-xl p-3 sm:p-4 lg:p-5 text-center">
+    <div class="text-2xl sm:text-3xl lg:text-4xl font-black text-purple-600 dark:text-purple-400" id="filteredCount">0</div>
+    <div class="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400">النتائج</div>
   </div>
-  <div class="glass-card rounded-xl p-3 text-center">
-    <div class="text-2xl font-black text-amber-600 dark:text-amber-400" id="renewalCount">0</div>
-    <div class="text-[10px] text-slate-500 dark:text-slate-400">يحتاجون تجديد</div>
+  <div class="glass-card rounded-xl p-3 sm:p-4 lg:p-5 text-center">
+    <div class="text-2xl sm:text-3xl lg:text-4xl font-black text-amber-600 dark:text-amber-400" id="renewalCount">0</div>
+    <div class="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400">يحتاجون تجديد</div>
   </div>
 </div>
 
 <!-- Patients List -->
-<section class="space-y-3" id="patientsList">
+<section class="space-y-3 max-h-[70vh] sm:max-h-[80vh] lg:max-h-[90vh] overflow-y-auto no-scrollbar" id="patientsList">
   <div class="glass-card rounded-2xl p-8 text-center">
-    <div class="w-16 h-16 mx-auto rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center mb-4">
-      <span class="material-symbols-outlined text-3xl text-slate-400">person_off</span>
+    <div class="w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center mb-4">
+      <span class="material-symbols-outlined text-3xl sm:text-4xl text-slate-400">person_off</span>
     </div>
-    <p class="text-slate-500 dark:text-slate-400">لا يوجد مرضى في الأرشيف</p>
+    <p class="text-slate-500 dark:text-slate-400 text-sm sm:text-lg">لا يوجد مرضى في الأرشيف</p>
   </div>
 </section>
 
 <!-- Empty State -->
 <div class="hidden glass-card rounded-2xl p-8 text-center" id="emptyState">
-  <div class="w-16 h-16 mx-auto rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center mb-4">
-    <span class="material-symbols-outlined text-3xl text-slate-400">search_off</span>
+  <div class="w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center mb-4">
+    <span class="material-symbols-outlined text-3xl sm:text-4xl text-slate-400">search_off</span>
   </div>
-  <p class="text-slate-500 dark:text-slate-400">لا توجد نتائج مطابقة للبحث</p>
+  <p class="text-slate-500 dark:text-slate-400 text-sm sm:text-lg">لا توجد نتائج مطابقة للبحث</p>
 </div>
 
 </main>
@@ -174,9 +174,9 @@
 <!-- Patient Details Modal -->
 <div class="fixed inset-0 bg-slate-900/60 dark:bg-black/80 backdrop-blur-sm z-[70] opacity-0 pointer-events-none transition-opacity duration-300" id="modal-overlay" onclick="closeModalOnOverlay(event)"></div>
 <div class="fixed inset-x-0 bottom-0 z-[80] translate-y-full transition-transform duration-300" id="patient-modal">
-  <div class="bg-white dark:bg-slate-900 rounded-t-[2rem] max-w-lg mx-auto max-h-[85vh] overflow-y-auto">
+  <div class="bg-white dark:bg-slate-900 rounded-t-[2rem] max-w-lg mx-auto max-h-[85vh] sm:max-h-[90vh] overflow-y-auto">
     <div class="sticky top-0 bg-white dark:bg-slate-900 p-6 border-b border-slate-100 dark:border-white/10 flex items-center justify-between">
-      <h3 class="text-xl font-bold text-slate-900 dark:text-white">تفاصيل المريض</h3>
+      <h3 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">تفاصيل المريض</h3>
       <button class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center" onclick="closeModal()">
         <span class="material-symbols-outlined text-slate-600 dark:text-slate-400">close</span>
       </button>
@@ -185,12 +185,12 @@
   </div>
 </div>
 
-<!-- Old Exams Modal - FIXED to show ALL exams -->
+<!-- Old Exams Modal -->
 <div class="fixed inset-0 bg-slate-900/60 dark:bg-black/80 backdrop-blur-sm z-[70] opacity-0 pointer-events-none transition-opacity duration-300" id="oldExamsOverlay" onclick="closeOldExams()"></div>
 <div class="fixed inset-x-0 bottom-0 z-[80] translate-y-full transition-transform duration-300" id="oldExamsModal">
-  <div class="bg-white dark:bg-slate-900 rounded-t-[2rem] max-w-lg mx-auto max-h-[70vh] overflow-y-auto">
+  <div class="bg-white dark:bg-slate-900 rounded-t-[2rem] max-w-lg mx-auto max-h-[70vh] sm:max-h-[80vh] lg:max-h-[90vh] overflow-y-auto">
     <div class="sticky top-0 bg-white dark:bg-slate-900 p-6 border-b border-slate-100 dark:border-white/10 flex items-center justify-between">
-      <h3 class="text-xl font-bold text-slate-900 dark:text-white">سجل الفحوصات</h3>
+      <h3 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">سجل الفحوصات</h3>
       <button class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center" onclick="closeOldExams()">
         <span class="material-symbols-outlined text-slate-600 dark:text-slate-400">close</span>
       </button>
@@ -245,8 +245,8 @@
   </div>
 </div>
 
-<!-- BottomNavBar -->
-<nav class="bg-white/80 dark:bg-slate-900/40 backdrop-blur-lg fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 pb-safe rounded-t-[2rem] border-t border-slate-200 dark:border-white/5">
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="bg-white/80 dark:bg-slate-900/40 backdrop-blur-lg fixed bottom-0 left-0 w-full z-50 lg:hidden flex justify-around items-center h-20 pb-safe rounded-t-[2rem] border-t border-slate-200 dark:border-white/5">
   <a class="flex flex-col items-center justify-center text-slate-400 py-2 hover:text-cyan-600 dark:hover:text-cyan-300 active:scale-90 transition-transform" href="home.html">
     <span class="material-symbols-outlined text-2xl">home</span>
     <span class="font-label text-xs font-medium mt-1">الرئيسية</span>
@@ -397,7 +397,7 @@
     listContainer.classList.remove('hidden');
     
     if (filtered.length === 0) {
-      listContainer.innerHTML = `<div class="glass-card rounded-2xl p-8 text-center"><div class="w-16 h-16 mx-auto rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center mb-4"><span class="material-symbols-outlined text-3xl text-slate-400">person_off</span></div><p class="text-slate-500 dark:text-slate-400">لا يوجد مرضى في الفترة المحددة</p></div>`;
+      listContainer.innerHTML = `<div class="glass-card rounded-2xl p-8 text-center"><div class="w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center mb-4"><span class="material-symbols-outlined text-3xl sm:text-4xl text-slate-400">person_off</span></div><p class="text-slate-500 dark:text-slate-400 text-sm sm:text-lg">لا يوجد مرضى في الفترة المحددة</p></div>`;
       return;
     }
     
@@ -415,16 +415,16 @@
               </div>
               <div class="text-right">
                 <div class="flex items-center gap-2">
-                  <div class="text-sm font-bold text-slate-900 dark:text-white">${patient.fullName || 'بدون اسم'}</div>
+                  <div class="text-sm lg:text-lg font-bold text-slate-900 dark:text-white">${patient.fullName || 'بدون اسم'}</div>
                   ${due ? '<span class="renewal-badge">⏰ يحتاج تجديد</span>' : ''}
                 </div>
-                <div class="text-[10px] text-slate-500 dark:text-secondary">
+                <div class="text-[10px] lg:text-sm text-slate-500 dark:text-secondary">
                   ${patient.phone || 'لا يوجد رقم'} • ${formatDate(patient.createdAt)}
                   ${!due && days > 0 ? `• باقي ${days} يوم` : ''}
                 </div>
               </div>
             </div>
-            <span class="material-symbols-outlined text-slate-400">arrow_back_ios</span>
+            <span class="material-symbols-outlined text-slate-400 lg:text-lg">arrow_back_ios</span>
           </div>
         </div>
       `;
@@ -461,11 +461,11 @@
                 ${patient.fullName ? patient.fullName.charAt(0).toUpperCase() : '?'}
               </div>
               <div class="text-right">
-                <div class="text-sm font-bold text-slate-900 dark:text-white">${patient.fullName || 'بدون اسم'}</div>
-                <div class="text-[10px] text-slate-500 dark:text-secondary">${patient.phone || 'لا يوجد رقم'} • ${formatDate(patient.createdAt)}</div>
+                <div class="text-sm lg:text-lg font-bold text-slate-900 dark:text-white">${patient.fullName || 'بدون اسم'}</div>
+                <div class="text-[10px] lg:text-sm text-slate-500 dark:text-secondary">${patient.phone || 'لا يوجد رقم'} • ${formatDate(patient.createdAt)}</div>
               </div>
             </div>
-            <span class="material-symbols-outlined text-slate-400">arrow_back_ios</span>
+            <span class="material-symbols-outlined text-slate-400 lg:text-lg">arrow_back_ios</span>
           </div>
         </div>
       `).join('');
@@ -496,7 +496,7 @@
         <div class="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-cyan-400 to-purple-500 flex items-center justify-center text-white font-bold text-2xl mb-3 shadow-lg">
           ${patient.fullName ? patient.fullName.charAt(0).toUpperCase() : '?'}
         </div>
-        <h4 class="text-xl font-bold text-slate-900 dark:text-white flex items-center justify-center gap-2">
+        <h4 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white flex items-center justify-center gap-2">
           ${patient.fullName || 'بدون اسم'}
           ${due ? '<span class="renewal-badge">⏰ يحتاج تجديد</span>' : ''}
         </h4>
@@ -527,9 +527,9 @@
             <span class="material-symbols-outlined text-purple-600 dark:text-purple-400">visibility</span>
             النظرة الطبية الحالية
           </h5>
-          <div class="grid grid-cols-2 gap-3">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div class="bg-cyan-50 dark:bg-cyan-500/10 rounded-lg p-3 border border-cyan-100 dark:border-cyan-500/20">
-              <div class="text-xs text-cyan-600 dark:text-cyan-400 mb-2 font-bold">👁️ العين اليمنى</div>
+              <div class="text-xs font-bold text-cyan-600 dark:text-cyan-400 mb-2">👁️ العين اليمنى</div>
               <div class="space-y-1 text-sm">
                 <div class="flex justify-between"><span class="text-slate-500">SPH:</span><span class="font-bold">${patient.rightEye?.sph ?? '0'}</span></div>
                 <div class="flex justify-between"><span class="text-slate-500">CYL:</span><span class="font-bold">${patient.rightEye?.cyl ?? '0'}</span></div>
@@ -538,7 +538,7 @@
               </div>
             </div>
             <div class="bg-purple-50 dark:bg-purple-500/10 rounded-lg p-3 border border-purple-100 dark:border-purple-500/20">
-              <div class="text-xs text-purple-600 dark:text-purple-400 mb-2 font-bold">👁️ العين اليسرى</div>
+              <div class="text-xs font-bold text-purple-600 dark:text-purple-400 mb-2">👁️ العين اليسرى</div>
               <div class="space-y-1 text-sm">
                 <div class="flex justify-between"><span class="text-slate-500">SPH:</span><span class="font-bold">${patient.leftEye?.sph ?? '0'}</span></div>
                 <div class="flex justify-between"><span class="text-slate-500">CYL:</span><span class="font-bold">${patient.leftEye?.cyl ?? '0'}</span></div>
@@ -612,7 +612,7 @@
     }
     
     // Sort by date (newest first)
-    allExams.sort((a, b) => new Date(b.createdAt || b.archivedAt) - new Date(a.createdAt || a.archivedAt));
+    allExams.sort((a, b) => new Date(b.createdAt || b.archivedAt) - new Date(a.createdAt || b.archivedAt));
     
     content.innerHTML = allExams.map(exam => `
       <div class="exam-history-item glass-card rounded-xl p-4">
@@ -624,11 +624,11 @@
             </div>
             <div class="text-xs text-slate-500">${formatDate(exam.createdAt || exam.archivedAt)}</div>
           </div>
-          <button class="text-cyan-600 dark:text-cyan-400 text-sm" onclick="printOldExamFromArchive(${patientId}, '${exam.createdAt || exam.archivedAt}')">
-            <span class="material-symbols-outlined text-sm">print</span> طباعة
+          <button class="text-cyan-600 dark:text-cyan-400 text-sm lg:text-base" onclick="printOldExamFromArchive(${patientId}, '${exam.createdAt || exam.archivedAt}')">
+            <span class="material-symbols-outlined text-sm lg:text-lg">print</span> طباعة
           </button>
         </div>
-        <div class="grid grid-cols-2 gap-2 text-xs">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
           <div class="bg-cyan-50 dark:bg-cyan-500/10 rounded p-2">
             <div class="font-bold text-cyan-600">يمنى</div>
             <div>SPH: ${exam.rightEye?.sph || 0}</div>
@@ -668,7 +668,17 @@
     const settings = JSON.parse(localStorage.getItem('clinicSettings') || '{}');
     const clinicName = settings.clinicName || 'عيادة الأثير للبصريات';
     
-    const message = `مرحباً ${name} 👋\n\nنود تذكيرك بأن موعد تجديد فحص النظر السنوي قد حان 🕐\n\nيسعدنا استقبالكم في ${clinicName} لإجراء الفحص الدوري والحفاظ على صحة عينيك 👁️✨\n\n📍 العنوان: ${settings.clinicAddress || ''}\n📞 للحجز: ${settings.clinicPhone || ''}\n\nمع أطيب التمنيات،\nفريق ${clinicName}`;
+    const message = `مرحباً ${name} 👋
+
+نود تذكيرك بأن موعد تجديد فحص النظر السنوي قد حان 🕐
+
+يسعدنا استقبالكم في ${clinicName} لإجراء الفحص الدوري والحفاظ على صحة عينيك 👁️✨
+
+📍 العنوان: ${settings.clinicAddress || ''}
+📞 للحجز: ${settings.clinicPhone || ''}
+
+مع أطيب التمنيات،
+فريق ${clinicName}`;
     
     window.open(`https://wa.me/${whatsappPhone}?text=${encodeURIComponent(message)}`, '_blank');
     showToast('✓ تم فتح واتساب لإرسال التذكير');
