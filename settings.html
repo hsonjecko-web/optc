@@ -23,7 +23,7 @@
   --grad-amber: linear-gradient(135deg, #f59e0b, #d97706);
   --grad-pink: linear-gradient(135deg, #ec4899, #db2777);
   
-  /* Shadows & Radius - EXACT MATCH */
+  /* Shadows & Radius */
   --shadow-card: 0 10px 25px rgba(0,0,0,0.12);
   --shadow-hover: 0 18px 40px rgba(0,0,0,0.18);
   --shadow-sm: 0 4px 12px rgba(0,0,0,0.06);
@@ -48,16 +48,15 @@ body {
   position:relative; overflow-x:hidden;
 }
 
-/* Animated Background - EXACT MATCH */
+/* Animated Background */
 body::before {
-  content:''; position:fixed; inset:0;
-  background:radial-gradient(ellipse at 20% 80%, rgba(99,102,241,0.08) 0%, transparent 50%),
-            radial-gradient(ellipse at 80% 20%, rgba(59,130,246,0.08) 0%, transparent 50%);
+   content:''; position:fixed; inset:0;
+  background:radial-gradient(ellipse at 20% 80%, rgba(6, 181, 212, 0.735) 0%, transparent 50%),
+            radial-gradient(ellipse at 80% 20%, rgba(92, 29, 141, 0.791) 0%, transparent 50%);
   pointer-events:none; z-index:-1; animation:pulse 10s ease-in-out infinite;
 }
 @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.7;} }
 
-/* Floating Particles - EXACT MATCH */
 .particle {
   position:fixed; width:4px; height:4px; border-radius:50%;
   background:rgba(99,102,241,0.4); animation:float 6s ease-in-out infinite;
@@ -69,7 +68,7 @@ body::before {
 .particle:nth-child(4){top:15%;left:70%;animation-delay:3s;background:rgba(16,185,129,0.4);}
 @keyframes float { 0%,100%{transform:translateY(0) scale(1);opacity:0.4;} 50%{transform:translateY(-20px) scale(1.3);opacity:0.7;} }
 
-/* ========== Header - EXACT MATCH ========== */
+/* ========== Header ========== */
 .header {
   position:sticky; top:0; z-index:100; background:var(--bg-surface);
   border-bottom:1px solid var(--border-light); padding:14px 18px;
@@ -90,7 +89,7 @@ body::before {
 }
 .header-btn:hover { background:var(--bg-surface-hover); }
 
-/* ========== Sidebar - EXACT MATCH ========== */
+/* ========== Sidebar ========== */
 .sidebar-overlay {
   position:fixed; inset:0; background:rgba(0,0,0,0.35); backdrop-filter:blur(3px);
   z-index:200; display:none; opacity:0; transition:opacity 0.25s;
@@ -130,7 +129,7 @@ body::before {
 /* ========== Content ========== */
 .content { padding:18px; max-width:900px; margin:0 auto; }
 
-/* ========== Settings Card - Modern Gradient Style ========== */
+/* ========== Settings Card ========== */
 .settings-card {
   background:var(--bg-surface); border:1px solid var(--border-light);
   border-radius:var(--radius-xl); padding:24px;
@@ -159,7 +158,7 @@ body::before {
 .settings-card.support h3::before { content:''; width:4px; height:18px; border-radius:2px; background:var(--grad-brand); }
 .settings-card.appearance h3::before { content:''; width:4px; height:18px; border-radius:2px; background:var(--grad-primary); }
 
-/* Form Fields - Modern Style */
+/* Form Fields */
 .form-grid { display:grid; gap:16px; }
 .form-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
 .form-group { text-align:right; }
@@ -235,12 +234,28 @@ body::before {
 }
 .template-preview {
   width:100%; aspect-ratio:3/4; border-radius:var(--radius-sm);
-  margin-bottom:8px; border:2px solid;
+  margin-bottom:8px; border:2px solid; position:relative; overflow:hidden;
 }
-.template-preview.cyan { background:linear-gradient(135deg, #e0f7fa, #b2ebf2); border-color:#06b6d4; }
-.template-preview.classic { background:linear-gradient(135deg, #fffef9, #f5f5f4); border-color:#64748b; }
-.template-preview.minimal { background:linear-gradient(135deg, #faf5ff, #f3e8ff); border-color:#8b5cf6; }
-.template-preview.medical { background:linear-gradient(135deg, #fef2f2, #fecaca); border-color:#ef4444; }
+.template-preview::after {
+  content:'A5'; position:absolute; bottom:4px; right:4px;
+  font-size:0.6rem; font-weight:700; color:var(--text-muted);
+}
+.template-preview.cyan { 
+  background:linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 50%, #80deea 100%); 
+  border-color:#06b6d4; 
+}
+.template-preview.classic { 
+  background:linear-gradient(135deg, #fffef9 0%, #f5f5f4 50%, #e7e5e4 100%); 
+  border-color:#64748b; 
+}
+.template-preview.minimal { 
+  background:linear-gradient(135deg, #faf5ff 0%, #f3e8ff 50%, #e9d5ff 100%); 
+  border-color:#8b5cf6; 
+}
+.template-preview.medical { 
+  background:linear-gradient(135deg, #fef2f2 0%, #fecaca 50%, #fca5a5 100%); 
+  border-color:#ef4444; 
+}
 .template-option .label { font-size:0.8rem; font-weight:600; color:var(--text-primary); }
 
 /* A5 Preview Container */
@@ -249,101 +264,207 @@ body::before {
   border:2px dashed var(--border-normal); border-radius:var(--radius-lg);
   padding:16px; cursor:pointer; transition:var(--transition);
   background:var(--bg-surface-hover);
+  display:flex; align-items:center; justify-content:center;
 }
 .a5-preview-container:hover { border-color:#3b82f6; background:#eff6ff; }
 
-/* A5 Card Preview (scaled down) */
-.a5-card-preview {
+/* ========== REAL A5 CARD STYLES FOR PRINTING ========== */
+.a5-card-real {
   width:148mm; height:210mm; background:white; color:#1e293b;
   padding:15mm; box-sizing:border-box; font-family:'Cairo',sans-serif;
-  border-radius:8px; margin:0 auto;
-  transform:scale(0.32); transform-origin:top center;
-  transition:transform 0.3s ease;
+  position:relative; margin:0 auto;
 }
-.a5-preview-container:hover .a5-card-preview { transform:scale(0.35); }
 
-/* A5 Card Base Styles */
-.a5-card-preview .header {
+/* Common A5 Elements */
+.a5-card-real .header {
   text-align:center; padding-bottom:12px; margin-bottom:15px;
 }
-.a5-card-preview .clinic-name {
-  font-size:18px; font-weight:800;
+.a5-card-real .clinic-name {
+  font-size:18px; font-weight:800; margin-bottom:4px;
 }
-.a5-card-preview .clinic-info {
-  font-size:10px; color:#64748b; margin-top:4px;
+.a5-card-real .clinic-info {
+  font-size:10px; color:#64748b; line-height:1.4;
 }
-.a5-card-preview .optics-icon {
+.a5-card-real .optics-icon {
   width:40px; height:40px; margin:0 auto 8px; border-radius:50%;
   display:flex; align-items:center; justify-content:center; color:#fff;
   font-size:20px;
 }
-.a5-card-preview .patient-section {
+.a5-card-real .patient-section {
   padding:10px; border-radius:8px; margin-bottom:12px;
   background:#f8fafc; border-right:3px solid;
 }
-.a5-card-preview .patient-title {
-  font-size:12px; font-weight:700; margin-bottom:6px;
+.a5-card-real .patient-title {
+  font-size:12px; font-weight:700; margin-bottom:6px; color:#334155;
 }
-.a5-card-preview .patient-row {
-  font-size:9px; display:flex; justify-content:space-between; margin:2px 0;
+.a5-card-real .patient-row {
+  font-size:9px; display:flex; justify-content:space-between; margin:2px 0; color:#475569;
 }
-.a5-card-preview .prescription-table {
+.a5-card-real .prescription-table {
   width:100%; border-collapse:collapse; font-size:9px; margin:10px 0;
 }
-.a5-card-preview .prescription-table th {
-  padding:6px 4px; border:1px solid #cbd5e1;
+.a5-card-real .prescription-table th {
+  padding:6px 4px; border:1px solid #cbd5e1; font-weight:600;
 }
-.a5-card-preview .prescription-table td {
+.a5-card-real .prescription-table td {
   padding:6px 4px; border:1px solid #cbd5e1; text-align:center;
 }
-.a5-card-preview .pd-section {
+.a5-card-real .pd-section {
   text-align:center; padding:8px; border-radius:6px;
-  margin:10px 0; font-size:10px; background:#f0fdfa;
+  margin:10px 0; font-size:10px; font-weight:600;
 }
-.a5-card-preview .footer {
+.a5-card-real .notes-section {
+  padding:10px; border-radius:8px; margin:10px 0;
+  background:#fffbeb; border-right:3px solid #f59e0b;
+}
+.a5-card-real .notes-title {
+  font-size:10px; font-weight:700; margin-bottom:4px; color:#92400e;
+}
+.a5-card-real .notes-content {
+  font-size:9px; color:#64748b; line-height:1.4;
+}
+.a5-card-real .footer {
   text-align:center; font-size:8px; color:#64748b;
-  margin-top:20px; padding-top:10px; border-top:1px dashed #cbd5e1;
+  margin-top:20px; padding-top:10px;
 }
-.a5-card-preview .signature {
-  margin-top:25px; text-align:left; font-size:10px;
+.a5-card-real .signature {
+  margin-top:25px; text-align:left;
 }
-.a5-card-preview .signature-line {
+.a5-card-real .signature-line {
   border-top:1px solid #334155; width:120px;
   margin-top:20px; padding-top:4px;
 }
+.a5-card-real .signature-text {
+  font-size:9px; color:#64748b; margin-top:4px;
+}
 
-/* Template 1: Modern Cyan */
-.template-1 .a5-card-preview { border:2px solid #06b6d4; }
-.template-1 .header { border-bottom:2px solid #06b6d4; }
-.template-1 .clinic-name { color:#06b6d4; }
-.template-1 .optics-icon { background:linear-gradient(135deg, #06b6d4, #7c3aed); }
-.template-1 .patient-section { border-color:#06b6d4; }
-.template-1 .prescription-table th { background:#06b6d4; color:white; }
+/* ========== TEMPLATE 1: MODERN CYAN (REAL) ========== */
+.template-1.a5-card-real {
+  border:2px solid #06b6d4;
+}
+.template-1 .header {
+  border-bottom:2px solid #06b6d4;
+}
+.template-1 .clinic-name {
+  color:#06b6d4;
+}
+.template-1 .optics-icon {
+  background:linear-gradient(135deg, #06b6d4, #7c3aed);
+}
+.template-1 .patient-section {
+  border-color:#06b6d4;
+}
+.template-1 .prescription-table th {
+  background:#06b6d4; color:white; border-color:#06b6d4;
+}
+.template-1 .pd-section {
+  background:#f0fdfa; color:#047857;
+}
+.template-1 .footer {
+  border-top:1px dashed #cbd5e1;
+}
 
-/* Template 2: Classic */
-.template-2 .a5-card-preview { border:3px double #1e293b; background:#fffef9; }
-.template-2 .header { border-bottom:3px double #1e293b; }
-.template-2 .clinic-name { color:#1e293b; font-family:serif; }
-.template-2 .optics-icon { background:linear-gradient(135deg, #1e293b, #475569); border:2px solid #cbd5e1; }
-.template-2 .patient-section { background:#fffef9; border-color:#1e293b; }
-.template-2 .prescription-table { border:2px solid #1e293b; }
-.template-2 .prescription-table th { background:#1e293b; color:white; }
+/* ========== TEMPLATE 2: CLASSIC ELEGANT (REAL) ========== */
+.template-2.a5-card-real {
+  border:3px double #1e293b; background:#fffef9;
+}
+.template-2 .header {
+  border-bottom:3px double #1e293b;
+}
+.template-2 .clinic-name {
+  color:#1e293b; font-family:serif;
+}
+.template-2 .optics-icon {
+  background:linear-gradient(135deg, #1e293b, #475569);
+  border:2px solid #cbd5e1;
+}
+.template-2 .patient-section {
+  background:#fffef9; border-color:#1e293b;
+}
+.template-2 .prescription-table {
+  border:2px solid #1e293b;
+}
+.template-2 .prescription-table th {
+  background:#1e293b; color:white; border-color:#1e293b;
+}
+.template-2 .pd-section {
+  background:#fffef9; border:1px solid #1e293b; color:#1e293b;
+}
+.template-2 .footer {
+  border-top:2px solid #1e293b; color:#1e293b;
+}
 
-/* Template 3: Minimal Purple */
-.template-3 .a5-card-preview { border:none; background:linear-gradient(180deg, #faf5ff 0%, white 100%); }
-.template-3 .header { border-bottom:none; }
-.template-3 .clinic-name { color:#7c3aed; }
-.template-3 .optics-icon { background:linear-gradient(135deg, #7c3aed, #a78bfa); }
-.template-3 .patient-section { background:white; border-color:#7c3aed; }
-.template-3 .prescription-table th { background:linear-gradient(135deg, #7c3aed, #a78bfa); color:white; border:none; }
+/* ========== TEMPLATE 3: MINIMAL PURPLE (REAL) ========== */
+.template-3.a5-card-real {
+  border:none; background:linear-gradient(180deg, #faf5ff 0%, white 100%);
+}
+.template-3 .header {
+  border-bottom:none;
+}
+.template-3 .clinic-name {
+  color:#7c3aed;
+}
+.template-3 .optics-icon {
+  background:linear-gradient(135deg, #7c3aed, #a78bfa);
+}
+.template-3 .patient-section {
+  background:white; border-color:#7c3aed;
+  box-shadow:0 2px 8px rgba(124,58,237,0.1);
+}
+.template-3 .prescription-table th {
+  background:linear-gradient(135deg, #7c3aed, #a78bfa); 
+  color:white; border:none;
+}
+.template-3 .prescription-table td {
+  border-color:#e9d5ff;
+}
+.template-3 .pd-section {
+  background:white; border:1px solid #e9d5ff; color:#7c3aed;
+}
+.template-3 .footer {
+  border-top:1px solid #e9d5ff; color:#7c3aed;
+}
 
-/* Template 4: Bold Medical */
-.template-4 .a5-card-preview { border:4px solid #ef4444; background:white; }
-.template-4 .header { border-bottom:4px solid #ef4444; background:#fef2f2; }
-.template-4 .clinic-name { color:#ef4444; font-size:20px; }
-.template-4 .optics-icon { background:#ef4444; width:50px; height:50px; }
-.template-4 .patient-section { background:#fef2f2; border-color:#ef4444; border-right-width:4px; }
-.template-4 .prescription-table th { background:#ef4444; color:white; }
+/* ========== TEMPLATE 4: BOLD MEDICAL (REAL) ========== */
+.template-4.a5-card-real {
+  border:4px solid #ef4444; background:white;
+}
+.template-4 .header {
+  border-bottom:4px solid #ef4444; 
+  background:#fef2f2; padding:15px; 
+  margin:-15mm -15mm 15mm -15mm; 
+  border-radius:4px 4px 0 0;
+}
+.template-4 .clinic-name {
+  color:#ef4444; font-size:20px;
+}
+.template-4 .optics-icon {
+  background:#ef4444; width:50px; height:50px;
+}
+.template-4 .patient-section {
+  background:#fef2f2; border-color:#ef4444; border-right-width:4px;
+}
+.template-4 .prescription-table th {
+  background:#ef4444; color:white; border-color:#ef4444; font-weight:700;
+}
+.template-4 .prescription-table td {
+  border-color:#fecaca; font-weight:600;
+}
+.template-4 .pd-section {
+  background:#fef2f2; border:2px solid #ef4444; color:#ef4444; font-weight:700;
+}
+.template-4 .footer {
+  border-top:3px solid #ef4444; color:#ef4444; font-weight:700;
+}
+
+/* Preview (scaled down for display) */
+.a5-card-preview {
+  transform:scale(0.32); transform-origin:top center;
+  transition:transform 0.3s ease;
+}
+.a5-preview-container:hover .a5-card-preview {
+  transform:scale(0.35);
+}
 
 /* Data Management Buttons */
 .data-btn {
@@ -380,7 +501,7 @@ body::before {
 .support-link.amber .icon { color:#f59e0b; }
 .support-link .label { font-size:0.95rem; color:var(--text-primary); }
 
-/* Toggle Switch - Modern Style */
+/* Toggle Switch */
 .toggle-switch {
   width:52px; height:30px; background:var(--border-normal);
   border-radius:100px; position:relative; cursor:pointer;
@@ -401,7 +522,7 @@ body::before {
 .toggle-switch.active .knob { right:25px; }
 [dir="ltr"] .toggle-switch.active .knob { right:auto; left:25px; }
 
-/* Save Button - Modern Gradient */
+/* Save Button */
 .btn-save {
   width:100%; padding:14px; background:var(--grad-brand); color:#fff;
   border:none; border-radius:var(--radius-md); font-family:'Cairo',sans-serif;
@@ -415,23 +536,34 @@ body::before {
 }
 .btn-save:active { transform:translateY(0) scale(0.98); }
 
+/* Test Print Button */
+.btn-test-print {
+  width:100%; padding:12px; background:var(--bg-surface-hover);
+  border:2px dashed var(--border-normal); border-radius:var(--radius-md);
+  font-family:'Cairo',sans-serif; font-size:0.9rem; font-weight:600;
+  color:var(--text-primary); cursor:pointer; transition:var(--transition);
+  display:flex; align-items:center; justify-content:center; gap:8px;
+}
+.btn-test-print:hover {
+  border-color:#3b82f6; background:#eff6ff; color:#2563eb;
+}
+
 /* ========== Full Preview Modal ========== */
 .preview-modal {
   position:fixed; inset:0; background:rgba(0,0,0,0.45);
   backdrop-filter:blur(4px); z-index:500; display:none;
   align-items:center; justify-content:center; padding:20px;
+  overflow:auto;
 }
 .preview-modal.show { display:flex; animation:fadeIn 0.2s ease; }
 @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
 
 .preview-modal .a5-card-full {
-  width:148mm; height:210mm; background:white; color:#1e293b;
-  padding:15mm; box-sizing:border-box; font-family:'Cairo',sans-serif;
-  border-radius:8px; box-shadow:0 20px 60px rgba(0,0,0,0.3);
-  transform:scale(1);
+  transform:scale(1) !important;
+  box-shadow:0 20px 60px rgba(0,0,0,0.3);
 }
 
-/* ========== Legal Modal - Modern Style ========== */
+/* ========== Legal Modal ========== */
 .legal-overlay {
   position:fixed; inset:0; background:rgba(0,0,0,0.45);
   backdrop-filter:blur(4px); z-index:500; display:none;
@@ -462,7 +594,7 @@ body::before {
 }
 .legal-close:hover { background:var(--bg-surface-hover); color:var(--text-primary); }
 
-/* ========== FAB Button - EXACT MATCH ========== */
+/* ========== FAB & Bottom Nav ========== */
 .fab {
   position:fixed; bottom:90px; left:20px; width:56px; height:56px;
   border-radius:50%; background:var(--grad-brand); color:#fff;
@@ -473,7 +605,6 @@ body::before {
 .fab:hover { transform:translateY(-3px) scale(1.05); box-shadow:0 12px 35px rgba(99,102,241,0.55); }
 .fab:active { transform:scale(0.95); }
 
-/* ========== GLOWING BOTTOM NAV - EXACT MATCH ========== */
 .bottom-nav {
   position:fixed; bottom:0; left:0; right:0; background:var(--bg-surface);
   border-top:1px solid var(--border-light); display:flex; z-index:100;
@@ -503,7 +634,7 @@ body::before {
   box-shadow:0 0 15px rgba(59,130,246,0.6), 0 0 25px rgba(139,92,246,0.3);
 }
 
-/* ========== Toast - EXACT MATCH ========== */
+/* ========== Toast ========== */
 .toast {
   position:fixed; top:85px; left:50%; transform:translateX(-50%) translateY(-100px);
   background:var(--bg-surface); border:1px solid var(--border-normal); border-right:4px solid #059669;
@@ -516,7 +647,46 @@ body::before {
 .toast.warning { border-right-color:#f59e0b; }
 .toast.info { border-right-color:#0ea5e9; }
 
-/* ========== Responsive - EXACT MATCH ========== */
+/* ========== PRINT STYLES - A5 FORMAT ========== */
+@media print {
+  @page {
+    size: A5 portrait;
+    margin: 0;
+  }
+  
+  body * {
+    visibility: hidden;
+  }
+  
+  #print-area, #print-area * {
+    visibility: visible;
+  }
+  
+  #print-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .a5-card-real {
+    transform: scale(1) !important;
+    box-shadow: none !important;
+    border: none !important;
+    width: 148mm !important;
+    height: 210mm !important;
+    page-break-after: always;
+  }
+  
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* ========== Responsive ========== */
 @media(min-width:768px) { .content{padding:22px 28px;} }
 @media(max-width:640px) {
   .form-row { grid-template-columns:1fr; }
@@ -660,6 +830,8 @@ button:focus-visible, input:focus-visible, select:focus-visible {
   <!-- Invoice Templates Card -->
   <div class="settings-card templates">
     <h3>🎨 تصاميم كارت المريض (A5)</h3>
+    <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:12px;">اختر التصميم وسيتم استخدامه عند الطباعة:</p>
+    
     <div class="template-grid">
       <div class="template-option active" id="template-1" onclick="selectTemplate('1')">
         <div class="template-preview cyan"></div>
@@ -679,7 +851,7 @@ button:focus-visible, input:focus-visible, select:focus-visible {
       </div>
     </div>
     
-    <!-- A5 Preview -->
+    <!-- A5 Preview (Clickable for full preview) -->
     <div style="margin-top:20px; text-align:center;">
       <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:12px;">🔍 اضغط للمعاينة الكاملة</p>
       <div class="a5-preview-container template-1" id="a5PreviewContainer" onclick="openFullPreview()">
@@ -708,13 +880,13 @@ button:focus-visible, input:focus-visible, select:focus-visible {
             </tbody>
           </table>
           <div class="pd-section"><strong>📏 PD:</strong> 63 mm</div>
-          <div class="patient-section">
-            <div class="patient-title">📝 ملاحظات</div>
-            <div style="font-size:9px;">عدسات مضادة للانعكاس - مراجعة سنوية</div>
+          <div class="notes-section">
+            <div class="notes-title">📝 ملاحظات</div>
+            <div class="notes-content">عدسات مضادة للانعكاس - مراجعة سنوية</div>
           </div>
           <div class="signature">
             <div class="signature-line">توقيع فاحص البصر</div>
-            <div style="margin-top:4px; font-size:9px; color:#64748b;">د. سارة البصري</div>
+            <div class="signature-text">د. سارة البصري - أخصائية بصريات</div>
           </div>
           <div class="footer">
             <div id="previewFooter">✨ عيادة الأثير للبصريات - جميع الحقوق محفوظة ✨</div>
@@ -723,6 +895,12 @@ button:focus-visible, input:focus-visible, select:focus-visible {
         </div>
       </div>
     </div>
+    
+    <!-- Test Print Button -->
+    <button class="btn-test-print" style="margin-top:16px;" onclick="testPrint()">
+      <span>🖨️</span>
+      <span>اختبار طباعة النموذج الحالي</span>
+    </button>
   </div>
 
   <!-- Data Management Card -->
@@ -733,7 +911,7 @@ button:focus-visible, input:focus-visible, select:focus-visible {
         <div class="info">
           <div class="icon">📤</div>
           <div class="text">
-            <div class="title">تصدير إلى Excel/JSON</div>
+            <div class="title">تصدير إلى JSON</div>
             <div class="desc">حفظ جميع البيانات</div>
           </div>
         </div>
@@ -743,7 +921,7 @@ button:focus-visible, input:focus-visible, select:focus-visible {
         <div class="info">
           <div class="icon">📥</div>
           <div class="text">
-            <div class="title">استيراد من Excel/JSON</div>
+            <div class="title">استيراد من JSON</div>
             <div class="desc">استعادة البيانات</div>
           </div>
         </div>
@@ -816,9 +994,16 @@ button:focus-visible, input:focus-visible, select:focus-visible {
 
 </main>
 
+<!-- Hidden Print Area - REAL A5 CARD FOR PRINTING -->
+<div id="print-area" style="display:none; position:fixed; left:-9999px; top:-9999px;">
+  <div class="a5-card-real" id="printCard">
+    <!-- Content will be populated by JavaScript -->
+  </div>
+</div>
+
 <!-- Full Preview Modal -->
 <div class="preview-modal" id="fullPreviewModal" onclick="closeFullPreview(event)">
-  <div class="a5-card-full" id="fullPreviewCard"></div>
+  <div class="a5-card-real" id="fullPreviewCard"></div>
 </div>
 
 <!-- Legal Modal -->
@@ -830,7 +1015,7 @@ button:focus-visible, input:focus-visible, select:focus-visible {
   </div>
 </div>
 
-<!-- Bottom Navigation - EXACT MATCH -->
+<!-- Bottom Navigation -->
 <nav class="bottom-nav">
   <a href="home.html" class="nav-item"><span class="nav-icon">🏠</span>الرئيسية</a>
   <a href="add-patient.html" class="nav-item"><span class="nav-icon">➕</span>مريض</a>
@@ -840,7 +1025,7 @@ button:focus-visible, input:focus-visible, select:focus-visible {
 </nav>
 
 <script>
-// ========== Theme Toggle - EXACT MATCH ==========
+// ========== Theme Toggle ==========
 function toggleTheme() {
   const html = document.documentElement;
   const btn = document.getElementById('themeBtn');
@@ -856,20 +1041,10 @@ function toggleTheme() {
 }
 
 function toggleDarkMode() {
-  const html = document.documentElement;
-  const btn = document.getElementById('themeBtn');
-  const toggle = document.getElementById('darkModeToggle');
-  const current = html.getAttribute('data-theme');
-  const next = current === 'light' ? 'dark' : 'light';
-  
-  html.setAttribute('data-theme', next);
-  btn.textContent = next === 'light' ? '🌙' : '☀️';
-  toggle.classList.toggle('active', next === 'dark');
-  localStorage.setItem('theme', next);
-  showToast(next === 'light' ? '🌞 النمط النهاري' : '🌙 النمط الليلي');
+  toggleTheme();
 }
 
-// ========== Sidebar Toggle - EXACT MATCH ==========
+// ========== Sidebar Toggle ==========
 function toggleSidebar() {
   const sb = document.getElementById('sidebar');
   const ov = document.getElementById('sidebarOverlay');
@@ -878,7 +1053,7 @@ function toggleSidebar() {
   document.body.style.overflow = sb.classList.contains('open') ? 'hidden' : '';
 }
 
-// ========== Toast Notification - EXACT MATCH ==========
+// ========== Toast Notification ==========
 function showToast(msg, type = 'success') {
   const toast = document.getElementById('toast');
   document.getElementById('toast-msg').textContent = msg;
@@ -895,26 +1070,72 @@ function selectInterval(months) {
   showToast(`⏰ تم تعيين الفترة إلى ${months} أشهر`);
 }
 
-// ========== Template Selection ==========
+// ========== Template Selection - REAL FUNCTIONALITY ==========
 function selectTemplate(num) {
+  // Update UI
   document.querySelectorAll('.template-option').forEach(opt => opt.classList.remove('active'));
   document.getElementById('template-' + num).classList.add('active');
   
+  // Update preview container classes
   const container = document.getElementById('a5PreviewContainer');
   const preview = document.getElementById('a5Preview');
-  container.className = `a5-preview-container template-${num}`;
-  preview.className = `a5-card-preview template-${num}`;
   
+  // Remove all template classes
+  container.className = 'a5-preview-container';
+  preview.className = 'a5-card-preview';
+  
+  // Add selected template class
+  container.classList.add('template-' + num);
+  preview.classList.add('template-' + num);
+  
+  // Save to localStorage
   localStorage.setItem('invoiceTemplate', num);
-  showToast(`🎨 تم اختيار التصميم ${num === '1' ? 'العصري' : num === '2' ? 'الكلاسيكي' : num === '3' ? 'المينيمال' : 'الطبي'}`);
+  
+  // Update preview content with current settings
+  updatePreviewContent();
+  
+  showToast(`🎨 تم اختيار التصميم ${getTemplateName(num)} - سيتم استخدامه عند الطباعة`);
+}
+
+function getTemplateName(num) {
+  const names = { '1': 'العصري', '2': 'الكلاسيكي', '3': 'المينيمال', '4': 'الطبي' };
+  return names[num] || 'غير معروف';
+}
+
+// ========== Update Preview Content ==========
+function updatePreviewContent() {
+  const settings = JSON.parse(localStorage.getItem('clinicSettings') || '{}');
+  
+  // Update clinic info in preview
+  document.getElementById('previewClinicName').textContent = settings.clinicName || 'عيادة الأثير للبصريات';
+  document.getElementById('previewFooter').textContent = `✨ ${settings.clinicName || 'عيادة الأثير للبصريات'} - جميع الحقوق محفوظة ✨`;
+  
+  // Build social links
+  const social = [];
+  if (settings.instagram) social.push(`🌐 instagram.com/${settings.instagram.replace('@','')}`);
+  if (settings.facebook) social.push(`📘 fb.com/${settings.facebook}`);
+  document.getElementById('previewSocial').textContent = social.join(' | ') || '🌐 instagram.com/ethereal_optics';
+  
+  // Update clinic info block
+  document.getElementById('previewClinicInfo').innerHTML = `
+    <div>📍 ${settings.clinicAddress || 'عنوان العيادة'}</div>
+    <div>📞 ${settings.clinicPhone || 'رقم الهاتف'}</div>
+    <div>📱 ${settings.instagram || '@username'}</div>
+  `;
 }
 
 // ========== Full Preview Modal ==========
 function openFullPreview() {
   const template = localStorage.getItem('invoiceTemplate') || '1';
   const fullPreview = document.getElementById('fullPreviewCard');
-  fullPreview.className = `a5-card-full template-${template}`;
+  
+  // Set template class
+  fullPreview.className = `a5-card-real template-${template}`;
+  
+  // Populate with current preview content
   fullPreview.innerHTML = document.getElementById('a5Preview').innerHTML;
+  
+  // Show modal
   document.getElementById('fullPreviewModal').classList.add('show');
 }
 
@@ -922,6 +1143,149 @@ function closeFullPreview(event) {
   if (event.target.id === 'fullPreviewModal') {
     document.getElementById('fullPreviewModal').classList.remove('show');
   }
+}
+
+// ========== TEST PRINT - REAL PRINTING FUNCTIONALITY ==========
+function testPrint() {
+  const template = localStorage.getItem('invoiceTemplate') || '1';
+  const printCard = document.getElementById('printCard');
+  
+  // Set template class
+  printCard.className = `a5-card-real template-${template}`;
+  
+  // Populate with REAL sample data for testing
+  const settings = JSON.parse(localStorage.getItem('clinicSettings') || '{}');
+  
+  printCard.innerHTML = `
+    <div class="header">
+      <div class="optics-icon">👁️</div>
+      <div class="clinic-name">${settings.clinicName || 'عيادة الأثير للبصريات'}</div>
+      <div class="clinic-info">
+        <div>📍 ${settings.clinicAddress || 'عنوان العيادة'}</div>
+        <div>📞 ${settings.clinicPhone || 'رقم الهاتف'}</div>
+        <div>📱 ${settings.instagram || '@username'}</div>
+      </div>
+    </div>
+    <div class="patient-section">
+      <div class="patient-title">👤 معلومات المريض</div>
+      <div class="patient-row"><span>الاسم:</span><span>محمد أحمد</span></div>
+      <div class="patient-row"><span>العمر:</span><span>28 سنة</span></div>
+      <div class="patient-row"><span>التاريخ:</span><span>${new Date().toLocaleDateString('ar-IQ')}</span></div>
+      <div class="patient-row"><span>الفحص القادم:</span><span>${getNextVisitDate()}</span></div>
+    </div>
+    <table class="prescription-table">
+      <thead><tr><th>العين</th><th>SPH</th><th>CYL</th><th>AXIS</th><th>ADD</th><th>VA</th></tr></thead>
+      <tbody>
+        <tr><td>👁️ يمنى</td><td>+1.25</td><td>-0.50</td><td>90°</td><td>+1.50</td><td>6/6</td></tr>
+        <tr><td>👁️ يسرى</td><td>+1.00</td><td>-0.75</td><td>85°</td><td>+1.50</td><td>6/6</td></tr>
+      </tbody>
+    </table>
+    <div class="pd-section"><strong>📏 PD:</strong> 63 mm</div>
+    <div class="notes-section">
+      <div class="notes-title">📝 ملاحظات</div>
+      <div class="notes-content">عدسات مضادة للانعكاس - مراجعة سنوية</div>
+    </div>
+    <div class="signature">
+      <div class="signature-line">توقيع فاحص البصر</div>
+      <div class="signature-text">د. سارة البصري - أخصائية بصريات</div>
+    </div>
+    <div class="footer">
+      <div>✨ ${settings.clinicName || 'عيادة الأثير للبصريات'} - جميع الحقوق محفوظة ✨</div>
+      <div style="margin-top:4px;">${getSocialLinks()}</div>
+    </div>
+  `;
+  
+  // Trigger print
+  showToast('🖨️ جاري فتح نافذة الطباعة...', 'info');
+  setTimeout(() => {
+    window.print();
+  }, 500);
+}
+
+function getNextVisitDate() {
+  const months = parseInt(localStorage.getItem('followupInterval') || '3');
+  const date = new Date();
+  date.setMonth(date.getMonth() + months);
+  return date.toLocaleDateString('ar-IQ');
+}
+
+function getSocialLinks() {
+  const settings = JSON.parse(localStorage.getItem('clinicSettings') || '{}');
+  const social = [];
+  if (settings.instagram) social.push(`🌐 instagram.com/${settings.instagram.replace('@','')}`);
+  if (settings.facebook) social.push(`📘 fb.com/${settings.facebook}`);
+  return social.join(' | ') || '🌐 instagram.com/ethereal_optics';
+}
+
+// ========== REAL PRINT FUNCTION FOR OTHER PAGES ==========
+// Call this function from add-patient.html or archive.html to print with selected template
+function printPatientCard(patientData) {
+  const template = localStorage.getItem('invoiceTemplate') || '1';
+  const settings = JSON.parse(localStorage.getItem('clinicSettings') || '{}');
+  const printCard = document.getElementById('printCard');
+  
+  // Set template class
+  printCard.className = `a5-card-real template-${template}`;
+  
+  // Populate with patient data
+  printCard.innerHTML = `
+    <div class="header">
+      <div class="optics-icon">👁️</div>
+      <div class="clinic-name">${settings.clinicName || 'عيادة الأثير للبصريات'}</div>
+      <div class="clinic-info">
+        <div>📍 ${settings.clinicAddress || 'عنوان العيادة'}</div>
+        <div>📞 ${settings.clinicPhone || 'رقم الهاتف'}</div>
+        <div>📱 ${settings.instagram || '@username'}</div>
+      </div>
+    </div>
+    <div class="patient-section">
+      <div class="patient-title">👤 معلومات المريض</div>
+      <div class="patient-row"><span>الاسم:</span><span>${patientData.fullName || '-'}</span></div>
+      <div class="patient-row"><span>العمر:</span><span>${patientData.age || '-'}</span></div>
+      <div class="patient-row"><span>التاريخ:</span><span>${new Date().toLocaleDateString('ar-IQ')}</span></div>
+      <div class="patient-row"><span>الفحص القادم:</span><span>${getNextVisitDate()}</span></div>
+    </div>
+    <table class="prescription-table">
+      <thead><tr><th>العين</th><th>SPH</th><th>CYL</th><th>AXIS</th><th>ADD</th><th>VA</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>👁️ يمنى</td>
+          <td>${patientData.rightEye?.sph || '0.00'}</td>
+          <td>${patientData.rightEye?.cyl || '0.00'}</td>
+          <td>${patientData.rightEye?.axis || '0'}°</td>
+          <td>${patientData.rightEye?.add || '+0.00'}</td>
+          <td>${patientData.rightEye?.va || '-'}</td>
+        </tr>
+        <tr>
+          <td>👁️ يسرى</td>
+          <td>${patientData.leftEye?.sph || '0.00'}</td>
+          <td>${patientData.leftEye?.cyl || '0.00'}</td>
+          <td>${patientData.leftEye?.axis || '0'}°</td>
+          <td>${patientData.leftEye?.add || '+0.00'}</td>
+          <td>${patientData.leftEye?.va || '-'}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="pd-section"><strong>📏 PD:</strong> ${patientData.pd || '0'} mm</div>
+    ${patientData.notes ? `
+    <div class="notes-section">
+      <div class="notes-title">📝 ملاحظات</div>
+      <div class="notes-content">${patientData.notes}</div>
+    </div>` : ''}
+    <div class="signature">
+      <div class="signature-line">توقيع فاحص البصر</div>
+      <div class="signature-text">د. سارة البصري - أخصائية بصريات</div>
+    </div>
+    <div class="footer">
+      <div>✨ ${settings.clinicName || 'عيادة الأثير للبصريات'} - جميع الحقوق محفوظة ✨</div>
+      <div style="margin-top:4px;">${getSocialLinks()}</div>
+    </div>
+  `;
+  
+  // Trigger print
+  setTimeout(() => {
+    window.print();
+  }, 100);
 }
 
 // ========== Legal Modal ==========
@@ -983,33 +1347,19 @@ function saveSettings() {
   localStorage.setItem('clinicSettings', JSON.stringify(settings));
   
   // Update preview
-  document.getElementById('clinic-name-header').textContent = settings.clinicName;
-  document.getElementById('previewClinicName').textContent = settings.clinicName;
-  document.getElementById('previewFooter').textContent = `✨ ${settings.clinicName} - جميع الحقوق محفوظة ✨`;
+  updatePreviewContent();
   
-  const social = [];
-  if (settings.instagram) social.push(`🌐 instagram.com/${settings.instagram.replace('@','')}`);
-  if (settings.facebook) social.push(`📘 fb.com/${settings.facebook}`);
-  document.getElementById('previewSocial').textContent = social.join(' | ') || '🌐 instagram.com/ethereal_optics';
-  
-  document.getElementById('previewClinicInfo').innerHTML = `
-    <div>📍 ${settings.clinicAddress || 'عنوان العيادة'}</div>
-    <div>📞 ${settings.clinicPhone || 'رقم الهاتف'}</div>
-    <div>📱 ${settings.instagram || '@username'}</div>
-  `;
-  
-  showToast('✅ تم حفظ الإعدادات بنجاح');
+  showToast('✅ تم حفظ الإعدادات بنجاح - التصميم المحدد: ' + getTemplateName(settings.invoiceTemplate));
 }
 
 // ========== Load Settings ==========
 function loadSettings() {
   const settings = JSON.parse(localStorage.getItem('clinicSettings') || '{}');
   
+  // Load form values
   if (settings.clinicName) {
     document.getElementById('clinicName').value = settings.clinicName;
     document.getElementById('clinic-name-header').textContent = settings.clinicName;
-    document.getElementById('previewClinicName').textContent = settings.clinicName;
-    document.getElementById('previewFooter').textContent = `✨ ${settings.clinicName} - جميع الحقوق محفوظة ✨`;
   }
   if (settings.clinicAddress) document.getElementById('clinicAddress').value = settings.clinicAddress;
   if (settings.clinicPhone) document.getElementById('clinicPhone').value = settings.clinicPhone;
@@ -1023,20 +1373,10 @@ function loadSettings() {
   
   // Load interval
   const interval = settings.followupInterval || localStorage.getItem('followupInterval') || '3';
-  document.querySelector(`input[value="${interval}"]`)?.checked = true;
   selectInterval(interval);
   
-  // Update preview social
-  const social = [];
-  if (settings.instagram) social.push(`🌐 instagram.com/${settings.instagram.replace('@','')}`);
-  if (settings.facebook) social.push(`📘 fb.com/${settings.facebook}`);
-  document.getElementById('previewSocial').textContent = social.join(' | ') || '🌐 instagram.com/ethereal_optics';
-  
-  document.getElementById('previewClinicInfo').innerHTML = `
-    <div>📍 ${settings.clinicAddress || 'عنوان العيادة'}</div>
-    <div>📞 ${settings.clinicPhone || 'رقم الهاتف'}</div>
-    <div>📱 ${settings.instagram || '@username'}</div>
-  `;
+  // Update preview
+  updatePreviewContent();
 }
 
 // ========== Export/Import Data ==========
@@ -1090,7 +1430,7 @@ function clearAllData() {
   }
 }
 
-// ========== Initialize - EXACT MATCH ==========
+// ========== Initialize ==========
 (function init() {
   // Load saved theme
   const saved = localStorage.getItem('theme') || 'light';
@@ -1115,6 +1455,7 @@ function clearAllData() {
   
   // Close modals on backdrop
   document.getElementById('legalOverlay')?.addEventListener('click', closeLegalModal);
+  document.getElementById('fullPreviewModal')?.addEventListener('click', closeFullPreview);
   
   // Close sidebar on backdrop
   document.getElementById('sidebarOverlay')?.addEventListener('click', toggleSidebar);
