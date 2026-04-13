@@ -1,335 +1,569 @@
 <!DOCTYPE html>
-<html class="dark" dir="rtl" lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>الجرد والمواد - عيادة الأثير للبصريات</title>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script>
-tailwind.config = {
-  darkMode: "class",
-  theme: {
-    extend: {
-      colors: {
-        "primary": "#00BCD4",
-        "secondary": "#64748b",
-        "surface": "#f8fafc",
-        "on-surface": "#0f172a",
-        "background": "#ffffff",
-        "surface-container": "#191f31",
-      },
-      borderRadius: {
-        "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"
-      },
-      fontFamily: {
-        "headline": ["Tajawal", "Manrope"],
-        "body": ["Tajawal", "Plus Jakarta Sans"],
-        "label": ["Tajawal", "Plus Jakarta Sans"]
-      }
-    },
-  },
-}
-</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>عيادة الأثير للبصريات - الجرد والمواد</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-body { font-family: 'Tajawal', sans-serif; transition: background-color 0.3s ease, color 0.3s ease; }
-.glass-card { backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); transition: all 0.3s ease; }
-.light .glass-card { background: rgba(255,255,255,0.7); border: 1px solid rgba(0,188,212,0.1); }
-.text-glow-white { text-shadow: 0 0 10px rgba(255,255,255,0.3); }
-.light .text-glow-white { text-shadow: 0 0 8px rgba(0,0,0,0.1); }
-.mesh-gradient { transition: background 0.5s ease; background-attachment: fixed; }
-.dark .mesh-gradient { background: linear-gradient(135deg, #0c1324 0%, #1e1b4b 50%, #312e81 100%); }
-.light .mesh-gradient { background: radial-gradient(at 0% 0%, rgba(0,188,212,0.05) 0%, transparent 50%), radial-gradient(at 100% 100%, rgba(139,92,246,0.05) 0%, transparent 50%), #f8fafc; }
-.no-scrollbar::-webkit-scrollbar { display: none; }
-.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-body { min-height: max(884px, 100dvh); }
-.sidebar-compact { width: 280px !important; }
-.sidebar-compact .nav-item { padding: 0.5rem 0.75rem !important; }
-.sidebar-compact .nav-icon { font-size: 1.25rem !important; }
-.sidebar-compact .nav-text { font-size: 0.875rem !important; }
+/* ========== Design System - EXACT SAME AS ALL PREVIOUS PAGES ========== */
+:root {
+  --bg-page: #f8fafc; --bg-surface: #ffffff; --bg-surface-hover: #f1f5f9;
+  --text-primary: #0f172a; --text-secondary: #475569; --text-muted: #94a3b8;
+  --border-light: #e2e8f0; --border-normal: #cbd5e1;
+  
+  /* Brand Gradients */
+  --grad-primary: linear-gradient(135deg, #3b82f6, #60a5fa);
+  --grad-success: linear-gradient(135deg, #10b981, #34d399);
+  --grad-warning: linear-gradient(135deg, #f59e0b, #fbbf24);
+  --grad-danger: linear-gradient(135deg, #ef4444, #f87171);
+  --grad-brand: linear-gradient(135deg, #6366f1, #8b5cf6, #3b82f6);
+  --grad-inventory: linear-gradient(135deg, #06b6d4, #0891b2);
+  
+  /* Shadows & Radius - EXACT MATCH */
+  --shadow-card: 0 10px 25px rgba(0,0,0,0.12);
+  --shadow-hover: 0 18px 40px rgba(0,0,0,0.18);
+  --shadow-sm: 0 4px 12px rgba(0,0,0,0.06);
+  --radius-sm: 10px; --radius-md: 16px; --radius-lg: 20px; --radius-xl: 24px;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="dark"] {
+  --bg-page: #0b1120; --bg-surface: #111827; --bg-surface-hover: #1f2937;
+  --text-primary: #f8fafc; --text-secondary: #94a3b8; --text-muted: #64748b;
+  --border-light: #1e293b; --border-normal: #334155;
+  --shadow-card: 0 10px 25px rgba(0,0,0,0.4);
+  --shadow-hover: 0 18px 40px rgba(0,0,0,0.55);
+  --shadow-sm: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+/* ========== Base ========== */
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family:'Cairo',sans-serif; background:var(--bg-page); color:var(--text-primary);
+  line-height:1.5; min-height:100vh; padding-bottom:80px; transition:var(--transition);
+  position:relative; overflow-x:hidden;
+}
+
+/* Animated Background - EXACT MATCH */
+body::before {
+  content:''; position:fixed; inset:0;
+  background:radial-gradient(ellipse at 20% 80%, rgba(6,182,212,0.08) 0%, transparent 50%),
+            radial-gradient(ellipse at 80% 20%, rgba(99,102,241,0.08) 0%, transparent 50%);
+  pointer-events:none; z-index:-1; animation:pulse 10s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.7;} }
+
+/* Floating Particles - EXACT MATCH */
+.particle {
+  position:fixed; width:4px; height:4px; border-radius:50%;
+  background:rgba(6,182,212,0.4); animation:float 6s ease-in-out infinite;
+  pointer-events:none; z-index:-1;
+}
+.particle:nth-child(1){top:20%;left:10%;animation-delay:0s;}
+.particle:nth-child(2){top:60%;left:85%;animation-delay:1s;background:rgba(99,102,241,0.4);}
+.particle:nth-child(3){top:80%;left:25%;animation-delay:2s;}
+.particle:nth-child(4){top:15%;left:70%;animation-delay:3s;background:rgba(16,185,129,0.4);}
+@keyframes float { 0%,100%{transform:translateY(0) scale(1);opacity:0.4;} 50%{transform:translateY(-20px) scale(1.3);opacity:0.7;} }
+
+/* ========== Header - EXACT MATCH ========== */
+.header {
+  position:sticky; top:0; z-index:100; background:var(--bg-surface);
+  border-bottom:1px solid var(--border-light); padding:14px 18px;
+  display:flex; align-items:center; justify-content:space-between; box-shadow:var(--shadow-sm);
+}
+.header-right { display:flex; align-items:center; gap:10px; }
+.menu-btn, .back-btn {
+  background:transparent; border:1px solid var(--border-normal); border-radius:var(--radius-sm);
+  padding:8px 10px; font-size:1.2rem; cursor:pointer; color:var(--text-primary); transition:var(--transition);
+}
+.menu-btn:hover, .back-btn:hover { background:var(--bg-surface-hover); border-color:#3b82f6; color:#2563eb; }
+.header-title { font-size:1.1rem; font-weight:700; display:flex; align-items:center; gap:8px; }
+.header-title::before { content:'📦'; font-size:1.2rem; }
+.header-left { display:flex; align-items:center; gap:6px; }
+.header-btn {
+  background:transparent; border:1px solid var(--border-normal); border-radius:var(--radius-sm);
+  padding:8px 10px; font-size:1.1rem; cursor:pointer; color:var(--text-primary); transition:var(--transition);
+}
+.header-btn:hover { background:var(--bg-surface-hover); }
+
+/* ========== Sidebar - EXACT MATCH ========== */
+.sidebar-overlay {
+  position:fixed; inset:0; background:rgba(0,0,0,0.35); backdrop-filter:blur(3px);
+  z-index:200; display:none; opacity:0; transition:opacity 0.25s;
+}
+.sidebar-overlay.show { display:block; opacity:1; }
+.sidebar {
+  position:fixed; top:0; right:-290px; width:280px; height:100vh;
+  background:var(--bg-surface); border-left:1px solid var(--border-light);
+  z-index:300; transition:right 0.3s ease; overflow-y:auto;
+  display:flex; flex-direction:column; box-shadow:0 0 30px rgba(0,0,0,0.2);
+}
+[dir="ltr"] .sidebar { right:auto; left:-290px; border-left:none; border-right:1px solid var(--border-light); }
+[dir="ltr"] .sidebar.open { left:0; }
+.sidebar.open { right:0; }
+.sidebar-header { padding:18px 16px; border-bottom:1px solid var(--border-light); display:flex; align-items:center; justify-content:space-between; }
+.sidebar-brand { font-size:1.1rem; font-weight:700; color:#2563eb; }
+.sidebar-close { background:transparent; border:none; font-size:1.3rem; cursor:pointer; color:var(--text-muted); padding:4px; border-radius:8px; transition:var(--transition); }
+.sidebar-close:hover { background:var(--bg-surface-hover); color:var(--text-primary); }
+.sidebar-nav { padding:10px 0; flex:1; }
+.sidebar-item {
+  display:flex; align-items:center; gap:10px; padding:11px 16px; margin:3px 10px;
+  border-radius:var(--radius-md); text-decoration:none; color:var(--text-secondary);
+  font-size:0.9rem; font-weight:500; transition:var(--transition); border:1px solid transparent;
+}
+.sidebar-item:hover { background:#eff6ff; color:#2563eb; }
+[data-theme="dark"] .sidebar-item:hover { background:rgba(59,130,246,0.15); }
+.sidebar-item.active { background:#2563eb; color:#fff; border-color:#2563eb; }
+.sidebar-item .icon { font-size:1.1rem; width:22px; text-align:center; }
+.sidebar-divider { height:1px; background:var(--border-light); margin:10px 14px; }
+.sidebar-footer { padding:12px 14px 18px; border-top:1px solid var(--border-light); margin-top:auto; }
+.sidebar-logout {
+  display:flex; align-items:center; gap:10px; padding:11px 16px; border-radius:var(--radius-md);
+  text-decoration:none; color:#ef4444; font-size:0.9rem; font-weight:500; transition:var(--transition);
+}
+.sidebar-logout:hover { background:#fef2f2; }
+
+/* ========== Content ========== */
+.content { padding:18px; max-width:1000px; margin:0 auto; }
+
+/* ========== Stats Cards - Modern Gradient Style ========== */
+.stats-grid {
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr));
+  gap:16px; margin-bottom:24px;
+}
+.stat-card {
+  position:relative; overflow:hidden;
+  background:var(--bg-surface); border:1px solid var(--border-light);
+  border-radius:var(--radius-lg); padding:18px 16px;
+  text-align:center; box-shadow:var(--shadow-card); transition:var(--transition);
+}
+.stat-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-hover); }
+.stat-card.total { border-top:4px solid var(--grad-inventory); }
+.stat-card.low { border-top:4px solid var(--grad-warning); }
+.stat-card.value { border-top:4px solid var(--grad-success); }
+
+.stat-card .value {
+  font-size:1.5rem; font-weight:800; margin-bottom:4px;
+}
+.stat-card.total .value {
+  background:linear-gradient(135deg, #06b6d4, #0891b2);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+}
+.stat-card.low .value {
+  background:linear-gradient(135deg, #f59e0b, #d97706);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+}
+.stat-card.value .value {
+  background:linear-gradient(135deg, #10b981, #059669);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+}
+.stat-card .label {
+  font-size:0.8rem; color:var(--text-secondary); font-weight:500;
+}
+
+/* ========== Search Box - Modern Style ========== */
+.search-card {
+  background:var(--bg-surface); border:1px solid var(--border-light);
+  border-radius:var(--radius-xl); padding:16px 20px;
+  box-shadow:var(--shadow-card); border-top:4px solid var(--grad-primary);
+  margin-bottom:20px;
+}
+.search-box {
+  position:relative;
+}
+.search-box input {
+  width:100%; padding:12px 14px 12px 40px;
+  border:1px solid var(--border-normal); border-radius:var(--radius-md);
+  font-family:'Cairo',sans-serif; font-size:0.9rem;
+  background:var(--bg-surface-hover); color:var(--text-primary);
+  outline:none; transition:var(--transition);
+}
+.search-box input:focus {
+  border-color:#3b82f6; box-shadow:0 0 0 3px rgba(59,130,246,0.15);
+}
+.search-box .search-icon {
+  position:absolute; right:14px; top:50%; transform:translateY(-50%);
+  font-size:1.1rem; color:var(--text-muted); pointer-events:none;
+}
+
+/* ========== Material List Cards ========== */
+.material-list { display:flex; flex-direction:column; gap:14px; }
+
+.material-card {
+  position:relative; overflow:hidden;
+  background:var(--bg-surface); border:1px solid var(--border-light);
+  border-radius:var(--radius-lg); padding:18px;
+  box-shadow:var(--shadow-card); transition:var(--transition);
+  cursor:pointer; display:flex; align-items:center; gap:16px;
+  border-left:4px solid var(--grad-inventory);
+}
+.material-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-hover); }
+.material-card:active { transform:scale(0.99); }
+.material-card.low-stock { border-left-color:var(--grad-warning); }
+
+.material-icon {
+  width:52px; height:52px; border-radius:var(--radius-md);
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.3rem; flex-shrink:0; box-shadow:0 4px 14px rgba(0,0,0,0.2);
+  background:var(--grad-inventory); color:#fff;
+}
+.material-card.low-stock .material-icon {
+  background:var(--grad-warning); color:#1f2937;
+}
+
+.material-info { flex:1; min-width:0; }
+.material-name {
+  font-size:1.05rem; font-weight:700; color:var(--text-primary);
+  margin-bottom:4px; display:flex; align-items:center; gap:6px;
+}
+.material-name::before { content:'📦'; font-size:1rem; }
+.material-category {
+  font-size:0.82rem; color:var(--text-secondary);
+}
+.material-stock {
+  font-size:1rem; font-weight:700; color:var(--text-primary);
+  white-space:nowrap;
+}
+.material-price {
+  font-size:0.9rem; color:var(--text-muted);
+}
+.low-stock-badge {
+  display:inline-flex; align-items:center; gap:4px;
+  padding:3px 10px; border-radius:100px;
+  font-size:0.7rem; font-weight:600;
+  background:var(--grad-warning); color:#1f2937;
+  margin-top:6px;
+}
+
+/* ========== FAB Button - EXACT MATCH ========== */
+.fab {
+  position:fixed; bottom:90px; left:20px; width:56px; height:56px;
+  border-radius:50%; background:var(--grad-brand); color:#fff;
+  border:none; font-size:1.8rem; cursor:pointer;
+  box-shadow:0 8px 25px rgba(99,102,241,0.4); z-index:90;
+  transition:var(--transition); display:flex; align-items:center; justify-content:center;
+}
+.fab:hover { transform:translateY(-3px) scale(1.05); box-shadow:0 12px 35px rgba(99,102,241,0.55); }
+.fab:active { transform:scale(0.95); }
+
+/* ========== GLOWING BOTTOM NAV - EXACT MATCH ========== */
+.bottom-nav {
+  position:fixed; bottom:0; left:0; right:0; background:var(--bg-surface);
+  border-top:1px solid var(--border-light); display:flex; z-index:100;
+  padding:10px 0 env(safe-area-inset-bottom, 10px); box-shadow:0 -4px 20px rgba(0,0,0,0.08);
+}
+.nav-item {
+  flex:1; display:flex; flex-direction:column; align-items:center; gap:4px;
+  text-decoration:none; color:var(--text-muted); font-size:0.72rem; font-weight:500;
+  padding:8px 4px; transition:var(--transition); position:relative; border-radius:14px; margin:0 2px;
+}
+.nav-item::before {
+  content:''; position:absolute; top:-1px; left:50%; transform:translateX(-50%);
+  width:0; height:3px; background:linear-gradient(90deg, #3b82f6, #8b5cf6);
+  border-radius:0 0 6px 6px;
+  box-shadow:0 2px 10px rgba(59,130,246,0.7), 0 0 16px rgba(139,92,246,0.5);
+  opacity:0; transition:width 0.3s ease, opacity 0.3s ease;
+}
+.nav-item:hover::before, .nav-item.active::before { width:34px; opacity:1; }
+.nav-item:hover, .nav-item.active { color:#2563eb; }
+.nav-icon { font-size:1.3rem; padding:6px; border-radius:12px; transition:var(--transition); }
+.nav-item:hover .nav-icon, .nav-item.active .nav-icon {
+  background:rgba(37,99,235,0.1); box-shadow:0 0 12px rgba(37,99,235,0.4); transform:translateY(-2px);
+}
+[data-theme="dark"] .nav-item:hover .nav-icon,
+[data-theme="dark"] .nav-item.active .nav-icon {
+  background:rgba(59,130,246,0.25);
+  box-shadow:0 0 15px rgba(59,130,246,0.6), 0 0 25px rgba(139,92,246,0.3);
+}
+
+/* ========== Toast - EXACT MATCH ========== */
+.toast {
+  position:fixed; top:85px; left:50%; transform:translateX(-50%) translateY(-100px);
+  background:var(--bg-surface); border:1px solid var(--border-normal); border-right:4px solid #059669;
+  color:var(--text-primary); padding:12px 18px; border-radius:var(--radius-md);
+  font-size:0.9rem; font-weight:500; z-index:999; transition:transform 0.35s cubic-bezier(0.4,0,0.2,1);
+  box-shadow:0 8px 25px rgba(0,0,0,0.15); display:flex; align-items:center; gap:8px;
+}
+.toast.show { transform:translateX(-50%) translateY(0); }
+.toast.error { border-right-color:#ef4444; }
+.toast.warning { border-right-color:#f59e0b; }
+.toast.info { border-right-color:#0ea5e9; }
+
+/* ========== Responsive - EXACT MATCH ========== */
+@media(min-width:768px) { .content{padding:22px 28px;} }
+@media(max-width:640px) {
+  .stats-grid { grid-template-columns:repeat(2,1fr); }
+  .header-title { font-size:1rem; }
+}
+button:focus-visible, input:focus-visible {
+  outline:2px solid #3b82f6; outline-offset:2px; border-radius:4px;
+}
 </style>
 </head>
-<body class="mesh-gradient min-h-screen pb-24 lg:pb-20 overflow-x-hidden text-slate-900 dark:text-slate-100">
+<body>
 
-<header class="bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl border-b border-black/5 dark:border-white/5 shadow-sm flex justify-between items-center px-4 sm:px-6 lg:px-8 h-20 w-full z-50 fixed top-0 left-0 lg:flex-row-reverse">
-  <div class="flex items-center gap-4">
-    <button class="text-slate-600 dark:text-slate-300 hover:bg-black/5 dark:hover:bg-white/5 transition-colors p-2 rounded-full lg:hidden" id="menu-btn">
-      <span class="material-symbols-outlined">menu</span>
-    </button>
-    <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-cyan-600 to-purple-600 dark:from-cyan-400 dark:to-purple-400 bg-clip-text text-transparent font-headline tracking-tight" id="appTitle">The Ethereal Clinic</h1>
+<!-- Floating Particles -->
+<div class="particle"></div><div class="particle"></div>
+<div class="particle"></div><div class="particle"></div>
+
+<!-- Toast Notification -->
+<div class="toast" id="toast"><span>✓</span><span id="toast-msg">جاري تحميل المخزون...</span></div>
+
+<!-- Header -->
+<header class="header">
+  <div class="header-right">
+    <button class="menu-btn" onclick="toggleSidebar()" aria-label="القائمة">☰</button>
+    <h1 class="header-title">الجرد والمواد</h1>
   </div>
-  <div class="flex items-center gap-2">
-    <button class="text-slate-600 dark:text-slate-300 p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/5 transition-colors" id="theme-toggle">
-      <span class="material-symbols-outlined dark:hidden">dark_mode</span>
-      <span class="material-symbols-outlined hidden dark:block">light_mode</span>
-    </button>
+  <div class="header-left">
+    <button class="header-btn" onclick="toggleTheme()" id="themeBtn" title="تبديل النمط">🌙</button>
+    <button class="header-btn" onclick="loadMaterials()" title="تحديث" aria-label="تحديث البيانات">🔄</button>
   </div>
 </header>
 
-<main class="px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 space-y-6 max-w-lg lg:max-w-4xl mx-auto">
-  <section class="space-y-1">
-    <p class="text-slate-500 dark:text-secondary text-sm sm:text-base font-medium">إدارة المخزون</p>
-    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white dark:text-glow-white">الجرد والمواد</h2>
-  </section>
+<!-- Sidebar Overlay -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
 
-  <!-- Stats -->
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-    <div class="glass-card rounded-xl p-3 sm:p-4 lg:p-6 text-center">
-      <div class="text-2xl sm:text-3xl lg:text-4xl font-black text-cyan-600 dark:text-cyan-400" id="totalItems">0</div>
-      <div class="text-[10px] sm:text-sm lg:text-base text-slate-500 dark:text-slate-400">إجمالي المواد</div>
+<!-- Sidebar -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">👁️ عيادة الأثير</div>
+    <button class="sidebar-close" onclick="toggleSidebar()" aria-label="إغلاق">✕</button>
+  </div>
+  <nav class="sidebar-nav">
+    <a href="home.html" class="sidebar-item"><span class="icon">🏠</span>الرئيسية</a>
+    <a href="add-patient.html" class="sidebar-item"><span class="icon">➕</span>إضافة مريض</a>
+    <a href="archive.html" class="sidebar-item"><span class="icon">📁</span>أرشيف المرضى</a>
+    <a href="expenses.html" class="sidebar-item"><span class="icon">💰</span>إضافة مصروف</a>
+    <a href="inventory.html" class="sidebar-item active"><span class="icon">📦</span>الجرد والمواد</a>
+    <a href="add-material.html" class="sidebar-item"><span class="icon">📥</span>إضافة مواد</a>
+    <a href="reports.html" class="sidebar-item"><span class="icon">📊</span>التقارير</a>
+    <a href="support.html" class="sidebar-item"><span class="icon">❓</span>الدعم الفني</a>
+    <a href="export-excel.html" class="sidebar-item"><span class="icon">📤</span>تصدير Excel</a>
+    <div class="sidebar-divider"></div>
+    <a href="settings.html" class="sidebar-item"><span class="icon">⚙️</span>الإعدادات</a>
+    <a href="logout.html" class="sidebar-item sidebar-logout"><span class="icon">🚪</span>تسجيل الخروج</a>
+  </nav>
+  <div class="sidebar-footer">
+    <a href="logout.html" class="sidebar-logout"><span class="icon">🚪</span>تسجيل الخروج</a>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="content">
+  
+  <!-- Welcome Section -->
+  <div style="margin-bottom:24px; text-align:center;">
+    <p style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:4px;">إدارة المخزون</p>
+    <h2 style="font-size:1.8rem; font-weight:800; color:var(--text-primary);">الجرد والمواد</h2>
+  </div>
+
+  <!-- Stats Cards -->
+  <div class="stats-grid">
+    <div class="stat-card total">
+      <div class="value" id="totalItems">0</div>
+      <div class="label">إجمالي المواد</div>
     </div>
-    <div class="glass-card rounded-xl p-3 sm:p-4 lg:p-6 text-center">
-      <div class="text-2xl sm:text-3xl lg:text-4xl font-black text-amber-600 dark:text-amber-400" id="lowStock">0</div>
-      <div class="text-[10px] sm:text-sm lg:text-base text-slate-500 dark:text-slate-400">مخزون منخفض</div>
+    <div class="stat-card low">
+      <div class="value" id="lowStock">0</div>
+      <div class="label">مخزون منخفض</div>
     </div>
-    <div class="glass-card rounded-xl p-3 sm:p-4 lg:p-6 text-center">
-      <div class="text-2xl sm:text-3xl lg:text-4xl font-black text-purple-600 dark:text-purple-400" id="stockValue">0</div>
-      <div class="text-[10px] sm:text-sm lg:text-base text-slate-500 dark:text-slate-400">القيمة (د.ع)</div>
+    <div class="stat-card value">
+      <div class="value" id="stockValue">0</div>
+      <div class="label">القيمة (د.ع)</div>
     </div>
   </div>
 
-  <!-- Search -->
-  <div class="glass-card rounded-2xl p-4 sm:p-6 lg:p-8">
-    <div class="flex items-center gap-3">
-      <span class="material-symbols-outlined text-slate-400 lg:text-lg">search</span>
-      <input class="flex-1 bg-transparent border-none outline-none text-slate-900 dark:text-white placeholder-slate-400 text-right text-sm lg:text-base" id="searchInput" onkeyup="searchMaterials()" placeholder="البحث في المواد..." type="text"/>
+  <!-- Search Box -->
+  <div class="search-card">
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="بحث في المواد..." oninput="searchMaterials()" aria-label="بحث">
+      <span class="search-icon">🔍</span>
     </div>
   </div>
 
   <!-- Materials List -->
-  <section class="space-y-3 max-h-[70vh] sm:max-h-[80vh] lg:max-h-[90vh] overflow-y-auto no-scrollbar" id="materialsList">
-    <div class="glass-card rounded-2xl p-8 text-center">
-      <div class="w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center mb-4">
-        <span class="material-symbols-outlined text-3xl sm:text-4xl text-slate-400">warehouse</span>
-      </div>
-      <p class="text-slate-500 dark:text-slate-400 text-sm sm:text-lg">لا توجد مواد في المخزون</p>
-      <a href="add-material.html" class="inline-block mt-4 text-cyan-600 dark:text-cyan-400 text-sm sm:text-lg font-bold hover:underline">إضافة مادة جديدة</a>
-    </div>
-  </section>
+  <div class="material-list" id="materialsList">
+    <!-- Dynamic content -->
+  </div>
+
 </main>
 
-<!-- BottomNavBar (Mobile Only) -->
-<nav class="bg-white/80 dark:bg-slate-900/40 backdrop-blur-lg fixed bottom-0 left-0 w-full z-50 lg:hidden flex justify-around items-center h-20 rounded-t-[2rem] border-t border-slate-200 dark:border-white/5">
-  <a href="home.html" class="flex flex-col items-center justify-center text-slate-400 py-2 hover:text-cyan-600 dark:hover:text-cyan-300 active:scale-90 transition-transform">
-    <span class="material-symbols-outlined text-2xl">home</span>
-    <span class="font-label text-xs font-medium mt-1">الرئيسية</span>
-  </a>
-  <a href="add-patient.html" class="flex flex-col items-center justify-center text-slate-400 py-2 hover:text-cyan-600 dark:hover:text-cyan-300 active:scale-90 transition-transform">
-    <span class="material-symbols-outlined text-2xl">person_add</span>
-    <span class="font-label text-xs font-medium mt-1">إضافة مريض</span>
-  </a>
-  <a href="archive.html" class="flex flex-col items-center justify-center text-slate-400 py-2 hover:text-cyan-600 dark:hover:text-cyan-300 active:scale-90 transition-transform">
-    <span class="material-symbols-outlined text-2xl">inventory</span>
-    <span class="font-label text-xs font-medium mt-1">الأرشيف</span>
-  </a>
-  <a href="settings.html" class="flex flex-col items-center justify-center text-slate-400 py-2 hover:text-cyan-600 dark:hover:text-cyan-300 active:scale-90 transition-transform">
-    <span class="material-symbols-outlined text-2xl">settings</span>
-    <span class="font-label text-xs font-medium mt-1">الإعدادات</span>
-  </a>
+<!-- FAB: Add Material -->
+<button class="fab" onclick="window.location.href='add-material.html'" aria-label="إضافة مادة جديدة">➕</button>
+
+<!-- Bottom Navigation - EXACT MATCH -->
+<nav class="bottom-nav">
+  <a href="home.html" class="nav-item"><span class="nav-icon">🏠</span>الرئيسية</a>
+  <a href="add-patient.html" class="nav-item"><span class="nav-icon">➕</span>مريض</a>
+  <a href="archive.html" class="nav-item"><span class="nav-icon">📁</span>الأرشيف</a>
+  <a href="expenses.html" class="nav-item"><span class="nav-icon">💰</span>المصروفات</a>
+  <a href="inventory.html" class="nav-item active" aria-current="page"><span class="nav-icon">📦</span>المخزون</a>
 </nav>
 
-<!-- Sidebar Overlay (Mobile) -->
-<div class="fixed inset-0 bg-slate-900/40 dark:bg-black/60 backdrop-blur-sm z-[55] opacity-0 pointer-events-none transition-opacity duration-300 lg:hidden" id="sidebar-overlay"></div>
-
-<!-- NavigationDrawer (Sidebar - Mobile slide, Desktop static) -->
-<div class="fixed inset-y-0 right-0 z-[60] flex flex-col bg-white dark:bg-slate-900/90 backdrop-blur-2xl h-full w-80 rounded-l-3xl border-l border-slate-100 dark:border-white/10 shadow-2xl translate-x-full lg:translate-x-0 lg:static lg:z-auto sidebar-compact" id="sidebar">
-  <div class="p-6 space-y-4">
-    <div class="text-lg font-black bg-gradient-to-r from-cyan-600 to-purple-600 dark:from-cyan-400 dark:to-purple-400 bg-clip-text text-transparent">Ethereal Menu</div>
-    <div class="space-y-1">
-      <a class="nav-item flex items-center gap-3 p-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-lg" href="home.html">
-        <span class="material-symbols-outlined nav-icon">dashboard</span>
-        <span class="nav-text font-body font-medium">الرئيسية</span>
-      </a>
-      <a class="nav-item flex items-center gap-3 p-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-lg" href="add-patient.html">
-        <span class="material-symbols-outlined nav-icon">person_add</span>
-        <span class="nav-text font-body font-medium">إضافة مريض</span>
-      </a>
-      <a class="nav-item flex items-center gap-3 p-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-lg" href="archive.html">
-        <span class="material-symbols-outlined nav-icon">inventory</span>
-        <span class="nav-text font-body font-medium">أرشيف المرضى</span>
-      </a>
-      <a class="nav-item flex items-center gap-3 p-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-lg" href="expenses.html">
-        <span class="material-symbols-outlined nav-icon">payments</span>
-        <span class="nav-text font-body font-medium">إضافة مصروف</span>
-      </a>
-      <div class="nav-item flex items-center gap-3 p-2 bg-cyan-50 dark:bg-white/10 text-cyan-600 dark:text-cyan-400 border-r-4 border-cyan-600 dark:border-cyan-400 rounded-lg">
-        <span class="material-symbols-outlined nav-icon">warehouse</span>
-        <span class="nav-text font-body font-medium">الجرد والمواد</span>
-      </div>
-      <a class="nav-item flex items-center gap-3 p-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-lg" href="add-material.html">
-        <span class="material-symbols-outlined nav-icon">add_box</span>
-        <span class="nav-text font-body font-medium">إضافة مواد</span>
-      </a>
-      <a class="nav-item flex items-center gap-3 p-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-lg" href="reports.html">
-        <span class="material-symbols-outlined nav-icon">analytics</span>
-        <span class="nav-text font-body font-medium">التقارير</span>
-      </a>
-      <a class="nav-item flex items-center gap-3 p-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-lg" href="support.html">
-        <span class="material-symbols-outlined nav-icon">support_agent</span>
-        <span class="nav-text font-body font-medium">الدعم الفني</span>
-      </a>
-      <a class="nav-item flex items-center gap-3 p-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-lg" href="export-excel.html">
-        <span class="material-symbols-outlined nav-icon">table</span>
-        <span class="nav-text font-body font-medium">تصدير Excel</span>
-      </a>
-      <div class="border-t border-slate-100 dark:border-white/10 my-2 pt-2"></div>
-      <a class="nav-item flex items-center gap-3 p-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-lg" href="settings.html">
-        <span class="material-symbols-outlined nav-icon">settings</span>
-        <span class="nav-text font-body font-medium">الإعدادات</span>
-      </a>
-      <button class="nav-item flex items-center gap-3 p-2 text-red-500 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10 transition-all rounded-lg w-full" onclick="logout()">
-        <span class="material-symbols-outlined nav-icon">logout</span>
-        <span class="nav-text font-body font-medium">تسجيل الخروج</span>
-      </button>
-    </div>
-  </div>
-</div>
-
 <script>
-function initTheme() {
-  const savedTheme = localStorage.getItem('theme') || 'dark';
-  if (savedTheme === 'dark') {
-    document.documentElement.classList.add('dark');
-    document.documentElement.classList.remove('light');
-  } else {
-    document.documentElement.classList.add('light');
-    document.documentElement.classList.remove('dark');
-  }
+// ========== Theme Toggle - EXACT MATCH ==========
+function toggleTheme() {
+  const html = document.documentElement;
+  const btn = document.getElementById('themeBtn');
+  const current = html.getAttribute('data-theme');
+  const next = current === 'light' ? 'dark' : 'light';
+  
+  html.setAttribute('data-theme', next);
+  btn.textContent = next === 'light' ? '🌙' : '☀️';
+  localStorage.setItem('theme', next);
+  showToast(next === 'light' ? '🌞 النمط النهاري' : '🌙 النمط الليلي');
 }
-initTheme();
 
-document.getElementById('theme-toggle').addEventListener('click', () => {
-  const isDark = document.documentElement.classList.toggle('dark');
-  document.documentElement.classList.toggle('light', !isDark);
-  localStorage.setItem('theme', isDark ? 'dark' : 'light');
-});
+// ========== Sidebar Toggle - EXACT MATCH ==========
+function toggleSidebar() {
+  const sb = document.getElementById('sidebar');
+  const ov = document.getElementById('sidebarOverlay');
+  sb.classList.toggle('open');
+  ov.classList.toggle('show');
+  document.body.style.overflow = sb.classList.contains('open') ? 'hidden' : '';
+}
 
-const sidebar = document.getElementById('sidebar');
-const menuBtn = document.getElementById('menu-btn');
-const overlay = document.getElementById('sidebar-overlay');
+// ========== Toast Notification - EXACT MATCH ==========
+function showToast(msg, type = 'success') {
+  const toast = document.getElementById('toast');
+  document.getElementById('toast-msg').textContent = msg;
+  toast.className = `toast ${type}`;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 3500);
+}
 
-menuBtn.addEventListener('click', () => {
-  sidebar.classList.remove('translate-x-full');
-  overlay.classList.remove('opacity-0', 'pointer-events-none');
-});
-
-overlay.addEventListener('click', () => {
-  sidebar.classList.add('translate-x-full');
-  overlay.classList.add('opacity-0', 'pointer-events-none');
-});
-
+// ========== Load Materials - WITH ENGLISH NUMBERS ==========
 function loadMaterials() {
   const materials = JSON.parse(localStorage.getItem('materials') || '[]');
   
-  document.getElementById('totalItems').textContent = materials.length;
+  // Stats with ENGLISH NUMBER FORMAT
+  document.getElementById('totalItems').textContent = materials.length.toLocaleString('en-US');
   
-  const lowStock = materials.filter(m => parseInt(m.quantity) <= parseInt(m.minQuantity));
-  document.getElementById('lowStock').textContent = lowStock.length;
+  const lowStock = materials.filter(m => parseInt(m.quantity) <= parseInt(m.minQuantity || 5));
+  document.getElementById('lowStock').textContent = lowStock.length.toLocaleString('en-US');
   
   const totalValue = materials.reduce((sum, m) => sum + (parseFloat(m.price) * parseInt(m.quantity)), 0);
-  document.getElementById('stockValue').textContent = totalValue.toLocaleString();
+  document.getElementById('stockValue').textContent = totalValue.toLocaleString('en-US');
   
   const listContainer = document.getElementById('materialsList');
   
   if (materials.length === 0) {
-    listContainer.innerHTML = `
-      <div class="glass-card rounded-2xl p-4 sm:p-6 lg:p-8 text-center">
-        <div class="w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center mb-4">
-          <span class="material-symbols-outlined text-3xl sm:text-4xl text-slate-400">warehouse</span>
-        </div>
-        <p class="text-slate-500 dark:text-slate-400 text-sm sm:text-lg">لا توجد مواد في المخزون</p>
-        <a href="add-material.html" class="inline-block mt-4 text-cyan-600 dark:text-cyan-400 text-sm sm:text-lg font-bold hover:underline">إضافة مادة جديدة</a>
-      </div>
-    `;
+    listContainer.innerHTML = `<div style="text-align:center; padding:40px; color:var(--text-muted)">
+      <div style="font-size:3rem; margin-bottom:12px">📦</div>
+      <p>لا توجد مواد في المخزون</p>
+      <a href="add-material.html" style="display:inline-block; margin-top:12px; color:#3b82f6; font-weight:600; text-decoration:none;">إضافة مادة جديدة ←</a>
+    </div>`;
     return;
   }
   
+  // Sort by quantity (low stock first)
+  materials.sort((a, b) => {
+    const aLow = parseInt(a.quantity) <= parseInt(a.minQuantity || 5);
+    const bLow = parseInt(b.quantity) <= parseInt(b.minQuantity || 5);
+    if (aLow && !bLow) return -1;
+    if (!aLow && bLow) return 1;
+    return b.quantity - a.quantity;
+  });
+  
   listContainer.innerHTML = materials.map(m => {
-    const isLow = parseInt(m.quantity) <= parseInt(m.minQuantity);
+    const isLow = parseInt(m.quantity) <= parseInt(m.minQuantity || 5);
+    const initials = m.name ? m.name.charAt(0).toUpperCase() : '?';
+    
     return `
-      <div class="glass-card rounded-xl p-4 hover:bg-white/80 dark:hover:bg-white/10 transition-all active:scale-[0.99] ${isLow ? 'border-red-300 dark:border-red-500/50' : ''}">
-        <div class="flex items-center justify-between mb-2">
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full ${isLow ? 'bg-red-100 dark:bg-red-500/20 text-red-600 dark:text-red-400' : 'bg-cyan-100 dark:bg-cyan-500/20 text-cyan-600 dark:text-cyan-400'} flex items-center justify-center">
-              <span class="material-symbols-outlined">inventory_2</span>
-            </div>
-            <div>
-              <div class="font-bold text-slate-900 dark:text-white text-sm sm:text-lg">${m.name}</div>
-              <div class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">${m.category || 'غير مصنف'}</div>
-            </div>
-          </div>
-          <div class="text-left">
-            <div class="font-bold text-slate-900 dark:text-white text-sm sm:text-lg">${m.quantity} ${m.unit}</div>
-            <div class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">${parseFloat(m.price).toLocaleString()} د.ع</div>
-          </div>
-        </div>
-        ${isLow ? '<div class="text-xs sm:text-sm text-red-600 dark:text-red-400 font-bold mt-1">⚠️ مخزون منخفض</div>' : ''}
+    <div class="material-card ${isLow ? 'low-stock' : ''}">
+      <div class="material-icon">${initials}</div>
+      <div class="material-info">
+        <div class="material-name">${m.name || 'بدون اسم'}</div>
+        <div class="material-category">${m.category || 'غير مصنف'} • ${m.unit || 'قطعة'}</div>
+        ${isLow ? `<div class="low-stock-badge">⚠️ مخزون منخفض</div>` : ''}
       </div>
+      <div style="text-align:left;">
+        <div class="material-stock">${parseInt(m.quantity).toLocaleString('en-US')} ${m.unit || ''}</div>
+        <div class="material-price">${parseFloat(m.price).toLocaleString('en-US')} د.ع</div>
+      </div>
+    </div>
     `;
   }).join('');
 }
 
+// ========== Search Materials ==========
 function searchMaterials() {
-  const query = document.getElementById('searchInput').value.toLowerCase();
+  const query = document.getElementById('searchInput').value.toLowerCase().trim();
   const materials = JSON.parse(localStorage.getItem('materials') || '[]');
-  const filtered = materials.filter(m => m.name.toLowerCase().includes(query) || (m.category && m.category.toLowerCase().includes(query)));
-  
   const listContainer = document.getElementById('materialsList');
+  
+  if (!query) { loadMaterials(); return; }
+  
+  const filtered = materials.filter(m => 
+    (m.name && m.name.toLowerCase().includes(query)) ||
+    (m.category && m.category.toLowerCase().includes(query))
+  );
+  
   if (filtered.length === 0) {
-    listContainer.innerHTML = '<div class="glass-card rounded-2xl p-4 sm:p-6 lg:p-8 text-center"><p class="text-slate-500 dark:text-slate-400 text-sm sm:text-lg">لا توجد نتائج للبحث</p></div>';
+    listContainer.innerHTML = `<div style="text-align:center; padding:40px; color:var(--text-muted)">
+      <div style="font-size:3rem; margin-bottom:12px">🔍</div>
+      <p>لا توجد نتائج لـ "${query}"</p>
+    </div>`;
     return;
   }
   
   listContainer.innerHTML = filtered.map(m => {
-    const isLow = parseInt(m.quantity) <= parseInt(m.minQuantity);
+    const isLow = parseInt(m.quantity) <= parseInt(m.minQuantity || 5);
+    const initials = m.name ? m.name.charAt(0).toUpperCase() : '?';
+    
     return `
-      <div class="glass-card rounded-xl p-4 hover:bg-white/80 dark:hover:bg-white/10 transition-all active:scale-[0.99] ${isLow ? 'border-red-300 dark:border-red-500/50' : ''}">
-        <div class="flex items-center justify-between mb-2">
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full ${isLow ? 'bg-red-100 dark:bg-red-500/20 text-red-600 dark:text-red-400' : 'bg-cyan-100 dark:bg-cyan-500/20 text-cyan-600 dark:text-cyan-400'} flex items-center justify-center">
-              <span class="material-symbols-outlined">inventory_2</span>
-            </div>
-            <div>
-              <div class="font-bold text-slate-900 dark:text-white text-sm sm:text-lg">${m.name}</div>
-              <div class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">${m.category || 'غير مصنف'}</div>
-            </div>
-          </div>
-          <div class="text-left">
-            <div class="font-bold text-slate-900 dark:text-white text-sm sm:text-lg">${m.quantity} ${m.unit}</div>
-            <div class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">${parseFloat(m.price).toLocaleString()} د.ع</div>
-          </div>
-        </div>
-        ${isLow ? '<div class="text-xs sm:text-sm text-red-600 dark:text-red-400 font-bold mt-1">⚠️ مخزون منخفض</div>' : ''}
+    <div class="material-card ${isLow ? 'low-stock' : ''}">
+      <div class="material-icon">${initials}</div>
+      <div class="material-info">
+        <div class="material-name">${m.name || 'بدون اسم'}</div>
+        <div class="material-category">${m.category || 'غير مصنف'} • ${m.unit || 'قطعة'}</div>
+        ${isLow ? `<div class="low-stock-badge">⚠️ مخزون منخفض</div>` : ''}
       </div>
+      <div style="text-align:left;">
+        <div class="material-stock">${parseInt(m.quantity).toLocaleString('en-US')} ${m.unit || ''}</div>
+        <div class="material-price">${parseFloat(m.price).toLocaleString('en-US')} د.ع</div>
+      </div>
+    </div>
     `;
   }).join('');
 }
 
-function logout() {
-  if (confirm('هل تريد تسجيل الخروج؟')) {
-    showToast('تم تسجيل الخروج');
-    setTimeout(() => window.location.href = 'index.html', 1000);
+// ========== Initialize - EXACT MATCH ==========
+(function init() {
+  // Load saved theme
+  const saved = localStorage.getItem('theme') || 'light';
+  document.documentElement.setAttribute('data-theme', saved);
+  document.getElementById('themeBtn').textContent = saved === 'light' ? '🌙' : '☀️';
+  
+  // Seed mock data if empty
+  if (!localStorage.getItem('materials')) {
+    const mockMaterials = [
+      {id:'m1',name:'عدسات لاصقة يومية',category:'عدسات',unit:'علبة',quantity:45,minQuantity:20,price:15000},
+      {id:'m2',name:'إطارات نظارات طبية',category:'إطارات',unit:'قطعة',quantity:8,minQuantity:10,price:85000},
+      {id:'m3',name:'محلول تنظيف العدسات',category:'مستلزمات',unit:'عبوة',quantity:120,minQuantity:30,price:3500},
+      {id:'m4',name:'أقمشة تنظيف',category:'مستلزمات',unit:'حبة',quantity:3,minQuantity:15,price:1200}
+    ];
+    localStorage.setItem('materials', JSON.stringify(mockMaterials));
   }
-}
-
-function showToast(message) {
-  const toast = document.createElement('div');
-  toast.className = 'fixed bottom-24 left-1/2 -translate-x-1/2 z-[100] bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-6 py-3 rounded-full shadow-2xl text-sm font-medium';
-  toast.textContent = message;
-  document.body.appendChild(toast);
-  setTimeout(() => toast.remove(), 2500);
-}
-
-function loadClinicSettings() {
-  const settings = JSON.parse(localStorage.getItem('clinicSettings') || '{}');
-  if (settings.clinicName) document.getElementById('appTitle').textContent = settings.clinicName;
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  loadClinicSettings();
+  
+  // Load materials
   loadMaterials();
-});
+  
+  // Welcome toast
+  setTimeout(() => showToast('📦 المخزون جاهز'), 600);
+  
+  // Keyboard support
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && document.getElementById('sidebar')?.classList.contains('open')) {
+      toggleSidebar();
+    }
+  });
+  
+  // Close sidebar on backdrop
+  document.getElementById('sidebarOverlay')?.addEventListener('click', toggleSidebar);
+})();
 </script>
 </body>
 </html>
