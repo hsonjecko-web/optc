@@ -6,34 +6,44 @@
 <title>عيادة الأثير للبصريات - أرشيف المرضى</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-/* ========== Design System - EXACT SAME AS ALL PREVIOUS PAGES ========== */
+/* ========== The Sovereign Ledger - Premium Design System ========== */
 :root {
-  --bg-page: #f8fafc; --bg-surface: #ffffff; --bg-surface-hover: #f1f5f9;
-  --text-primary: #0f172a; --text-secondary: #475569; --text-muted: #94a3b8;
-  --border-light: #e2e8f0; --border-normal: #cbd5e1;
+  --bg-page: #f8fafc;
+  --bg-surface: #ffffff;
+  --bg-surface-hover: #f1f5f9;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  --border-light: #e2e8f0;
+  --border-normal: #cbd5e1;
   
-  /* Brand Gradients */
-  --grad-primary: linear-gradient(135deg, #3b82f6, #60a5fa);
-  --grad-success: linear-gradient(135deg, #10b981, #34d399);
-  --grad-warning: linear-gradient(135deg, #f59e0b, #fbbf24);
-  --grad-danger: linear-gradient(135deg, #ef4444, #f87171);
-  --grad-brand: linear-gradient(135deg, #6366f1, #8b5cf6, #3b82f6);
-  --grad-cyan: linear-gradient(135deg, #06b6d4, #0891b2);
+  /* ألوان التدرج المميزة */
+  --grad-cyan: linear-gradient(135deg, #06b5d4, #0891b2);
   --grad-purple: linear-gradient(135deg, #8b5cf6, #7c3aed);
-  --grad-amber: linear-gradient(135deg, #f59e0b, #d97706);
+  --grad-gold: linear-gradient(135deg, #eab308, #ca8a04);
+  --grad-red: linear-gradient(135deg, #ef4444, #dc2626);
+  --grad-green: linear-gradient(135deg, #10b981, #059669);
+  --grad-brand: linear-gradient(135deg, #6366f1, #8b5cf6, #3b82f6);
   
-  /* Shadows & Radius - EXACT MATCH */
   --shadow-card: 0 10px 25px rgba(0,0,0,0.12);
   --shadow-hover: 0 18px 40px rgba(0,0,0,0.18);
   --shadow-sm: 0 4px 12px rgba(0,0,0,0.06);
-  --radius-sm: 10px; --radius-md: 16px; --radius-lg: 20px; --radius-xl: 24px;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 20px;
+  --radius-xl: 24px;
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 [data-theme="dark"] {
-  --bg-page: #0b1120; --bg-surface: #111827; --bg-surface-hover: #1f2937;
-  --text-primary: #f8fafc; --text-secondary: #94a3b8; --text-muted: #64748b;
-  --border-light: #1e293b; --border-normal: #334155;
+  --bg-page: #0b1120;
+  --bg-surface: #111827;
+  --bg-surface-hover: #1f2937;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --border-light: #1e293b;
+  --border-normal: #334155;
   --shadow-card: 0 10px 25px rgba(0,0,0,0.4);
   --shadow-hover: 0 18px 40px rgba(0,0,0,0.55);
   --shadow-sm: 0 4px 12px rgba(0,0,0,0.3);
@@ -42,272 +52,717 @@
 /* ========== Base ========== */
 * { margin:0; padding:0; box-sizing:border-box; }
 body {
-  font-family:'Cairo',sans-serif; background:var(--bg-page); color:var(--text-primary);
-  line-height:1.5; min-height:100vh; padding-bottom:80px; transition:var(--transition);
-  position:relative; overflow-x:hidden;
+  font-family:'Cairo',sans-serif;
+  background:var(--bg-page);
+  color:var(--text-primary);
+  line-height:1.5;
+  min-height:100vh;
+  padding-bottom:80px;
+  transition:var(--transition);
+  position:relative;
+  overflow-x:hidden;
 }
 
-/* Animated Background - EXACT MATCH */
+/* خلفية متدرجة ناعمة */
 body::before {
-  content:''; position:fixed; inset:0;
-  background:radial-gradient(ellipse at 20% 80%, rgba(6,182,212,0.08) 0%, transparent 50%),
+  content:'';
+  position:fixed;
+  inset:0;
+  background:radial-gradient(ellipse at 20% 80%, rgba(6,181,212,0.08) 0%, transparent 50%),
             radial-gradient(ellipse at 80% 20%, rgba(99,102,241,0.08) 0%, transparent 50%);
-  pointer-events:none; z-index:-1; animation:pulse 10s ease-in-out infinite;
+  pointer-events:none;
+  z-index:-1;
 }
-@keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.7;} }
 
-/* Floating Particles - EXACT MATCH */
+/* جزيئات خلفية متحركة */
 .particle {
-  position:fixed; width:4px; height:4px; border-radius:50%;
-  background:rgba(6,182,212,0.4); animation:float 6s ease-in-out infinite;
-  pointer-events:none; z-index:-1;
+  position:fixed;
+  width:4px;
+  height:4px;
+  border-radius:50%;
+  background:rgba(6,182,212,0.4);
+  animation:float 6s ease-in-out infinite;
+  pointer-events:none;
+  z-index:-1;
 }
 .particle:nth-child(1){top:20%;left:10%;animation-delay:0s;}
 .particle:nth-child(2){top:60%;left:85%;animation-delay:1s;background:rgba(99,102,241,0.4);}
 .particle:nth-child(3){top:80%;left:25%;animation-delay:2s;}
 .particle:nth-child(4){top:15%;left:70%;animation-delay:3s;background:rgba(16,185,129,0.4);}
-@keyframes float { 0%,100%{transform:translateY(0) scale(1);opacity:0.4;} 50%{transform:translateY(-20px) scale(1.3);opacity:0.7;} }
+@keyframes float {
+  0%,100%{transform:translateY(0) scale(1);opacity:0.4;}
+  50%{transform:translateY(-20px) scale(1.3);opacity:0.7;}
+}
 
-/* ========== Header - EXACT MATCH ========== */
+/* ========== Header ========== */
 .header {
-  position:sticky; top:0; z-index:100; background:var(--bg-surface);
-  border-bottom:1px solid var(--border-light); padding:14px 18px;
-  display:flex; align-items:center; justify-content:space-between; box-shadow:var(--shadow-sm);
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:var(--bg-surface);
+  border-bottom:1px solid var(--border-light);
+  padding:14px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  box-shadow:var(--shadow-sm);
 }
 .header-right { display:flex; align-items:center; gap:10px; }
 .menu-btn, .back-btn {
-  background:transparent; border:1px solid var(--border-normal); border-radius:var(--radius-sm);
-  padding:8px 10px; font-size:1.2rem; cursor:pointer; color:var(--text-primary); transition:var(--transition);
+  background:transparent;
+  border:1px solid var(--border-normal);
+  border-radius:var(--radius-sm);
+  padding:8px 10px;
+  font-size:1.2rem;
+  cursor:pointer;
+  color:var(--text-primary);
+  transition:var(--transition);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:40px;
+  height:40px;
 }
-.menu-btn:hover, .back-btn:hover { background:var(--bg-surface-hover); border-color:#3b82f6; color:#2563eb; }
-.header-title { font-size:1.1rem; font-weight:700; display:flex; align-items:center; gap:8px; }
+.menu-btn:hover, .back-btn:hover {
+  background:var(--bg-surface-hover);
+  border-color:#3b82f6;
+  color:#2563eb;
+}
+.header-title {
+  font-size:1.1rem;
+  font-weight:700;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:var(--text-primary);
+}
 .header-title::before { content:'📁'; font-size:1.2rem; }
 .header-left { display:flex; align-items:center; gap:6px; }
 .header-btn {
-  background:transparent; border:1px solid var(--border-normal); border-radius:var(--radius-sm);
-  padding:8px 10px; font-size:1.1rem; cursor:pointer; color:var(--text-primary); transition:var(--transition);
+  background:transparent;
+  border:1px solid var(--border-normal);
+  border-radius:var(--radius-sm);
+  padding:8px 10px;
+  font-size:1.1rem;
+  cursor:pointer;
+  color:var(--text-primary);
+  transition:var(--transition);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:40px;
+  height:40px;
 }
-.header-btn:hover { background:var(--bg-surface-hover); }
+.header-btn:hover {
+  background:var(--bg-surface-hover);
+  border-color:#3b82f6;
+  color:#2563eb;
+}
 
-/* ========== Sidebar - EXACT MATCH ========== */
+/* ========== Sidebar ========== */
 .sidebar-overlay {
-  position:fixed; inset:0; background:rgba(0,0,0,0.35); backdrop-filter:blur(3px);
-  z-index:200; display:none; opacity:0; transition:opacity 0.25s;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.35);
+  backdrop-filter:blur(3px);
+  z-index:200;
+  display:none;
+  opacity:0;
+  transition:opacity 0.25s;
 }
 .sidebar-overlay.show { display:block; opacity:1; }
 .sidebar {
-  position:fixed; top:0; right:-290px; width:280px; height:100vh;
-  background:var(--bg-surface); border-left:1px solid var(--border-light);
-  z-index:300; transition:right 0.3s ease; overflow-y:auto;
-  display:flex; flex-direction:column; box-shadow:0 0 30px rgba(0,0,0,0.2);
+  position:fixed;
+  top:0;
+  right:-290px;
+  width:280px;
+  height:100vh;
+  background:var(--bg-surface);
+  border-left:1px solid var(--border-light);
+  z-index:300;
+  transition:right 0.3s ease;
+  overflow-y:auto;
+  display:flex;
+  flex-direction:column;
+  box-shadow:0 0 30px rgba(0,0,0,0.2);
 }
 [dir="ltr"] .sidebar { right:auto; left:-290px; border-left:none; border-right:1px solid var(--border-light); }
 [dir="ltr"] .sidebar.open { left:0; }
 .sidebar.open { right:0; }
-.sidebar-header { padding:18px 16px; border-bottom:1px solid var(--border-light); display:flex; align-items:center; justify-content:space-between; }
-.sidebar-brand { font-size:1.1rem; font-weight:700; color:#2563eb; }
-.sidebar-close { background:transparent; border:none; font-size:1.3rem; cursor:pointer; color:var(--text-muted); padding:4px; border-radius:8px; transition:var(--transition); }
-.sidebar-close:hover { background:var(--bg-surface-hover); color:var(--text-primary); }
+.sidebar-header {
+  padding:18px 16px;
+  border-bottom:1px solid var(--border-light);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.sidebar-brand {
+  font-size:1.1rem;
+  font-weight:700;
+  color:#2563eb;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.sidebar-close {
+  background:transparent;
+  border:none;
+  font-size:1.3rem;
+  cursor:pointer;
+  color:var(--text-muted);
+  padding:4px;
+  border-radius:8px;
+  transition:var(--transition);
+  width:36px;
+  height:36px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.sidebar-close:hover {
+  background:var(--bg-surface-hover);
+  color:var(--text-primary);
+}
 .sidebar-nav { padding:10px 0; flex:1; }
 .sidebar-item {
-  display:flex; align-items:center; gap:10px; padding:11px 16px; margin:3px 10px;
-  border-radius:var(--radius-md); text-decoration:none; color:var(--text-secondary);
-  font-size:0.9rem; font-weight:500; transition:var(--transition); border:1px solid transparent;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:11px 16px;
+  margin:3px 10px;
+  border-radius:var(--radius-md);
+  text-decoration:none;
+  color:var(--text-secondary);
+  font-size:0.9rem;
+  font-weight:500;
+  transition:var(--transition);
+  border:1px solid transparent;
 }
-.sidebar-item:hover { background:#eff6ff; color:#2563eb; }
-[data-theme="dark"] .sidebar-item:hover { background:rgba(59,130,246,0.15); }
-.sidebar-item.active { background:#2563eb; color:#fff; border-color:#2563eb; }
-.sidebar-item .icon { font-size:1.1rem; width:22px; text-align:center; }
-.sidebar-divider { height:1px; background:var(--border-light); margin:10px 14px; }
-.sidebar-footer { padding:12px 14px 18px; border-top:1px solid var(--border-light); margin-top:auto; }
+.sidebar-item:hover {
+  background:#eff6ff;
+  color:#2563eb;
+}
+[data-theme="dark"] .sidebar-item:hover {
+  background:rgba(59,130,246,0.15);
+}
+.sidebar-item.active {
+  background:#2563eb;
+  color:#fff;
+  border-color:#2563eb;
+}
+.sidebar-item .icon {
+  font-size:1.1rem;
+  width:22px;
+  text-align:center;
+}
+.sidebar-divider {
+  height:1px;
+  background:var(--border-light);
+  margin:10px 14px;
+}
+.sidebar-footer {
+  padding:12px 14px 18px;
+  border-top:1px solid var(--border-light);
+  margin-top:auto;
+}
 .sidebar-logout {
-  display:flex; align-items:center; gap:10px; padding:11px 16px; border-radius:var(--radius-md);
-  text-decoration:none; color:#ef4444; font-size:0.9rem; font-weight:500; transition:var(--transition);
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:11px 16px;
+  border-radius:var(--radius-md);
+  text-decoration:none;
+  color:#ef4444;
+  font-size:0.9rem;
+  font-weight:500;
+  transition:var(--transition);
 }
 .sidebar-logout:hover { background:#fef2f2; }
+[data-theme="dark"] .sidebar-logout:hover { background:rgba(239,68,68,0.1); }
 
 /* ========== Content ========== */
-.content { padding:18px; max-width:1000px; margin:0 auto; }
-
-/* ========== Search & Filter Bar ========== */
-.filter-card {
-  background:var(--bg-surface); border:1px solid var(--border-light);
-  border-radius:var(--radius-xl); padding:20px;
-  box-shadow:var(--shadow-card); border-top:4px solid var(--grad-primary);
-  margin-bottom:20px;
+.content {
+  padding:18px;
+  max-width:1000px;
+  margin:0 auto;
 }
+
+/* ========== Bulk Actions Bar - جديد للواتساب ========== */
+.bulk-actions-bar {
+  display:none;
+  align-items:center;
+  justify-content:space-between;
+  background:var(--bg-surface);
+  border:1px solid var(--border-light);
+  border-radius:var(--radius-md);
+  padding:12px 16px;
+  margin-bottom:16px;
+  box-shadow:var(--shadow-sm);
+  animation:fadeIn 0.3s ease;
+}
+.bulk-actions-bar.show { display:flex; }
+.bulk-actions-left {
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.bulk-actions-left span {
+  font-size:0.9rem;
+  font-weight:600;
+  color:var(--text-primary);
+}
+.bulk-actions-right {
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.bulk-btn {
+  padding:8px 16px;
+  border:1px solid var(--border-normal);
+  border-radius:var(--radius-sm);
+  background:var(--bg-surface);
+  color:var(--text-secondary);
+  font-family:'Cairo',sans-serif;
+  font-size:0.85rem;
+  font-weight:600;
+  cursor:pointer;
+  transition:var(--transition);
+}
+.bulk-btn:hover {
+  border-color:#3b82f6;
+  color:#2563eb;
+  background:#eff6ff;
+}
+.whatsapp-bulk-btn {
+  background:#25D366 !important;
+  color:#fff !important;
+  border:none !important;
+  padding:10px 20px !important;
+  border-radius:var(--radius-md) !important;
+  font-weight:600 !important;
+  display:flex !important;
+  align-items:center !important;
+  gap:8px !important;
+  box-shadow:0 4px 14px rgba(37,211,102,0.35) !important;
+  transition:var(--transition) !important;
+}
+.whatsapp-bulk-btn:hover {
+  filter:brightness(1.05) !important;
+  box-shadow:0 6px 20px rgba(37,211,102,0.5) !important;
+  transform:translateY(-2px) !important;
+}
+
+/* ========== Filter Card ========== */
+.filter-card {
+  background:var(--bg-surface);
+  border:1px solid var(--border-light);
+  border-radius:var(--radius-xl);
+  padding:20px;
+  box-shadow:var(--shadow-card);
+  border-top:4px solid var(--grad-brand);
+  margin-bottom:20px;
+  position:relative;
+  overflow:hidden;
+}
+.filter-card::before {
+  content:'';
+  position:absolute;
+  top:-30%;
+  right:-20%;
+  width:80px;
+  height:80px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.2);
+  filter:blur(10px);
+  transition:var(--transition);
+}
+.filter-card:hover::before { transform:scale(1.3); }
+
 .filter-card h3 {
-  font-size:1rem; font-weight:700; margin-bottom:16px;
-  display:flex; align-items:center; gap:8px; color:var(--text-primary);
+  font-size:1rem;
+  font-weight:700;
+  margin-bottom:16px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:var(--text-primary);
 }
 .filter-card h3::before {
-  content:''; width:4px; height:18px; border-radius:2px;
-  background:var(--grad-primary);
+  content:'';
+  width:4px;
+  height:18px;
+  border-radius:2px;
+  background:var(--grad-brand);
 }
 .search-box {
-  position:relative; margin-bottom:16px;
+  position:relative;
+  margin-bottom:16px;
 }
 .search-box input {
-  width:100%; padding:12px 14px 12px 40px;
-  border:1px solid var(--border-normal); border-radius:var(--radius-md);
-  font-family:'Cairo',sans-serif; font-size:0.9rem;
-  background:var(--bg-surface-hover); color:var(--text-primary);
-  outline:none; transition:var(--transition);
+  width:100%;
+  padding:12px 14px 12px 40px;
+  border:1px solid var(--border-normal);
+  border-radius:var(--radius-md);
+  font-family:'Cairo',sans-serif;
+  font-size:0.9rem;
+  background:var(--bg-surface-hover);
+  color:var(--text-primary);
+  outline:none;
+  transition:var(--transition);
 }
 .search-box input:focus {
-  border-color:#3b82f6; box-shadow:0 0 0 3px rgba(59,130,246,0.15);
+  border-color:#3b82f6;
+  box-shadow:0 0 0 3px rgba(59,130,246,0.15);
 }
 .search-box .search-icon {
-  position:absolute; right:14px; top:50%; transform:translateY(-50%);
-  font-size:1.1rem; color:var(--text-muted); pointer-events:none;
+  position:absolute;
+  right:14px;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:1.1rem;
+  color:var(--text-muted);
+  pointer-events:none;
 }
 .filter-pills {
-  display:flex; gap:8px; margin-bottom:16px; overflow-x:auto;
-  padding-bottom:4px; scrollbar-width:none; flex-wrap:wrap;
+  display:flex;
+  gap:8px;
+  margin-bottom:16px;
+  overflow-x:auto;
+  padding-bottom:4px;
+  scrollbar-width:none;
+  flex-wrap:wrap;
 }
 .filter-pills::-webkit-scrollbar { display:none; }
 .filter-btn {
-  padding:8px 16px; border:1px solid var(--border-normal);
-  border-radius:100px; background:var(--bg-surface);
-  color:var(--text-secondary); font-family:'Cairo',sans-serif;
-  font-size:0.85rem; font-weight:600; cursor:pointer;
-  white-space:nowrap; transition:var(--transition);
+  padding:8px 16px;
+  border:1px solid var(--border-normal);
+  border-radius:100px;
+  background:var(--bg-surface);
+  color:var(--text-secondary);
+  font-family:'Cairo',sans-serif;
+  font-size:0.85rem;
+  font-weight:600;
+  cursor:pointer;
+  white-space:nowrap;
+  transition:var(--transition);
 }
-.filter-btn:hover { border-color:#3b82f6; color:#2563eb; background:#eff6ff; }
+.filter-btn:hover {
+  border-color:#3b82f6;
+  color:#2563eb;
+  background:#eff6ff;
+}
 .filter-btn.active {
-  background:var(--grad-primary); color:#fff; border-color:transparent;
-  box-shadow:0 4px 14px rgba(59,130,246,0.35);
+  background:var(--grad-brand);
+  color:#fff;
+  border-color:transparent;
+  box-shadow:0 4px 14px rgba(99,102,241,0.35);
 }
 .filter-btn.renewal {
-  background:var(--grad-warning); color:#1f2937; border-color:transparent;
+  background:var(--grad-gold);
+  color:#1f2937;
+  border-color:transparent;
 }
 .date-range {
-  display:grid; grid-template-columns:1fr 1fr; gap:12px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
 }
 .date-range input {
-  padding:10px 12px; border:1px solid var(--border-normal);
-  border-radius:var(--radius-sm); font-family:'Cairo',sans-serif;
-  font-size:0.85rem; background:var(--bg-surface-hover);
-  color:var(--text-primary); outline:none; transition:var(--transition);
+  padding:10px 12px;
+  border:1px solid var(--border-normal);
+  border-radius:var(--radius-sm);
+  font-family:'Cairo',sans-serif;
+  font-size:0.85rem;
+  background:var(--bg-surface-hover);
+  color:var(--text-primary);
+  outline:none;
+  transition:var(--transition);
 }
 
-/* ========== Stats Cards - Modern Gradient Style ========== */
+/* ========== Stats Cards ========== */
 .stats-grid {
-  display:grid; grid-template-columns:repeat(auto-fit, minmax(120px, 1fr));
-  gap:14px; margin-bottom:24px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(120px, 1fr));
+  gap:14px;
+  margin-bottom:24px;
 }
 .stat-card {
-  position:relative; overflow:hidden;
-  background:var(--bg-surface); border:1px solid var(--border-light);
-  border-radius:var(--radius-lg); padding:18px 16px;
-  text-align:center; box-shadow:var(--shadow-card); transition:var(--transition);
+  position:relative;
+  overflow:hidden;
+  background:var(--bg-surface);
+  border:1px solid var(--border-light);
+  border-radius:var(--radius-lg);
+  padding:18px 16px;
+  text-align:center;
+  box-shadow:var(--shadow-card);
+  transition:var(--transition);
 }
-.stat-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-hover); }
+.stat-card:hover {
+  transform:translateY(-4px);
+  box-shadow:var(--shadow-hover);
+}
+.stat-card::before {
+  content:'';
+  position:absolute;
+  top:-30%;
+  right:-20%;
+  width:80px;
+  height:80px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.2);
+  filter:blur(10px);
+  transition:var(--transition);
+}
+.stat-card:hover::before { transform:scale(1.3); }
+
 .stat-card.total { border-top:4px solid var(--grad-cyan); }
+.stat-card.total .value {
+  background:var(--grad-cyan);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
 .stat-card.filtered { border-top:4px solid var(--grad-purple); }
-.stat-card.renewal { border-top:4px solid var(--grad-amber); }
+.stat-card.filtered .value {
+  background:var(--grad-purple);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.stat-card.renewal { border-top:4px solid var(--grad-gold); }
+.stat-card.renewal .value {
+  background:var(--grad-gold);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
 
 .stat-card .value {
-  font-size:1.5rem; font-weight:800; margin-bottom:4px;
-}
-.stat-card.total .value {
-  background:linear-gradient(135deg, #06b6d4, #0891b2);
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-}
-.stat-card.filtered .value {
-  background:linear-gradient(135deg, #8b5cf6, #7c3aed);
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-}
-.stat-card.renewal .value {
-  background:linear-gradient(135deg, #f59e0b, #d97706);
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  font-size:1.5rem;
+  font-weight:800;
+  margin-bottom:4px;
 }
 .stat-card .label {
-  font-size:0.8rem; color:var(--text-secondary); font-weight:500;
+  font-size:0.8rem;
+  color:var(--text-secondary);
+  font-weight:500;
 }
 
 /* ========== Patient List Cards ========== */
-.patient-list { display:flex; flex-direction:column; gap:14px; }
+.patient-list {
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
 
 .patient-card {
-  position:relative; overflow:hidden;
-  background:var(--bg-surface); border:1px solid var(--border-light);
-  border-radius:var(--radius-lg); padding:18px;
-  box-shadow:var(--shadow-card); transition:var(--transition);
-  cursor:pointer; display:flex; align-items:center; gap:16px;
-  border-left:4px solid var(--grad-cyan);
+  position:relative;
+  overflow:hidden;
+  background:var(--bg-surface);
+  border:1px solid var(--border-light);
+  border-radius:var(--radius-lg);
+  padding:18px 18px 18px 50px;
+  box-shadow:var(--shadow-card);
+  transition:var(--transition);
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:16px;
+  border-right:4px solid var(--grad-cyan);
 }
-.patient-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-hover); }
+.patient-card::before {
+  content:'';
+  position:absolute;
+  top:-30%;
+  right:-20%;
+  width:80px;
+  height:80px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.2);
+  filter:blur(10px);
+  transition:var(--transition);
+}
+.patient-card:hover {
+  transform:translateY(-4px);
+  box-shadow:var(--shadow-hover);
+}
+.patient-card:hover::before { transform:scale(1.3); }
 .patient-card:active { transform:scale(0.99); }
-.patient-card.due-renewal { border-left-color:var(--grad-amber); }
+.patient-card.due-renewal { border-right-color:var(--grad-gold); }
+
+/* Checkbox for bulk selection */
+.patient-checkbox {
+  position:absolute;
+  right:16px;
+  top:50%;
+  transform:translateY(-50%);
+  width:20px;
+  height:20px;
+  cursor:pointer;
+  accent-color:#2563eb;
+  z-index:2;
+}
+
+/* WhatsApp button on hover */
+.whatsapp-btn {
+  position:absolute;
+  left:16px;
+  top:50%;
+  transform:translateY(-50%);
+  background:#25D366;
+  color:#fff;
+  border:none;
+  border-radius:50%;
+  width:36px;
+  height:36px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.2rem;
+  opacity:0;
+  transition:opacity 0.2s, transform 0.2s;
+  cursor:pointer;
+  box-shadow:0 4px 14px rgba(37,211,102,0.35);
+  z-index:2;
+}
+.patient-card:hover .whatsapp-btn { opacity:1; transform:translateY(-50%) scale(1.05); }
+.whatsapp-btn:hover { filter:brightness(1.05); }
+.whatsapp-btn:active { transform:translateY(-50%) scale(0.95); }
 
 .patient-avatar {
-  width:52px; height:52px; border-radius:50%;
-  display:flex; align-items:center; justify-content:center;
-  font-size:1.3rem; font-weight:700; color:#fff; flex-shrink:0;
+  width:52px;
+  height:52px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.3rem;
+  font-weight:700;
+  color:#fff;
+  flex-shrink:0;
   box-shadow:0 4px 14px rgba(0,0,0,0.2);
   background:var(--grad-cyan);
 }
-.patient-card.due-renewal .patient-avatar { background:var(--grad-amber); color:#1f2937; }
+.patient-card.due-renewal .patient-avatar {
+  background:var(--grad-gold);
+  color:#1f2937;
+}
 
 .patient-info { flex:1; min-width:0; }
 .patient-name {
-  font-size:1.05rem; font-weight:700; color:var(--text-primary);
-  margin-bottom:4px; display:flex; align-items:center; gap:6px;
+  font-size:1.05rem;
+  font-weight:700;
+  color:var(--text-primary);
+  margin-bottom:4px;
+  display:flex;
+  align-items:center;
+  gap:6px;
 }
 .patient-name::before { content:'👤'; font-size:1rem; }
 .patient-meta {
-  font-size:0.82rem; color:var(--text-secondary);
-  display:flex; align-items:center; gap:4px; flex-wrap:wrap;
+  font-size:0.82rem;
+  color:var(--text-secondary);
+  display:flex;
+  align-items:center;
+  gap:4px;
+  flex-wrap:wrap;
 }
 .renewal-badge {
-  display:inline-flex; align-items:center; gap:4px;
-  padding:3px 10px; border-radius:100px;
-  font-size:0.7rem; font-weight:600;
-  background:var(--grad-amber); color:#1f2937;
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  padding:3px 10px;
+  border-radius:100px;
+  font-size:0.7rem;
+  font-weight:600;
+  background:var(--grad-gold);
+  color:#1f2937;
 }
 
-/* ========== Modal - Modern Style ========== */
+/* ========== Modal ========== */
 .modal-overlay {
-  position:fixed; inset:0; background:rgba(0,0,0,0.45);
-  backdrop-filter:blur(4px); z-index:500; display:none;
-  align-items:flex-end; justify-content:center;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.45);
+  backdrop-filter:blur(4px);
+  z-index:500;
+  display:none;
+  align-items:flex-end;
+  justify-content:center;
 }
 .modal-overlay.show { display:flex; animation:fadeIn 0.2s ease; }
 @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
 
 .modal {
-  background:var(--bg-surface); border-radius:var(--radius-lg) var(--radius-lg) 0 0;
-  padding:22px; width:100%; max-width:520px; max-height:88vh; overflow-y:auto;
-  box-shadow:0 -10px 40px rgba(0,0,0,0.25); animation:slideUp 0.3s ease;
+  background:var(--bg-surface);
+  border-radius:var(--radius-lg) var(--radius-lg) 0 0;
+  padding:22px;
+  width:100%;
+  max-width:520px;
+  max-height:88vh;
+  overflow-y:auto;
+  box-shadow:0 -10px 40px rgba(0,0,0,0.25);
+  animation:slideUp 0.3s ease;
+  position:relative;
 }
 @keyframes slideUp { from{transform:translateY(100%);} to{transform:translateY(0);} }
 
 .modal-header {
-  display:flex; justify-content:space-between; align-items:center;
-  padding-bottom:16px; border-bottom:1px solid var(--border-light);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding-bottom:16px;
+  border-bottom:1px solid var(--border-light);
   margin-bottom:18px;
 }
-.modal-title { font-size:1.15rem; font-weight:700; color:var(--text-primary); }
-.modal-close {
-  background:transparent; border:none; font-size:1.3rem;
-  cursor:pointer; color:var(--text-muted); padding:4px;
-  border-radius:var(--radius-sm); transition:var(--transition);
+.modal-title {
+  font-size:1.15rem;
+  font-weight:700;
+  color:var(--text-primary);
 }
-.modal-close:hover { background:var(--bg-surface-hover); color:var(--text-primary); }
+.modal-close {
+  background:transparent;
+  border:none;
+  font-size:1.3rem;
+  cursor:pointer;
+  color:var(--text-muted);
+  padding:4px;
+  border-radius:var(--radius-sm);
+  transition:var(--transition);
+  width:36px;
+  height:36px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.modal-close:hover {
+  background:var(--bg-surface-hover);
+  color:var(--text-primary);
+}
 
 /* Patient Detail Sections */
 .detail-section {
-  background:var(--bg-surface-hover); border:1px solid var(--border-light);
-  border-radius:var(--radius-md); padding:16px; margin-bottom:14px;
+  background:var(--bg-surface-hover);
+  border:1px solid var(--border-light);
+  border-radius:var(--radius-md);
+  padding:16px;
+  margin-bottom:14px;
 }
 .detail-section h4 {
-  font-size:0.95rem; font-weight:600; margin-bottom:12px;
-  display:flex; align-items:center; gap:6px; color:var(--text-primary);
+  font-size:0.95rem;
+  font-weight:600;
+  margin-bottom:12px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  color:var(--text-primary);
 }
 .detail-row {
-  display:flex; justify-content:space-between; align-items:center;
-  padding:6px 0; border-bottom:1px dashed var(--border-light);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:6px 0;
+  border-bottom:1px dashed var(--border-light);
   font-size:0.9rem;
 }
 .detail-row:last-child { border-bottom:none; }
@@ -316,9 +771,27 @@ body::before {
 
 /* Eye Prescription Cards */
 .eye-card {
-  border-radius:var(--radius-md); padding:14px; margin-bottom:12px;
+  border-radius:var(--radius-md);
+  padding:14px;
+  margin-bottom:12px;
   border:1px solid var(--border-light);
+  position:relative;
+  overflow:hidden;
 }
+.eye-card::before {
+  content:'';
+  position:absolute;
+  top:-20%;
+  right:-15%;
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.15);
+  filter:blur(8px);
+  transition:var(--transition);
+}
+.eye-card:hover::before { transform:scale(1.2); }
+
 .eye-card.right {
   background:linear-gradient(135deg, rgba(6,182,212,0.08), rgba(8,145,178,0.05));
   border-left:4px solid var(--grad-cyan);
@@ -328,102 +801,239 @@ body::before {
   border-left:4px solid var(--grad-purple);
 }
 .eye-title {
-  font-size:0.9rem; font-weight:600; margin-bottom:10px;
-  display:flex; align-items:center; gap:6px;
+  font-size:0.9rem;
+  font-weight:600;
+  margin-bottom:10px;
+  display:flex;
+  align-items:center;
+  gap:6px;
 }
 .eye-title.right { color:#06b6d4; }
 .eye-title.left { color:#8b5cf6; }
 .eye-values {
-  display:grid; grid-template-columns:1fr 1fr; gap:8px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
   font-size:0.85rem;
 }
 .eye-values .item {
-  display:flex; justify-content:space-between; padding:4px 0;
+  display:flex;
+  justify-content:space-between;
+  padding:4px 0;
 }
 .eye-values .item .label { color:var(--text-muted); }
 .eye-values .item .value { font-weight:600; }
 
 /* Exam History Items */
-.exam-history-list { display:flex; flex-direction:column; gap:10px; }
+.exam-history-list {
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
 .exam-item {
-  background:var(--bg-surface-hover); border:1px solid var(--border-light);
-  border-radius:var(--radius-md); padding:14px;
+  background:var(--bg-surface-hover);
+  border:1px solid var(--border-light);
+  border-radius:var(--radius-md);
+  padding:14px;
   transition:var(--transition);
 }
-.exam-item:hover { border-color:#3b82f6; background:#eff6ff; }
-.exam-item-header {
-  display:flex; justify-content:space-between; align-items:center;
-  margin-bottom:10px; padding-bottom:8px; border-bottom:1px solid var(--border-light);
+.exam-item:hover {
+  border-color:#3b82f6;
+  background:#eff6ff;
 }
-.exam-item-title { font-size:0.9rem; font-weight:600; color:var(--text-primary); }
-.exam-item-date { font-size:0.8rem; color:var(--text-muted); }
+.exam-item-header {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:10px;
+  padding-bottom:8px;
+  border-bottom:1px solid var(--border-light);
+}
+.exam-item-title {
+  font-size:0.9rem;
+  font-weight:600;
+  color:var(--text-primary);
+}
+.exam-item-date {
+  font-size:0.8rem;
+  color:var(--text-muted);
+}
 .exam-item-current {
-  background:var(--grad-success); color:#fff;
-  padding:2px 8px; border-radius:100px; font-size:0.7rem; font-weight:600;
+  background:var(--grad-green);
+  color:#fff;
+  padding:2px 8px;
+  border-radius:100px;
+  font-size:0.7rem;
+  font-weight:600;
 }
 
 /* Action Buttons */
 .action-grid {
-  display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-top:20px;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+  margin-top:20px;
 }
 .action-btn {
-  padding:14px; border:none; border-radius:var(--radius-md);
-  font-family:'Cairo',sans-serif; font-size:0.95rem; font-weight:700;
-  cursor:pointer; transition:var(--transition);
-  display:flex; align-items:center; justify-content:center; gap:8px;
+  padding:14px;
+  border:none;
+  border-radius:var(--radius-md);
+  font-family:'Cairo',sans-serif;
+  font-size:0.95rem;
+  font-weight:700;
+  cursor:pointer;
+  transition:var(--transition);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  position:relative;
+  overflow:hidden;
 }
+.action-btn::before {
+  content:'';
+  position:absolute;
+  top:0;
+  left:-100%;
+  width:100%;
+  height:100%;
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+  transition:left 0.5s ease;
+}
+.action-btn:hover::before { left:100%; }
+
 .action-btn.print {
-  background:var(--grad-cyan); color:#fff;
+  background:var(--grad-cyan);
+  color:#fff;
   box-shadow:0 6px 18px rgba(6,182,212,0.35);
 }
-.action-btn.print:hover { filter:brightness(1.05); box-shadow:0 8px 24px rgba(6,182,212,0.5); transform:translateY(-2px); }
+.action-btn.print:hover {
+  filter:brightness(1.05);
+  box-shadow:0 8px 24px rgba(6,182,212,0.5);
+  transform:translateY(-2px);
+}
 .action-btn.delete {
-  background:#fef2f2; color:#dc2626;
+  background:#fef2f2;
+  color:#ef4444;
   border:1px solid #fecaca;
 }
-.action-btn.delete:hover { background:#fee2e2; border-color:#ef4444; }
+.action-btn.delete:hover {
+  background:#fee2e2;
+  border-color:#ef4444;
+}
 .action-btn.whatsapp {
-  background:var(--grad-success); color:#fff;
-  box-shadow:0 6px 18px rgba(16,185,129,0.35);
-  width:100%; margin-bottom:16px;
+  background:#25D366;
+  color:#fff;
+  box-shadow:0 6px 18px rgba(37,211,102,0.35);
+  width:100%;
+  margin-bottom:16px;
 }
-.action-btn.whatsapp:hover { filter:brightness(1.05); box-shadow:0 8px 24px rgba(16,185,129,0.5); transform:translateY(-2px); }
+.action-btn.whatsapp:hover {
+  filter:brightness(1.05);
+  box-shadow:0 8px 24px rgba(37,211,102,0.5);
+  transform:translateY(-2px);
+}
 .action-btn:active { transform:translateY(0) scale(0.98); }
-
-/* ========== FAB Button - EXACT MATCH ========== */
-.fab {
-  position:fixed; bottom:90px; left:20px; width:56px; height:56px;
-  border-radius:50%; background:var(--grad-brand); color:#fff;
-  border:none; font-size:1.8rem; cursor:pointer;
-  box-shadow:0 8px 25px rgba(99,102,241,0.4); z-index:90;
-  transition:var(--transition); display:flex; align-items:center; justify-content:center;
+.action-btn.view {
+  background:var(--bg-surface-hover);
+  color:var(--text-primary);
+  border:1px solid var(--border-normal);
 }
-.fab:hover { transform:translateY(-3px) scale(1.05); box-shadow:0 12px 35px rgba(99,102,241,0.55); }
+.action-btn.view:hover {
+  border-color:#3b82f6;
+  background:#eff6ff;
+  transform:translateY(-2px);
+}
+
+/* ========== FAB Button ========== */
+.fab {
+  position:fixed;
+  bottom:90px;
+  left:20px;
+  width:56px;
+  height:56px;
+  border-radius:50%;
+  background:var(--grad-brand);
+  color:#fff;
+  border:none;
+  font-size:1.8rem;
+  cursor:pointer;
+  box-shadow:0 8px 25px rgba(99,102,241,0.4);
+  z-index:90;
+  transition:var(--transition);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.fab:hover {
+  transform:translateY(-3px) scale(1.05);
+  box-shadow:0 12px 35px rgba(99,102,241,0.55);
+}
 .fab:active { transform:scale(0.95); }
 
-/* ========== GLOWING BOTTOM NAV - EXACT MATCH ========== */
+/* ========== GLOWING BOTTOM NAV ========== */
 .bottom-nav {
-  position:fixed; bottom:0; left:0; right:0; background:var(--bg-surface);
-  border-top:1px solid var(--border-light); display:flex; z-index:100;
-  padding:10px 0 env(safe-area-inset-bottom, 10px); box-shadow:0 -4px 20px rgba(0,0,0,0.08);
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:var(--bg-surface);
+  border-top:1px solid var(--border-light);
+  display:flex;
+  z-index:100;
+  padding:10px 0 env(safe-area-inset-bottom, 10px);
+  box-shadow:0 -4px 20px rgba(0,0,0,0.098);
 }
 .nav-item {
-  flex:1; display:flex; flex-direction:column; align-items:center; gap:4px;
-  text-decoration:none; color:var(--text-muted); font-size:0.72rem; font-weight:500;
-  padding:8px 4px; transition:var(--transition); position:relative; border-radius:14px; margin:0 2px;
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:4px;
+  text-decoration:none;
+  color:var(--text-muted);
+  font-size:0.72rem;
+  font-weight:500;
+  padding:8px 4px;
+  transition:var(--transition);
+  position:relative;
+  border-radius:14px;
+  margin:0 2px;
 }
 .nav-item::before {
-  content:''; position:absolute; top:-1px; left:50%; transform:translateX(-50%);
-  width:0; height:3px; background:linear-gradient(90deg, #3b82f6, #8b5cf6);
+  content:'';
+  position:absolute;
+  top:-1px;
+  left:50%;
+  transform:translateX(-50%);
+  width:0;
+  height:3px;
+  background:linear-gradient(90deg, #3b82f6, #8b5cf6);
   border-radius:0 0 6px 6px;
   box-shadow:0 2px 10px rgba(59,130,246,0.7), 0 0 16px rgba(139,92,246,0.5);
-  opacity:0; transition:width 0.3s ease, opacity 0.3s ease;
+  opacity:0;
+  transition:width 0.3s ease, opacity 0.3s ease;
 }
-.nav-item:hover::before, .nav-item.active::before { width:34px; opacity:1; }
-.nav-item:hover, .nav-item.active { color:#2563eb; }
-.nav-icon { font-size:1.3rem; padding:6px; border-radius:12px; transition:var(--transition); }
-.nav-item:hover .nav-icon, .nav-item.active .nav-icon {
-  background:rgba(37,99,235,0.1); box-shadow:0 0 12px rgba(37,99,235,0.4); transform:translateY(-2px);
+.nav-item:hover::before,
+.nav-item.active::before {
+  width:34px;
+  opacity:1;
+}
+.nav-item:hover,
+.nav-item.active {
+  color:#2563eb;
+}
+.nav-icon {
+  font-size:1.3rem;
+  padding:6px;
+  border-radius:12px;
+  transition:var(--transition);
+}
+.nav-item:hover .nav-icon,
+.nav-item.active .nav-icon {
+  background:rgba(37,99,235,0.1);
+  box-shadow:0 0 12px rgba(37,99,235,0.4);
+  transform:translateY(-2px);
 }
 [data-theme="dark"] .nav-item:hover .nav-icon,
 [data-theme="dark"] .nav-item.active .nav-icon {
@@ -431,20 +1041,27 @@ body::before {
   box-shadow:0 0 15px rgba(59,130,246,0.6), 0 0 25px rgba(139,92,246,0.3);
 }
 
-/* ========== Toast - EXACT MATCH ========== */
-.toast {
-  position:fixed; top:85px; left:50%; transform:translateX(-50%) translateY(-100px);
-  background:var(--bg-surface); border:1px solid var(--border-normal); border-right:4px solid #059669;
-  color:var(--text-primary); padding:12px 18px; border-radius:var(--radius-md);
-  font-size:0.9rem; font-weight:500; z-index:999; transition:transform 0.35s cubic-bezier(0.4,0,0.2,1);
-  box-shadow:0 8px 25px rgba(0,0,0,0.15); display:flex; align-items:center; gap:8px;
+/* ========== Success Indicator ========== */
+.success-indicator {
+  display:none;
+  align-items:center;
+  gap:8px;
+  padding:12px 16px;
+  background:rgba(16,185,129,0.1);
+  border:1px solid var(--grad-green);
+  border-radius:var(--radius-md);
+  color:var(--text-primary);
+  font-size:0.9rem;
+  font-weight:500;
+  margin-bottom:16px;
+  animation:fadeIn 0.3s ease;
+  position:sticky;
+  top:70px;
+  z-index:95;
 }
-.toast.show { transform:translateX(-50%) translateY(0); }
-.toast.error { border-right-color:#ef4444; }
-.toast.warning { border-right-color:#f59e0b; }
-.toast.info { border-right-color:#0ea5e9; }
+.success-indicator.show { display:flex; }
 
-/* ========== Print Styles - A5 Card ========== */
+/* ========== Print Styles ========== */
 @media print {
   @page { size: A5; margin: 10mm; }
   body * { visibility: hidden; }
@@ -523,29 +1140,41 @@ body::before {
   margin-top: 20px; padding-top: 4px;
 }
 
-/* ========== Responsive - EXACT MATCH ========== */
-@media(min-width:768px) { .content{padding:22px 28px;} }
+/* ========== Responsive ========== */
+@media(min-width:768px) {
+  .content { padding:22px 28px; }
+}
 @media(max-width:640px) {
   .date-range { grid-template-columns:1fr; }
   .action-grid { grid-template-columns:1fr; }
   .eye-values { grid-template-columns:1fr; }
   .header-title { font-size:1rem; }
+  .bulk-actions-bar { flex-direction:column; gap:12px; align-items:flex-start; }
+  .bulk-actions-right { width:100%; justify-content:space-between; }
 }
-button:focus-visible, input:focus-visible {
-  outline:2px solid #3b82f6; outline-offset:2px; border-radius:4px;
+button:focus-visible,
+input:focus-visible {
+  outline:2px solid #3b82f6;
+  outline-offset:2px;
+  border-radius:4px;
 }
 </style>
 </head>
 <body>
 
-<!-- Floating Particles -->
-<div class="particle"></div><div class="particle"></div>
-<div class="particle"></div><div class="particle"></div>
+<!-- جزيئات الخلفية -->
+<div class="particle"></div>
+<div class="particle"></div>
+<div class="particle"></div>
+<div class="particle"></div>
 
-<!-- Toast Notification -->
-<div class="toast" id="toast"><span>✓</span><span id="toast-msg">جاري تحميل أرشيف المرضى...</span></div>
+<!-- Success Indicator -->
+<div class="success-indicator" id="successIndicator">
+  <span>✅</span>
+  <span id="successMsg">تم التحميل بنجاح</span>
+</div>
 
-<!-- Header -->
+<!-- Header - ✅ بدون زر التحديث -->
 <header class="header">
   <div class="header-right">
     <button class="menu-btn" onclick="toggleSidebar()" aria-label="القائمة">☰</button>
@@ -553,7 +1182,6 @@ button:focus-visible, input:focus-visible {
   </div>
   <div class="header-left">
     <button class="header-btn" onclick="toggleTheme()" id="themeBtn" title="تبديل النمط">🌙</button>
-    <button class="header-btn" onclick="loadPatients()" title="تحديث" aria-label="تحديث البيانات">🔄</button>
   </div>
 </header>
 
@@ -592,6 +1220,21 @@ button:focus-visible, input:focus-visible {
   <div style="margin-bottom:24px; text-align:center;">
     <p style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:4px;">سجلات المرضى</p>
     <h2 style="font-size:1.8rem; font-weight:800; color:var(--text-primary);">أرشيف المرضى</h2>
+  </div>
+
+  <!-- Bulk Actions Bar - جديد للواتساب -->
+  <div class="bulk-actions-bar" id="bulkActionsBar">
+    <div class="bulk-actions-left">
+      <span id="selectedCount">0 محدد</span>
+      <button class="bulk-btn" onclick="selectAllPatients()">تحديد الكل</button>
+      <button class="bulk-btn" onclick="deselectAllPatients()">إلغاء الكل</button>
+    </div>
+    <div class="bulk-actions-right">
+      <button class="whatsapp-bulk-btn" onclick="sendWhatsAppBulk()">
+        <span>💬</span>
+        <span>إرسال واتساب للمحددين</span>
+      </button>
+    </div>
   </div>
 
   <!-- Filter Card -->
@@ -674,7 +1317,7 @@ button:focus-visible, input:focus-visible {
   </div>
 </div>
 
-<!-- Print Area (A5) - Hidden until print -->
+<!-- Print Area (A5) -->
 <div id="print-area" style="display:none;">
   <div class="a5-card">
     <div class="header">
@@ -737,7 +1380,7 @@ button:focus-visible, input:focus-visible {
   </div>
 </div>
 
-<!-- Bottom Navigation - EXACT MATCH -->
+<!-- Bottom Navigation -->
 <nav class="bottom-nav">
   <a href="home.html" class="nav-item"><span class="nav-icon">🏠</span>الرئيسية</a>
   <a href="add-patient.html" class="nav-item"><span class="nav-icon">➕</span>مريض</a>
@@ -747,7 +1390,7 @@ button:focus-visible, input:focus-visible {
 </nav>
 
 <script>
-// ========== Theme Toggle - EXACT MATCH ==========
+// ========== Theme Toggle ==========
 function toggleTheme() {
   const html = document.documentElement;
   const btn = document.getElementById('themeBtn');
@@ -757,10 +1400,9 @@ function toggleTheme() {
   html.setAttribute('data-theme', next);
   btn.textContent = next === 'light' ? '🌙' : '☀️';
   localStorage.setItem('theme', next);
-  showToast(next === 'light' ? '🌞 النمط النهاري' : '🌙 النمط الليلي');
 }
 
-// ========== Sidebar Toggle - EXACT MATCH ==========
+// ========== Sidebar Toggle ==========
 function toggleSidebar() {
   const sb = document.getElementById('sidebar');
   const ov = document.getElementById('sidebarOverlay');
@@ -769,13 +1411,111 @@ function toggleSidebar() {
   document.body.style.overflow = sb.classList.contains('open') ? 'hidden' : '';
 }
 
-// ========== Toast Notification - EXACT MATCH ==========
-function showToast(msg, type = 'success') {
-  const toast = document.getElementById('toast');
-  document.getElementById('toast-msg').textContent = msg;
-  toast.className = `toast ${type}`;
-  toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), 3500);
+// ========== Success Indicator ==========
+function showSuccess(msg) {
+  const indicator = document.getElementById('successIndicator');
+  document.getElementById('successMsg').textContent = msg;
+  indicator.classList.add('show');
+  setTimeout(() => indicator.classList.remove('show'), 2500);
+}
+
+// ========== WhatsApp Functions - جديد ==========
+
+// إرسال لفرد واحد
+function sendWhatsAppSingle(phone, name) {
+  if (!phone) {
+    showSuccess('❌ لا يوجد رقم هاتف لهذا المريض');
+    return;
+  }
+  
+  const cleanPhone = phone.replace(/[^0-9+]/g, '');
+  const whatsappPhone = cleanPhone.startsWith('964') ? cleanPhone : '964' + cleanPhone.replace(/^0/, '');
+  
+  const settings = JSON.parse(localStorage.getItem('clinicSettings') || '{}');
+  const clinicName = settings.clinicName || 'عيادة الأثير للبصريات';
+  
+  const message = `مرحباً ${name} 👋
+
+من ${clinicName} 🏥
+
+نشكرك على ثقتنا. هل تحتاج إلى أي مساعدة أو حجز موعد؟ 📅
+
+📍 ${settings.clinicAddress || ''}
+📞 ${settings.clinicPhone || ''}
+
+مع أطيب التمنيات،
+فريق ${clinicName} 💙`;
+  
+  window.open(`https://wa.me/${whatsappPhone}?text=${encodeURIComponent(message)}`, '_blank');
+  showSuccess('💬 تم فتح واتساب');
+}
+
+// إرسال للمحددين
+function sendWhatsAppBulk() {
+  const checkboxes = document.querySelectorAll('.patient-checkbox:checked');
+  if (checkboxes.length === 0) {
+    showSuccess('⚠️ يرجى تحديد مريض واحد على الأقل');
+    return;
+  }
+  
+  const patients = JSON.parse(localStorage.getItem('patients') || '[]');
+  const selected = Array.from(checkboxes).map(cb => cb.dataset.id);
+  const targets = patients.filter(p => selected.includes(p.id) && p.phone);
+  
+  if (targets.length === 0) {
+    showSuccess('⚠️ لا توجد أرقام هاتف للمرضى المحددين');
+    return;
+  }
+  
+  const settings = JSON.parse(localStorage.getItem('clinicSettings') || '{}');
+  const clinicName = settings.clinicName || 'عيادة الأثير للبصريات';
+  
+  targets.forEach((patient, index) => {
+    setTimeout(() => {
+      const cleanPhone = patient.phone.replace(/[^0-9+]/g, '');
+      const whatsappPhone = cleanPhone.startsWith('964') ? cleanPhone : '964' + cleanPhone.replace(/^0/, '');
+      
+      const message = `مرحباً ${patient.fullName} 👋
+
+من ${clinicName} 🏥
+
+هل تحتاج إلى مساعدة أو حجز موعد؟ 📅
+
+مع أطيب التمنيات،
+فريق ${clinicName} 💙`;
+      
+      window.open(`https://wa.me/${whatsappPhone}?text=${encodeURIComponent(message)}`, '_blank');
+    }, index * 1500); // تأخير 1.5 ثانية بين كل رسالة
+  });
+  
+  showSuccess(`💬 جاري فتح ${targets.length} محادثة واتساب...`);
+  deselectAllPatients();
+}
+
+// تحديد الكل
+function selectAllPatients() {
+  document.querySelectorAll('.patient-checkbox').forEach(cb => cb.checked = true);
+  updateBulkActionsBar();
+}
+
+// إلغاء تحديد الكل
+function deselectAllPatients() {
+  document.querySelectorAll('.patient-checkbox').forEach(cb => cb.checked = false);
+  updateBulkActionsBar();
+}
+
+// تحديث شريط الإجراءات الجماعية
+function updateBulkActionsBar() {
+  const bar = document.getElementById('bulkActionsBar');
+  const count = document.getElementById('selectedCount');
+  const checked = document.querySelectorAll('.patient-checkbox:checked').length;
+  
+  if (checked > 0) {
+    bar.classList.add('show');
+    count.textContent = `${checked} محدد`;
+  } else {
+    bar.classList.remove('show');
+  }
 }
 
 // ========== Date Helpers ==========
@@ -814,7 +1554,7 @@ function setFilter(filter) {
     document.getElementById('dateTo').value = '';
   }
   loadPatients();
-  showToast(`🔍 عرض: ${filter === 'all' ? 'الكل' : filter === 'today' ? 'اليوم' : filter === 'week' ? 'هذا الأسبوع' : filter === 'month' ? 'هذا الشهر' : 'تجديد الفحص'}`);
+  console.log(`🔍 عرض: ${filter === 'all' ? 'الكل' : filter === 'today' ? 'اليوم' : filter === 'week' ? 'هذا الأسبوع' : filter === 'month' ? 'هذا الشهر' : 'تجديد الفحص'}`);
 }
 
 function applyDateFilter() {
@@ -824,7 +1564,7 @@ function applyDateFilter() {
     currentFilter = 'custom';
     document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
     loadPatients();
-    showToast('🔍 تطبيق فلتر التاريخ المخصص');
+    console.log('🔍 تطبيق فلتر التاريخ المخصص');
   }
 }
 
@@ -853,18 +1593,17 @@ function filterByDate(patients) {
   }
 }
 
-// ========== Load Patients - WITH ENGLISH NUMBERS ==========
+// ========== Load Patients ==========
 function loadPatients() {
   allPatients = JSON.parse(localStorage.getItem('patients') || '[]');
   const filtered = filterByDate(allPatients);
   
-  const listContainer = document.getElementById('patientList');
-  const emptyState = document.getElementById('emptyState');
-  
-  // Stats with ENGLISH NUMBERS
   document.getElementById('totalCount').textContent = allPatients.length.toLocaleString('en-US');
   document.getElementById('filteredCount').textContent = filtered.length.toLocaleString('en-US');
   document.getElementById('renewalCount').textContent = allPatients.filter(p => isDueForRenewal(p.createdAt)).length.toLocaleString('en-US');
+  
+  const listContainer = document.getElementById('patientList');
+  const emptyState = document.getElementById('emptyState');
   
   emptyState.style.display = 'none';
   
@@ -885,6 +1624,7 @@ function loadPatients() {
     
     return `
     <div class="patient-card ${due ? 'due-renewal' : ''}" onclick="showPatientDetails('${patient.id}')">
+      <input type="checkbox" class="patient-checkbox" data-id="${patient.id}" onclick="event.stopPropagation(); updateBulkActionsBar();">
       <div class="patient-avatar">${initials}</div>
       <div class="patient-info">
         <div class="patient-name">
@@ -896,10 +1636,14 @@ function loadPatients() {
           ${!due && days > 0 ? `• باقي ${days.toLocaleString('en-US')} يوم` : ''}
         </div>
       </div>
+      <button class="whatsapp-btn" onclick="event.stopPropagation(); sendWhatsAppSingle('${patient.phone || ''}', '${patient.fullName || ''}')" title="إرسال واتساب">💬</button>
       <span style="color:var(--text-muted)">←</span>
     </div>
     `;
   }).join('');
+  
+  // Reset bulk actions
+  deselectAllPatients();
 }
 
 // ========== Search Patients ==========
@@ -930,16 +1674,20 @@ function searchPatients() {
       const initials = patient.fullName ? patient.fullName.charAt(0).toUpperCase() : '?';
       return `
       <div class="patient-card" onclick="showPatientDetails('${patient.id}')">
+        <input type="checkbox" class="patient-checkbox" data-id="${patient.id}" onclick="event.stopPropagation(); updateBulkActionsBar();">
         <div class="patient-avatar">${initials}</div>
         <div class="patient-info">
           <div class="patient-name">${patient.fullName || 'بدون اسم'}</div>
           <div class="patient-meta">📞 ${patient.phone || '-'} • 📅 ${formatDate(patient.createdAt)}</div>
         </div>
+        <button class="whatsapp-btn" onclick="event.stopPropagation(); sendWhatsAppSingle('${patient.phone || ''}', '${patient.fullName || ''}')" title="إرسال واتساب">💬</button>
         <span style="color:var(--text-muted)">←</span>
       </div>
       `;
     }).join('');
   }
+  
+  deselectAllPatients();
 }
 
 // ========== Show Patient Details ==========
@@ -950,11 +1698,10 @@ function showPatientDetails(id) {
   const due = isDueForRenewal(patient.createdAt);
   const content = document.getElementById('modalContent');
   
-  // Build exam history button
   let historyHtml = '';
   if (patient.examHistory && patient.examHistory.length > 0) {
     historyHtml = `
-    <button class="action-btn" style="background:var(--bg-surface-hover); color:var(--text-primary); border:1px solid var(--border-normal); width:100%; margin-bottom:12px;" onclick="showHistory('${patient.id}')">
+    <button class="action-btn view" style="width:100%; margin-bottom:12px;" onclick="showHistory('${patient.id}')">
       <span>📜</span><span>عرض ${ (patient.examHistory.length + 1).toLocaleString('en-US') } فحص (الحالي + ${patient.examHistory.length.toLocaleString('en-US')} سابق)</span>
     </button>
     `;
@@ -972,9 +1719,9 @@ function showPatientDetails(id) {
       <p style="font-size:0.9rem; color:var(--text-secondary); margin-top:4px;">📞 ${patient.phone || 'لا يوجد رقم'}</p>
     </div>
     
-    ${due && patient.phone ? `
-    <button class="action-btn whatsapp" onclick="sendWhatsApp('${patient.phone}', '${patient.fullName}')">
-      <span>💬</span><span>إرسال تذكير عبر واتساب</span>
+    ${patient.phone ? `
+    <button class="action-btn whatsapp" onclick="sendWhatsAppSingle('${patient.phone}', '${patient.fullName}')">
+      <span>💬</span><span>إرسال رسالة واتساب</span>
     </button>
     ` : ''}
     
@@ -1050,17 +1797,9 @@ function showHistory(patientId) {
   
   const content = document.getElementById('historyContent');
   
-  // Build list of ALL exams: current + history
   const allExams = [];
+  allExams.push({ ...patient, isCurrent: true, examLabel: 'الفحص الحالي' });
   
-  // Add current exam first
-  allExams.push({
-    ...patient,
-    isCurrent: true,
-    examLabel: 'الفحص الحالي'
-  });
-  
-  // Add history exams
   if (patient.examHistory) {
     patient.examHistory.forEach((exam, idx) => {
       allExams.push({
@@ -1071,7 +1810,6 @@ function showHistory(patientId) {
     });
   }
   
-  // Sort by date (newest first)
   allExams.sort((a, b) => new Date(b.createdAt || b.archivedAt) - new Date(a.createdAt || b.archivedAt));
   
   content.innerHTML = allExams.map(exam => `
@@ -1119,51 +1857,21 @@ function closeHistoryModal() {
   document.getElementById('historyModal').classList.remove('show');
 }
 
-// ========== WhatsApp Reminder ==========
-function sendWhatsApp(phone, name) {
-  const cleanPhone = phone.replace(/[^0-9]/g, '');
-  const whatsappPhone = cleanPhone.startsWith('964') ? cleanPhone : '964' + cleanPhone;
-  const settings = JSON.parse(localStorage.getItem('clinicSettings') || '{}');
-  const clinicName = settings.clinicName || 'عيادة الأثير للبصريات';
-  
-  const message = `مرحباً ${name} 👋
-
-نود تذكيرك بأن موعد تجديد فحص النظر السنوي قد حان 🕐
-
-يسعدنا استقبالكم في ${clinicName} لإجراء الفحص الدوري والحفاظ على صحة عينيك 👁️✨
-
-📍 العنوان: ${settings.clinicAddress || ''}
-📞 للحجز: ${settings.clinicPhone || ''}
-
-مع أطيب التمنيات،
-فريق ${clinicName}`;
-  
-  window.open(`https://wa.me/${whatsappPhone}?text=${encodeURIComponent(message)}`, '_blank');
-  showToast('💬 تم فتح واتساب لإرسال التذكير', 'info');
-}
-
-// ========== Print Functions - WITH ENGLISH NUMBERS ==========
+// ========== Print Functions ==========
 function printPatient(id) {
   const patient = allPatients.find(p => p.id === id);
   if (!patient) return;
   
   const settings = JSON.parse(localStorage.getItem('clinicSettings') || '{}');
   
-  // Fill print card - ALL NUMBERS IN ENGLISH
   document.getElementById('printClinicName').textContent = settings.clinicName || 'عيادة الأثير للبصريات';
   document.getElementById('printFooter').textContent = `✨ ${settings.clinicName || 'عيادة الأثير للبصريات'} - جميع الحقوق محفوظة ✨`;
-  document.getElementById('printClinicInfo').innerHTML = `
-    <div>📍 ${settings.clinicAddress || 'عنوان العيادة'}</div>
-    <div>📞 ${settings.clinicPhone || 'رقم الهاتف'}</div>
-    <div>📱 ${settings.instagram || '@username'}</div>
-  `;
   
   document.getElementById('printName').textContent = patient.fullName || '-';
   document.getElementById('printAge').textContent = patient.age?.toLocaleString('en-US') || '-';
   document.getElementById('printPhone').textContent = patient.phone || '-';
   document.getElementById('printExamDate').textContent = formatDate(patient.createdAt);
   
-  // Prescription - ENGLISH NUMBERS
   ['Right','Left'].forEach(eye => {
     const prefix = eye === 'Right' ? 'right' : 'left';
     document.getElementById(`print${eye}Sph`).textContent = patient[`${prefix}Eye`]?.sph || '0.00';
@@ -1173,11 +1881,9 @@ function printPatient(id) {
     document.getElementById(`print${eye}VA`).textContent = patient[`${prefix}Eye`]?.va || '-';
   });
   
-  // PD - ENGLISH NUMBER
   document.getElementById('printPD').textContent = patient.pd?.toLocaleString('en-US') || '0';
   document.getElementById('printNextVisit').textContent = patient.nextVisit || '-';
   
-  // Notes
   const notesSection = document.getElementById('printNotesSection');
   if (patient.notes) {
     document.getElementById('printNotes').textContent = patient.notes;
@@ -1186,7 +1892,7 @@ function printPatient(id) {
     notesSection.style.display = 'none';
   }
   
-  showToast('🖨️ جاري تحضير الطباعة...', 'info');
+  console.log('🖨️ جاري تحضير الطباعة...');
   setTimeout(() => window.print(), 100);
 }
 
@@ -1194,7 +1900,6 @@ function printOldExam(patientId, examDate) {
   const patient = allPatients.find(p => p.id === patientId);
   if (!patient) return;
   
-  // Find the exam (current or history)
   let exam = patient;
   if (patient.examHistory) {
     const hist = patient.examHistory.find(h => (h.createdAt || h.archivedAt) === examDate);
@@ -1205,11 +1910,6 @@ function printOldExam(patientId, examDate) {
   
   document.getElementById('printClinicName').textContent = settings.clinicName || 'عيادة الأثير للبصريات';
   document.getElementById('printFooter').textContent = `✨ ${settings.clinicName} - جميع الحقوق محفوظة ✨`;
-  document.getElementById('printClinicInfo').innerHTML = `
-    <div>📍 ${settings.clinicAddress || 'عنوان العيادة'}</div>
-    <div>📞 ${settings.clinicPhone || 'رقم الهاتف'}</div>
-    <div>📱 ${settings.instagram || '@username'}</div>
-  `;
   
   document.getElementById('printName').textContent = patient.fullName || '-';
   document.getElementById('printAge').textContent = patient.age?.toLocaleString('en-US') || '-';
@@ -1236,7 +1936,7 @@ function printOldExam(patientId, examDate) {
     notesSection.style.display = 'none';
   }
   
-  showToast('🖨️ جاري طباعة الفحص...', 'info');
+  console.log('🖨️ جاري طباعة الفحص...');
   setTimeout(() => window.print(), 100);
 }
 
@@ -1249,23 +1949,17 @@ function deletePatient(id) {
   
   closeModal();
   loadPatients();
-  showToast('🗑️ تم حذف المريض بنجاح', 'warning');
+  showSuccess('🗑️ تم حذف المريض بنجاح');
 }
 
-// ========== Initialize - EXACT MATCH ==========
+// ========== Initialize ==========
 (function init() {
-  // Load saved theme
   const saved = localStorage.getItem('theme') || 'light';
   document.documentElement.setAttribute('data-theme', saved);
   document.getElementById('themeBtn').textContent = saved === 'light' ? '🌙' : '☀️';
   
-  // Load patients
   loadPatients();
   
-  // Welcome toast
-  setTimeout(() => showToast('📁 أرشيف المرضى جاهز'), 600);
-  
-  // Keyboard support
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') {
       closeModal();
@@ -1274,7 +1968,6 @@ function deletePatient(id) {
     }
   });
   
-  // Close modals on backdrop
   document.getElementById('patientModal')?.addEventListener('click', e => {
     if (e.target.id === 'patientModal') closeModal();
   });
@@ -1282,10 +1975,8 @@ function deletePatient(id) {
     if (e.target.id === 'historyModal') closeHistoryModal();
   });
   
-  // Close sidebar on backdrop
   document.getElementById('sidebarOverlay')?.addEventListener('click', toggleSidebar);
   
-  // Auto-refresh on visibility change
   document.addEventListener('visibilitychange', () => {
     if (!document.hidden) loadPatients();
   });

@@ -1,355 +1,759 @@
 <!DOCTYPE html>
-<html class="dark" dir="rtl" lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>تسجيل الدخول - عيادة الأثير للبصريات</title>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script id="tailwind-config">
-  tailwind.config = {
-    darkMode: "class",
-    theme: {
-      extend: {
-        colors: {
-          "primary": "#00BCD4",
-          "secondary": "#64748b",
-          "surface": "#f8fafc",
-          "on-surface": "#0f172a",
-          "background": "#ffffff",
-          "surface-container": "#191f31",
-        },
-        borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" },
-        fontFamily: {
-          "headline": ["Tajawal", "Manrope"],
-          "body": ["Tajawal", "Plus Jakarta Sans"],
-          "label": ["Tajawal", "Plus Jakarta Sans"]
-        },
-        animation: {
-          "float": "float 6s ease-in-out infinite",
-          "pulse-slow": "pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite",
-          "fade-in": "fadeIn 0.6s ease-out forwards"
-        },
-        keyframes: {
-          float: {
-            "0%, 100%": { transform: "translateY(0px)" },
-            "50%": { transform: "translateY(-20px)" }
-          },
-          fadeIn: {
-            "0%": { opacity: "0", transform: "translateY(20px)" },
-            "100%": { opacity: "1", transform: "translateY(0)" }
-          }
-        }
-      },
-    },
-  }
-</script>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
+/* ========== The Sovereign Ledger - Premium Design System ========== */
+:root {
+  --bg-page: #f8fafc;
+  --bg-surface: #ffffff;
+  --bg-surface-hover: #f1f5f9;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  --border-light: #e2e8f0;
+  --border-normal: #cbd5e1;
   
-  body { 
-    font-family: 'Tajawal', sans-serif; 
-    transition: background-color 0.3s ease, color 0.3s ease;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
+  /* ألوان التدرج المميزة */
+  --grad-cyan: linear-gradient(135deg, #06b5d4, #0891b2);
+  --grad-purple: linear-gradient(135deg, #8b5cf6, #7c3aed);
+  --grad-gold: linear-gradient(135deg, #eab308, #ca8a04);
+  --grad-red: linear-gradient(135deg, #ef4444, #dc2626);
+  --grad-green: linear-gradient(135deg, #10b981, #059669);
+  --grad-brand: linear-gradient(135deg, #6366f1, #8b5cf6, #3b82f6);
   
-  .glass-card { 
-    backdrop-filter: blur(20px); 
-    border: 1px solid rgba(255, 255, 255, 0.1); 
-    transition: all 0.3s ease; 
-  }
-  .light .glass-card { 
-    background: rgba(255, 255, 255, 0.85); 
-    border: 1px solid rgba(0, 188, 212, 0.2); 
-  }
-  
-  .mesh-gradient { 
-    transition: background 0.5s ease; 
-    background-attachment: fixed;
-    position: relative;
-    overflow: hidden;
-  }
-  .mesh-gradient::before {
-    content: '';
-    position: absolute; inset: -50%;
-    width: 200%; height: 200%;
-    background: radial-gradient(circle at 20% 80%, rgba(0, 188, 212, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 50% 50%, rgba(236, 72, 153, 0.1) 0%, transparent 60%);
-    animation: pulse-slow 8s ease-in-out infinite;
-    pointer-events: none;
-  }
-  .dark .mesh-gradient { background: linear-gradient(135deg, #0c1324 0%, #1e1b4b 30%, #312e81 70%, #1e1b4b 100%); }
-  .light .mesh-gradient { background: radial-gradient(at 0% 0%, rgba(0, 188, 212, 0.08) 0%, transparent 50%), radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.08) 0%, transparent 50%), #f8fafc; }
-  
-  .floating-icon { position: absolute; opacity: 0.08; animation: float 8s ease-in-out infinite; pointer-events: none; z-index: 0; }
-  .floating-icon:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; font-size: 80px; }
-  .floating-icon:nth-child(2) { top: 20%; right: 15%; animation-delay: -2s; font-size: 60px; }
-  .floating-icon:nth-child(3) { bottom: 15%; left: 20%; animation-delay: -4s; font-size: 70px; }
-  .floating-icon:nth-child(4) { bottom: 25%; right: 10%; animation-delay: -6s; font-size: 50px; }
-  
-  .login-input { background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); transition: all 0.3s ease; }
-  .light .login-input { background: rgba(255, 255, 255, 0.9); border: 1px solid rgba(0, 188, 212, 0.3); }
-  .login-input:focus { border-color: #00BCD4; box-shadow: 0 0 0 4px rgba(0, 188, 212, 0.2); background: rgba(255, 255, 255, 0.15); }
-  .light .login-input:focus { background: white; }
-  
-  .login-btn {
-    background: linear-gradient(135deg, #00BCD4, #7c3aed);
-    transition: all 0.3s ease; position: relative; overflow: hidden;
-  }
-  .login-btn::before {
-    content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-    transition: left 0.5s ease;
-  }
-  .login-btn:hover::before { left: 100%; }
-  .login-btn:active { transform: scale(0.98); }
-  .login-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none !important; }
-  
-  .input-error { border-color: #dc2626 !important; animation: shake 0.3s ease; }
-  @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
-  
-  .spinner { width: 20px; height: 20px; border: 2px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin 0.8s linear infinite; display: inline-block; }
-  @keyframes spin { to { transform: rotate(360deg); } }
-  
-  .toast {
-    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px);
-    background: #1e293b; color: white; padding: 12px 24px; border-radius: 9999px;
-    font-size: 14px; font-weight: 500; box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-    z-index: 1000; transition: transform 0.3s ease, opacity 0.3s ease;
-    display: flex; align-items: center; gap: 8px;
-  }
-  .toast.show { transform: translateX(-50%) translateY(0); }
-  .toast.error { background: #dc2626; }
-  .toast.success { background: #10b981; }
-  .light .toast { background: white; color: #1e293b; box-shadow: 0 10px 40px rgba(0,0,0,0.15); }
+  --shadow-card: 0 10px 25px rgba(0,0,0,0.12);
+  --shadow-hover: 0 18px 40px rgba(0,0,0,0.18);
+  --shadow-sm: 0 4px 12px rgba(0,0,0,0.06);
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 20px;
+  --radius-xl: 24px;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-  @media (max-width: 640px) { .floating-icon { display: none; } }
+[data-theme="dark"] {
+  --bg-page: #0b1120;
+  --bg-surface: #111827;
+  --bg-surface-hover: #1f2937;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --border-light: #1e293b;
+  --border-normal: #334155;
+  --shadow-card: 0 10px 25px rgba(0,0,0,0.4);
+  --shadow-hover: 0 18px 40px rgba(0,0,0,0.55);
+  --shadow-sm: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+/* ========== Base ========== */
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family:'Cairo',sans-serif;
+  background:var(--bg-page);
+  color:var(--text-primary);
+  line-height:1.5;
+  min-height:100vh;
+  transition:var(--transition);
+  position:relative;
+  overflow-x:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+/* خلفية متدرجة ناعمة */
+body::before {
+  content:'';
+  position:fixed;
+  inset:0;
+  background:radial-gradient(ellipse at 20% 80%, rgba(6,181,212,0.08) 0%, transparent 50%),
+            radial-gradient(ellipse at 80% 20%, rgba(99,102,241,0.08) 0%, transparent 50%);
+  pointer-events:none;
+  z-index:-1;
+}
+
+/* جزيئات خلفية */
+.particle {
+  position:fixed;
+  width:4px;
+  height:4px;
+  border-radius:50%;
+  background:rgba(6,182,212,0.4);
+  animation:float 6s ease-in-out infinite;
+  pointer-events:none;
+  z-index:-1;
+}
+.particle:nth-child(1){top:20%;left:10%;animation-delay:0s;}
+.particle:nth-child(2){top:60%;left:85%;animation-delay:1s;background:rgba(99,102,241,0.4);}
+.particle:nth-child(3){top:80%;left:25%;animation-delay:2s;}
+.particle:nth-child(4){top:15%;left:70%;animation-delay:3s;background:rgba(16,185,129,0.4);}
+@keyframes float { 0%,100%{transform:translateY(0) scale(1);opacity:0.4;} 50%{transform:translateY(-20px) scale(1.3);opacity:0.7;} }
+
+/* ========== بطاقة تسجيل الدخول ========== */
+.login-card {
+  background:var(--bg-surface);
+  border:1px solid var(--border-light);
+  border-radius:var(--radius-xl);
+  padding:32px 28px;
+  width:100%;
+  max-width:480px;
+  box-shadow:var(--shadow-card);
+  transition:var(--transition);
+  position:relative;
+  overflow:hidden;
+}
+.login-card::before {
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  left:0;
+  height:4px;
+  background:var(--grad-brand);
+}
+.login-card:hover {
+  transform:translateY(-4px);
+  box-shadow:var(--shadow-hover);
+}
+
+/* ========== الشعار والعنوان ========== */
+.login-header {
+  text-align:center;
+  margin-bottom:28px;
+  padding-top:8px;
+}
+.login-logo {
+  width:72px;
+  height:72px;
+  border-radius:var(--radius-lg);
+  background:var(--grad-brand);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:0 auto 16px;
+  box-shadow:0 8px 25px rgba(99,102,241,0.35);
+  font-size:2rem;
+  position:relative;
+  overflow:hidden;
+}
+.login-logo::after {
+  content:'';
+  position:absolute;
+  inset:0;
+  background:rgba(255,255,255,0.15);
+  animation:pulse 3s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{opacity:0.15;} 50%{opacity:0.25;} }
+.login-title {
+  font-size:1.5rem;
+  font-weight:800;
+  background:var(--grad-brand);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  margin-bottom:6px;
+}
+.login-subtitle {
+  font-size:0.9rem;
+  color:var(--text-secondary);
+  font-weight:500;
+}
+
+/* ========== زر تبديل السمة ========== */
+.theme-toggle {
+  position:absolute;
+  top:16px;
+  left:16px;
+  width:40px;
+  height:40px;
+  border-radius:var(--radius-sm);
+  border:1px solid var(--border-normal);
+  background:transparent;
+  color:var(--text-primary);
+  font-size:1.2rem;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:var(--transition);
+}
+.theme-toggle:hover {
+  background:var(--bg-surface-hover);
+  border-color:var(--color-primary);
+  color:#2563eb;
+}
+
+/* ========== نموذج الدخول ========== */
+.login-form {
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+.form-group {
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.form-label {
+  font-size:0.9rem;
+  font-weight:600;
+  color:var(--text-primary);
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+.form-label .icon {
+  font-size:1.1rem;
+  color:#2563eb;
+}
+.form-input {
+  width:100%;
+  padding:14px 16px;
+  padding-right:44px;
+  border:1px solid var(--border-normal);
+  border-radius:var(--radius-md);
+  background:var(--bg-surface);
+  color:var(--text-primary);
+  font-size:0.95rem;
+  font-family:'Cairo',sans-serif;
+  transition:var(--transition);
+  outline:none;
+}
+.form-input:focus {
+  border-color:#2563eb;
+  box-shadow:0 0 0 4px rgba(37,99,235,0.15);
+  background:var(--bg-surface-hover);
+}
+.form-input::placeholder {
+  color:var(--text-muted);
+}
+.input-icon {
+  position:absolute;
+  left:16px;
+  top:50%;
+  transform:translateY(-50%);
+  color:var(--text-muted);
+  font-size:1.2rem;
+  pointer-events:none;
+}
+.input-wrapper {
+  position:relative;
+}
+.form-hint {
+  font-size:0.75rem;
+  color:var(--text-muted);
+  margin-top:4px;
+}
+
+/* ========== تذكرني ========== */
+.remember-row {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:4px 0;
+}
+.remember-label {
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:0.85rem;
+  color:var(--text-secondary);
+  cursor:pointer;
+  user-select:none;
+}
+.remember-checkbox {
+  width:18px;
+  height:18px;
+  border:1px solid var(--border-normal);
+  border-radius:4px;
+  accent-color:#2563eb;
+  cursor:pointer;
+}
+
+/* ========== زر الدخول ========== */
+.login-btn {
+  width:100%;
+  padding:16px;
+  border:none;
+  border-radius:var(--radius-md);
+  background:var(--grad-brand);
+  color:#fff;
+  font-size:1rem;
+  font-weight:700;
+  font-family:'Cairo',sans-serif;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  transition:var(--transition);
+  box-shadow:0 8px 25px rgba(99,102,241,0.35);
+  position:relative;
+  overflow:hidden;
+}
+.login-btn::before {
+  content:'';
+  position:absolute;
+  top:0;
+  left:-100%;
+  width:100%;
+  height:100%;
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+  transition:left 0.5s ease;
+}
+.login-btn:hover::before { left:100%; }
+.login-btn:hover {
+  transform:translateY(-2px);
+  box-shadow:0 12px 35px rgba(99,102,241,0.5);
+}
+.login-btn:active { transform:scale(0.98); }
+.login-btn:disabled {
+  opacity:0.7;
+  cursor:not-allowed;
+  transform:none !important;
+}
+.btn-spinner {
+  width:20px;
+  height:20px;
+  border:2px solid rgba(255,255,255,0.3);
+  border-top-color:#fff;
+  border-radius:50%;
+  animation:spin 0.8s linear infinite;
+  display:none;
+}
+.btn-spinner.show { display:inline-block; }
+@keyframes spin { to { transform:rotate(360deg); } }
+
+/* ========== تجربة سريعة ========== */
+.demo-section {
+  text-align:center;
+  margin-top:20px;
+  padding-top:20px;
+  border-top:1px solid var(--border-light);
+}
+.demo-text {
+  font-size:0.8rem;
+  color:var(--text-muted);
+  margin-bottom:12px;
+}
+.demo-btn {
+  padding:10px 20px;
+  border:1px solid var(--border-normal);
+  border-radius:var(--radius-md);
+  background:transparent;
+  color:#2563eb;
+  font-size:0.85rem;
+  font-weight:600;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  transition:var(--transition);
+}
+.demo-btn:hover {
+  background:var(--bg-surface-hover);
+  border-color:#2563eb;
+}
+
+/* ========== التذييل ========== */
+.login-footer {
+  text-align:center;
+  margin-top:24px;
+  padding-top:20px;
+  border-top:1px solid var(--border-light);
+}
+.login-footer p {
+  font-size:0.75rem;
+  color:var(--text-muted);
+}
+
+/* ========== Toast Notification ========== */
+.toast {
+  position:fixed;
+  top:20px;
+  left:50%;
+  transform:translateX(-50%) translateY(-100px);
+  background:var(--bg-surface);
+  border:1px solid var(--border-normal);
+  border-right:4px solid #10b981;
+  color:var(--text-primary);
+  padding:12px 20px;
+  border-radius:var(--radius-md);
+  font-size:0.9rem;
+  font-weight:500;
+  z-index:1000;
+  transition:transform 0.35s cubic-bezier(0.4,0,0.2,1);
+  box-shadow:var(--shadow-card);
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.toast.show { transform:translateX(-50%) translateY(0); }
+.toast.error { border-right-color:#ef4444; }
+.toast.info { border-right-color:#0ea5e9; }
+
+/* ========== Responsive ========== */
+@media(max-width:480px) {
+  .login-card { padding:24px 20px; }
+  .login-title { font-size:1.3rem; }
+  .login-logo { width:64px; height:64px; font-size:1.8rem; }
+}
+
+/* ========== Focus Accessibility ========== */
+button:focus-visible,
+input:focus-visible {
+  outline:2px solid #2563eb;
+  outline-offset:2px;
+  border-radius:4px;
+}
+
+/* ========== Input Error State ========== */
+.input-error {
+  border-color:#ef4444 !important;
+  animation:shake 0.3s ease;
+}
+@keyframes shake {
+  0%,100% { transform:translateX(0); }
+  25% { transform:translateX(-4px); }
+  75% { transform:translateX(4px); }
+}
 </style>
 </head>
-<body class="mesh-gradient min-h-screen flex items-center justify-center px-4 lg:px-8 text-slate-900 dark:text-slate-100">
+<body>
 
-<!-- Floating Background Icons -->
-<span class="material-symbols-outlined floating-icon text-cyan-400">eyeglasses</span>
-<span class="material-symbols-outlined floating-icon text-purple-400">visibility</span>
-<span class="material-symbols-outlined floating-icon text-pink-400">lens_blur</span>
-<span class="material-symbols-outlined floating-icon text-cyan-300">remove_red_eye</span>
+<!-- جزيئات الخلفية -->
+<div class="particle"></div>
+<div class="particle"></div>
+<div class="particle"></div>
+<div class="particle"></div>
 
-<!-- Main Login Card -->
-<div class="glass-card rounded-3xl p-6 md:p-8 w-full max-w-md lg:max-w-lg mx-auto animate-fade-in relative z-10">
+<!-- Toast Notification -->
+<div class="toast" id="toast"><span id="toast-icon">✓</span><span id="toast-msg"></span></div>
+
+<!-- بطاقة تسجيل الدخول -->
+<div class="login-card">
   
-  <!-- Theme Toggle -->
-  <button class="absolute top-4 left-4 p-2 rounded-full hover:bg-white/10 transition-colors" id="themeToggle" aria-label="تبديل المظهر">
-    <span class="material-symbols-outlined dark:hidden text-slate-600">dark_mode</span>
-    <span class="material-symbols-outlined hidden dark:block text-amber-300">light_mode</span>
-  </button>
+  <!-- زر تبديل السمة -->
+  <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" title="تبديل النمط" aria-label="تبديل النمط">🌙</button>
   
-  <!-- Logo Section -->
-  <div class="text-center mb-8 pt-4">
-    <div class="w-20 h-20 md:w-24 md:h-24 mx-auto rounded-2xl bg-gradient-to-br from-cyan-400 via-purple-500 to-pink-500 flex items-center justify-center shadow-2xl shadow-cyan-500/30 mb-4 relative">
-      <div class="absolute inset-0 bg-white/20 rounded-2xl animate-pulse-slow"></div>
-      <span class="material-symbols-outlined text-4xl md:text-5xl text-white relative z-10">eyeglasses</span>
-    </div>
-    <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent font-headline tracking-tight">
-      عيادة الأثير للبصريات
-    </h1>
-    <p class="text-slate-500 dark:text-slate-400 text-sm mt-2 font-body">أدخل بياناتك للدخول إلى التطبيق</p>
+  <!-- الشعار والعنوان -->
+  <div class="login-header">
+    <div class="login-logo">👁️</div>
+    <h1 class="login-title">عيادة الأثير للبصريات</h1>
+    <p class="login-subtitle">أدخل بياناتك للدخول إلى لوحة التحكم</p>
   </div>
   
-  <!-- Login Form -->
-  <form id="loginForm" class="space-y-5" onsubmit="handleLogin(event)">
+  <!-- نموذج الدخول -->
+  <form class="login-form" id="loginForm" onsubmit="handleLogin(event)">
     
-    <!-- Name Field -->
-    <div class="space-y-2">
-      <label for="username" class="text-sm font-medium text-slate-700 dark:text-slate-300 flex items-center gap-2">
-        <span class="material-symbols-outlined text-cyan-500 text-lg">person</span>
-        الاسم
+    <!-- حقل الاسم -->
+    <div class="form-group">
+      <label for="username" class="form-label">
+        <span class="icon">👤</span>
+        الاسم الكامل
       </label>
-      <div class="relative">
-        <input type="text" id="username" name="username" class="login-input w-full rounded-xl px-4 py-4 pr-12 text-right outline-none text-slate-900 dark:text-white placeholder-slate-400 text-base" placeholder="أدخل اسمك الكامل" required/>
-        <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">badge</span>
+      <div class="input-wrapper">
+        <input type="text" id="username" name="username" class="form-input" placeholder="أدخل اسمك الكامل" required autocomplete="name">
+        <span class="input-icon">🪪</span>
       </div>
     </div>
     
-    <!-- Phone Field -->
-    <div class="space-y-2">
-      <label for="phone" class="text-sm font-medium text-slate-700 dark:text-slate-300 flex items-center gap-2">
-        <span class="material-symbols-outlined text-purple-500 text-lg">phone</span>
-        رقم الهاتف
+    <!-- حقل الهاتف -->
+    <!-- حقل الهاتف - بدون pattern -->
+<div class="form-group">
+  <label for="phone" class="form-label">
+    <span class="icon">📱</span>
+    رقم الهاتف
+  </label>
+  <div class="input-wrapper">
+    <input type="tel" id="phone" name="phone" class="form-input" 
+           placeholder="07XX XXX XXXX" required 
+           title="أدخل رقم هاتف عراقي: 07 + 9 أرقام"
+           inputmode="tel">
+    <span class="input-icon">📞</span>
+  </div>
+  <p class="form-hint">صيغة الرقم العراقي: 07XXXXXXXXX (11 رقم)</p>
+</div>
+    
+    <!-- تذكرني -->
+    <div class="remember-row">
+      <label class="remember-label">
+        <input type="checkbox" id="remember" class="remember-checkbox">
+        تذكرني على هذا الجهاز
       </label>
-      <div class="relative">
-        <input type="tel" id="phone" name="phone" class="login-input w-full rounded-xl px-4 py-4 pr-12 text-right outline-none text-slate-900 dark:text-white placeholder-slate-400 text-base" placeholder="07XX XXX XXXX" required/>
-        <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">call</span>
-      </div>
-      <p class="text-xs text-slate-400 dark:text-slate-500 mr-1">صيغة الرقم العراقي: 07XXXXXXXXX</p>
     </div>
     
-    <!-- Remember Me -->
-    <div class="flex items-center justify-between text-sm">
-      <label class="flex items-center gap-2 cursor-pointer">
-        <input type="checkbox" id="remember" class="w-4 h-4 rounded border-slate-300 text-cyan-500 focus:ring-cyan-500 bg-transparent">
-        <span class="text-slate-600 dark:text-slate-400">تذكرني على هذا الجهاز</span>
-      </label>
-    </div>
-    
-    <!-- Login Button -->
-    <button type="submit" id="loginBtn" class="login-btn w-full rounded-xl py-4 text-white font-bold text-base flex items-center justify-center gap-2 shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40">
+    <!-- زر الدخول -->
+    <button type="submit" id="loginBtn" class="login-btn">
       <span id="btnText">دخول للتطبيق</span>
-      <span class="material-symbols-outlined">login</span>
-      <span id="btnSpinner" class="spinner hidden"></span>
+      <span id="btnSpinner" class="btn-spinner"></span>
     </button>
     
   </form>
   
-  <!-- Quick Demo -->
-  <div class="text-center mt-6">
-    <p class="text-xs text-slate-400 dark:text-slate-500 mb-3">للتجربة السريعة:</p>
-    <button onclick="quickLogin()" class="glass-card px-6 py-3 rounded-xl text-sm font-medium text-cyan-600 dark:text-cyan-400 hover:bg-cyan-500/10 transition-all flex items-center justify-center gap-2 mx-auto">
-      <span class="material-symbols-outlined text-lg">bolt</span>
-      دخول كمستخدم تجريبي
+  <!-- تجربة سريعة -->
+  <div class="demo-section">
+    <p class="demo-text">للتجربة السريعة:</p>
+    <button type="button" class="demo-btn" onclick="quickLogin()">
+      ⚡ دخول كمستخدم تجريبي
     </button>
   </div>
   
-  <!-- Footer -->
-  <div class="text-center mt-8 pt-6 border-t border-slate-200 dark:border-white/10">
-    <p class="text-xs text-slate-400 dark:text-slate-500">© 2026 عيادة الأثير للبصريات</p>
+  <!-- التذييل -->
+  <div class="login-footer">
+    <p>© 2026 عيادة الأثير للبصريات • جميع الحقوق محفوظة</p>
   </div>
   
 </div>
 
-<!-- Toast Container -->
-<div id="toastContainer"></div>
-
-<!-- Scripts -->
 <script>
-  // ===== Theme Management =====
+// ========== Theme Toggle ==========
+function toggleTheme() {
   const html = document.documentElement;
-  const themeToggle = document.getElementById('themeToggle');
+  const btn = document.getElementById('themeBtn');
+  const current = html.getAttribute('data-theme');
+  const next = current === 'light' ? 'dark' : 'light';
   
-  function initTheme() {
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-    if (savedTheme === 'dark') { html.classList.add('dark'); html.classList.remove('light'); }
-    else { html.classList.add('light'); html.classList.remove('dark'); }
-  }
-  initTheme();
-  
-  themeToggle.addEventListener('click', () => {
-    const isDark = html.classList.toggle('dark');
-    html.classList.toggle('light', !isDark);
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
-  });
+  html.setAttribute('data-theme', next);
+  btn.textContent = next === 'light' ? '🌙' : '☀️';
+  localStorage.setItem('theme', next);
+}
 
-  // ===== Toast Notifications =====
-  function showToast(message, type = 'info') {
-    const container = document.getElementById('toastContainer');
-    const toast = document.createElement('div');
-    toast.className = `toast ${type}`;
-    const icon = type === 'error' ? 'error' : type === 'success' ? 'check_circle' : 'info';
-    toast.innerHTML = `<span class="material-symbols-outlined">${icon}</span><span>${message}</span>`;
-    container.appendChild(toast);
-    setTimeout(() => toast.classList.add('show'), 10);
-    setTimeout(() => { toast.classList.remove('show'); setTimeout(() => toast.remove(), 300); }, 3000);
-  }
-
-  // ===== Validation =====
-  function validatePhone(phone) { return /^07[0-9]{9}$/.test(phone.replace(/\s/g, '')); }
-  function showError(input, message) {
-    if(message) {
-      input.classList.add('input-error');
-      showToast(message, 'error');
-      setTimeout(() => input.classList.remove('input-error'), 2000);
+// ========== Toast Notification ==========
+function showToast(msg, type = 'success') {
+  try {
+    const toast = document.getElementById('toast');
+    const icon = document.getElementById('toast-icon');
+    const text = document.getElementById('toast-msg');
+    
+    if (toast && icon && text) {
+      text.textContent = msg;
+      icon.textContent = type === 'error' ? '✕' : type === 'info' ? 'ℹ️' : '✓';
+      toast.className = `toast ${type}`;
+      toast.classList.add('show');
+      
+      setTimeout(() => toast.classList.remove('show'), 3000);
     }
+  } catch(e) {
+    console.log('Toast error:', e);
   }
+}
 
-  // ===== Phone Auto-Formatting =====
-  document.getElementById('phone').addEventListener('input', function(e) {
+// ========== Validation ==========
+function validatePhone(phone) {
+  // إزالة جميع المسافات والرموز غير الرقمية
+  const clean = phone.replace(/[\s\-\(\)]/g, '');
+  // التحقق: يبدأ بـ 07 ويتبعه 9 أرقام = 11 رقم إجمالي
+  return /^07\d{9}$/.test(clean);
+}
+
+function cleanPhone(phone) {
+  return phone.replace(/[\s\-\(\)]/g, '');
+}
+
+function showError(input, message) {
+  input.classList.add('input-error');
+  showToast(message, 'error');
+  setTimeout(() => input.classList.remove('input-error'), 2000);
+}
+
+// ========== Phone Auto-Formatting ==========
+const phoneInput = document.getElementById('phone');
+if (phoneInput) {
+  phoneInput.addEventListener('input', function(e) {
     let value = e.target.value.replace(/\D/g, '');
     if (value.length > 0 && !value.startsWith('07')) value = '07' + value;
     if (value.length >= 4) value = value.slice(0, 4) + ' ' + value.slice(4);
     if (value.length >= 9) value = value.slice(0, 9) + ' ' + value.slice(9);
     e.target.value = value.slice(0, 13);
   });
+}
 
-  // ===== Login Handler (OPEN ACCESS) =====
-  async function handleLogin(event) {
-    event.preventDefault();
-    
-    const username = document.getElementById('username').value.trim();
-    const phone = document.getElementById('phone').value.replace(/\s/g, '');
-    const loginBtn = document.getElementById('loginBtn');
-    const btnText = document.getElementById('btnText');
-    const btnSpinner = document.getElementById('btnSpinner');
-    
-    // Basic Validation
-    if (username.length < 2) {
-      showError(document.getElementById('username'), 'الاسم يجب أن يكون حرفين على الأقل'); return;
-    }
-    if (!validatePhone(phone)) {
-      showError(document.getElementById('phone'), 'يرجى إدخال رقم هاتف عراقي صحيح (07XXXXXXXXX)'); return;
-    }
-    
-    // Loading State
-    loginBtn.disabled = true;
-    btnText.textContent = 'جاري الدخول...';
-    btnSpinner.classList.remove('hidden');
-    
-    try {
-      await new Promise(resolve => setTimeout(resolve, 600));
-      
-      // Save Session (No credential check needed)
-      localStorage.setItem('userSession', JSON.stringify({
-        username: username,
-        phone: phone,
-        loginTime: new Date().toISOString(),
-        remember: document.getElementById('remember').checked
-      }));
-      
-      showToast('✓ أهلاً وسهلاً! جاري التحويل...', 'success');
-      setTimeout(() => window.location.href = 'home.html', 800);
-      
-    } catch (error) {
-      showToast('حدث خطأ أثناء الدخول', 'error');
-    } finally {
-      loginBtn.disabled = false;
-      btnText.textContent = 'دخول للتطبيق';
-      btnSpinner.classList.add('hidden');
-    }
+// ========== Login Handler - مُحدَّث ومُحسَّن ==========
+async function handleLogin(event) {
+  event.preventDefault();
+  
+  const usernameInput = document.getElementById('username');
+  const phoneInput = document.getElementById('phone');
+  const rememberCheck = document.getElementById('remember');
+  const loginBtn = document.getElementById('loginBtn');
+  const btnText = document.getElementById('btnText');
+  const btnSpinner = document.getElementById('btnSpinner');
+  
+  const username = usernameInput.value.trim();
+  const phone = cleanPhone(phoneInput.value);
+  
+  console.log('🔐 محاولة الدخول:', { username, phone });
+  
+  // Validation
+  if (username.length < 2) {
+    showError(usernameInput, 'الاسم يجب أن يكون حرفين على الأقل');
+    usernameInput.focus();
+    return;
   }
-
-  // ===== Quick Demo =====
-  function quickLogin() {
-    document.getElementById('username').value = 'مستخدم تجريبي';
-    document.getElementById('phone').value = '0770 123 4567';
-    document.getElementById('remember').checked = true;
-    showToast('تم تعبئة بيانات التجربة تلقائياً', 'info');
-    setTimeout(() => document.getElementById('loginForm').requestSubmit(), 500);
+  
+  if (!validatePhone(phone)) {
+    showError(phoneInput, 'يرجى إدخال رقم هاتف عراقي صحيح (07 + 9 أرقام)');
+    phoneInput.focus();
+    return;
   }
+  
+  // Loading State
+  loginBtn.disabled = true;
+  btnText.textContent = 'جاري الدخول...';
+  if (btnSpinner) btnSpinner.classList.add('show');
+  
+  try {
+    // محاكاة تأخير الشبكة
+    await new Promise(resolve => setTimeout(resolve, 600));
+    
+    // حفظ الجلسة
+    const sessionData = {
+      username: username,
+      phone: phone,
+      loginTime: new Date().toISOString(),
+      remember: rememberCheck ? rememberCheck.checked : false
+    };
+    
+    localStorage.setItem('userSession', JSON.stringify(sessionData));
+    console.log('✅ تم حفظ الجلسة:', sessionData);
+    
+    showToast('✓ أهلاً وسهلاً! جاري التحويل...', 'success');
+    
+    // التوجيه مع تحقق إضافي
+    setTimeout(() => {
+      // محاولة التوجيه إلى home.html
+      window.location.href = 'home.html';
+      
+      // احتياطي: إذا لم يعمل الرابط بعد 2 ثانية
+      setTimeout(() => {
+        if (window.location.href.includes('login')) {
+          console.log('⚠️ home.html غير موجود، جاري التوجيه البديل...');
+          // يمكن تغيير هذا إلى أي صفحة أخرى متوفرة
+          // window.location.href = 'archive.html';
+          showToast('⚠️ يرجى التأكد من وجود ملف home.html', 'info');
+        }
+      }, 2000);
+    }, 800);
+    
+  } catch (error) {
+    console.error('❌ خطأ في الدخول:', error);
+    showToast('حدث خطأ أثناء الدخول، يرجى المحاولة مرة أخرى', 'error');
+  } finally {
+    loginBtn.disabled = false;
+    btnText.textContent = 'دخول للتطبيق';
+    if (btnSpinner) btnSpinner.classList.remove('show');
+  }
+}
 
-  // ===== Keyboard Support =====
-  document.getElementById('username').addEventListener('keypress', e => { if(e.key === 'Enter') document.getElementById('phone').focus(); });
-  document.getElementById('phone').addEventListener('keypress', e => { if(e.key === 'Enter') document.getElementById('loginForm').requestSubmit(); });
+// ========== Quick Demo ==========
+function quickLogin() {
+  const usernameInput = document.getElementById('username');
+  const phoneInput = document.getElementById('phone');
+  const rememberCheck = document.getElementById('remember');
+  
+  if (usernameInput) usernameInput.value = 'مستخدم تجريبي';
+  if (phoneInput) phoneInput.value = '0770 123 4567';
+  if (rememberCheck) rememberCheck.checked = true;
+  
+  showToast('تم تعبئة بيانات التجربة تلقائياً', 'info');
+  
+  setTimeout(() => {
+    const form = document.getElementById('loginForm');
+    if (form) form.requestSubmit();
+  }, 500);
+}
 
-  // ===== Auto-fill if Remembered =====
-  function checkSession() {
-    const session = JSON.parse(localStorage.getItem('userSession') || 'null');
-    if (session && session.remember) {
-      document.getElementById('username').value = session.username || '';
-      document.getElementById('phone').value = session.phone ? session.phone.replace(/(\d{4})(\d{3})(\d{4})/, '$1 $2 $3') : '';
-      document.getElementById('remember').checked = true;
+// ========== Keyboard Support ==========
+const usernameInput = document.getElementById('username');
+const phoneInputEl = document.getElementById('phone');
+
+if (usernameInput) {
+  usernameInput.addEventListener('keypress', e => {
+    if(e.key === 'Enter' && phoneInputEl) {
+      e.preventDefault();
+      phoneInputEl.focus();
+    }
+  });
+}
+
+if (phoneInputEl) {
+  phoneInputEl.addEventListener('keypress', e => {
+    if(e.key === 'Enter') {
+      e.preventDefault();
+      const form = document.getElementById('loginForm');
+      if (form) form.requestSubmit();
+    }
+  });
+}
+
+// ========== Auto-fill if Remembered ==========
+function checkSession() {
+  try {
+    const sessionStr = localStorage.getItem('userSession');
+    if (!sessionStr || sessionStr === 'null') return;
+    
+    const session = JSON.parse(sessionStr);
+    const rememberCheck = document.getElementById('remember');
+    
+    if (session && session.remember && rememberCheck) {
+      const usernameInput = document.getElementById('username');
+      const phoneInput = document.getElementById('phone');
+      
+      if (usernameInput && session.username) {
+        usernameInput.value = session.username;
+      }
+      if (phoneInput && session.phone) {
+        // إعادة تنسيق الرقم للعرض
+        const formatted = session.phone.replace(/(\d{4})(\d{3})(\d{4})/, '$1 $2 $3');
+        phoneInput.value = formatted;
+      }
+      rememberCheck.checked = true;
+      
+      console.log('👋 تم استعادة بيانات المستخدم');
       showToast('👋 مرحباً بعودتك!', 'info');
     }
+  } catch(e) {
+    console.log('Session check error:', e);
   }
+}
 
-  document.addEventListener('DOMContentLoaded', () => {
-    checkSession();
-    // Prevent zoom on mobile input
-    document.querySelectorAll('input').forEach(input => {
-      input.addEventListener('focus', () => document.querySelector('meta[name="viewport"]').content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
-      input.addEventListener('blur', () => document.querySelector('meta[name="viewport"]').content = 'width=device-width, initial-scale=1.0, maximum-scale=5.0');
-    });
-  });
+// ========== Initialize ==========
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('🚀 صفحة تسجيل الدخول جاهزة');
+  
+  // Init Theme
+  try {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    const themeBtn = document.getElementById('themeBtn');
+    if (themeBtn) {
+      themeBtn.textContent = savedTheme === 'light' ? '🌙' : '☀️';
+    }
+  } catch(e) {
+    console.log('Theme init error:', e);
+  }
+  
+  // Check saved session
+  checkSession();
+  
+  // Focus first input
+  const usernameInput = document.getElementById('username');
+  if (usernameInput) usernameInput.focus();
+});
+
+// ========== تشخيص إضافي عند التحميل ==========
+window.addEventListener('load', () => {
+  console.log('📋 حالة التخزين المحلي:');
+  console.log('- localStorage متاح:', !!window.localStorage);
+  console.log('- عدد العناصر:', localStorage.length);
+  console.log('- userSession موجود:', !!localStorage.getItem('userSession'));
+});
 </script>
 </body>
 </html>

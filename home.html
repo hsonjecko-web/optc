@@ -6,14 +6,19 @@
 <title>عيادة الأثير للبصريات - لوحة التحكم</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-/* ========== نظام التصميم الموحد ========== */
+/* ========== The Sovereign Ledger - Premium Design System ========== */
 :root {
-  --bg-page: #f8fafc; --bg-surface: #ffffff; --bg-surface-hover: #f1f5f9;
-  --text-primary: #0f172a; --text-secondary: #475569; --text-muted: #94a3b8;
-  --border-light: #e2e8f0; --border-normal: #cbd5e1;
+  --bg-page: #e6ecf132;
+  --bg-surface: #ffffff;
+  --bg-surface-hover: #f1f5f9;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  --border-light: #e2e8f0;
+  --border-normal: #cbd5e1;
   
-  /* ألوان متدرجة فريدة لكل بطاقة */
-  --grad-cyan: linear-gradient(135deg, #06b6d4, #0891b2);
+  /* ألوان البطاقات المميزة - نفس النمط الأصلي */
+  --grad-cyan: linear-gradient(135deg, #06b5d4, #0891b2);
   --grad-purple: linear-gradient(135deg, #8b5cf6, #7c3aed);
   --grad-gold: linear-gradient(135deg, #eab308, #ca8a04);
   --grad-red: linear-gradient(135deg, #ef4444, #dc2626);
@@ -23,14 +28,22 @@
   --shadow-card: 0 10px 25px rgba(0,0,0,0.12);
   --shadow-hover: 0 18px 40px rgba(0,0,0,0.18);
   --shadow-sm: 0 4px 12px rgba(0,0,0,0.06);
-  --radius-sm: 10px; --radius-md: 16px; --radius-lg: 20px; --radius-xl: 24px;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 20px;
+  --radius-xl: 24px;
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 [data-theme="dark"] {
-  --bg-page: #0b1120; --bg-surface: #111827; --bg-surface-hover: #1f2937;
-  --text-primary: #f8fafc; --text-secondary: #94a3b8; --text-muted: #64748b;
-  --border-light: #1e293b; --border-normal: #334155;
+  --bg-page: #0b1120;
+  --bg-surface: #111827;
+  --bg-surface-hover: #1f2937;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --border-light: #1e293b;
+  --border-normal: #334155;
   --shadow-card: 0 10px 25px rgba(0,0,0,0.4);
   --shadow-hover: 0 18px 40px rgba(0,0,0,0.55);
   --shadow-sm: 0 4px 12px rgba(0,0,0,0.3);
@@ -39,213 +52,502 @@
 /* ========== Base ========== */
 * { margin:0; padding:0; box-sizing:border-box; }
 body {
-  font-family:'Cairo',sans-serif; background:var(--bg-page); color:var(--text-primary);
-  line-height:1.5; min-height:100vh; padding-bottom:80px; transition:var(--transition);
-  position:relative; overflow-x:hidden;
+  font-family:'Cairo',sans-serif;
+  background:var(--bg-page);
+  color:var(--text-primary);
+  line-height:1.5;
+  min-height:100vh;
+  padding-bottom:80px;
+  transition:var(--transition);
+  position:relative;
+  overflow-x:hidden;
 }
 
+/* خلفية متدرجة ناعمة */
 body::before {
-  content:''; position:fixed; inset:0;
-  background:radial-gradient(ellipse at 20% 80%, rgba(6, 181, 212, 0.735) 0%, transparent 50%),
-            radial-gradient(ellipse at 80% 20%, rgba(92, 29, 141, 0.791) 0%, transparent 50%);
-  pointer-events:none; z-index:-1; animation:pulse 10s ease-in-out infinite;
+  content:'';
+  position:fixed;
+  inset:0;
+  background:radial-gradient(ellipse at 20% 80%, rgba(22, 231, 238, 0.104) 0%, transparent 50%),
+            radial-gradient(ellipse at 80% 20%, rgba(30, 194, 197, 0.103) 0%, transparent 50%);
+  pointer-events:none;
+  z-index:-1;
 }
-@keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.7;} }
-
-.particle {
-  position:fixed; width:4px; height:4px; border-radius:50%;
-  background:rgba(6,182,212,0.4); animation:float 6s ease-in-out infinite;
-  pointer-events:none; z-index:-1;
-}
-.particle:nth-child(1){top:20%;left:10%;animation-delay:0s;}
-.particle:nth-child(2){top:60%;left:85%;animation-delay:1s;background:rgba(99,102,241,0.4);}
-.particle:nth-child(3){top:80%;left:25%;animation-delay:2s;}
-.particle:nth-child(4){top:15%;left:70%;animation-delay:3s;background:rgba(16,185,129,0.4);}
-@keyframes float { 0%,100%{transform:translateY(0) scale(1);opacity:0.4;} 50%{transform:translateY(-20px) scale(1.3);opacity:0.7;} }
 
 /* ========== Header ========== */
 .header {
-  position:sticky; top:0; z-index:100; background:var(--bg-surface);
-  border-bottom:1px solid var(--border-light); padding:14px 18px;
-  display:flex; align-items:center; justify-content:space-between; box-shadow:var(--shadow-sm);
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:var(--bg-surface);
+  border-bottom:1px solid var(--border-light);
+  padding:14px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  box-shadow:var(--shadow-sm);
 }
 .header-right { display:flex; align-items:center; gap:10px; }
 .menu-btn {
-  background:transparent; border:1px solid var(--border-normal); border-radius:var(--radius-sm);
-  padding:8px 10px; font-size:1.2rem; cursor:pointer; color:var(--text-primary); transition:var(--transition);
+  background:transparent;
+  border:1px solid var(--border-normal);
+  border-radius:var(--radius-sm);
+  padding:8px 10px;
+  font-size:1.2rem;
+  cursor:pointer;
+  color:var(--text-primary);
+  transition:var(--transition);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:40px;
+  height:40px;
 }
-.menu-btn:hover { background:var(--bg-surface-hover); border-color:#3b82f6; color:#2563eb; }
-.header-title { font-size:1.1rem; font-weight:700; display:flex; align-items:center; gap:8px; }
+.menu-btn:hover {
+  background:var(--bg-surface-hover);
+  border-color:#3b82f6;
+  color:#2563eb;
+}
+.header-title {
+  font-size:1.1rem;
+  font-weight:700;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:var(--text-primary);
+}
 .header-title::before { content:'👁️'; font-size:1.2rem; }
 .header-left { display:flex; align-items:center; gap:6px; }
 .header-btn {
-  background:transparent; border:1px solid var(--border-normal); border-radius:var(--radius-sm);
-  padding:8px 10px; font-size:1.1rem; cursor:pointer; color:var(--text-primary); transition:var(--transition);
+  background:transparent;
+  border:1px solid var(--border-normal);
+  border-radius:var(--radius-sm);
+  padding:8px 10px;
+  font-size:1.1rem;
+  cursor:pointer;
+  color:var(--text-primary);
+  transition:var(--transition);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:40px;
+  height:40px;
 }
-.header-btn:hover { background:var(--bg-surface-hover); }
+.header-btn:hover {
+  background:var(--bg-surface-hover);
+  border-color:#3b82f6;
+  color:#2563eb;
+}
 
 /* ========== Sidebar ========== */
 .sidebar-overlay {
-  position:fixed; inset:0; background:rgba(0,0,0,0.35); backdrop-filter:blur(3px);
-  z-index:200; display:none; opacity:0; transition:opacity 0.25s;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.35);
+  backdrop-filter:blur(3px);
+  z-index:200;
+  display:none;
+  opacity:0;
+  transition:opacity 0.25s;
 }
 .sidebar-overlay.show { display:block; opacity:1; }
 .sidebar {
-  position:fixed; top:0; right:-290px; width:280px; height:100vh;
-  background:var(--bg-surface); border-left:1px solid var(--border-light);
-  z-index:300; transition:right 0.3s ease; overflow-y:auto;
-  display:flex; flex-direction:column; box-shadow:0 0 30px rgba(0,0,0,0.2);
+  position:fixed;
+  top:0;
+  right:-290px;
+  width:280px;
+  height:100vh;
+  background:var(--bg-surface);
+  border-left:1px solid var(--border-light);
+  z-index:300;
+  transition:right 0.3s ease;
+  overflow-y:auto;
+  display:flex;
+  flex-direction:column;
+  box-shadow:0 0 30px rgba(0,0,0,0.2);
 }
 [dir="ltr"] .sidebar { right:auto; left:-290px; border-left:none; border-right:1px solid var(--border-light); }
 [dir="ltr"] .sidebar.open { left:0; }
 .sidebar.open { right:0; }
-.sidebar-header { padding:18px 16px; border-bottom:1px solid var(--border-light); display:flex; align-items:center; justify-content:space-between; }
-.sidebar-brand { font-size:1.1rem; font-weight:700; color:#2563eb; }
-.sidebar-close { background:transparent; border:none; font-size:1.3rem; cursor:pointer; color:var(--text-muted); padding:4px; border-radius:8px; transition:var(--transition); }
-.sidebar-close:hover { background:var(--bg-surface-hover); color:var(--text-primary); }
+.sidebar-header {
+  padding:18px 16px;
+  border-bottom:1px solid var(--border-light);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.sidebar-brand {
+  font-size:1.1rem;
+  font-weight:700;
+  color:#2563eb;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.sidebar-close {
+  background:transparent;
+  border:none;
+  font-size:1.3rem;
+  cursor:pointer;
+  color:var(--text-muted);
+  padding:4px;
+  border-radius:8px;
+  transition:var(--transition);
+  width:36px;
+  height:36px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.sidebar-close:hover {
+  background:var(--bg-surface-hover);
+  color:var(--text-primary);
+}
 .sidebar-nav { padding:10px 0; flex:1; }
 .sidebar-item {
-  display:flex; align-items:center; gap:10px; padding:11px 16px; margin:3px 10px;
-  border-radius:var(--radius-md); text-decoration:none; color:var(--text-secondary);
-  font-size:0.9rem; font-weight:500; transition:var(--transition); border:1px solid transparent;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:11px 16px;
+  margin:3px 10px;
+  border-radius:var(--radius-md);
+  text-decoration:none;
+  color:var(--text-secondary);
+  font-size:0.9rem;
+  font-weight:500;
+  transition:var(--transition);
+  border:1px solid transparent;
 }
-.sidebar-item:hover { background:#eff6ff; color:#2563eb; }
-[data-theme="dark"] .sidebar-item:hover { background:rgba(59,130,246,0.15); }
-.sidebar-item.active { background:#2563eb; color:#fff; border-color:#2563eb; }
-.sidebar-item .icon { font-size:1.1rem; width:22px; text-align:center; }
-.sidebar-divider { height:1px; background:var(--border-light); margin:10px 14px; }
-.sidebar-footer { padding:12px 14px 18px; border-top:1px solid var(--border-light); margin-top:auto; }
+.sidebar-item:hover {
+  background:#eff6ff;
+  color:#2563eb;
+}
+[data-theme="dark"] .sidebar-item:hover {
+  background:rgba(59,130,246,0.15);
+}
+.sidebar-item.active {
+  background:#2563eb;
+  color:#fff;
+  border-color:#2563eb;
+}
+.sidebar-item .icon {
+  font-size:1.1rem;
+  width:22px;
+  text-align:center;
+}
+.sidebar-divider {
+  height:1px;
+  background:var(--border-light);
+  margin:10px 14px;
+}
+.sidebar-footer {
+  padding:12px 14px 18px;
+  border-top:1px solid var(--border-light);
+  margin-top:auto;
+}
 .sidebar-logout {
-  display:flex; align-items:center; gap:10px; padding:11px 16px; border-radius:var(--radius-md);
-  text-decoration:none; color:#ef4444; font-size:0.9rem; font-weight:500; transition:var(--transition);
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:11px 16px;
+  border-radius:var(--radius-md);
+  text-decoration:none;
+  color:#ef4444;
+  font-size:0.9rem;
+  font-weight:500;
+  transition:var(--transition);
 }
-.sidebar-logout:hover { background:#fef2f2; }
+.sidebar-logout:hover {
+  background:#fef2f2;
+}
+[data-theme="dark"] .sidebar-logout:hover {
+  background:rgba(239,68,68,0.1);
+}
 
 /* ========== Content ========== */
-.content { padding:18px; max-width:1100px; margin:0 auto; }
+.content {
+  padding:18px;
+  max-width:1100px;
+  margin:0 auto;
+}
 
-/* ========== بطاقات الإحصائيات - كل واحدة بلون مختلف ========== */
+/* ========== بطاقات الإحصائيات - نفس ألوان The Sovereign Ledger ========== */
 .stats-grid {
-  display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));
-  gap:16px; margin-bottom:24px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));
+  gap:16px;
+  margin-bottom:24px;
+  
 }
 .stat-card {
-  position:relative; overflow:hidden;
-  background:var(--bg-surface); border:1px solid var(--border-light);
-  border-radius:var(--radius-lg); padding:20px 18px;
-  text-align:center; box-shadow:var(--shadow-card); transition:var(--transition);
+  position:relative;
+  overflow:hidden;
+  background:var(--bg-surface);
+  border:1px solid var(--border-light);
+  border-radius:var(--radius-lg);
+  padding:20px 18px;
+  text-align:center;
+  box-shadow:var(--shadow-card);
+  transition:var(--transition);
   cursor:pointer;
 }
-.stat-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-hover); }
+.stat-card:hover {
+  transform:translateY(-4px);
+  box-shadow:var(--shadow-hover);
+}
 .stat-card::before {
-  content:''; position:absolute; top:-30%; right:-20%;
-  width:80px; height:80px; border-radius:50%;
-  background:rgba(255,255,255,0.2); filter:blur(10px);
+  content:'';
+  position:absolute;
+  top:-30%;
+  right:-20%;
+  width:80px;
+  height:80px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.2);
+  filter:blur(10px);
   transition:var(--transition);
 }
 .stat-card:hover::before { transform:scale(1.3); }
 
-/* حدود علوية ملونة لكل بطاقة */
-.stat-card.cyan { border-top:4px solid var(--grad-cyan); }
-.stat-card.cyan .icon { color:#06b6d4; }
-.stat-card.cyan .value { background:var(--grad-cyan); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+/* حدود علوية ملونة لكل بطاقة - نفس النمط الأصلي */
+.stat-card.cyan {
+  border-top:4px solid #06b5d4;
+  background: linear-gradient(135deg, rgba(59,130,246,0.06) 0%, rgba(2, 208, 240, 0.099) 100%);
+}
+.stat-card.cyan .icon { color:#06b5d4; }
+.stat-card.cyan .value {
+  background:var(--grad-cyan);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  
+}
 
-.stat-card.purple { border-top:4px solid var(--grad-purple); }
+.stat-card.purple {
+  border-top:4px solid #8b5cf6;
+  background: linear-gradient(135deg, rgba(146, 2, 249, 0) 0%, rgba(116, 2, 246, 0.112) 100%);
+}
 .stat-card.purple .icon { color:#8b5cf6; }
-.stat-card.purple .value { background:var(--grad-purple); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.stat-card.purple .value {
+  background:var(--grad-purple);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
 
-.stat-card.gold { border-top:4px solid var(--grad-gold); }
+.stat-card.gold {
+  border-top:4px solid #eab308;
+  background: linear-gradient(135deg, rgba(59,130,246,0.06) 0%, rgba(244, 200, 2, 0.1) 100%);
+}
 .stat-card.gold .icon { color:#eab308; }
-.stat-card.gold .value { background:var(--grad-gold); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.stat-card.gold .value {
+  background:var(--grad-gold);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
 
-.stat-card.red { border-top:4px solid var(--grad-red); }
+.stat-card.red {
+  border-top:4px solid #ef4444;
+  background: linear-gradient(135deg, rgba(59,130,246,0.06) 0%, rgba(252, 3, 3, 0.064) 100%);
+}
 .stat-card.red .icon { color:#ef4444; }
-.stat-card.red .value { background:var(--grad-red); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.stat-card.red .value {
+  background:var(--grad-red);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
 
-.stat-card.green { border-top:4px solid var(--grad-green); }
-.stat-card.green .icon { color:#10b981; }
-.stat-card.green .value { background:var(--grad-green); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.stat-card.green {
+  border-top:4px solid #1810b9;
+  background: linear-gradient(135deg, rgba(3, 254, 32, 0) 0%, rgba(16, 4, 252, 0.05) 100%);
+}
+.stat-card.green .icon { color:#1610b9; }
+.stat-card.green .value {
+  background:var(--grad-green);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
 
 .stat-card .icon {
-  font-size:1.8rem; margin-bottom:10px;
-  display:flex; align-items:center; justify-content:center;
+  font-size:1.8rem;
+  margin-bottom:1px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 .stat-card .value {
-  font-size:1.5rem; font-weight:800; margin-bottom:4px;
+  font-size:1.5rem;
+  font-weight:800;
+  margin-bottom:4px;
+  line-height:1.2;
 }
 .stat-card .label {
-  font-size:0.8rem; color:var(--text-secondary); font-weight:500;
+  font-size:0.8rem;
+  color:var(--text-secondary);
+  font-weight:500;
 }
 .stat-card .trend {
-  display:inline-flex; align-items:center; gap:4px;
-  font-size:0.75rem; margin-top:8px; padding:4px 10px;
-  border-radius:20px; background:var(--bg-surface-hover);
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  font-size:0.75rem;
+  margin-top:8px;
+  padding:4px 10px;
+  border-radius:20px;
+  background:var(--bg-surface-hover);
 }
 .stat-card .trend.up { color:#10b981; }
 .stat-card .trend.down { color:#ef4444; }
 
 /* ========== العمليات الأخيرة ========== */
-.transaction-list { display:flex; flex-direction:column; gap:14px; }
+.transaction-list {
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
 .transaction-card {
-  position:relative; overflow:hidden;
-  background:var(--bg-surface); border:1px solid var(--border-light);
-  border-radius:var(--radius-lg); padding:18px;
-  box-shadow:var(--shadow-card); transition:var(--transition);
-  display:flex; align-items:center; gap:16px;
-  border-left:4px solid var(--grad-cyan);
+  position:relative;
+  overflow:hidden;
+  background:var(--bg-surface);
+  border:1px solid var(--border-light);
+  border-radius:var(--radius-lg);
+  padding:18px;
+  box-shadow:var(--shadow-card);
+  transition:var(--transition);
+  display:flex;
+  align-items:center;
+  gap:16px;
+  border-right:4px solid #06b5d4;
   cursor:pointer;
 }
-.transaction-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-hover); }
-.transaction-card:active { transform:scale(0.99); }
+.transaction-card:hover {
+  transform:translateY(-4px);
+  box-shadow:var(--shadow-hover);
+}
 .tx-avatar {
-  width:52px; height:52px; border-radius:50%;
-  display:flex; align-items:center; justify-content:center;
-  font-size:1.3rem; font-weight:700; color:#fff; flex-shrink:0;
-  box-shadow:0 4px 14px rgba(0,0,0,0.2); background:var(--grad-cyan);
+  width:52px;
+  height:52px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.3rem;
+  font-weight:700;
+  color:#fff;
+  flex-shrink:0;
+  box-shadow:0 4px 14px rgba(0,0,0,0.2);
+  background:var(--grad-cyan);
 }
 .tx-info { flex:1; min-width:0; }
 .tx-name {
-  font-size:1.05rem; font-weight:700; color:var(--text-primary);
-  margin-bottom:4px; display:flex; align-items:center; gap:6px;
+  font-size:1.05rem;
+  font-weight:700;
+  color:var(--text-primary);
+  margin-bottom:4px;
 }
-.tx-name::before { content:'👤'; font-size:1rem; }
-.tx-date { font-size:0.82rem; color:var(--text-secondary); display:flex; align-items:center; gap:4px; }
-.tx-amount { font-size:1rem; font-weight:700; color:#10b981; white-space:nowrap; }
+.tx-date {
+  font-size:0.82rem;
+  color:var(--text-secondary);
+}
+.tx-amount {
+  font-size:1rem;
+  font-weight:700;
+  color:#10b981;
+  white-space:nowrap;
+}
 
 /* ========== FAB ========== */
 .fab {
-  position:fixed; bottom:90px; left:20px; width:56px; height:56px;
-  border-radius:50%; background:var(--grad-brand); color:#fff;
-  border:none; font-size:1.8rem; cursor:pointer;
-  box-shadow:0 8px 25px rgba(99,102,241,0.4); z-index:90;
-  transition:var(--transition); display:flex; align-items:center; justify-content:center;
+  position:fixed;
+  bottom:90px;
+  left:20px;
+  width:56px;
+  height:56px;
+  border-radius:50%;
+  background:var(--grad-brand);
+  color:#fff;
+  border:none;
+  font-size:1.8rem;
+  cursor:pointer;
+  box-shadow:0 8px 25px rgba(99,102,241,0.4);
+  z-index:90;
+  transition:var(--transition);
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
-.fab:hover { transform:translateY(-3px) scale(1.05); box-shadow:0 12px 35px rgba(99,102,241,0.55); }
+.fab:hover {
+  transform:translateY(-3px) scale(1.05);
+  box-shadow:0 12px 35px rgba(99,102,241,0.55);
+}
 .fab:active { transform:scale(0.95); }
 
-/* ========== شريط التنقل السفلي ========== */
+/* ========== شريط التنقل السفلي - نفس تنسيق الفوتر الأصلي ========== */
 .bottom-nav {
-  position:fixed; bottom:0; left:0; right:0; background:var(--bg-surface);
-  border-top:1px solid var(--border-light); display:flex; z-index:100;
-  padding:10px 0 env(safe-area-inset-bottom, 10px); box-shadow:0 -4px 20px rgba(0,0,0,0.08);
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:var(--bg-surface);
+  border-top:1px solid var(--border-light);
+  display:flex;
+  z-index:100;
+  padding:7px 0 env(safe-area-inset-bottom, 10px);
+  box-shadow:0 -4px 20px rgba(0,0,0,0.098);
 }
 .nav-item {
-  flex:1; display:flex; flex-direction:column; align-items:center; gap:4px;
-  text-decoration:none; color:var(--text-muted); font-size:0.72rem; font-weight:500;
-  padding:8px 4px; transition:var(--transition); position:relative; border-radius:14px; margin:0 2px;
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:4px;
+  text-decoration:none;
+  color:var(--text-muted);
+  font-size:0.72rem;
+  font-weight:500;
+  padding:4px 4px;
+  transition:var(--transition);
+  position:relative;
+  border-radius:14px;
+  margin:0 2px;
 }
 .nav-item::before {
-  content:''; position:absolute; top:-1px; left:50%; transform:translateX(-50%);
-  width:0; height:3px; background:linear-gradient(90deg, #3b82f6, #8b5cf6);
+  content:'';
+  position:absolute;
+  top:-1px;
+  left:50%;
+  transform:translateX(-50%);
+  width:0;
+  height:3px;
+  background:linear-gradient(90deg, #3b82f6, #8b5cf6);
   border-radius:0 0 6px 6px;
   box-shadow:0 2px 10px rgba(59,130,246,0.7), 0 0 16px rgba(139,92,246,0.5);
-  opacity:0; transition:width 0.3s ease, opacity 0.3s ease;
+  opacity:0;
+  transition:width 0.3s ease, opacity 0.3s ease;
 }
-.nav-item:hover::before, .nav-item.active::before { width:34px; opacity:1; }
-.nav-item:hover, .nav-item.active { color:#2563eb; }
-.nav-icon { font-size:1.3rem; padding:6px; border-radius:12px; transition:var(--transition); }
-.nav-item:hover .nav-icon, .nav-item.active .nav-icon {
-  background:rgba(37,99,235,0.1); box-shadow:0 0 12px rgba(37,99,235,0.4); transform:translateY(-2px);
+.nav-item:hover::before,
+.nav-item.active::before {
+  width:34px;
+  opacity:1;
+}
+.nav-item:hover,
+.nav-item.active {
+  color:#2563eb;
+}
+.nav-icon {
+  font-size:1.3rem;
+  padding:6px;
+  border-radius:12px;
+  transition:var(--transition);
+}
+.nav-item:hover .nav-icon,
+.nav-item.active .nav-icon {
+  background:rgba(37,99,235,0.1);
+  box-shadow:0 0 12px rgba(37,99,235,0.4);
+  transform:translateY(-2px);
 }
 [data-theme="dark"] .nav-item:hover .nav-icon,
 [data-theme="dark"] .nav-item.active .nav-icon {
@@ -253,41 +555,26 @@ body::before {
   box-shadow:0 0 15px rgba(59,130,246,0.6), 0 0 25px rgba(139,92,246,0.3);
 }
 
-/* ========== Toast ========== */
-.toast {
-  position:fixed; top:85px; left:50%; transform:translateX(-50%) translateY(-100px);
-  background:var(--bg-surface); border:1px solid var(--border-normal); border-right:4px solid #059669;
-  color:var(--text-primary); padding:12px 18px; border-radius:var(--radius-md);
-  font-size:0.9rem; font-weight:500; z-index:999; transition:transform 0.35s cubic-bezier(0.4,0,0.2,1);
-  box-shadow:0 8px 25px rgba(0,0,0,0.15); display:flex; align-items:center; gap:8px;
-}
-.toast.show { transform:translateX(-50%) translateY(0); }
-.toast.error { border-right-color:#ef4444; }
-.toast.warning { border-right-color:#f59e0b; }
-.toast.info { border-right-color:#0ea5e9; }
-
 /* ========== Responsive ========== */
-@media(min-width:768px) { .content{padding:22px 28px;} }
+@media(min-width:768px) {
+  .content { padding:22px 28px; }
+}
 @media(max-width:640px) {
   .stats-grid { grid-template-columns:repeat(2,1fr); }
   .transaction-card { flex-wrap:wrap; }
   .header-title { font-size:1rem; }
 }
-button:focus-visible, a:focus-visible {
-  outline:2px solid #3b82f6; outline-offset:2px; border-radius:4px;
+button:focus-visible,
+a:focus-visible {
+  outline:2px solid #3b82f6;
+  outline-offset:2px;
+  border-radius:4px;
 }
 </style>
 </head>
 <body>
 
-<!-- جزيئات الخلفية -->
-<div class="particle"></div><div class="particle"></div>
-<div class="particle"></div><div class="particle"></div>
-
-<!-- إشعار Toast -->
-<div class="toast" id="toast"><span>✓</span><span id="toast-msg">تم تحميل لوحة التحكم</span></div>
-
-<!-- Header -->
+<!-- Header - ✅ تم حذف زر التحديث -->
 <header class="header">
   <div class="header-right">
     <button class="menu-btn" onclick="toggleSidebar()" aria-label="القائمة">☰</button>
@@ -295,7 +582,7 @@ button:focus-visible, a:focus-visible {
   </div>
   <div class="header-left">
     <button class="header-btn" onclick="toggleTheme()" id="themeBtn" title="تبديل النمط">🌙</button>
-    <button class="header-btn" onclick="refreshData()" title="تحديث" aria-label="تحديث البيانات">🔄</button>
+    <!-- ✅ زر التحديث محذوف حسب الطلب -->
   </div>
 </header>
 
@@ -320,11 +607,9 @@ button:focus-visible, a:focus-visible {
     <a href="export-excel.html" class="sidebar-item"><span class="icon">📤</span>تصدير Excel</a>
     <div class="sidebar-divider"></div>
     <a href="settings.html" class="sidebar-item"><span class="icon">⚙️</span>الإعدادات</a>
-    <a href="logout.html" class="sidebar-item sidebar-logout"><span class="icon">🚪</span>تسجيل الخروج</a>
+    <a href="index.html" class="sidebar-item sidebar-logout"><span class="icon">🚪</span>تسجيل الخروج</a>
   </nav>
-  <div class="sidebar-footer">
-    <a href="logout.html" class="sidebar-logout"><span class="icon">🚪</span>تسجيل الخروج</a>
-  </div>
+ 
 </aside>
 
 <!-- Main Content -->
@@ -336,9 +621,8 @@ button:focus-visible, a:focus-visible {
     <h2 style="font-size:1.8rem; font-weight:800; color:var(--text-primary);">عيادة الأثير للبصريات</h2>
   </div>
 
-  <!-- Stats Grid - كل بطاقة بلون مختلف -->
+  <!-- Stats Grid - نفس ألوان البطاقات من The Sovereign Ledger -->
   <div class="stats-grid">
-    <!-- بطاقة سيان -->
     <div class="stat-card cyan" onclick="viewSection('customers')">
       <div class="icon">👥</div>
       <div class="value" id="totalCustomers">0</div>
@@ -346,31 +630,27 @@ button:focus-visible, a:focus-visible {
       <div class="trend up">📈 +12% هذا الشهر</div>
     </div>
     
-    <!-- بطاقة أرجواني -->
     <div class="stat-card purple" onclick="viewSection('exams')">
       <div class="icon">👁️</div>
       <div class="value" id="todayExams">0</div>
       <div class="label">فحوصات اليوم</div>
-      <div class="trend">⏳ 8 مواعيد متبقية</div>
+      <div class="trend">⏳ 8 مواعيد</div>
     </div>
     
-    <!-- بطاقة ذهبي -->
     <div class="stat-card gold" onclick="viewSection('revenue')">
       <div class="icon">💰</div>
       <div class="value" id="todayRevenue">0</div>
       <div class="label">إيرادات اليوم</div>
-      <div class="trend up">📈 +8% عن الأمس</div>
+      <div class="trend up">📈 +8%</div>
     </div>
     
-    <!-- بطاقة أحمر -->
     <div class="stat-card red" onclick="viewSection('expenses')">
       <div class="icon">🧾</div>
       <div class="value" id="monthExpenses">0</div>
       <div class="label">مصروفات الشهر</div>
-      <div class="trend down">📉 -3% عن الشهر الماضي</div>
+      <div class="trend down">📉 -3%</div>
     </div>
     
-    <!-- بطاقة أخضر -->
     <div class="stat-card green" style="grid-column:span 2;" onclick="viewSection('monthly')">
       <div class="icon">📊</div>
       <div class="value" id="monthRevenue">0</div>
@@ -386,17 +666,15 @@ button:focus-visible, a:focus-visible {
       <a href="archive.html" style="font-size:0.85rem; color:#3b82f6; text-decoration:none; font-weight:600;">عرض الكل ←</a>
     </div>
     
-    <div class="transaction-list" id="transactionList">
-      <!-- Dynamic content -->
-    </div>
+    <div class="transaction-list" id="transactionList"></div>
   </div>
 
 </main>
 
 <!-- FAB -->
-<button class="fab" onclick="openAddPatient()" aria-label="إضافة مريض جديد">➕</button>
+<!-- <button class="fab" onclick="openAddPatient()" aria-label="إضافة مريض جديد">➕</button> -->
 
-<!-- Bottom Navigation -->
+<!-- Bottom Navigation - نفس تنسيق الفوتر الأصلي -->
 <nav class="bottom-nav">
   <a href="home.html" class="nav-item active" aria-current="page"><span class="nav-icon">🏠</span>الرئيسية</a>
   <a href="add-patient.html" class="nav-item"><span class="nav-icon">➕</span>مريض</a>
@@ -416,7 +694,7 @@ function toggleTheme() {
   html.setAttribute('data-theme', next);
   btn.textContent = next === 'light' ? '🌙' : '☀️';
   localStorage.setItem('theme', next);
-  showToast(next === 'light' ? '🌞 تم تفعيل النمط النهاري' : '🌙 تم تفعيل النمط الليلي');
+  // ✅ تم إزالة استدعاء showToast حسب الطلب
 }
 
 // ========== Sidebar Toggle ==========
@@ -428,14 +706,7 @@ function toggleSidebar() {
   document.body.style.overflow = sb.classList.contains('open') ? 'hidden' : '';
 }
 
-// ========== Toast Notification ==========
-function showToast(msg, type = 'success') {
-  const toast = document.getElementById('toast');
-  document.getElementById('toast-msg').textContent = msg;
-  toast.className = `toast ${type}`;
-  toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), 3500);
-}
+// ✅ تم حذف نظام Toast بالكامل حسب الطلب
 
 // ========== View Section ==========
 function viewSection(section) {
@@ -446,31 +717,23 @@ function viewSection(section) {
     expenses: '🧾 جاري عرض تفاصيل المصروفات...',
     monthly: '📊 جاري عرض التقرير الشهري...'
   };
-  showToast(sections[section] || 'جاري التحميل...', 'info');
+  // ✅ تم إزالة التنبيهات - يمكن إضافة منطق آخر هنا
+  console.log(sections[section] || 'جاري التحميل...');
 }
 
 // ========== Add Patient ==========
 function openAddPatient() {
-  showToast('➕ جاري فتح نموذج إضافة مريض...', 'info');
-  setTimeout(() => showToast('✅ تم فتح النموذج', 'success'), 800);
+  // ✅ تم إزالة showToast
+  console.log('➕ جاري فتح نموذج إضافة مريض...');
 }
 
-// ========== Refresh Data ==========
-function refreshData() {
-  showToast('🔄 جاري تحديث البيانات...', 'info');
-  setTimeout(() => {
-    calculateStats();
-    loadTransactions();
-    showToast('✅ تم تحديث جميع البيانات', 'success');
-  }, 1200);
-}
+// ✅ تم حذف دالة refreshData مع زر التحديث
 
-// ========== Calculate Stats - NUMBERS IN ENGLISH FORMAT ==========
+// ========== Calculate Stats ==========
 function calculateStats() {
   const patients = JSON.parse(localStorage.getItem('patients') || '[]');
   const expenses = JSON.parse(localStorage.getItem('expenses') || '[]');
   
-  // استخدام 'en-US' لضمان ظهور الأرقام بالإنجليزية فقط
   document.getElementById('totalCustomers').textContent = patients.length.toLocaleString('en-US');
   
   const today = new Date().toDateString();
@@ -506,9 +769,9 @@ function loadTransactions() {
   const recent = patients.slice(-5).reverse();
   
   if (recent.length === 0) {
-    container.innerHTML = `<div style="text-align:center;padding:40px;color:var(--text-muted)">
-      <div style="font-size:3rem;margin-bottom:12px">👁️</div>
-      <p>لا توجد عمليات حديثة</p>
+    container.innerHTML = `<div style="text-align:center;padding:40px;color:var(--text-muted);background:var(--bg-surface);border:1px solid var(--border-light);border-radius:var(--radius-lg);">
+      <div style="font-size:2.5rem;margin-bottom:12px">👁️</div>
+      <p style="font-size:0.95rem">لا توجد عمليات حديثة</p>
     </div>`;
     return;
   }
@@ -532,7 +795,7 @@ function loadTransactions() {
 }
 
 function viewPatient(id) {
-  if (id) showToast('👁️ جاري عرض تفاصيل المريض...', 'info');
+  if (id) console.log('👁️ جاري عرض تفاصيل المريض:', id);
 }
 
 // ========== Initialize ==========
@@ -552,7 +815,7 @@ function viewPatient(id) {
   
   calculateStats();
   loadTransactions();
-  setTimeout(() => showToast('👁️ عيادة الأثير جاهزة'), 600);
+  // ✅ تم إزالة showToast من التهيئة
   
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && document.getElementById('sidebar')?.classList.contains('open')) toggleSidebar();
