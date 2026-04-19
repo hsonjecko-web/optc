@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>The Sovereign Ledger - Premium Edition</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    /* ===============================
+       🎨 المتغيرات - تصميم رسمي احترافي
+       =============================== */
+    :root {
+      /* الوضع الداكن - رسمي وهادئ */
+      --bg-page: #0f172a;
+      --bg-container: #1e293b;
+      --bg-card: #1e293b;
+      --bg-input: #334155;
+      
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      
+      --border-color: #334155;
+      --border-light: #475569;
+      
+      --accent-primary: #3b82f6;
+      --accent-hover: #2563eb;
+      --accent-light: rgba(59, 130, 246, 0.1);
+      
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 14px;
+      --radius-full: 9999px;
+      
+      --transition: all 0.15s ease-in-out;
+      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    [data-theme="light"] {
+      /* الوضع النهاري - نظيف واحترافي */
+      --bg-page: #f8fafc;
+      --bg-container: #ffffff;
+      --bg-card: #ffffff;
+      --bg-input: #f1f5f9;
+      
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #64748b;
+      
+      --border-color: #e2e8f0;
+      --border-light: #cbd5e1;
+      
+      --accent-primary: #2563eb;
+      --accent-hover: #1d4ed8;
+      --accent-light: rgba(37, 99, 235, 0.08);
+      
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.03);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg-page);
+      color: var(--text-primary);
+      transition: var(--transition);
+      overflow-x: hidden;
+      min-height: 100vh;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ===============================
+       📂 الشريط الجانبي - تصميم رسمي
+       =============================== */
+    .sidebar-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(4px);
+      z-index: 1100;
+      opacity: 0; visibility: hidden;
+      transition: var(--transition);
+    }
+    .sidebar-overlay.active { opacity: 1; visibility: visible; }
+
+    .sidebar {
+      position: fixed; top: 0; right: 0; bottom: 0;
+      width: 240px;
+      background: var(--bg-container);
+      border-left: 1px solid var(--border-color);
+      z-index: 1200;
+      transform: translateX(100%);
+      transition: transform 0.25s ease;
+      display: flex; flex-direction: column;
+      padding: 16px 12px;
+      box-shadow: var(--shadow-lg);
+    }
+    .sidebar.active { transform: translateX(0); }
+
+    .sidebar-header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 4px 8px 16px;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 12px;
+    }
+    .sidebar-header h2 { font-size: 15px; font-weight: 600; color: var(--text-primary); letter-spacing: -0.01em; }
+    .sidebar-close { 
+      width: 32px; height: 32px; background: var(--bg-input); border: none; 
+      color: var(--text-secondary); cursor: pointer; border-radius: var(--radius-sm); 
+      display: flex; align-items: center; justify-content: center;
+      transition: var(--transition); font-size: 18px;
+    }
+    .sidebar-close:hover { background: var(--border-color); color: var(--text-primary); }
+
+    .sidebar-nav { display: flex; flex-direction: column; gap: 4px; }
+    
+    .sidebar-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 11px 12px; border-radius: var(--radius-md);
+      color: var(--text-secondary); text-decoration: none;
+      font-size: 13px; font-weight: 500;
+      transition: var(--transition); cursor: pointer;
+      border: 1px solid transparent;
+    }
+    .sidebar-item:hover { background: var(--accent-light); color: var(--accent-primary); }
+    .sidebar-item.active {
+      background: var(--accent-light); color: var(--accent-primary);
+      border-color: var(--accent-primary); font-weight: 600;
+    }
+    .sidebar-item .material-icons { font-size: 19px; transition: var(--transition); opacity: 0.9; }
+    .sidebar-item.active .material-icons, .sidebar-item:hover .material-icons { opacity: 1; }
+    
+    .sidebar-divider { height: 1px; background: var(--border-color); margin: 8px 4px; }
+    .sidebar-item.logout { margin-top: auto; color: var(--danger); }
+    .sidebar-item.logout:hover { background: rgba(239, 68, 68, 0.08); }
+
+    /* ===============================
+       📱 الهيكل العام
+       =============================== */
+    .app-container { max-width: 480px; margin: 0 auto; min-height: 100vh; position: relative; padding-bottom: 75px; }
+    
+    .app-header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 12px 16px; background: var(--bg-container);
+      position: sticky; top: 0; z-index: 100;
+      border-bottom: 1px solid var(--border-color);
+      transition: var(--transition);
+    }
+    
+    .logo { display: flex; flex-direction: column; gap: 2px; }
+    .logo h1 { font-size: 15px; font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; }
+    .logo span { font-size: 11px; color: var(--text-muted); font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+    .header-actions { display: flex; align-items: center; gap: 8px; }
+
+    /* ===============================
+       🔍 زر البحث - تصميم رسمي
+       =============================== */
+    .search-btn {
+      width: 36px; height: 36px; background: var(--bg-input);
+      border: 1px solid var(--border-color); border-radius: var(--radius-md);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; color: var(--text-secondary); transition: var(--transition);
+    }
+    .search-btn:hover { background: var(--border-light); color: var(--text-primary); border-color: var(--border-light); }
+    .search-btn .material-icons { font-size: 18px; }
+
+    .search-dropdown {
+      position: absolute; top: calc(100% + 8px); left: 50%;
+      transform: translateX(-50%) translateY(-8px); transform-origin: top center;
+      background: var(--bg-container); border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg); padding: 12px;
+      width: 240px; opacity: 0; visibility: hidden;
+      transition: all 0.15s ease; z-index: 90; box-shadow: var(--shadow-lg);
+    }
+    .search-dropdown.active { transform: translateX(-50%) translateY(0); opacity: 1; visibility: visible; }
+    .search-dropdown input {
+      width: 100%; padding: 10px 14px 10px 36px;
+      border: 1px solid var(--border-color); border-radius: var(--radius-md);
+      background: var(--bg-input); color: var(--text-primary);
+      font-size: 13px; outline: none; transition: var(--transition);
+    }
+    .search-dropdown input:focus { border-color: var(--accent-primary); box-shadow: 0 0 0 3px var(--accent-light); }
+    .search-dropdown input::placeholder { color: var(--text-muted); }
+    .search-dropdown .search-icon {
+      position: absolute; right: 22px; top: 50%;
+      transform: translateY(-50%); color: var(--text-muted);
+      font-size: 18px; pointer-events: none;
+    }
+
+    /* ===============================
+       🎚️ زر التبديل - تصميم رسمي
+       =============================== */
+    .theme-switch {
+      display: flex; align-items: center; gap: 8px;
+      padding: 6px 10px; background: var(--bg-input);
+      border: 1px solid var(--border-color); border-radius: var(--radius-full);
+      cursor: pointer; transition: var(--transition);
+    }
+    .theme-switch:hover { border-color: var(--border-light); }
+    .theme-switch input { display: none; }
+    
+    .switch-track {
+      width: 44px; height: 24px; background: var(--border-color);
+      border-radius: var(--radius-full); position: relative; transition: var(--transition);
+    }
+    .switch-thumb {
+      position: absolute; top: 2px; left: 2px;
+      width: 20px; height: 20px; background: var(--bg-container);
+      border-radius: 50%; transition: var(--transition); box-shadow: var(--shadow-sm);
+    }
+    .theme-switch input:checked + .switch-track { background: var(--accent-primary); }
+    .theme-switch input:checked + .switch-track .switch-thumb { transform: translateX(20px); }
+    .theme-switch .material-icons { font-size: 16px; color: var(--text-muted); transition: var(--transition); }
+    .theme-switch input:checked ~ .material-icons:last-child { color: var(--accent-primary); }
+    .theme-switch:not(:has(input:checked)) .material-icons:first-child { color: var(--accent-primary); }
+
+    /* ===============================
+       🎴 البطاقات - تصميم رسمي مع تدرجات خفيفة
+       =============================== */
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 12px; padding: 16px;
+    }
+    
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      display: flex; flex-direction: column; gap: 10px;
+      transition: var(--transition);
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    /* ✨ تدرجات خفيفة ومنسقة للكروت - الوضع الداكن */
+    .card-1 { background: linear-gradient(135deg, rgba(59,130,246,0.08) 0%, rgba(59,130,246,0.02) 100%); }
+    .card-2 { background: linear-gradient(135deg, rgba(16,185,129,0.08) 0%, rgba(16,185,129,0.02) 100%); }
+    .card-3 { background: linear-gradient(135deg, rgba(245,158,11,0.08) 0%, rgba(245,158,11,0.02) 100%); }
+    .card-4 { background: linear-gradient(135deg, rgba(139,92,246,0.08) 0%, rgba(139,92,246,0.02) 100%); }
+    .card-5 { background: linear-gradient(135deg, rgba(6,182,212,0.08) 0%, rgba(6,182,212,0.02) 100%); }
+    .card-6 { background: linear-gradient(135deg, rgba(239,68,68,0.08) 0%, rgba(239,68,68,0.02) 100%); animation: pulse 3s infinite; }
+    
+    /* ✨ تدرجات خفيفة ومنسقة للكروت - الوضع النهاري */
+    [data-theme="light"] .card-1 { background: linear-gradient(135deg, rgba(59,130,246,0.06) 0%, rgba(255,255,255,0) 100%); }
+    [data-theme="light"] .card-2 { background: linear-gradient(135deg, rgba(16,185,129,0.06) 0%, rgba(255,255,255,0) 100%); }
+    [data-theme="light"] .card-3 { background: linear-gradient(135deg, rgba(245,158,11,0.06) 0%, rgba(255,255,255,0) 100%); }
+    [data-theme="light"] .card-4 { background: linear-gradient(135deg, rgba(139,92,246,0.06) 0%, rgba(255,255,255,0) 100%); }
+    [data-theme="light"] .card-5 { background: linear-gradient(135deg, rgba(6,182,212,0.06) 0%, rgba(255,255,255,0) 100%); }
+    [data-theme="light"] .card-6 { 
+      background: linear-gradient(135deg, rgba(239,68,68,0.06) 0%, rgba(255,255,255,0) 100%); 
+      animation: pulse-light 3s infinite; 
+    }
+    
+    .stat-card:hover {
+      border-color: var(--border-light);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+    
+    .stat-card .icon {
+      width: 40px; height: 40px;
+      border-radius: var(--radius-md);
+      background: var(--accent-light);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent-primary);
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .stat-card.critical .icon {
+      background: rgba(239, 68, 68, 0.1);
+      color: var(--danger);
+    }
+    
+    .stat-card .value {
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+    .stat-card .value span {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-right: 4px;
+    }
+    
+    .stat-card .label {
+      font-size: 12px;
+      color: var(--text-secondary);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    /* ألوان أيقونات الكروت */
+    .card-1 .icon { background: rgba(59, 130, 246, 0.12); color: #3b82f6; }
+    .card-2 .icon { background: rgba(16, 185, 129, 0.12); color: #10b981; }
+    .card-3 .icon { background: rgba(245, 158, 11, 0.12); color: #f59e0b; }
+    .card-4 .icon { background: rgba(139, 92, 246, 0.12); color: #8b5cf6; }
+    .card-5 .icon { background: rgba(6, 182, 212, 0.12); color: #06b6d4; }
+    .card-6 .icon { background: rgba(239, 68, 68, 0.12); color: #ef4444; }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 1px 2px rgba(0,0,0,0.05), 0 0 0 1px rgba(239,68,68,0.1); }
+      50% { box-shadow: 0 4px 12px rgba(0,0,0,0.1), 0 0 0 1px rgba(239,68,68,0.2); }
+    }
+    @keyframes pulse-light {
+      0%, 100% { box-shadow: 0 1px 2px rgba(0,0,0,0.03), 0 0 0 1px rgba(239,68,68,0.08); }
+      50% { box-shadow: 0 4px 12px rgba(0,0,0,0.06), 0 0 0 1px rgba(239,68,68,0.15); }
+    }
+
+    /* ===============================
+       ⚡ الإجراءات السريعة
+       =============================== */
+    .section-title {
+      font-size: 14px; font-weight: 600;
+      margin: 8px 16px 12px;
+      color: var(--text-primary);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .section-title::before {
+      content: ""; width: 3px; height: 14px;
+      background: var(--accent-primary);
+      border-radius: 2px;
+    }
+    
+    .actions-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 10px; padding: 0 16px 16px;
+    }
+    
+    .action-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 14px 10px;
+      display: flex; flex-direction: column;
+      align-items: center; gap: 8px;
+      cursor: pointer;
+      color: var(--text-primary);
+      transition: var(--transition);
+    }
+    .action-btn:hover {
+      border-color: var(--accent-primary);
+      background: var(--accent-light);
+      transform: translateY(-1px);
+    }
+    .action-btn .material-icons {
+      font-size: 22px;
+      color: var(--text-secondary);
+      transition: var(--transition);
+    }
+    .action-btn:hover .material-icons { color: var(--accent-primary); }
+    .action-btn span:last-child {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+    .action-btn:hover span:last-child { color: var(--accent-primary); }
+
+    /* ===============================
+       🧭 الفوتر - تصميم رسمي (نمط الراديو المبسط)
+       =============================== */
+    .app-footer {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      display: flex; justify-content: center;
+      padding: 8px 16px 12px;
+      background: linear-gradient(to top, var(--bg-container) 85%, transparent);
+      z-index: 1000; pointer-events: none;
+    }
+    
+    .radio-input {
+      display: flex; align-items: center; gap: 3px;
+      background: var(--bg-container);
+      border: 1px solid var(--border-color);
+      padding: 4px;
+      border-radius: var(--radius-lg);
+      width: 100%; max-width: 400px;
+      pointer-events: auto;
+      box-shadow: var(--shadow-md);
+    }
+    
+    .radio-input input[type="radio"] { display: none; }
+    
+    .radio-input .label {
+      flex: 1; height: 52px;
+      background: transparent;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 6px 4px;
+      transition: var(--transition);
+      border-radius: var(--radius-md);
+      position: relative;
+      cursor: pointer;
+    }
+    
+    .label .text {
+      color: var(--text-secondary);
+      font-size: 10px;
+      font-weight: 600;
+      transition: var(--transition);
+      display: flex; flex-direction: column;
+      align-items: center; gap: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+    .label .text .material-icons { font-size: 18px; transition: var(--transition); }
+    
+    /* حالة التحديد - نظيفة واحترافية */
+    .label:has(input[type="radio"]:checked) { background: var(--accent-light); }
+    .label:has(input[type="radio"]:checked) .text { color: var(--accent-primary); font-weight: 700; }
+    .label:has(input[type="radio"]:checked) .material-icons { transform: scale(1.05); }
+    
+    /* مؤشر التحديد السفلي */
+    .label:has(input[type="radio"]:checked)::after {
+      content: ""; position: absolute; bottom: 4px;
+      width: 20px; height: 3px;
+      background: var(--accent-primary);
+      border-radius: 2px;
+    }
+
+    /* ===============================
+       📱 تحسينات الجوال
+       =============================== */
+    @media (max-width: 480px) {
+      .stats-grid { gap: 10px; padding: 12px; }
+      .stat-card { padding: 14px; }
+      .stat-card .value { font-size: 18px; }
+      .stat-card .label { font-size: 11px; }
+      .label .text { font-size: 9px; }
+      .label .text .material-icons { font-size: 16px; }
+      .sidebar { width: 220px; }
+      .search-dropdown { width: 220px; }
+    }
+
+    /* ===============================
+       🎬 حركات ناعمة واحترافية
+       =============================== */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .stat-card, .action-btn {
+      animation: fadeIn 0.25s ease-out forwards;
+      opacity: 0;
+    }
+    .stat-card:nth-child(1) { animation-delay: 0.05s; opacity: 1; }
+    .stat-card:nth-child(2) { animation-delay: 0.1s; }
+    .stat-card:nth-child(3) { animation-delay: 0.15s; }
+    .stat-card:nth-child(4) { animation-delay: 0.2s; }
+    .stat-card:nth-child(5) { animation-delay: 0.25s; }
+    .stat-card:nth-child(6) { animation-delay: 0.3s; }
+  </style>
+</head>
+<body>
+
+  <!-- 📂 الشريط الجانبي -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <h2>القائمة</h2>
+      <button class="sidebar-close" id="closeSidebar">✕</button>
+    </div>
+    <nav class="sidebar-nav">
+      <a class="sidebar-item active"><span class="material-icons">settings</span>الإعدادات</a>
+      <a class="sidebar-item"><span class="material-icons">support_agent</span>الدعم الفني</a>
+      <div class="sidebar-divider"></div>
+      <a class="sidebar-item"><span class="material-icons">privacy_tip</span>الخصوصية</a>
+      <a class="sidebar-item"><span class="material-icons">gavel</span>شروط الاستخدام</a>
+      <a class="sidebar-item logout"><span class="material-icons">logout</span>تسجيل الخروج</a>
+    </nav>
+  </aside>
+
+  <!-- 📱 التطبيق -->
+  <div class="app-container">
+    <header class="app-header">
+      <button class="search-btn" id="menuBtn" aria-label="القائمة"><span class="material-icons">menu</span></button>
+      <div class="logo">
+        <h1>The Sovereign Ledger</h1>
+        <span>Premium Edition</span>
+      </div>
+      <div style="display:flex; gap:6px;">
+        <!-- 🔍 زر البحث -->
+        <div style="position:relative;">
+          <button class="search-btn" id="searchBtn" aria-label="بحث"><span class="material-icons">search</span></button>
+          <div class="search-dropdown" id="searchDropdown">
+            <span class="material-icons search-icon">search</span>
+            <input type="text" placeholder="ابحث..." id="searchInput" />
+          </div>
+        </div>
+        <!-- 🎚️ زر التبديل -->
+        <label class="theme-switch">
+          <input type="checkbox" id="themeSwitch" />
+          <div class="switch-track"><div class="switch-thumb"></div></div>
+          <span class="material-icons">dark_mode</span>
+          <span class="material-icons">light_mode</span>
+        </label>
+      </div>
+    </header>
+
+    <main>
+      <div class="stats-grid">
+        <div class="stat-card card-1">
+          <span class="material-icons icon">account_balance_wallet</span>
+          <div>
+            <div class="value">124,500,000 <span>د.ع</span></div>
+            <div class="label">إجمالي الأصول</div>
+          </div>
+        </div>
+        <div class="stat-card card-2">
+          <span class="material-icons icon">event_upcoming</span>
+          <div>
+            <div class="value">12,850,000 <span>د.ع</span></div>
+            <div class="label">مستحقات الشهر</div>
+          </div>
+        </div>
+        <div class="stat-card card-3">
+          <span class="material-icons icon">sync_alt</span>
+          <div>
+            <div class="value">482</div>
+            <div class="label">الأقساط النشطة</div>
+          </div>
+        </div>
+        <div class="stat-card card-4">
+          <span class="material-icons icon">group</span>
+          <div>
+            <div class="value">1,240</div>
+            <div class="label">قاعدة العملاء</div>
+          </div>
+        </div>
+        <div class="stat-card card-5">
+          <span class="material-icons icon">verified_user</span>
+          <div>
+            <div class="value">856</div>
+            <div class="label">إجمالي الكفلاء</div>
+          </div>
+        </div>
+        <div class="stat-card card-6 critical">
+          <span class="material-icons icon">warning</span>
+          <div>
+            <div class="value">24</div>
+            <div class="label">المتأخرات الحرجة</div>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="section-title">إجراءات سريعة</h2>
+      <div class="actions-grid">
+        <button class="action-btn"><span class="material-icons">person_add</span><span>إضافة عميل</span></button>
+        <button class="action-btn"><span class="material-icons">security</span><span>إضافة كفيل</span></button>
+        <button class="action-btn"><span class="material-icons">inventory_2</span><span>إضافة مواد</span></button>
+      </div>
+    </main>
+
+    <!-- 🧭 الفوتر -->
+    <footer class="app-footer">
+      <div class="radio-input">
+        <label class="label"><input type="radio" name="nav" value="home" checked /><span class="text"><span class="material-icons">home</span><span>الرئيسية</span></span></label>
+        <label class="label"><input type="radio" name="nav" value="installments" /><span class="text"><span class="material-icons">reorder</span><span>الأقساط</span></span></label>
+        <label class="label"><input type="radio" name="nav" value="add" /><span class="text"><span class="material-icons">add</span><span>جديد</span></span></label>
+        <label class="label"><input type="radio" name="nav" value="payments" /><span class="text"><span class="material-icons">payments</span><span>مدفوعات</span></span></label>
+        <label class="label"><input type="radio" name="nav" value="reports" /><span class="text"><span class="material-icons">analytics</span><span>تقارير</span></span></label>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // 🌓 تبديل الوضع
+    const themeSwitch = document.getElementById('themeSwitch');
+    const html = document.documentElement;
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    html.setAttribute('data-theme', savedTheme);
+    themeSwitch.checked = (savedTheme === 'light');
+    themeSwitch.addEventListener('change', function() {
+      const t = this.checked ? 'light' : 'dark';
+      html.setAttribute('data-theme', t);
+      localStorage.setItem('theme', t);
+    });
+
+    // 🔍 البحث
+    const searchBtn = document.getElementById('searchBtn');
+    const searchDropdown = document.getElementById('searchDropdown');
+    const searchInput = document.getElementById('searchInput');
+    searchBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const active = searchDropdown.classList.toggle('active');
+      if(active) setTimeout(() => searchInput.focus(), 100);
+    });
+    document.addEventListener('click', function(e) {
+      if(!e.target.closest('.search-btn') && !e.target.closest('.search-dropdown')) {
+        searchDropdown.classList.remove('active');
+      }
+    });
+
+    // 📂 السايدبار
+    const menuBtn = document.getElementById('menuBtn');
+    const closeSidebar = document.getElementById('closeSidebar');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    const openSB = () => { sidebar.classList.add('active'); overlay.classList.add('active'); };
+    const closeSB = () => { sidebar.classList.remove('active'); overlay.classList.remove('active'); };
+    menuBtn.addEventListener('click', openSB);
+    closeSidebar.addEventListener('click', closeSB);
+    overlay.addEventListener('click', closeSB);
+
+    // 🎯 تفعيل عناصر السايدبار
+    document.querySelectorAll('.sidebar-item').forEach(item => {
+      item.addEventListener('click', function(e) {
+        if(!this.classList.contains('logout')) {
+          document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
+          this.classList.add('active');
+        }
+      });
+    });
+
+    // 🎬 ظهور العناصر عند التحميل
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.stat-card, .action-btn').forEach((el, i) => {
+        setTimeout(() => { el.style.opacity = '1'; }, 50 + i * 40);
+      });
+    });
+  </script>
+</body>
+</html>

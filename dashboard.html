@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>عيادة الأثير - لوحة التحكم</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-page: #f8fafc;
+  --bg-surface: #ffffff;
+  --bg-surface-hover: #f1f5f9;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  --success: #10b981;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --border-light: #e2e8f0;
+  --grad-brand: linear-gradient(135deg, #6366f1, #8b5cf6);
+  --shadow-card: 0 10px 25px rgba(0,0,0,0.12);
+  --shadow-hover: 0 20px 40px rgba(0,0,0,0.15);
+  --radius-md: 16px;
+  --radius-lg: 20px;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="dark"] {
+  --bg-page: #0b1120;
+  --bg-surface: #111827;
+  --bg-surface-hover: #1f2937;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --border-light: #1e293b;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family:'Cairo',sans-serif;
+  background:var(--bg-page);
+  color:var(--text-primary);
+  line-height:1.6;
+  overflow-x:hidden;
+}
+
+.header {
+  position:sticky; top:0; z-index:100;
+  background:var(--bg-surface); border-bottom:1px solid var(--border-light);
+  padding:14px 18px; display:flex; align-items:center; justify-content:space-between;
+  box-shadow:var(--shadow-card);
+}
+.header-title {
+  font-size:1.1rem; font-weight:700; display:flex; align-items:center; gap:8px;
+  background:var(--grad-brand); -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+}
+.header-title::before { content:'📊'; font-size:1.2rem; }
+.header-btn {
+  background:var(--bg-surface-hover); border:1px solid var(--border-light); border-radius:12px;
+  padding:10px 14px; cursor:pointer; transition:var(--transition);
+}
+.header-btn:hover { background:var(--grad-brand); color:white; border-color:transparent; }
+
+.content { padding:20px; max-width:1000px; margin:0 auto; }
+
+.hero {
+  text-align:center; padding:40px 30px; background:var(--bg-surface); border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-card); margin-bottom:40px;
+}
+.hero h1 { 
+  font-size:2.5rem; font-weight:800; margin-bottom:16px; 
+  background:var(--grad-brand); -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+}
+.hero p { font-size:1.1rem; color:var(--text-secondary); max-width:600px; margin:0 auto; }
+
+.stats-grid {
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:20px; margin-bottom:40px;
+}
+.stat-card {
+  background:var(--bg-surface); border-radius:var(--radius-lg); padding:24px; text-align:center;
+  box-shadow:var(--shadow-card); border:2px solid var(--border-light); transition:var(--transition);
+}
+.stat-card:hover { transform:translateY(-6px); box-shadow:var(--shadow-hover); border-color:var(--grad-brand); }
+.stat-number { font-size:2.8rem; font-weight:800; margin-bottom:8px; }
+.stat-cyan .stat-number { background:var(--grad-brand); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.stat-purple .stat-number { color:#8b5cf6; }
+.stat-green .stat-number { color:#10b981; }
+.stat-gold .stat-number { color:#eab308; }
+.stat-label { font-size:1rem; font-weight:600; color:var(--text-secondary); }
+
+.control-section {
+  background:var(--bg-surface); border-radius:var(--radius-lg); padding:30px; box-shadow:var(--shadow-card);
+  margin-bottom:30px;
+}
+.control-section h3 {
+  font-size:1.5rem; font-weight:700; margin-bottom:24px; display:flex; align-items:center; gap:12px;
+  background:var(--grad-brand); -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+}
+.control-grid {
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:20px;
+}
+
+.toggle-group {
+  background:var(--bg-surface-hover); border-radius:var(--radius-md); padding:20px; border:1px solid var(--border-light);
+}
+.toggle-item {
+  display:flex; align-items:center; justify-content:space-between; padding:14px 0; border-bottom:1px solid var(--border-light);
+  transition:var(--transition);
+}
+.toggle-item:last-child { border-bottom:none; }
+.toggle-item:hover { background:var(--bg-page); border-radius:8px; padding-left:12px; padding-right:12px; }
+.toggle-label { font-weight:600; }
+.toggle-switch {
+  position:relative; display:inline-block; width:54px; height:30px;
+}
+.toggle-switch input { opacity:0; width:0; height:0; }
+.slider {
+  position:absolute; top:0; right:0; width:100%; height:100%; background:var(--border-light);
+  border-radius:30px; bottom:0; transition:var(--transition); cursor:pointer;
+}
+.slider:before {
+  position:absolute; content:""; height:24px; width:24px; right:3px; bottom:3px;
+  background:white; transition:var(--transition); border-radius:50%; box-shadow:0 2px 6px rgba(0,0,0,0.2);
+}
+input:checked + .slider { background:var(--success); }
+input:checked + .slider:before { transform:translateX(-24px); }
+[dir="ltr"] .slider:before { left:3px; right:auto; }
+[dir="ltr"] input:checked + .slider:before { transform:translateX(24px); }
+
+.save-section {
+  text-align:center; padding:30px; background:var(--bg-surface); border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-card); border-top:4px solid var(--grad-brand);
+}
+.btn-save {
+  padding:16px 40px; background:var(--grad-brand); color:white; border:none;
+  border-radius:var(--radius-md); font-size:1.1rem; font-weight:700; font-family:'Cairo',sans-serif;
+  cursor:pointer; transition:var(--transition); box-shadow:0 8px 25px rgba(99,102,241,0.4);
+}
+.btn-save:hover {
+  transform:translateY(-3px); box-shadow:0 12px 35px rgba(99,102,241,0.55);
+}
+
+@media(max-width:640px) {
+  .stats-grid { grid-template-columns:1fr; }
+  .control-grid { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+  <button class="header-btn" onclick="history.back()">←</button>
+  <h1 class="header-title">لوحة التحكم</h1>
+  <button class="header-btn" onclick="toggleTheme()">🌙</button>
+</header>
+
+<!-- Main Content -->
+<main class="content">
+
+<!-- Hero -->
+<section class="hero">
+  <h1>📊 التحكم الكامل</h1>
+  <p>فعّل أو عطّل أي صفحة/زر حسب احتياجاتك</p>
+</section>
+
+<!-- إحصائيات التحكم -->
+<div class="stats-grid">
+  <div class="stat-card stat-cyan">
+    <div class="stat-number" id="activePages">8</div>
+    <div>صفحات مفعّلة</div>
+  </div>
+  <div class="stat-card stat-purple">
+    <div class="stat-number" id="totalPages">10</div>
+    <div>إجمالي الصفحات</div>
+  </div>
+  <div class="stat-card stat-green">
+    <div class="stat-number" id="activeBtns">25</div>
+    <div>أزرار مفعّلة</div>
+  </div>
+  <div class="stat-card stat-gold">
+    <div class="stat-number" id="quickActions">3</div>
+    <div>إجراءات سريعة</div>
+  </div>
+</div>
+
+<!-- تحكم الصفحات -->
+<div class="control-section">
+  <h3><span style="font-size:1.2rem;">📄</span>الصفحات الرئيسية</h3>
+  <div class="control-grid">
+    
+    <div class="toggle-group">
+      <h4 style="font-size:1.1rem; margin-bottom:16px; color:var(--text-primary);">الصفحات الأساسية</h4>
+      <div class="toggle-item">
+        <span class="toggle-label">🏠 الصفحة الرئيسية</span>
+        <label class="toggle-switch">
+          <input type="checkbox" id="homePage" checked onchange="updateControl('homePage', this.checked)">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="toggle-item">
+        <span class="toggle-label">➕ إضافة مريض</span>
+        <label class="toggle-switch">
+          <input type="checkbox" id="addPatient" checked onchange="updateControl('addPatient', this.checked)">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="toggle-item">
+        <span class="toggle-label">📁 أرشيف المرضى</span>
+        <label class="toggle-switch">
+          <input type="checkbox" id="archive" checked onchange="updateControl('archive', this.checked)">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+    
+    <div class="toggle-group">
+      <h4 style="font-size:1.1rem; margin-bottom:16px; color:var(--text-primary);">الصفحات الإدارية</h4>
+      <div class="toggle-item">
+        <span class="toggle-label">💰 المصروفات</span>
+        <label class="toggle-switch">
+          <input type="checkbox" id="expenses" checked onchange="updateControl('expenses', this.checked)">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="toggle-item">
+        <span class="toggle-label">📦 المخزون</span>
+        <label class="toggle-switch">
+          <input type="checkbox" id="inventory" checked onchange="updateControl('inventory', this.checked)">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="toggle-item">
+        <span class="toggle-label">📊 التقارير</span>
+        <label class="toggle-switch">
+          <input type="checkbox" id="reports" checked onchange="updateControl('reports', this.checked)">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+<!-- حفظ الإعدادات -->
+<div class="save-section">
+  <button class="btn-save" onclick="saveDashboardSettings()">
+    💾 حفظ إعدادات التحكم
+  </button>
+  <p style="margin-top:16px; color:var(--text-muted); font-size:0.9rem;">
+    سيتم تطبيق التغييرات تلقائياً على جميع الصفحات
+  </p>
+</div>
+
+</main>
+
+<script>
+// تحميل الإعدادات
+function loadDashboardSettings() {
+  const controls = JSON.parse(localStorage.getItem('dashboardControls') || '{}');
+  
+  // تطبيق الإعدادات على الـ toggles
+  Object.keys(controls).forEach(key => {
+    const toggle = document.getElementById(key);
+    if (toggle) toggle.checked = controls[key];
+  });
+  
+  updateStats();
+}
+
+// حفظ الإعدادات
+function updateControl(key, value) {
+  const controls = JSON.parse(localStorage.getItem('dashboardControls') || '{}');
+  controls[key] = value;
+  localStorage.setItem('dashboardControls', JSON.stringify(controls));
+  updateStats();
+}
+
+function saveDashboardSettings() {
+  // حفظ فوري (يحدث تلقائياً)
+  updateStats();
+  alert('✅ تم حفظ إعدادات التحكم - سيتم التطبيق في كل الصفحات');
+}
+
+// تحديث الإحصائيات
+function updateStats() {
+  const controls = JSON.parse(localStorage.getItem('dashboardControls') || '{}');
+  const allPages = ['homePage', 'addPatient', 'archive', 'expenses', 'inventory', 'reports'];
+  const activePages = allPages.filter(key => controls[key]).length;
+  
+  document.getElementById('activePages').textContent = activePages;
+  document.getElementById('totalPages').textContent = allPages.length;
+}
+
+// تهيئة الصفحة
+document.addEventListener('DOMContentLoaded', () => {
+  loadDashboardSettings();
+});
+</script>
+</body>
+</html>
+

@@ -17,7 +17,6 @@
   --border-light: #e2e8f0;
   --border-normal: #cbd5e1;
   
-  /* ألوان التدرج المميزة - نفس القالب الأصلي */
   --grad-cyan: linear-gradient(135deg, #06b5d4, #0891b2);
   --grad-purple: linear-gradient(135deg, #8b5cf6, #7c3aed);
   --grad-gold: linear-gradient(135deg, #eab308, #ca8a04);
@@ -63,7 +62,6 @@ body {
   overflow-x:hidden;
 }
 
-/* خلفية متدرجة ناعمة - نفس النمط الأصلي */
 body::before {
   content:'';
   position:fixed;
@@ -74,7 +72,6 @@ body::before {
   z-index:-1;
 }
 
-/* جزيئات خلفية متحركة - نفس النمط الأصلي */
 .particle {
   position:fixed;
   width:4px;
@@ -94,7 +91,7 @@ body::before {
   50%{transform:translateY(-20px) scale(1.3);opacity:0.7;}
 }
 
-/* ========== Header - نفس النمط الأصلي ========== */
+/* ========== Header ========== */
 .header {
   position:sticky;
   top:0;
@@ -159,7 +156,7 @@ body::before {
   color:#2563eb;
 }
 
-/* ========== Sidebar - نفس النمط الأصلي ========== */
+/* ========== Sidebar ========== */
 .sidebar-overlay {
   position:fixed;
   inset:0;
@@ -287,7 +284,7 @@ body::before {
   margin:0 auto;
 }
 
-/* ========== Choice Cards - نفس نمط البطاقات الأصلي ========== */
+/* ========== Choice Cards ========== */
 .choice-grid {
   display:grid;
   grid-template-columns:repeat(auto-fit, minmax(140px, 1fr));
@@ -349,7 +346,7 @@ body::before {
   color:var(--text-primary);
 }
 
-/* ========== Form Card - نفس نمط البطاقات الأصلي ========== */
+/* ========== Form Card ========== */
 .form-card {
   background:var(--bg-surface);
   border:1px solid var(--border-light);
@@ -397,7 +394,7 @@ body::before {
   background:var(--grad-brand);
 }
 
-/* Form Fields - نفس تنسيق الحقول الأصلي */
+/* Form Fields */
 .form-grid { display:grid; gap:16px; }
 .form-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
 .form-group { text-align:right; }
@@ -427,7 +424,7 @@ body::before {
 }
 .form-textarea { min-height:80px; resize:vertical; }
 
-/* ========== Prescription Section - Eye Cards ========== */
+/* ========== Prescription Section ========== */
 .eye-card {
   border-radius:var(--radius-lg);
   padding:18px;
@@ -527,7 +524,86 @@ body::before {
   color:var(--text-primary);
 }
 
-/* PD Section */
+/* ========== 🔥 VA Comparison Card - جديد ========== */
+.va-compare-card {
+  background:linear-gradient(135deg, rgba(16,185,129,0.08), rgba(5,150,105,0.05));
+  border-radius:var(--radius-lg);
+  padding:18px;
+  border-left:4px solid var(--grad-green);
+  margin-bottom:16px;
+  position:relative;
+  overflow:hidden;
+}
+.va-compare-card::before {
+  content:'';
+  position:absolute;
+  top:-20%;
+  right:-15%;
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.15);
+  filter:blur(8px);
+  transition:var(--transition);
+}
+.va-compare-card:hover::before { transform:scale(1.2); }
+
+.va-compare-header {
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-bottom:16px;
+}
+.va-compare-header .eye-icon { color:#10b981; font-size:1.3rem; }
+.va-compare-title {
+  font-size:1.05rem;
+  font-weight:700;
+  color:#047857;
+}
+
+.va-compare-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+}
+.va-compare-item {
+  background:var(--bg-surface);
+  border-radius:var(--radius-md);
+  padding:14px;
+  border:1px solid var(--border-light);
+}
+.va-compare-item label {
+  display:block;
+  font-size:0.8rem;
+  font-weight:600;
+  color:var(--text-secondary);
+  margin-bottom:8px;
+  text-align:center;
+}
+.va-input-group {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+}
+.va-input {
+  width:80px;
+  padding:10px;
+  border:1px solid var(--border-normal);
+  border-radius:var(--radius-sm);
+  text-align:center;
+  font-size:1rem;
+  font-weight:700;
+  background:var(--bg-surface-hover);
+  color:var(--text-primary);
+}
+.va-input:focus {
+  border-color:#10b981;
+  box-shadow:0 0 0 3px rgba(16,185,129,0.15);
+  background:var(--bg-surface);
+}
+
+/* ========== PD Section ========== */
 .pd-card {
   background:linear-gradient(135deg, rgba(245,158,11,0.08), rgba(217,119,6,0.05));
   border-radius:var(--radius-lg);
@@ -574,10 +650,10 @@ body::before {
   gap:12px;
 }
 
-/* Action Buttons - نفس نمط الأزرار الأصلي */
+/* Action Buttons */
 .action-grid {
   display:grid;
-  grid-template-columns:repeat(2,1fr);
+  grid-template-columns:repeat(3,1fr);
   gap:12px;
   margin-top:20px;
 }
@@ -586,7 +662,7 @@ body::before {
   border:none;
   border-radius:var(--radius-md);
   font-family:'Cairo',sans-serif;
-  font-size:0.95rem;
+  font-size:0.9rem;
   font-weight:700;
   cursor:pointer;
   transition:var(--transition);
@@ -629,6 +705,16 @@ body::before {
   box-shadow:0 8px 24px rgba(139,92,246,0.5);
   transform:translateY(-2px);
 }
+.action-btn.preview {
+  background:var(--grad-green);
+  color:#fff;
+  box-shadow:0 6px 18px rgba(16,185,129,0.35);
+}
+.action-btn.preview:hover {
+  filter:brightness(1.05);
+  box-shadow:0 8px 24px rgba(16,185,129,0.5);
+  transform:translateY(-2px);
+}
 .action-btn:active { transform:translateY(0) scale(0.98); }
 .action-btn.view {
   background:var(--bg-surface-hover);
@@ -641,7 +727,7 @@ body::before {
   transform:translateY(-2px);
 }
 
-/* ========== FAB Button - نفس النمط الأصلي ========== */
+/* ========== FAB Button ========== */
 .fab {
   position:fixed;
   bottom:90px;
@@ -667,7 +753,7 @@ body::before {
 }
 .fab:active { transform:scale(0.95); }
 
-/* ========== GLOWING BOTTOM NAV - نفس تنسيق الفوتر الأصلي ========== */
+/* ========== Bottom Nav ========== */
 .bottom-nav {
   position:fixed;
   bottom:0;
@@ -677,7 +763,7 @@ body::before {
   border-top:1px solid var(--border-light);
   display:flex;
   z-index:100;
-  padding:10px 0 env(safe-area-inset-bottom, 10px);
+  padding:7px 0 env(safe-area-inset-bottom, 10px);
   box-shadow:0 -4px 20px rgba(0,0,0,0.098);
 }
 .nav-item {
@@ -690,7 +776,7 @@ body::before {
   color:var(--text-muted);
   font-size:0.72rem;
   font-weight:500;
-  padding:8px 4px;
+  padding:4px 4px;
   transition:var(--transition);
   position:relative;
   border-radius:14px;
@@ -737,7 +823,7 @@ body::before {
   box-shadow:0 0 15px rgba(59,130,246,0.6), 0 0 25px rgba(139,92,246,0.3);
 }
 
-/* ========== Modal - نفس النمط الأصلي ========== */
+/* ========== Modal ========== */
 .modal-overlay {
   position:fixed;
   inset:0;
@@ -745,25 +831,26 @@ body::before {
   backdrop-filter:blur(4px);
   z-index:500;
   display:none;
-  align-items:flex-end;
+  align-items:center;
   justify-content:center;
+  padding:16px;
 }
 .modal-overlay.show { display:flex; animation:fadeIn 0.2s ease; }
 @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
 
 .modal {
   background:var(--bg-surface);
-  border-radius:var(--radius-lg) var(--radius-lg) 0 0;
-  padding:22px;
+  border-radius:var(--radius-lg);
+  padding:20px;
   width:100%;
-  max-width:480px;
-  max-height:85vh;
+  max-width:520px;
+  max-height:90vh;
   overflow-y:auto;
-  box-shadow:0 -10px 40px rgba(0,0,0,0.25);
-  animation:slideUp 0.3s ease;
+  box-shadow:0 10px 40px rgba(0,0,0,0.25);
+  animation:scaleIn 0.25s ease;
   position:relative;
 }
-@keyframes slideUp { from{transform:translateY(100%);} to{transform:translateY(0);} }
+@keyframes scaleIn { from{transform:scale(0.95);opacity:0;} to{transform:scale(1);opacity:1;} }
 
 .modal h3 {
   font-size:1.15rem;
@@ -771,11 +858,15 @@ body::before {
   margin-bottom:18px;
   text-align:center;
   color:var(--text-primary);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
 }
 .modal-close {
   position:absolute;
-  top:16px;
-  left:16px;
+  top:14px;
+  left:14px;
   background:transparent;
   border:none;
   font-size:1.3rem;
@@ -836,7 +927,22 @@ body::before {
   margin-top:2px;
 }
 
-/* ========== Success Indicator (بديل بسيط للتنبيهات) ========== */
+/* ========== Print Preview Modal ========== */
+.preview-container {
+  background:var(--bg-page);
+  border-radius:var(--radius-md);
+  padding:16px;
+  max-height:60vh;
+  overflow-y:auto;
+  border:1px solid var(--border-light);
+}
+.preview-container .a5-card {
+  transform:scale(0.6);
+  transform-origin:top center;
+  margin:0 auto;
+}
+
+/* ========== Success Indicator ========== */
 .success-indicator {
   display:none;
   align-items:center;
@@ -853,7 +959,7 @@ body::before {
 }
 .success-indicator.show { display:flex; }
 
-/* ========== Print Styles - A5 Card ========== */
+/* ========== Print Styles ========== */
 @media print {
   @page { size: A5; margin: 10mm; }
   body * { visibility: hidden; }
@@ -870,12 +976,10 @@ body::before {
   width: 148mm; min-height: 210mm; background: white; color: #1e293b;
   padding: 15mm; box-sizing: border-box; font-family: 'Cairo', sans-serif;
   border: 2px solid #06b6d4;
-  
 }
 .a5-card .header {
   text-align: center; padding-bottom: 12px; margin-bottom: 15px;
   border-bottom: 2px solid #06b6d4;
-  
 }
 .a5-card .clinic-name {
   font-size: 18px; font-weight: 800; color: #06b6d4;
@@ -934,7 +1038,7 @@ body::before {
   margin-top: 20px; padding-top: 4px;
 }
 
-/* ========== Responsive - نفس النمط الأصلي ========== */
+/* ========== Responsive ========== */
 @media(min-width:768px) {
   .content { padding:22px 28px; }
 }
@@ -942,6 +1046,7 @@ body::before {
   .form-row { grid-template-columns:1fr; }
   .prescription-grid { grid-template-columns:1fr; }
   .action-grid { grid-template-columns:1fr; }
+  .va-compare-grid { grid-template-columns:1fr; }
   .header-title { font-size:1rem; }
 }
 button:focus-visible,
@@ -961,17 +1066,17 @@ select:focus-visible {
 <div class="particle"></div>
 <div class="particle"></div>
 
-<!-- Success Indicator (بديل بسيط للتنبيهات) -->
+<!-- Success Indicator -->
 <div class="success-indicator" id="successIndicator">
   <span>✅</span>
   <span id="successMsg">تم الحفظ بنجاح</span>
 </div>
 
-<!-- Header - ✅ بدون زر التحديث -->
+<!-- Header -->
 <header class="header">
   <div class="header-right">
     <button class="back-btn" onclick="history.back()" aria-label="عودة">←</button>
-    <h1 class="header-title">إضافة مصروف</h1>
+    <h1 class="header-title">إضافة مريض</h1>
   </div>
   <div class="header-left">
     <button class="header-btn" onclick="toggleTheme()" id="themeBtn" title="تبديل النمط">🌙</button>
@@ -980,8 +1085,6 @@ select:focus-visible {
 
 <!-- Sidebar Overlay -->
 <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
-
-
 
 <!-- Main Content -->
 <main class="content">
@@ -1004,7 +1107,7 @@ select:focus-visible {
     </div>
   </div>
 
-  <!-- Patient Form Section (Hidden by default) -->
+  <!-- Patient Form Section -->
   <div id="patientFormSection" style="display:none;">
     
     <!-- Personal Info Card -->
@@ -1068,7 +1171,7 @@ select:focus-visible {
             </div>
           </div>
           <div class="prescription-field">
-            <label>ADD</label>
+            <label>ADD 🔧</label>
             <div class="stepper-group">
               <button class="stepper-btn" onclick="adjustAdd('rightAdd', -0.25)">−</button>
               <input type="text" id="rightAdd" class="stepper-value" readonly value="+0.00">
@@ -1114,7 +1217,7 @@ select:focus-visible {
             </div>
           </div>
           <div class="prescription-field">
-            <label>ADD</label>
+            <label>ADD 🔧</label>
             <div class="stepper-group">
               <button class="stepper-btn" onclick="adjustAdd('leftAdd', -0.25)">−</button>
               <input type="text" id="leftAdd" class="stepper-value" readonly value="+0.00">
@@ -1125,6 +1228,44 @@ select:focus-visible {
         <div class="form-group">
           <label for="leftVA">VA (حدة الإبصار)</label>
           <input type="text" id="leftVA" class="form-input" placeholder="مثال: 6/6">
+        </div>
+      </div>
+
+      <!-- 🔥 NEW: VA Comparison Card - بدون نظارة / بعد النظارة -->
+      <div class="va-compare-card">
+        <div class="va-compare-header">
+          <span class="eye-icon material-icons">👓</span>
+          <h4 class="va-compare-title">📊 مقارنة حدة الإبصار (VA)</h4>
+        </div>
+        <div class="va-compare-grid">
+          <!-- Right Eye VA -->
+          <div class="va-compare-item">
+            <label>👁️ العين اليمنى</label>
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <div>
+                <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:4px;">بدون نظارة</div>
+                <input type="text" id="rightVANoGlasses" class="va-input" placeholder="6/ـ" value="">
+              </div>
+              <div>
+                <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:4px;">بعد النظارة</div>
+                <input type="text" id="rightVAWithGlasses" class="va-input" placeholder="6/ـ" value="">
+              </div>
+            </div>
+          </div>
+          <!-- Left Eye VA -->
+          <div class="va-compare-item">
+            <label>👁️ العين اليسرى</label>
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <div>
+                <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:4px;">بدون نظارة</div>
+                <input type="text" id="leftVANoGlasses" class="va-input" placeholder="6/ـ" value="">
+              </div>
+              <div>
+                <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:4px;">بعد النظارة</div>
+                <input type="text" id="leftVAWithGlasses" class="va-input" placeholder="6/ـ" value="">
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -1158,92 +1299,130 @@ select:focus-visible {
         <span>📋</span><span>عرض الفحص القديم</span>
       </button>
 
-      <!-- Action Buttons -->
+      <!-- Action Buttons - مع زر المعاينة -->
       <div class="action-grid">
         <button class="action-btn save" onclick="savePatient()">
-          <span>💾</span><span>حفظ في الأرشيف</span>
+          <span>💾</span><span>حفظ</span>
+        </button>
+        <button class="action-btn preview" onclick="showPrintPreview()">
+          <span>🔍</span><span>معاينة</span>
         </button>
         <button class="action-btn print" onclick="printPrescription()">
-          <span>🖨️</span><span>طباعة (A5)</span>
+          <span>🖨️</span><span>طباعة</span>
         </button>
       </div>
     </div>
 
-  </div>
-
-  <!-- Print Area (A5) - Hidden until print -->
-  <div id="print-area" style="display:none;">
-    <div class="a5-card">
-      <div class="header">
-        <div class="optics-icon">👁️</div>
-        <div class="clinic-name" id="printClinicName">عيادة الأثير للبصريات</div>
-        <div class="clinic-info">
-          <div>📍 بغداد - المنصور - شارع 14 رمضان</div>
-          <div>📞 0770 123 4567</div>
-          <div>📱 @ethereal_optics</div>
-        </div>
-      </div>
-      
-      <div class="patient-section">
-        <div class="patient-title">👤 معلومات المريض</div>
-        <div class="patient-row"><span>الاسم:</span><span id="printName">-</span></div>
-        <div class="patient-row"><span>العمر:</span><span id="printAge">-</span></div>
-        <div class="patient-row"><span>العنوان:</span><span id="printAddress">-</span></div>
-        <div class="patient-row"><span>الهاتف:</span><span id="printPhone">-</span></div>
-        <div class="patient-row"><span>تاريخ الفحص:</span><span id="printExamDate">-</span></div>
-      </div>
-      
-      <table class="prescription-table">
-        <thead>
-          <tr><th>العين</th><th>SPH</th><th>CYL</th><th>AXIS</th><th>ADD</th><th>VA</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>👁️ يمنى</td>
-            <td id="printRightSph">-</td><td id="printRightCyl">-</td><td id="printRightAxis">-</td>
-            <td id="printRightAdd">-</td><td id="printRightVA">-</td>
-          </tr>
-          <tr>
-            <td>👁️ يسرى</td>
-            <td id="printLeftSph">-</td><td id="printLeftCyl">-</td><td id="printLeftAxis">-</td>
-            <td id="printLeftAdd">-</td><td id="printLeftVA">-</td>
-          </tr>
-        </tbody>
-      </table>
-      
-      <div class="pd-section">
-        <strong>📏 PD:</strong> <span id="printPD">-</span> mm
-      </div>
-      
-      <div class="next-visit">
-        📅 موعد الفحص القادم: <span id="printNextVisit">-</span>
-      </div>
-      
-      <div class="notes-section" id="printNotesSection" style="display:none;">
-        <div class="patient-title">📝 ملاحظات</div>
-        <div style="font-size:9px; color:#475569;" id="printNotes"></div>
-      </div>
-      
-      <div class="signature">
-        <div class="signature-line">توقيع فاحص البصر</div>
-        <div style="margin-top:4px; font-size:9px; color:#64748b;">د. سارة البصري - أخصائية بصريات</div>
-      </div>
-      
-      <div class="footer">
-        <div id="printFooter">✨ عيادة الأثير للبصريات - جميع الحقوق محفوظة ✨</div>
-      </div>
-    </div>
   </div>
 
 </main>
+
+<!-- Print Area (A5) - Hidden until print -->
+<div id="print-area" style="display:none;">
+  <div class="a5-card">
+    <div class="header">
+      <div class="optics-icon">👁️</div>
+      <div class="clinic-name" id="printClinicName">عيادة الأثير للبصريات</div>
+      <div class="clinic-info">
+        <div>📍 بغداد - المنصور - شارع 14 رمضان</div>
+        <div>📞 0770 123 4567</div>
+        <div>📱 @ethereal_optics</div>
+      </div>
+    </div>
+    
+    <div class="patient-section">
+      <div class="patient-title">👤 معلومات المريض</div>
+      <div class="patient-row"><span>الاسم:</span><span id="printName">-</span></div>
+      <div class="patient-row"><span>العمر:</span><span id="printAge">-</span></div>
+      <div class="patient-row"><span>العنوان:</span><span id="printAddress">-</span></div>
+      <div class="patient-row"><span>الهاتف:</span><span id="printPhone">-</span></div>
+      <div class="patient-row"><span>تاريخ الفحص:</span><span id="printExamDate">-</span></div>
+    </div>
+    
+    <table class="prescription-table">
+      <thead>
+        <tr><th>العين</th><th>SPH</th><th>CYL</th><th>AXIS</th><th>ADD</th><th>VA</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>👁️ يمنى</td>
+          <td id="printRightSph">-</td><td id="printRightCyl">-</td><td id="printRightAxis">-</td>
+          <td id="printRightAdd">-</td><td id="printRightVA">-</td>
+        </tr>
+        <tr>
+          <td>👁️ يسرى</td>
+          <td id="printLeftSph">-</td><td id="printLeftCyl">-</td><td id="printLeftAxis">-</td>
+          <td id="printLeftAdd">-</td><td id="printLeftVA">-</td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <!-- 🔥 VA Comparison in Print -->
+    <div style="margin:10px 0;padding:8px;background:#f8fafc;border-radius:6px;font-size:9px;">
+      <div style="font-weight:700;margin-bottom:6px;color:#047857;">📊 مقارنة VA:</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;">
+        <div>👁️ يمنى: <span id="printRightVANo">-</span> → <span id="printRightVAWith">-</span></div>
+        <div>👁️ يسرى: <span id="printLeftVANo">-</span> → <span id="printLeftVAWith">-</span></div>
+      </div>
+    </div>
+    
+    <div class="pd-section">
+      <strong>📏 PD:</strong> <span id="printPD">-</span> mm
+    </div>
+    
+    <div class="next-visit">
+      📅 موعد الفحص القادم: <span id="printNextVisit">-</span>
+    </div>
+    
+    <div class="notes-section" id="printNotesSection" style="display:none;">
+      <div class="patient-title">📝 ملاحظات</div>
+      <div style="font-size:9px; color:#475569;" id="printNotes"></div>
+    </div>
+    
+    <div class="signature">
+      <div class="signature-line">توقيع فاحص البصر</div>
+      <div style="margin-top:4px; font-size:9px; color:#64748b;">د. سارة البصري - أخصائية بصريات</div>
+    </div>
+    
+    <div class="footer">
+      <div id="printFooter">✨ عيادة الأثير للبصريات - جميع الحقوق محفوظة ✨</div>
+    </div>
+  </div>
+</div>
+
+<!-- 🔥 Print Preview Modal - جديد -->
+<div class="modal-overlay" id="printPreviewOverlay">
+  <div class="modal" style="max-width:600px;">
+    <button class="modal-close" onclick="closePrintPreview()" aria-label="إغلاق">✕</button>
+    <h3><span>🔍</span> معاينة قبل الطباعة</h3>
+    <div class="preview-container">
+      <div id="previewContent"></div>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:16px;">
+      <button class="action-btn preview" onclick="closePrintPreview()" style="flex:1;">
+        <span>✕</span><span>إغلاق</span>
+      </button>
+      <button class="action-btn print" onclick="confirmPrint()" style="flex:1;">
+        <span>🖨️</span><span>طباعة الآن</span>
+      </button>
+    </div>
+  </div>
+</div>
 
 <!-- Patient Selection Modal -->
 <div class="modal-overlay" id="patientSelectOverlay">
   <div class="modal">
     <button class="modal-close" onclick="closePatientSelect()">✕</button>
-    <h3>اختر المريض لتجديد الفحص</h3>
+    <h3>🔍 اختر المريض لتجديد الفحص</h3>
+    
+    <div class="search-box" style="margin-bottom:16px;">
+      <input type="text" id="patientSearchInput" placeholder="ابحث بالاسم أو الهاتف..." oninput="searchExistingPatients()" aria-label="بحث المرضى">
+      <span class="search-icon">🔍</span>
+    </div>
+    
     <div class="patient-list" id="patientListContainer"></div>
   </div>
+
 </div>
 
 <!-- Old Exam Modal -->
@@ -1255,7 +1434,7 @@ select:focus-visible {
   </div>
 </div>
 
-<!-- Bottom Navigation - نفس تنسيق الفوتر الأصلي -->
+<!-- Bottom Navigation -->
 <nav class="bottom-nav">
   <a href="home.html" class="nav-item"><span class="nav-icon">🏠</span>الرئيسية</a>
   <a href="add-patient.html" class="nav-item active" aria-current="page"><span class="nav-icon">➕</span>مريض</a>
@@ -1275,20 +1454,18 @@ function toggleTheme() {
   html.setAttribute('data-theme', next);
   btn.textContent = next === 'light' ? '🌙' : '☀️';
   localStorage.setItem('theme', next);
-  // ✅ تم إزالة استدعاء نظام التنبيهات
 }
 
 // ========== Sidebar Toggle ==========
 function toggleSidebar() {
   const sb = document.getElementById('sidebar');
   const ov = document.getElementById('sidebarOverlay');
-  sb.classList.toggle('open');
-  ov.classList.toggle('show');
-  document.body.style.overflow = sb.classList.contains('open') ? 'hidden' : '';
+  if(sb && ov) {
+    sb.classList.toggle('open');
+    ov.classList.toggle('show');
+    document.body.style.overflow = sb.classList.contains('open') ? 'hidden' : '';
+  }
 }
-
-// ✅ تم حذف نظام Toast بالكامل حسب الطلب
-// تم استبداله بمؤشر نجاح بسيط داخل الصفحة
 
 // ========== Show Success Indicator ==========
 function showSuccess(msg) {
@@ -1298,21 +1475,25 @@ function showSuccess(msg) {
   setTimeout(() => indicator.classList.remove('show'), 2500);
 }
 
-// ========== Value Steppers - WITH ENGLISH NUMBERS ==========
+// ========== Value Steppers - FIXED with English Numbers ==========
 function adjustValue(id, delta) {
   const input = document.getElementById(id);
-  let value = parseFloat(input.value) || 0;
+  if(!input) return;
+  let value = parseFloat(input.value.replace('+','').replace('-','')) || 0;
+  const isNegative = input.value.trim().startsWith('-');
+  if(isNegative) value = -value;
   value += delta;
   const max = id.includes('Sph') ? 25 : 8;
   const min = id.includes('Sph') ? -25 : -8;
   if (value > max) value = max;
   if (value < min) value = min;
   const sign = value >= 0 ? '+' : '';
-  input.value = sign + value.toFixed(2).toLocaleString('en-US');
+  input.value = sign + Math.abs(value).toFixed(2).toLocaleString('en-US');
 }
 
 function adjustAxis(id, delta) {
   const input = document.getElementById(id);
+  if(!input) return;
   let value = parseInt(input.value) || 0;
   value += delta;
   if (value > 180) value = 180;
@@ -1320,21 +1501,34 @@ function adjustAxis(id, delta) {
   input.value = value.toLocaleString('en-US');
 }
 
+// 🔥 FIXED: ADD Stepper Function
 function adjustAdd(id, delta) {
   const input = document.getElementById(id);
-  let value = parseFloat(input.value.replace('+', '')) || 0;
+  if(!input) return;
+  
+  // Parse current value - handle +0.00, -0.25, etc.
+  let currentValue = input.value.trim();
+  let value = parseFloat(currentValue.replace('+', '')) || 0;
+  
+  // Apply delta
   value += delta;
-  if (value < 0.50) value = 0.00;
+  
+  // Clamp between 0.00 and 4.00
+  if (value < 0) value = 0;
   if (value > 4.00) value = 4.00;
+  
+  // Format with + sign and 2 decimal places in English
   if (value === 0) {
     input.value = '+0.00';
   } else {
-    input.value = '+' + value.toFixed(2).toLocaleString('en-US');
+    const formatted = Math.abs(value).toFixed(2).toLocaleString('en-US');
+    input.value = '+' + formatted;
   }
 }
 
 function adjustPD(delta) {
   const input = document.getElementById('pdDisplay');
+  if(!input) return;
   let value = parseInt(input.textContent) || 62;
   value += delta;
   if (value > 75) value = 75;
@@ -1366,12 +1560,21 @@ function showNewPatientForm() {
 function resetPrescriptionFields() {
   ['rightSph','rightCyl','rightAxis','rightAdd','rightVA','leftSph','leftCyl','leftAxis','leftAdd','leftVA'].forEach(id => {
     const input = document.getElementById(id);
-    if (id.includes('Axis')) input.value = '0';
-    else if (id.includes('Add')) input.value = '+0.00';
-    else input.value = '+0.00';
+    if(input) {
+      if (id.includes('Axis')) input.value = '0';
+      else if (id.includes('Add')) input.value = '+0.00';
+      else input.value = '+0.00';
+    }
   });
-  document.getElementById('pdDisplay').textContent = '62';
-  document.getElementById('notes').value = '';
+  // Reset VA comparison fields
+  ['rightVANoGlasses','rightVAWithGlasses','leftVANoGlasses','leftVAWithGlasses'].forEach(id => {
+    const input = document.getElementById(id);
+    if(input) input.value = '';
+  });
+  const pd = document.getElementById('pdDisplay');
+  if(pd) pd.textContent = '62';
+  const notes = document.getElementById('notes');
+  if(notes) notes.value = '';
 }
 
 function showExistingPatients() {
@@ -1380,8 +1583,33 @@ function showExistingPatients() {
     console.log('❌ لا يوجد مرضى في الأرشيف');
     return;
   }
+  allPatients = patients; // Global for search
+  renderPatientList(patients); // Initial render
   
+  document.getElementById('patientSearchInput').value = ''; // Clear search
+  document.getElementById('patientSelectOverlay').classList.add('show');
+}
+
+function searchExistingPatients() {
+  const query = document.getElementById('patientSearchInput').value.toLowerCase().trim();
+  const filtered = allPatients.filter(p => 
+    (p.fullName?.toLowerCase().includes(query)) ||
+    (p.phone?.includes(query))
+  );
+  renderPatientList(filtered);
+}
+
+function renderPatientList(patients) {
   const container = document.getElementById('patientListContainer');
+  
+  if (patients.length === 0) {
+    container.innerHTML = `<div style="text-align:center;padding:30px;color:var(--text-muted);">
+      <div style="font-size:2.5rem;margin-bottom:8px">🔍</div>
+      <p style="font-size:0.9rem;">لا توجد نتائج مطابقة</p>
+    </div>`;
+    return;
+  }
+  
   container.innerHTML = patients.map(p => {
     const initials = p.fullName ? p.fullName.charAt(0).toUpperCase() : '?';
     const date = new Date(p.createdAt).toLocaleDateString('ar-IQ');
@@ -1396,8 +1624,6 @@ function showExistingPatients() {
     </div>
     `;
   }).join('');
-  
-  document.getElementById('patientSelectOverlay').classList.add('show');
 }
 
 function closePatientSelect() {
@@ -1444,58 +1670,104 @@ function showOldExam() {
   if (!oldExamData) return;
   
   const content = document.getElementById('oldExamContent');
+  const va = oldExamData.vaComparison || {};
+  
   content.innerHTML = `
-    <div style="text-align:center; font-size:0.8rem; color:var(--text-muted); margin-bottom:16px;">
-      تاريخ الفحص: ${new Date(oldExamData.createdAt).toLocaleDateString('ar-IQ')}
-    </div>
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px;">
-      <div style="background:var(--bg-surface-hover); border-radius:var(--radius-md); padding:12px; border-right:3px solid #06b6d4;">
-        <div style="font-size:0.85rem; font-weight:600; color:#06b6d4; margin-bottom:8px;">العين اليمنى</div>
-        <div style="font-size:0.85rem; display:flex; justify-content:space-between; margin:4px 0;">
-          <span style="color:var(--text-muted);">SPH:</span>
-          <span style="font-weight:600;">${oldExamData.rightEye?.sph || '0.00'}</span>
-        </div>
-        <div style="font-size:0.85rem; display:flex; justify-content:space-between; margin:4px 0;">
-          <span style="color:var(--text-muted);">CYL:</span>
-          <span style="font-weight:600;">${oldExamData.rightEye?.cyl || '0.00'}</span>
-        </div>
-        <div style="font-size:0.85rem; display:flex; justify-content:space-between; margin:4px 0;">
-          <span style="color:var(--text-muted);">AXIS:</span>
-          <span style="font-weight:600;">${oldExamData.rightEye?.axis || '0'}</span>
-        </div>
-        <div style="font-size:0.85rem; display:flex; justify-content:space-between; margin:4px 0;">
-          <span style="color:var(--text-muted);">ADD:</span>
-          <span style="font-weight:600;">${oldExamData.rightEye?.add || '+0.00'}</span>
-        </div>
+    <div style="text-align:center; margin-bottom:20px;">
+      <h4 style="font-size:1.1rem; font-weight:700; color:var(--text-primary); margin-bottom:8px;">
+        📋 الفحص السابق
+      </h4>
+      <div style="font-size:0.85rem; color:var(--text-muted);">
+        📅 ${new Date(oldExamData.createdAt).toLocaleDateString('ar-IQ')}
       </div>
-      <div style="background:var(--bg-surface-hover); border-radius:var(--radius-md); padding:12px; border-right:3px solid #8b5cf6;">
-        <div style="font-size:0.85rem; font-weight:600; color:#8b5cf6; margin-bottom:8px;">العين اليسرى</div>
-        <div style="font-size:0.85rem; display:flex; justify-content:space-between; margin:4px 0;">
-          <span style="color:var(--text-muted);">SPH:</span>
-          <span style="font-weight:600;">${oldExamData.leftEye?.sph || '0.00'}</span>
+    </div>
+    
+    <!-- 🔥 VA Comparison Card -->
+    ${va.rightNoGlasses || va.leftNoGlasses ? `
+    <div style="background:linear-gradient(135deg, rgba(16,185,129,0.1), rgba(5,150,105,0.08)); border-radius:var(--radius-lg); padding:16px; margin-bottom:16px; border-left:4px solid #10b981;">
+      <div style="font-size:1rem; font-weight:700; color:#047857; margin-bottom:12px; display:flex; align-items:center; gap:8px;">
+        👓 مقارنة حدة الإبصار (VA)
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+        <div style="text-align:center;">
+          <div style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:6px;">العين اليمنى</div>
+          <div style="font-size:1.1rem; font-weight:800; color:var(--text-primary);">
+            بدون: ${va.rightNoGlasses || '-'} → مع: ${va.rightWithGlasses || '-'}
+          </div>
         </div>
-        <div style="font-size:0.85rem; display:flex; justify-content:space-between; margin:4px 0;">
-          <span style="color:var(--text-muted);">CYL:</span>
-          <span style="font-weight:600;">${oldExamData.leftEye?.cyl || '0.00'}</span>
-        </div>
-        <div style="font-size:0.85rem; display:flex; justify-content:space-between; margin:4px 0;">
-          <span style="color:var(--text-muted);">AXIS:</span>
-          <span style="font-weight:600;">${oldExamData.leftEye?.axis || '0'}</span>
-        </div>
-        <div style="font-size:0.85rem; display:flex; justify-content:space-between; margin:4px 0;">
-          <span style="color:var(--text-muted);">ADD:</span>
-          <span style="font-weight:600;">${oldExamData.leftEye?.add || '+0.00'}</span>
+        <div style="text-align:center;">
+          <div style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:6px;">العين اليسرى</div>
+          <div style="font-size:1.1rem; font-weight:800; color:var(--text-primary);">
+            بدون: ${va.leftNoGlasses || '-'} → مع: ${va.leftWithGlasses || '-'}
+          </div>
         </div>
       </div>
     </div>
-    <div style="text-align:center; margin-bottom:12px;">
-      <span style="font-size:0.85rem; color:var(--text-muted);">PD: </span>
-      <span style="font-size:1.1rem; font-weight:700; color:#b45309;">${oldExamData.pd || '0'} mm</span>
+    ` : ''}
+    
+    <!-- Prescription -->
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;">
+      <div style="background:var(--bg-surface-hover); border-radius:var(--radius-md); padding:16px; border-right:3px solid #06b6d4;">
+        <div style="font-size:0.95rem; font-weight:700; color:#06b6d4; margin-bottom:12px; display:flex; align-items:center; gap:6px;">👁️ العين اليمنى</div>
+        <div style="font-size:0.9rem; display:flex; justify-content:space-between; margin:6px 0;">
+          <span style="color:var(--text-secondary);">SPH:</span>
+          <span style="font-weight:700;">${oldExamData.rightEye?.sph || '0.00'}</span>
+        </div>
+        <div style="font-size:0.9rem; display:flex; justify-content:space-between; margin:6px 0;">
+          <span style="color:var(--text-secondary);">CYL:</span>
+          <span style="font-weight:700;">${oldExamData.rightEye?.cyl || '0.00'}</span>
+        </div>
+        <div style="font-size:0.9rem; display:flex; justify-content:space-between; margin:6px 0;">
+          <span style="color:var(--text-secondary);">AXIS:</span>
+          <span style="font-weight:700;">${oldExamData.rightEye?.axis || '0'}</span>
+        </div>
+        <div style="font-size:0.9rem; display:flex; justify-content:space-between; margin:6px 0;">
+          <span style="color:var(--text-secondary);">ADD:</span>
+          <span style="font-weight:700;">${oldExamData.rightEye?.add || '+0.00'}</span>
+        </div>
+      </div>
+      <div style="background:var(--bg-surface-hover); border-radius:var(--radius-md); padding:16px; border-right:3px solid #8b5cf6;">
+        <div style="font-size:0.95rem; font-weight:700; color:#8b5cf6; margin-bottom:12px; display:flex; align-items:center; gap:6px;">👁️ العين اليسرى</div>
+        <div style="font-size:0.9rem; display:flex; justify-content:space-between; margin:6px 0;">
+          <span style="color:var(--text-secondary);">SPH:</span>
+          <span style="font-weight:700;">${oldExamData.leftEye?.sph || '0.00'}</span>
+        </div>
+        <div style="font-size:0.9rem; display:flex; justify-content:space-between; margin:6px 0;">
+          <span style="color:var(--text-secondary);">CYL:</span>
+          <span style="font-weight:700;">${oldExamData.leftEye?.cyl || '0.00'}</span>
+        </div>
+        <div style="font-size:0.9rem; display:flex; justify-content:space-between; margin:6px 0;">
+          <span style="color:var(--text-secondary);">AXIS:</span>
+          <span style="font-weight:700;">${oldExamData.leftEye?.axis || '0'}</span>
+        </div>
+        <div style="font-size:0.9rem; display:flex; justify-content:space-between; margin:6px 0;">
+          <span style="color:var(--text-secondary);">ADD:</span>
+          <span style="font-weight:700;">${oldExamData.leftEye?.add || '+0.00'}</span>
+        </div>
+      </div>
     </div>
-    ${oldExamData.notes ? `<div style="background:var(--bg-surface-hover); border-radius:var(--radius-md); padding:12px; margin-bottom:12px;">
-      <div style="font-size:0.85rem; font-weight:600; color:#b45309; margin-bottom:6px;">ملاحظات:</div>
-      <div style="font-size:0.9rem;">${oldExamData.notes}</div>
-    </div>` : ''}
+    
+    <!-- PD & Next Visit -->
+    <div style="background:var(--bg-surface-hover); border-radius:var(--radius-md); padding:16px; text-align:center; margin-bottom:16px;">
+      <div style="font-size:0.95rem; font-weight:700; color:#b45309; margin-bottom:8px;">📏 PD: ${oldExamData.pd || 'غير محدد'} mm</div>
+      ${oldExamData.nextVisit ? `
+      <div style="font-size:0.9rem; color:#06b6d4;">
+        ⏰ الموعد القادم: ${oldExamData.nextVisit}
+      </div>
+      ` : ''}
+    </div>
+    
+    <!-- 🔥 Notes -->
+    ${oldExamData.notes ? `
+    <div style="background:#fffbeb; border-radius:var(--radius-md); padding:16px; border-left:4px solid #f59e0b; margin-bottom:16px;">
+      <div style="font-size:0.95rem; font-weight:700; color:#b45309; margin-bottom:10px; display:flex; align-items:center; gap:6px;">
+        📝 الملاحظات
+      </div>
+      <div style="font-size:0.95rem; line-height:1.6; color:var(--text-primary);">
+        ${oldExamData.notes}
+      </div>
+    </div>
+    ` : ''}
   `;
   
   document.getElementById('oldExamOverlay').classList.add('show');
@@ -1505,7 +1777,76 @@ function closeOldExam() {
   document.getElementById('oldExamOverlay').classList.remove('show');
 }
 
-// ========== Save Patient - WITH ENGLISH NUMBERS ==========
+// 🔥 NEW: Print Preview Functions
+function showPrintPreview() {
+  // Fill preview content with current form data
+  const previewContent = document.getElementById('previewContent');
+  
+  // Clone and populate the print area
+  const printArea = document.getElementById('print-area').cloneNode(true);
+  printArea.style.display = 'block';
+  
+  // Fill data
+  populatePrintData();
+  
+  // Show modal
+  document.getElementById('printPreviewOverlay').classList.add('show');
+  
+  // Copy populated content to preview
+  previewContent.innerHTML = document.getElementById('print-area').innerHTML;
+}
+
+function closePrintPreview() {
+  document.getElementById('printPreviewOverlay').classList.remove('show');
+}
+
+function confirmPrint() {
+  closePrintPreview();
+  setTimeout(() => window.print(), 100);
+}
+
+// ========== Populate Print Data ==========
+function populatePrintData() {
+  const settings = JSON.parse(localStorage.getItem('clinicSettings') || '{}');
+  
+  document.getElementById('printClinicName').textContent = settings.clinicName || 'عيادة الأثير للبصريات';
+  document.getElementById('printFooter').textContent = `✨ ${settings.clinicName || 'عيادة الأثير للبصريات'} - جميع الحقوق محفوظة ✨`;
+  
+  document.getElementById('printName').textContent = document.getElementById('fullName').value || '-';
+  document.getElementById('printAge').textContent = document.getElementById('age').value?.toLocaleString('en-US') || '-';
+  document.getElementById('printAddress').textContent = document.getElementById('address').value || '-';
+  document.getElementById('printPhone').textContent = document.getElementById('phone').value || '-';
+  document.getElementById('printExamDate').textContent = new Date().toLocaleDateString('ar-IQ');
+  
+  ['Right','Left'].forEach(eye => {
+    const prefix = eye === 'Right' ? 'right' : 'left';
+    document.getElementById(`print${eye}Sph`).textContent = document.getElementById(`${prefix}Sph`).value || '0.00';
+    document.getElementById(`print${eye}Cyl`).textContent = document.getElementById(`${prefix}Cyl`).value || '0.00';
+    document.getElementById(`print${eye}Axis`).textContent = document.getElementById(`${prefix}Axis`).value?.toLocaleString('en-US') || '0';
+    document.getElementById(`print${eye}Add`).textContent = document.getElementById(`${prefix}Add`).value || '+0.00';
+    document.getElementById(`print${eye}VA`).textContent = document.getElementById(`${prefix}VA`).value || '-';
+  });
+  
+  // 🔥 VA Comparison values
+  document.getElementById('printRightVANo').textContent = document.getElementById('rightVANoGlasses').value || '-';
+  document.getElementById('printRightVAWith').textContent = document.getElementById('rightVAWithGlasses').value || '-';
+  document.getElementById('printLeftVANo').textContent = document.getElementById('leftVANoGlasses').value || '-';
+  document.getElementById('printLeftVAWith').textContent = document.getElementById('leftVAWithGlasses').value || '-';
+  
+  document.getElementById('printPD').textContent = document.getElementById('pdDisplay').textContent?.toLocaleString('en-US') || '0';
+  document.getElementById('printNextVisit').textContent = document.getElementById('nextVisit').value || '-';
+  
+  const notes = document.getElementById('notes').value.trim();
+  const notesSection = document.getElementById('printNotesSection');
+  if (notes) {
+    document.getElementById('printNotes').textContent = notes;
+    notesSection.style.display = 'block';
+  } else {
+    notesSection.style.display = 'none';
+  }
+}
+
+// ========== Save Patient ==========
 function savePatient() {
   const fullName = document.getElementById('fullName').value.trim();
   if (!fullName) {
@@ -1532,6 +1873,13 @@ function savePatient() {
       axis: document.getElementById('leftAxis').value,
       add: document.getElementById('leftAdd').value,
       va: document.getElementById('leftVA').value
+    },
+    // 🔥 Save VA comparison data
+    vaComparison: {
+      rightNoGlasses: document.getElementById('rightVANoGlasses').value,
+      rightWithGlasses: document.getElementById('rightVAWithGlasses').value,
+      leftNoGlasses: document.getElementById('leftVANoGlasses').value,
+      leftWithGlasses: document.getElementById('leftVAWithGlasses').value
     },
     pd: document.getElementById('pdDisplay').textContent,
     notes: document.getElementById('notes').value.trim(),
@@ -1568,40 +1916,9 @@ function savePatient() {
   }, 2000);
 }
 
-// ========== Print Prescription (A5) - WITH ENGLISH NUMBERS ==========
+// ========== Print Prescription (A5) ==========
 function printPrescription() {
-  const settings = JSON.parse(localStorage.getItem('clinicSettings') || '{}');
-  
-  document.getElementById('printClinicName').textContent = settings.clinicName || 'عيادة الأثير للبصريات';
-  document.getElementById('printFooter').textContent = `✨ ${settings.clinicName || 'عيادة الأثير للبصريات'} - جميع الحقوق محفوظة ✨`;
-  
-  document.getElementById('printName').textContent = document.getElementById('fullName').value || '-';
-  document.getElementById('printAge').textContent = document.getElementById('age').value?.toLocaleString('en-US') || '-';
-  document.getElementById('printAddress').textContent = document.getElementById('address').value || '-';
-  document.getElementById('printPhone').textContent = document.getElementById('phone').value || '-';
-  document.getElementById('printExamDate').textContent = new Date().toLocaleDateString('ar-IQ');
-  
-  ['Right','Left'].forEach(eye => {
-    const prefix = eye === 'Right' ? 'right' : 'left';
-    document.getElementById(`print${eye}Sph`).textContent = document.getElementById(`${prefix}Sph`).value || '0.00';
-    document.getElementById(`print${eye}Cyl`).textContent = document.getElementById(`${prefix}Cyl`).value || '0.00';
-    document.getElementById(`print${eye}Axis`).textContent = document.getElementById(`${prefix}Axis`).value?.toLocaleString('en-US') || '0';
-    document.getElementById(`print${eye}Add`).textContent = document.getElementById(`${prefix}Add`).value || '+0.00';
-    document.getElementById(`print${eye}VA`).textContent = document.getElementById(`${prefix}VA`).value || '-';
-  });
-  
-  document.getElementById('printPD').textContent = document.getElementById('pdDisplay').textContent?.toLocaleString('en-US') || '0';
-  document.getElementById('printNextVisit').textContent = document.getElementById('nextVisit').value || '-';
-  
-  const notes = document.getElementById('notes').value.trim();
-  const notesSection = document.getElementById('printNotesSection');
-  if (notes) {
-    document.getElementById('printNotes').textContent = notes;
-    notesSection.style.display = 'block';
-  } else {
-    notesSection.style.display = 'none';
-  }
-  
+  populatePrintData();
   console.log('🖨️ جاري تحضير الطباعة...');
   setTimeout(() => window.print(), 100);
 }
@@ -1623,6 +1940,7 @@ function printPrescription() {
     if (e.key === 'Escape') {
       closePatientSelect();
       closeOldExam();
+      closePrintPreview();
       if (document.getElementById('sidebar')?.classList.contains('open')) toggleSidebar();
     }
   });
@@ -1632,6 +1950,9 @@ function printPrescription() {
   });
   document.getElementById('oldExamOverlay')?.addEventListener('click', e => {
     if (e.target.id === 'oldExamOverlay') closeOldExam();
+  });
+  document.getElementById('printPreviewOverlay')?.addEventListener('click', e => {
+    if (e.target.id === 'printPreviewOverlay') closePrintPreview();
   });
   
   document.getElementById('sidebarOverlay')?.addEventListener('click', toggleSidebar);

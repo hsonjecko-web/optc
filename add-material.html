@@ -247,9 +247,9 @@ body::before {
   background:rgba(59,130,246,0.15);
 }
 .sidebar-item.active {
-  background:#2563eb;
-  color:#fff;
-  border-color:#2563eb;
+  background: var(--accent-light);
+  color: var(--accent-primary);
+  border: 1px solid var(--accent-primary);
 }
 .sidebar-item .icon {
   font-size:1.1rem;
@@ -440,7 +440,7 @@ body::before {
   border-top:1px solid var(--border-light);
   display:flex;
   z-index:100;
-  padding:10px 0 env(safe-area-inset-bottom, 10px);
+  padding:7px 0 env(safe-area-inset-bottom, 10px);
   box-shadow:0 -4px 20px rgba(0,0,0,0.098);
 }
 .nav-item {
@@ -453,7 +453,7 @@ body::before {
   color:var(--text-muted);
   font-size:0.72rem;
   font-weight:500;
-  padding:8px 4px;
+  padding:4px 4px;
   transition:var(--transition);
   position:relative;
   border-radius:14px;
@@ -572,6 +572,7 @@ select:focus-visible {
     <a href="archive.html" class="sidebar-item"><span class="icon">📁</span>أرشيف المرضى</a>
     <a href="expenses.html" class="sidebar-item"><span class="icon">💰</span>إضافة مصروف</a>
     <a href="inventory.html" class="sidebar-item"><span class="icon">📦</span>الجرد والمواد</a>
+    <a href="sales-invoice.html" class="sidebar-item"><span class="icon">🧾</span>فاتورة بيع</a>
     <a href="add-material.html" class="sidebar-item active"><span class="icon">📥</span>إضافة مواد</a>
     <a href="reports.html" class="sidebar-item"><span class="icon">📊</span>التقارير</a>
     <a href="support.html" class="sidebar-item"><span class="icon">❓</span>الدعم الفني</a>
@@ -580,9 +581,6 @@ select:focus-visible {
     <a href="settings.html" class="sidebar-item"><span class="icon">⚙️</span>الإعدادات</a>
     <a href="logout.html" class="sidebar-item sidebar-logout"><span class="icon">🚪</span>تسجيل الخروج</a>
   </nav>
-  <div class="sidebar-footer">
-    <a href="logout.html" class="sidebar-logout"><span class="icon">🚪</span>تسجيل الخروج</a>
-  </div>
 </aside>
 
 <!-- Main Content -->

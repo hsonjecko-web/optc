@@ -17,13 +17,13 @@
   --border-light: #e2e8f0;
   --border-normal: #cbd5e1;
   
-  /* ألوان التدرج المميزة */
   --grad-cyan: linear-gradient(135deg, #06b5d4, #0891b2);
   --grad-purple: linear-gradient(135deg, #8b5cf6, #7c3aed);
   --grad-gold: linear-gradient(135deg, #eab308, #ca8a04);
   --grad-red: linear-gradient(135deg, #ef4444, #dc2626);
   --grad-green: linear-gradient(135deg, #10b981, #059669);
   --grad-brand: linear-gradient(135deg, #6366f1, #8b5cf6, #3b82f6);
+  --grad-whatsapp: linear-gradient(135deg, #25D366, #128C7E);
   
   --shadow-card: 0 10px 25px rgba(0,0,0,0.12);
   --shadow-hover: 0 18px 40px rgba(0,0,0,0.18);
@@ -63,7 +63,6 @@ body {
   overflow-x:hidden;
 }
 
-/* خلفية متدرجة ناعمة */
 body::before {
   content:'';
   position:fixed;
@@ -74,7 +73,6 @@ body::before {
   z-index:-1;
 }
 
-/* جزيئات خلفية متحركة */
 .particle {
   position:fixed;
   width:4px;
@@ -287,7 +285,7 @@ body::before {
   margin:0 auto;
 }
 
-/* ========== Bulk Actions Bar - جديد للواتساب ========== */
+/* ========== Bulk Actions Bar ========== */
 .bulk-actions-bar {
   display:none;
   align-items:center;
@@ -334,7 +332,7 @@ body::before {
   background:#eff6ff;
 }
 .whatsapp-bulk-btn {
-  background:#25D366 !important;
+  background:var(--grad-whatsapp) !important;
   color:#fff !important;
   border:none !important;
   padding:10px 20px !important;
@@ -590,7 +588,6 @@ body::before {
 .patient-card:active { transform:scale(0.99); }
 .patient-card.due-renewal { border-right-color:var(--grad-gold); }
 
-/* Checkbox for bulk selection */
 .patient-checkbox {
   position:absolute;
   right:16px;
@@ -603,30 +600,33 @@ body::before {
   z-index:2;
 }
 
-/* WhatsApp button on hover */
+/* 🔥 WhatsApp Button - متناسق مع التصميم */
 .whatsapp-btn {
   position:absolute;
   left:16px;
   top:50%;
   transform:translateY(-50%);
-  background:#25D366;
+  background:var(--grad-whatsapp);
   color:#fff;
   border:none;
-  border-radius:50%;
-  width:36px;
-  height:36px;
+  border-radius:var(--radius-sm);
+  width:40px;
+  height:40px;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:1.2rem;
+  font-size:1.1rem;
   opacity:0;
-  transition:opacity 0.2s, transform 0.2s;
+  transition:opacity 0.2s, transform 0.2s, box-shadow 0.2s;
   cursor:pointer;
   box-shadow:0 4px 14px rgba(37,211,102,0.35);
   z-index:2;
 }
 .patient-card:hover .whatsapp-btn { opacity:1; transform:translateY(-50%) scale(1.05); }
-.whatsapp-btn:hover { filter:brightness(1.05); }
+.whatsapp-btn:hover { 
+  filter:brightness(1.05); 
+  box-shadow:0 6px 20px rgba(37,211,102,0.5);
+}
 .whatsapp-btn:active { transform:translateY(-50%) scale(0.95); }
 
 .patient-avatar {
@@ -678,6 +678,17 @@ body::before {
   background:var(--grad-gold);
   color:#1f2937;
 }
+.exams-badge {
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  padding:3px 8px;
+  border-radius:100px;
+  font-size:0.7rem;
+  font-weight:600;
+  background:var(--grad-purple);
+  color:#fff;
+}
 
 /* ========== Modal ========== */
 .modal-overlay {
@@ -687,25 +698,26 @@ body::before {
   backdrop-filter:blur(4px);
   z-index:500;
   display:none;
-  align-items:flex-end;
+  align-items:center;
   justify-content:center;
+  padding:16px;
 }
 .modal-overlay.show { display:flex; animation:fadeIn 0.2s ease; }
 @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
 
 .modal {
   background:var(--bg-surface);
-  border-radius:var(--radius-lg) var(--radius-lg) 0 0;
-  padding:22px;
+  border-radius:var(--radius-lg);
+  padding:20px;
   width:100%;
-  max-width:520px;
-  max-height:88vh;
+  max-width:560px;
+  max-height:90vh;
   overflow-y:auto;
-  box-shadow:0 -10px 40px rgba(0,0,0,0.25);
-  animation:slideUp 0.3s ease;
+  box-shadow:0 10px 40px rgba(0,0,0,0.25);
+  animation:scaleIn 0.25s ease;
   position:relative;
 }
-@keyframes slideUp { from{transform:translateY(100%);} to{transform:translateY(0);} }
+@keyframes scaleIn { from{transform:scale(0.95);opacity:0;} to{transform:scale(1);opacity:1;} }
 
 .modal-header {
   display:flex;
@@ -824,6 +836,40 @@ body::before {
 .eye-values .item .label { color:var(--text-muted); }
 .eye-values .item .value { font-weight:600; }
 
+/* 🔥 VA Comparison Card */
+.va-compare-card {
+  background:linear-gradient(135deg, rgba(16,185,129,0.08), rgba(5,150,105,0.05));
+  border-radius:var(--radius-md);
+  padding:14px;
+  margin:10px 0;
+  border-left:4px solid var(--grad-green);
+}
+.va-compare-title {
+  font-size:0.85rem;
+  font-weight:600;
+  color:#047857;
+  margin-bottom:10px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+.va-compare-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+.va-compare-item label {
+  display:block;
+  font-size:0.75rem;
+  color:var(--text-muted);
+  margin-bottom:4px;
+}
+.va-compare-value {
+  font-size:0.9rem;
+  font-weight:700;
+  color:var(--text-primary);
+}
+
 /* Exam History Items */
 .exam-history-list {
   display:flex;
@@ -836,6 +882,7 @@ body::before {
   border-radius:var(--radius-md);
   padding:14px;
   transition:var(--transition);
+  cursor:pointer;
 }
 .exam-item:hover {
   border-color:#3b82f6;
@@ -879,7 +926,7 @@ body::before {
   border:none;
   border-radius:var(--radius-md);
   font-family:'Cairo',sans-serif;
-  font-size:0.95rem;
+  font-size:0.9rem;
   font-weight:700;
   cursor:pointer;
   transition:var(--transition);
@@ -922,7 +969,7 @@ body::before {
   border-color:#ef4444;
 }
 .action-btn.whatsapp {
-  background:#25D366;
+  background:var(--grad-whatsapp);
   color:#fff;
   box-shadow:0 6px 18px rgba(37,211,102,0.35);
   width:100%;
@@ -931,6 +978,16 @@ body::before {
 .action-btn.whatsapp:hover {
   filter:brightness(1.05);
   box-shadow:0 8px 24px rgba(37,211,102,0.5);
+  transform:translateY(-2px);
+}
+.action-btn.edit {
+  background:var(--grad-gold);
+  color:#1f2937;
+  box-shadow:0 6px 18px rgba(234,179,8,0.35);
+}
+.action-btn.edit:hover {
+  filter:brightness(1.05);
+  box-shadow:0 8px 24px rgba(234,179,8,0.5);
   transform:translateY(-2px);
 }
 .action-btn:active { transform:translateY(0) scale(0.98); }
@@ -971,7 +1028,7 @@ body::before {
 }
 .fab:active { transform:scale(0.95); }
 
-/* ========== GLOWING BOTTOM NAV ========== */
+/* ========== Bottom Nav ========== */
 .bottom-nav {
   position:fixed;
   bottom:0;
@@ -981,7 +1038,7 @@ body::before {
   border-top:1px solid var(--border-light);
   display:flex;
   z-index:100;
-  padding:10px 0 env(safe-area-inset-bottom, 10px);
+  padding:7px 0 env(safe-area-inset-bottom, 10px);
   box-shadow:0 -4px 20px rgba(0,0,0,0.098);
 }
 .nav-item {
@@ -994,7 +1051,7 @@ body::before {
   color:var(--text-muted);
   font-size:0.72rem;
   font-weight:500;
-  padding:8px 4px;
+  padding:4px 4px;
   transition:var(--transition);
   position:relative;
   border-radius:14px;
@@ -1148,6 +1205,7 @@ body::before {
   .date-range { grid-template-columns:1fr; }
   .action-grid { grid-template-columns:1fr; }
   .eye-values { grid-template-columns:1fr; }
+  .va-compare-grid { grid-template-columns:1fr; }
   .header-title { font-size:1rem; }
   .bulk-actions-bar { flex-direction:column; gap:12px; align-items:flex-start; }
   .bulk-actions-right { width:100%; justify-content:space-between; }
@@ -1174,7 +1232,7 @@ input:focus-visible {
   <span id="successMsg">تم التحميل بنجاح</span>
 </div>
 
-<!-- Header - ✅ بدون زر التحديث -->
+<!-- Header -->
 <header class="header">
   <div class="header-right">
     <button class="menu-btn" onclick="toggleSidebar()" aria-label="القائمة">☰</button>
@@ -1208,9 +1266,6 @@ input:focus-visible {
     <a href="settings.html" class="sidebar-item"><span class="icon">⚙️</span>الإعدادات</a>
     <a href="logout.html" class="sidebar-item sidebar-logout"><span class="icon">🚪</span>تسجيل الخروج</a>
   </nav>
-  <div class="sidebar-footer">
-    <a href="logout.html" class="sidebar-logout"><span class="icon">🚪</span>تسجيل الخروج</a>
-  </div>
 </aside>
 
 <!-- Main Content -->
@@ -1222,7 +1277,7 @@ input:focus-visible {
     <h2 style="font-size:1.8rem; font-weight:800; color:var(--text-primary);">أرشيف المرضى</h2>
   </div>
 
-  <!-- Bulk Actions Bar - جديد للواتساب -->
+  <!-- Bulk Actions Bar -->
   <div class="bulk-actions-bar" id="bulkActionsBar">
     <div class="bulk-actions-left">
       <span id="selectedCount">0 محدد</span>
@@ -1283,9 +1338,7 @@ input:focus-visible {
   </div>
 
   <!-- Patient List -->
-  <div class="patient-list" id="patientList">
-    <!-- Dynamic content -->
-  </div>
+  <div class="patient-list" id="patientList"></div>
   
   <!-- Empty State -->
   <div id="emptyState" style="display:none; text-align:center; padding:40px; color:var(--text-muted);">
@@ -1295,7 +1348,7 @@ input:focus-visible {
 
 </main>
 
-<!-- Patient Details Modal -->
+<!-- 🔥 Patient Details Modal - مع زر التعديل والواتساب والمعاينة -->
 <div class="modal-overlay" id="patientModal">
   <div class="modal">
     <div class="modal-header">
@@ -1303,6 +1356,41 @@ input:focus-visible {
       <button class="modal-close" onclick="closeModal()">✕</button>
     </div>
     <div id="modalContent"></div>
+  </div>
+</div>
+
+<!-- 🔥 Edit Patient Modal - جديد -->
+<div class="modal-overlay" id="editModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 class="modal-title">✏️ تعديل معلومات المريض</h3>
+      <button class="modal-close" onclick="closeEditModal()">✕</button>
+    </div>
+    <div id="editContent"></div>
+  </div>
+</div>
+
+<!-- 🔥 WhatsApp Template Modal - جديد -->
+<div class="modal-overlay" id="whatsappModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 class="modal-title">💬 رسالة واتساب</h3>
+      <button class="modal-close" onclick="closeWhatsAppModal()">✕</button>
+    </div>
+    <div style="padding:0 4px;">
+      <p style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:12px;">
+        قم بتعديل الرسالة قبل الإرسال:
+      </p>
+      <textarea id="whatsappMessage" class="form-textarea" style="width:100%;min-height:150px;border-radius:var(--radius-md);padding:12px;font-family:'Cairo',sans-serif;font-size:0.9rem;" placeholder="اكتب رسالتك هنا..."></textarea>
+      <div style="display:flex;gap:10px;margin-top:16px;">
+        <button class="action-btn view" onclick="closeWhatsAppModal()" style="flex:1;">
+          <span>✕</span><span>إلغاء</span>
+        </button>
+        <button class="action-btn whatsapp" onclick="sendWhatsAppMessage()" style="flex:1;">
+          <span>📤</span><span>إرسال</span>
+        </button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1314,6 +1402,27 @@ input:focus-visible {
       <button class="modal-close" onclick="closeHistoryModal()">✕</button>
     </div>
     <div class="exam-history-list" id="historyContent"></div>
+  </div>
+</div>
+
+<!-- Print Preview Modal - جديد -->
+<div class="modal-overlay" id="printPreviewModal">
+  <div class="modal" style="max-width:600px;">
+    <div class="modal-header">
+      <h3 class="modal-title">🔍 معاينة قبل الطباعة</h3>
+      <button class="modal-close" onclick="closePrintPreview()">✕</button>
+    </div>
+    <div class="preview-container" style="background:var(--bg-page);border-radius:var(--radius-md);padding:16px;max-height:60vh;overflow-y:auto;border:1px solid var(--border-light);">
+      <div id="previewContent" style="transform:scale(0.5);transform-origin:top center;"></div>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:16px;">
+      <button class="action-btn view" onclick="closePrintPreview()" style="flex:1;">
+        <span>✕</span><span>إغلاق</span>
+      </button>
+      <button class="action-btn print" onclick="confirmPrint()" style="flex:1;">
+        <span>🖨️</span><span>طباعة الآن</span>
+      </button>
+    </div>
   </div>
 </div>
 
@@ -1356,6 +1465,15 @@ input:focus-visible {
       </tbody>
     </table>
     
+    <!-- 🔥 VA Comparison in Print -->
+    <div style="margin:10px 0;padding:8px;background:#f8fafc;border-radius:6px;font-size:9px;">
+      <div style="font-weight:700;margin-bottom:6px;color:#047857;">📊 مقارنة VA:</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;">
+        <div>👁️ يمنى: <span id="printRightVANo">-</span> → <span id="printRightVAWith">-</span></div>
+        <div>👁️ يسرى: <span id="printLeftVANo">-</span> → <span id="printLeftVAWith">-</span></div>
+      </div>
+    </div>
+    
     <div class="pd-section">
       <strong>📏 PD:</strong> <span id="printPD">-</span> mm
     </div>
@@ -1396,7 +1514,6 @@ function toggleTheme() {
   const btn = document.getElementById('themeBtn');
   const current = html.getAttribute('data-theme');
   const next = current === 'light' ? 'dark' : 'light';
-  
   html.setAttribute('data-theme', next);
   btn.textContent = next === 'light' ? '🌙' : '☀️';
   localStorage.setItem('theme', next);
@@ -1406,9 +1523,11 @@ function toggleTheme() {
 function toggleSidebar() {
   const sb = document.getElementById('sidebar');
   const ov = document.getElementById('sidebarOverlay');
-  sb.classList.toggle('open');
-  ov.classList.toggle('show');
-  document.body.style.overflow = sb.classList.contains('open') ? 'hidden' : '';
+  if(sb && ov) {
+    sb.classList.toggle('open');
+    ov.classList.toggle('show');
+    document.body.style.overflow = sb.classList.contains('open') ? 'hidden' : '';
+  }
 }
 
 // ========== Success Indicator ==========
@@ -1417,105 +1536,6 @@ function showSuccess(msg) {
   document.getElementById('successMsg').textContent = msg;
   indicator.classList.add('show');
   setTimeout(() => indicator.classList.remove('show'), 2500);
-}
-
-// ========== WhatsApp Functions - جديد ==========
-
-// إرسال لفرد واحد
-function sendWhatsAppSingle(phone, name) {
-  if (!phone) {
-    showSuccess('❌ لا يوجد رقم هاتف لهذا المريض');
-    return;
-  }
-  
-  const cleanPhone = phone.replace(/[^0-9+]/g, '');
-  const whatsappPhone = cleanPhone.startsWith('964') ? cleanPhone : '964' + cleanPhone.replace(/^0/, '');
-  
-  const settings = JSON.parse(localStorage.getItem('clinicSettings') || '{}');
-  const clinicName = settings.clinicName || 'عيادة الأثير للبصريات';
-  
-  const message = `مرحباً ${name} 👋
-
-من ${clinicName} 🏥
-
-نشكرك على ثقتنا. هل تحتاج إلى أي مساعدة أو حجز موعد؟ 📅
-
-📍 ${settings.clinicAddress || ''}
-📞 ${settings.clinicPhone || ''}
-
-مع أطيب التمنيات،
-فريق ${clinicName} 💙`;
-  
-  window.open(`https://wa.me/${whatsappPhone}?text=${encodeURIComponent(message)}`, '_blank');
-  showSuccess('💬 تم فتح واتساب');
-}
-
-// إرسال للمحددين
-function sendWhatsAppBulk() {
-  const checkboxes = document.querySelectorAll('.patient-checkbox:checked');
-  if (checkboxes.length === 0) {
-    showSuccess('⚠️ يرجى تحديد مريض واحد على الأقل');
-    return;
-  }
-  
-  const patients = JSON.parse(localStorage.getItem('patients') || '[]');
-  const selected = Array.from(checkboxes).map(cb => cb.dataset.id);
-  const targets = patients.filter(p => selected.includes(p.id) && p.phone);
-  
-  if (targets.length === 0) {
-    showSuccess('⚠️ لا توجد أرقام هاتف للمرضى المحددين');
-    return;
-  }
-  
-  const settings = JSON.parse(localStorage.getItem('clinicSettings') || '{}');
-  const clinicName = settings.clinicName || 'عيادة الأثير للبصريات';
-  
-  targets.forEach((patient, index) => {
-    setTimeout(() => {
-      const cleanPhone = patient.phone.replace(/[^0-9+]/g, '');
-      const whatsappPhone = cleanPhone.startsWith('964') ? cleanPhone : '964' + cleanPhone.replace(/^0/, '');
-      
-      const message = `مرحباً ${patient.fullName} 👋
-
-من ${clinicName} 🏥
-
-هل تحتاج إلى مساعدة أو حجز موعد؟ 📅
-
-مع أطيب التمنيات،
-فريق ${clinicName} 💙`;
-      
-      window.open(`https://wa.me/${whatsappPhone}?text=${encodeURIComponent(message)}`, '_blank');
-    }, index * 1500); // تأخير 1.5 ثانية بين كل رسالة
-  });
-  
-  showSuccess(`💬 جاري فتح ${targets.length} محادثة واتساب...`);
-  deselectAllPatients();
-}
-
-// تحديد الكل
-function selectAllPatients() {
-  document.querySelectorAll('.patient-checkbox').forEach(cb => cb.checked = true);
-  updateBulkActionsBar();
-}
-
-// إلغاء تحديد الكل
-function deselectAllPatients() {
-  document.querySelectorAll('.patient-checkbox').forEach(cb => cb.checked = false);
-  updateBulkActionsBar();
-}
-
-// تحديث شريط الإجراءات الجماعية
-function updateBulkActionsBar() {
-  const bar = document.getElementById('bulkActionsBar');
-  const count = document.getElementById('selectedCount');
-  const checked = document.querySelectorAll('.patient-checkbox:checked').length;
-  
-  if (checked > 0) {
-    bar.classList.add('show');
-    count.textContent = `${checked} محدد`;
-  } else {
-    bar.classList.remove('show');
-  }
 }
 
 // ========== Date Helpers ==========
@@ -1554,7 +1574,6 @@ function setFilter(filter) {
     document.getElementById('dateTo').value = '';
   }
   loadPatients();
-  console.log(`🔍 عرض: ${filter === 'all' ? 'الكل' : filter === 'today' ? 'اليوم' : filter === 'week' ? 'هذا الأسبوع' : filter === 'month' ? 'هذا الشهر' : 'تجديد الفحص'}`);
 }
 
 function applyDateFilter() {
@@ -1564,7 +1583,6 @@ function applyDateFilter() {
     currentFilter = 'custom';
     document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
     loadPatients();
-    console.log('🔍 تطبيق فلتر التاريخ المخصص');
   }
 }
 
@@ -1591,6 +1609,16 @@ function filterByDate(patients) {
     }
     default: return patients;
   }
+}
+
+// ========== 🔥 Duplicate Prevention ==========
+function isDuplicatePatient(name, phone, date) {
+  const today = new Date(date).toDateString();
+  return allPatients.some(p => 
+    p.fullName?.toLowerCase().trim() === name?.toLowerCase().trim() &&
+    p.phone?.trim() === phone?.trim() &&
+    new Date(p.createdAt).toDateString() === today
+  );
 }
 
 // ========== Load Patients ==========
@@ -1621,6 +1649,7 @@ function loadPatients() {
     const due = isDueForRenewal(patient.createdAt);
     const days = daysUntilRenewal(patient.createdAt);
     const initials = patient.fullName ? patient.fullName.charAt(0).toUpperCase() : '?';
+    const examCount = (patient.examHistory?.length || 0) + 1;
     
     return `
     <div class="patient-card ${due ? 'due-renewal' : ''}" onclick="showPatientDetails('${patient.id}')">
@@ -1630,19 +1659,19 @@ function loadPatients() {
         <div class="patient-name">
           ${patient.fullName || 'بدون اسم'}
           ${due ? '<span class="renewal-badge">⏰ يحتاج تجديد</span>' : ''}
+          ${examCount > 1 ? `<span class="exams-badge">📋 ${examCount} فحوصات</span>` : ''}
         </div>
         <div class="patient-meta">
           📞 ${patient.phone || '-'} • 📅 ${formatDate(patient.createdAt)}
-          ${!due && days > 0 ? `• باقي ${days.toLocaleString('en-US')} يوم` : ''}
+          ${!due && days > 0 ? `• باقي ${days} يوم` : ''}
         </div>
       </div>
-      <button class="whatsapp-btn" onclick="event.stopPropagation(); sendWhatsAppSingle('${patient.phone || ''}', '${patient.fullName || ''}')" title="إرسال واتساب">💬</button>
+      <button class="whatsapp-btn" onclick="event.stopPropagation(); openWhatsAppModal('${patient.phone || ''}', '${patient.fullName || ''}')" title="إرسال واتساب">💬</button>
       <span style="color:var(--text-muted)">←</span>
     </div>
     `;
   }).join('');
   
-  // Reset bulk actions
   deselectAllPatients();
 }
 
@@ -1672,25 +1701,28 @@ function searchPatients() {
     
     listContainer.innerHTML = searched.map(patient => {
       const initials = patient.fullName ? patient.fullName.charAt(0).toUpperCase() : '?';
+      const examCount = (patient.examHistory?.length || 0) + 1;
       return `
       <div class="patient-card" onclick="showPatientDetails('${patient.id}')">
         <input type="checkbox" class="patient-checkbox" data-id="${patient.id}" onclick="event.stopPropagation(); updateBulkActionsBar();">
         <div class="patient-avatar">${initials}</div>
         <div class="patient-info">
-          <div class="patient-name">${patient.fullName || 'بدون اسم'}</div>
+          <div class="patient-name">
+            ${patient.fullName || 'بدون اسم'}
+            ${examCount > 1 ? `<span class="exams-badge">📋 ${examCount}</span>` : ''}
+          </div>
           <div class="patient-meta">📞 ${patient.phone || '-'} • 📅 ${formatDate(patient.createdAt)}</div>
         </div>
-        <button class="whatsapp-btn" onclick="event.stopPropagation(); sendWhatsAppSingle('${patient.phone || ''}', '${patient.fullName || ''}')" title="إرسال واتساب">💬</button>
+        <button class="whatsapp-btn" onclick="event.stopPropagation(); openWhatsAppModal('${patient.phone || ''}', '${patient.fullName || ''}')" title="إرسال واتساب">💬</button>
         <span style="color:var(--text-muted)">←</span>
       </div>
       `;
     }).join('');
   }
-  
   deselectAllPatients();
 }
 
-// ========== Show Patient Details ==========
+// ========== 🔥 Show Patient Details with VA & Edit Button ==========
 function showPatientDetails(id) {
   const patient = allPatients.find(p => p.id === id);
   if (!patient) return;
@@ -1702,10 +1734,32 @@ function showPatientDetails(id) {
   if (patient.examHistory && patient.examHistory.length > 0) {
     historyHtml = `
     <button class="action-btn view" style="width:100%; margin-bottom:12px;" onclick="showHistory('${patient.id}')">
-      <span>📜</span><span>عرض ${ (patient.examHistory.length + 1).toLocaleString('en-US') } فحص (الحالي + ${patient.examHistory.length.toLocaleString('en-US')} سابق)</span>
+      <span>📜</span><span>عرض ${(patient.examHistory.length + 1)} فحص (الحالي + ${patient.examHistory.length} سابق)</span>
     </button>
     `;
   }
+  
+  // 🔥 VA Comparison Display
+  const va = patient.vaComparison || {};
+  const vaHtml = `
+  <div class="va-compare-card">
+    <div class="va-compare-title">📊 مقارنة حدة الإبصار (VA)</div>
+    <div class="va-compare-grid">
+      <div>
+        <label>👁️ اليمنى</label>
+        <div class="va-compare-value">
+          بدون: ${va.rightNoGlasses || '-'} → مع: ${va.rightWithGlasses || '-'}
+        </div>
+      </div>
+      <div>
+        <label>👁️ اليسرى</label>
+        <div class="va-compare-value">
+          بدون: ${va.leftNoGlasses || '-'} → مع: ${va.leftWithGlasses || '-'}
+        </div>
+      </div>
+    </div>
+  </div>
+  `;
   
   content.innerHTML = `
     <div style="text-align:center; margin-bottom:20px;">
@@ -1720,14 +1774,14 @@ function showPatientDetails(id) {
     </div>
     
     ${patient.phone ? `
-    <button class="action-btn whatsapp" onclick="sendWhatsAppSingle('${patient.phone}', '${patient.fullName}')">
+    <button class="action-btn whatsapp" onclick="openWhatsAppModal('${patient.phone}', '${patient.fullName}')">
       <span>💬</span><span>إرسال رسالة واتساب</span>
     </button>
     ` : ''}
     
     <div class="detail-section">
       <h4>👤 المعلومات الشخصية</h4>
-      <div class="detail-row"><span class="label">العمر:</span><span class="value">${patient.age?.toLocaleString('en-US') || '-'}</span></div>
+      <div class="detail-row"><span class="label">العمر:</span><span class="value">${patient.age || '-'}</span></div>
       <div class="detail-row"><span class="label">العنوان:</span><span class="value">${patient.address || '-'}</span></div>
     </div>
     
@@ -1738,8 +1792,9 @@ function showPatientDetails(id) {
         <div class="eye-values">
           <div class="item"><span class="label">SPH:</span><span class="value">${patient.rightEye?.sph || '0.00'}</span></div>
           <div class="item"><span class="label">CYL:</span><span class="value">${patient.rightEye?.cyl || '0.00'}</span></div>
-          <div class="item"><span class="label">AXIS:</span><span class="value">${patient.rightEye?.axis?.toLocaleString('en-US') || '0'}</span></div>
+          <div class="item"><span class="label">AXIS:</span><span class="value">${patient.rightEye?.axis || '0'}</span></div>
           <div class="item"><span class="label">ADD:</span><span class="value">${patient.rightEye?.add || '+0.00'}</span></div>
+          <div class="item"><span class="label">VA:</span><span class="value">${patient.rightEye?.va || '-'}</span></div>
         </div>
       </div>
       <div class="eye-card left">
@@ -1747,13 +1802,15 @@ function showPatientDetails(id) {
         <div class="eye-values">
           <div class="item"><span class="label">SPH:</span><span class="value">${patient.leftEye?.sph || '0.00'}</span></div>
           <div class="item"><span class="label">CYL:</span><span class="value">${patient.leftEye?.cyl || '0.00'}</span></div>
-          <div class="item"><span class="label">AXIS:</span><span class="value">${patient.leftEye?.axis?.toLocaleString('en-US') || '0'}</span></div>
+          <div class="item"><span class="label">AXIS:</span><span class="value">${patient.leftEye?.axis || '0'}</span></div>
           <div class="item"><span class="label">ADD:</span><span class="value">${patient.leftEye?.add || '+0.00'}</span></div>
+          <div class="item"><span class="label">VA:</span><span class="value">${patient.leftEye?.va || '-'}</span></div>
         </div>
       </div>
+      ${vaHtml}
       <div style="text-align:center; padding-top:12px; border-top:1px solid var(--border-light);">
         <span style="font-size:0.85rem; color:var(--text-muted);">PD: </span>
-        <span style="font-size:1.1rem; font-weight:700; color:#b45309;">${patient.pd?.toLocaleString('en-US') || '0'} mm</span>
+        <span style="font-size:1.1rem; font-weight:700; color:#b45309;">${patient.pd || '0'} mm</span>
       </div>
       ${patient.nextVisit ? `<div style="text-align:center; margin-top:8px; font-size:0.85rem;"><span style="color:var(--text-muted);">الفحص القادم:</span> <span style="font-weight:600; color:#06b6d4;">${patient.nextVisit}</span></div>` : ''}
     </div>
@@ -1772,13 +1829,16 @@ function showPatientDetails(id) {
     </div>
     
     <div class="action-grid">
-      <button class="action-btn print" onclick="printPatient('${patient.id}')">
-        <span>🖨️</span><span>طباعة</span>
+      <button class="action-btn print" onclick="showPrintPreview('${patient.id}')">
+        <span>🔍</span><span>معاينة</span>
       </button>
-      <button class="action-btn delete" onclick="deletePatient('${patient.id}')">
-        <span>🗑️</span><span>حذف</span>
+      <button class="action-btn edit" onclick="openEditModal('${patient.id}')">
+        <span>✏️</span><span>تعديل</span>
       </button>
     </div>
+    <button class="action-btn delete" style="width:100%;margin-top:10px;" onclick="deletePatient('${patient.id}')">
+      <span>🗑️</span><span>حذف المريض</span>
+    </button>
   `;
   
   document.getElementById('patientModal').classList.add('show');
@@ -1788,6 +1848,197 @@ function showPatientDetails(id) {
 function closeModal() {
   document.getElementById('patientModal').classList.remove('show');
   document.body.style.overflow = '';
+}
+
+// ========== 🔥 Edit Patient Modal ==========
+function openEditModal(id) {
+  const patient = allPatients.find(p => p.id === id);
+  if (!patient) return;
+  
+  const content = document.getElementById('editContent');
+  content.innerHTML = `
+    <div class="form-grid">
+      <div class="form-group">
+        <label for="editFullName">الاسم الكامل *</label>
+        <input type="text" id="editFullName" class="form-input" value="${patient.fullName || ''}" required>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="editAge">العمر</label>
+          <input type="number" id="editAge" class="form-input" value="${patient.age || ''}" min="1" max="120">
+        </div>
+        <div class="form-group">
+          <label for="editPhone">رقم الهاتف</label>
+          <input type="tel" id="editPhone" class="form-input" value="${patient.phone || ''}">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="editAddress">العنوان</label>
+        <input type="text" id="editAddress" class="form-input" value="${patient.address || ''}">
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:20px;">
+      <button class="action-btn view" onclick="closeEditModal()" style="flex:1;">
+        <span>✕</span><span>إلغاء</span>
+      </button>
+      <button class="action-btn save" onclick="savePatientEdit('${patient.id}')" style="flex:1;">
+        <span>💾</span><span>حفظ التعديلات</span>
+      </button>
+    </div>
+  `;
+  
+  document.getElementById('editModal').classList.add('show');
+}
+
+function closeEditModal() {
+  document.getElementById('editModal').classList.remove('show');
+}
+
+function savePatientEdit(id) {
+  const fullName = document.getElementById('editFullName').value.trim();
+  if (!fullName) { showSuccess('❌ يرجى إدخال الاسم'); return; }
+  
+  const patient = allPatients.find(p => p.id === id);
+  if (!patient) return;
+  
+  // 🔥 Check for duplicate when editing phone
+  const newPhone = document.getElementById('editPhone').value.trim();
+  if (newPhone && newPhone !== patient.phone) {
+    const duplicate = allPatients.find(p => 
+      p.id !== id && 
+      p.phone === newPhone && 
+      new Date(p.createdAt).toDateString() === new Date(patient.createdAt).toDateString()
+    );
+    if (duplicate) {
+      showSuccess('⚠️ يوجد مريض آخر بنفس الهاتف اليوم');
+      return;
+    }
+  }
+  
+  // Update patient data
+  patient.fullName = fullName;
+  patient.age = document.getElementById('editAge').value;
+  patient.phone = newPhone;
+  patient.address = document.getElementById('editAddress').value;
+  patient.updatedAt = new Date().toISOString();
+  
+  localStorage.setItem('patients', JSON.stringify(allPatients));
+  closeEditModal();
+  closeModal();
+  loadPatients();
+  showSuccess('✅ تم تحديث معلومات المريض');
+}
+
+// ========== 🔥 WhatsApp Template Modal ==========
+let whatsappTarget = { phone: '', name: '' };
+
+function openWhatsAppModal(phone, name) {
+  if (!phone) {
+    showSuccess('❌ لا يوجد رقم هاتف لهذا المريض');
+    return;
+  }
+  
+  whatsappTarget = { phone, name };
+  
+  const settings = JSON.parse(localStorage.getItem('clinicSettings') || '{}');
+  const clinicName = settings.clinicName || 'عيادة الأثير للبصريات';
+  
+  const template = `مرحباً ${name} 👋
+
+من ${clinicName} 🏥
+
+نشكرك على ثقتنا. هل تحتاج إلى أي مساعدة أو حجز موعد؟ 📅
+
+📍 ${settings.clinicAddress || ''}
+📞 ${settings.clinicPhone || ''}
+
+مع أطيب التمنيات،
+فريق ${clinicName} 💙`;
+  
+  document.getElementById('whatsappMessage').value = template;
+  document.getElementById('whatsappModal').classList.add('show');
+}
+
+function closeWhatsAppModal() {
+  document.getElementById('whatsappModal').classList.remove('show');
+  whatsappTarget = { phone: '', name: '' };
+}
+
+function sendWhatsAppMessage() {
+  const message = document.getElementById('whatsappMessage').value.trim();
+  if (!message || !whatsappTarget.phone) return;
+  
+  const cleanPhone = whatsappTarget.phone.replace(/[^0-9+]/g, '');
+  const whatsappPhone = cleanPhone.startsWith('964') ? cleanPhone : '964' + cleanPhone.replace(/^0/, '');
+  
+  window.open(`https://wa.me/${whatsappPhone}?text=${encodeURIComponent(message)}`, '_blank');
+  closeWhatsAppModal();
+  showSuccess('💬 تم فتح واتساب');
+}
+
+// ========== Bulk WhatsApp Functions ==========
+function selectAllPatients() {
+  document.querySelectorAll('.patient-checkbox').forEach(cb => cb.checked = true);
+  updateBulkActionsBar();
+}
+
+function deselectAllPatients() {
+  document.querySelectorAll('.patient-checkbox').forEach(cb => cb.checked = false);
+  updateBulkActionsBar();
+}
+
+function updateBulkActionsBar() {
+  const bar = document.getElementById('bulkActionsBar');
+  const count = document.getElementById('selectedCount');
+  const checked = document.querySelectorAll('.patient-checkbox:checked').length;
+  
+  if (checked > 0) {
+    bar.classList.add('show');
+    count.textContent = `${checked} محدد`;
+  } else {
+    bar.classList.remove('show');
+  }
+}
+
+function sendWhatsAppBulk() {
+  const checkboxes = document.querySelectorAll('.patient-checkbox:checked');
+  if (checkboxes.length === 0) {
+    showSuccess('⚠️ يرجى تحديد مريض واحد على الأقل');
+    return;
+  }
+  
+  const patients = allPatients;
+  const selected = Array.from(checkboxes).map(cb => cb.dataset.id);
+  const targets = patients.filter(p => selected.includes(p.id) && p.phone);
+  
+  if (targets.length === 0) {
+    showSuccess('⚠️ لا توجد أرقام هاتف للمرضى المحددين');
+    return;
+  }
+  
+  const settings = JSON.parse(localStorage.getItem('clinicSettings') || '{}');
+  const clinicName = settings.clinicName || 'عيادة الأثير للبصريات';
+  
+  targets.forEach((patient, index) => {
+    setTimeout(() => {
+      const cleanPhone = patient.phone.replace(/[^0-9+]/g, '');
+      const whatsappPhone = cleanPhone.startsWith('964') ? cleanPhone : '964' + cleanPhone.replace(/^0/, '');
+      
+      const message = `مرحباً ${patient.fullName} 👋
+
+من ${clinicName} 🏥
+
+هل تحتاج إلى مساعدة أو حجز موعد؟ 📅
+
+مع أطيب التمنيات،
+فريق ${clinicName} 💙`;
+      
+      window.open(`https://wa.me/${whatsappPhone}?text=${encodeURIComponent(message)}`, '_blank');
+    }, index * 1500);
+  });
+  
+  showSuccess(`💬 جاري فتح ${targets.length} محادثة واتساب...`);
+  deselectAllPatients();
 }
 
 // ========== Show Exam History ==========
@@ -1805,15 +2056,17 @@ function showHistory(patientId) {
       allExams.push({
         ...exam,
         isCurrent: false,
-        examLabel: `فحص سابق #${(patient.examHistory.length - idx).toLocaleString('en-US')}`
+        examLabel: `فحص سابق #${(patient.examHistory.length - idx)}`
       });
     });
   }
   
   allExams.sort((a, b) => new Date(b.createdAt || b.archivedAt) - new Date(a.createdAt || b.archivedAt));
   
-  content.innerHTML = allExams.map(exam => `
-    <div class="exam-item">
+  content.innerHTML = allExams.map(exam => {
+    const va = exam.vaComparison || {};
+    return `
+    <div class="exam-item" onclick="printOldExam('${patient.id}', '${exam.createdAt || exam.archivedAt}')">
       <div class="exam-item-header">
         <div>
           <div class="exam-item-title">
@@ -1822,33 +2075,39 @@ function showHistory(patientId) {
           </div>
           <div class="exam-item-date">📅 ${formatDate(exam.createdAt || exam.archivedAt)}</div>
         </div>
-        <button style="background:none; border:none; color:#06b6d4; cursor:pointer; font-size:0.9rem;" onclick="printOldExam('${patient.id}', '${exam.createdAt || exam.archivedAt}')">
-          🖨️ طباعة
-        </button>
+        <span style="color:#06b6d4;font-size:0.9rem;">🖨️ طباعة</span>
       </div>
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; font-size:0.85rem;">
         <div style="background:rgba(6,182,212,0.08); border-radius:var(--radius-sm); padding:10px; border-right:3px solid #06b6d4;">
           <div style="font-weight:600; color:#06b6d4; margin-bottom:6px;">يمنى</div>
           <div style="display:flex; justify-content:space-between; margin:2px 0;"><span style="color:var(--text-muted);">SPH:</span><span style="font-weight:600;">${exam.rightEye?.sph || '0.00'}</span></div>
           <div style="display:flex; justify-content:space-between; margin:2px 0;"><span style="color:var(--text-muted);">CYL:</span><span style="font-weight:600;">${exam.rightEye?.cyl || '0.00'}</span></div>
-          <div style="display:flex; justify-content:space-between; margin:2px 0;"><span style="color:var(--text-muted);">AXIS:</span><span style="font-weight:600;">${exam.rightEye?.axis?.toLocaleString('en-US') || '0'}</span></div>
+          <div style="display:flex; justify-content:space-between; margin:2px 0;"><span style="color:var(--text-muted);">AXIS:</span><span style="font-weight:600;">${exam.rightEye?.axis || '0'}</span></div>
           <div style="display:flex; justify-content:space-between; margin:2px 0;"><span style="color:var(--text-muted);">ADD:</span><span style="font-weight:600;">${exam.rightEye?.add || '+0.00'}</span></div>
+          <div style="display:flex; justify-content:space-between; margin:2px 0;"><span style="color:var(--text-muted);">VA:</span><span style="font-weight:600;">${exam.rightEye?.va || '-'}</span></div>
         </div>
         <div style="background:rgba(139,92,246,0.08); border-radius:var(--radius-sm); padding:10px; border-right:3px solid #8b5cf6;">
           <div style="font-weight:600; color:#8b5cf6; margin-bottom:6px;">يسرى</div>
           <div style="display:flex; justify-content:space-between; margin:2px 0;"><span style="color:var(--text-muted);">SPH:</span><span style="font-weight:600;">${exam.leftEye?.sph || '0.00'}</span></div>
           <div style="display:flex; justify-content:space-between; margin:2px 0;"><span style="color:var(--text-muted);">CYL:</span><span style="font-weight:600;">${exam.leftEye?.cyl || '0.00'}</span></div>
-          <div style="display:flex; justify-content:space-between; margin:2px 0;"><span style="color:var(--text-muted);">AXIS:</span><span style="font-weight:600;">${exam.leftEye?.axis?.toLocaleString('en-US') || '0'}</span></div>
+          <div style="display:flex; justify-content:space-between; margin:2px 0;"><span style="color:var(--text-muted);">AXIS:</span><span style="font-weight:600;">${exam.leftEye?.axis || '0'}</span></div>
           <div style="display:flex; justify-content:space-between; margin:2px 0;"><span style="color:var(--text-muted);">ADD:</span><span style="font-weight:600;">${exam.leftEye?.add || '+0.00'}</span></div>
+          <div style="display:flex; justify-content:space-between; margin:2px 0;"><span style="color:var(--text-muted);">VA:</span><span style="font-weight:600;">${exam.leftEye?.va || '-'}</span></div>
         </div>
       </div>
+      ${va.rightNoGlasses || va.leftNoGlasses ? `
+      <div style="margin-top:10px;font-size:0.8rem;background:#f0fdfa;border-radius:var(--radius-sm);padding:8px;">
+        <strong style="color:#047857;">📊 VA:</strong> 
+        👁️ يمنى: ${va.rightNoGlasses||'-'}→${va.rightWithGlasses||'-'} | 
+        👁️ يسرى: ${va.leftNoGlasses||'-'}→${va.leftWithGlasses||'-'}
+      </div>` : ''}
       <div style="text-align:center; margin-top:10px; font-size:0.85rem;">
-        <span style="color:var(--text-muted);">PD:</span> <span style="font-weight:600; color:#b45309;">${exam.pd?.toLocaleString('en-US') || '0'} mm</span>
+        <span style="color:var(--text-muted);">PD:</span> <span style="font-weight:600; color:#b45309;">${exam.pd || '0'} mm</span>
         ${exam.nextVisit ? ` • <span style="color:var(--text-muted);">التالي:</span> <span style="font-weight:600; color:#06b6d4;">${exam.nextVisit}</span>` : ''}
       </div>
       ${exam.notes ? `<div style="margin-top:10px; font-size:0.85rem; background:var(--bg-surface-hover); border-radius:var(--radius-sm); padding:8px;">📝 ${exam.notes}</div>` : ''}
     </div>
-  `).join('');
+  `}).join('');
   
   document.getElementById('historyModal').classList.add('show');
 }
@@ -1857,18 +2116,40 @@ function closeHistoryModal() {
   document.getElementById('historyModal').classList.remove('show');
 }
 
-// ========== Print Functions ==========
-function printPatient(id) {
+// ========== 🔥 Print Preview Functions ==========
+let printPreviewData = null;
+
+function showPrintPreview(id) {
   const patient = allPatients.find(p => p.id === id);
   if (!patient) return;
   
+  printPreviewData = { ...patient };
+  populatePrintData(patient);
+  
+  const previewContent = document.getElementById('previewContent');
+  previewContent.innerHTML = document.getElementById('print-area').innerHTML;
+  
+  document.getElementById('printPreviewModal').classList.add('show');
+}
+
+function closePrintPreview() {
+  document.getElementById('printPreviewModal').classList.remove('show');
+  printPreviewData = null;
+}
+
+function confirmPrint() {
+  closePrintPreview();
+  setTimeout(() => window.print(), 100);
+}
+
+function populatePrintData(patient) {
   const settings = JSON.parse(localStorage.getItem('clinicSettings') || '{}');
   
   document.getElementById('printClinicName').textContent = settings.clinicName || 'عيادة الأثير للبصريات';
   document.getElementById('printFooter').textContent = `✨ ${settings.clinicName || 'عيادة الأثير للبصريات'} - جميع الحقوق محفوظة ✨`;
   
   document.getElementById('printName').textContent = patient.fullName || '-';
-  document.getElementById('printAge').textContent = patient.age?.toLocaleString('en-US') || '-';
+  document.getElementById('printAge').textContent = patient.age || '-';
   document.getElementById('printPhone').textContent = patient.phone || '-';
   document.getElementById('printExamDate').textContent = formatDate(patient.createdAt);
   
@@ -1876,12 +2157,19 @@ function printPatient(id) {
     const prefix = eye === 'Right' ? 'right' : 'left';
     document.getElementById(`print${eye}Sph`).textContent = patient[`${prefix}Eye`]?.sph || '0.00';
     document.getElementById(`print${eye}Cyl`).textContent = patient[`${prefix}Eye`]?.cyl || '0.00';
-    document.getElementById(`print${eye}Axis`).textContent = patient[`${prefix}Eye`]?.axis?.toLocaleString('en-US') || '0';
+    document.getElementById(`print${eye}Axis`).textContent = patient[`${prefix}Eye`]?.axis || '0';
     document.getElementById(`print${eye}Add`).textContent = patient[`${prefix}Eye`]?.add || '+0.00';
     document.getElementById(`print${eye}VA`).textContent = patient[`${prefix}Eye`]?.va || '-';
   });
   
-  document.getElementById('printPD').textContent = patient.pd?.toLocaleString('en-US') || '0';
+  // VA Comparison
+  const va = patient.vaComparison || {};
+  document.getElementById('printRightVANo').textContent = va.rightNoGlasses || '-';
+  document.getElementById('printRightVAWith').textContent = va.rightWithGlasses || '-';
+  document.getElementById('printLeftVANo').textContent = va.leftNoGlasses || '-';
+  document.getElementById('printLeftVAWith').textContent = va.leftWithGlasses || '-';
+  
+  document.getElementById('printPD').textContent = patient.pd || '0';
   document.getElementById('printNextVisit').textContent = patient.nextVisit || '-';
   
   const notesSection = document.getElementById('printNotesSection');
@@ -1891,9 +2179,6 @@ function printPatient(id) {
   } else {
     notesSection.style.display = 'none';
   }
-  
-  console.log('🖨️ جاري تحضير الطباعة...');
-  setTimeout(() => window.print(), 100);
 }
 
 function printOldExam(patientId, examDate) {
@@ -1906,43 +2191,15 @@ function printOldExam(patientId, examDate) {
     if (hist) exam = hist;
   }
   
-  const settings = JSON.parse(localStorage.getItem('clinicSettings') || '{}');
-  
-  document.getElementById('printClinicName').textContent = settings.clinicName || 'عيادة الأثير للبصريات';
-  document.getElementById('printFooter').textContent = `✨ ${settings.clinicName} - جميع الحقوق محفوظة ✨`;
-  
-  document.getElementById('printName').textContent = patient.fullName || '-';
-  document.getElementById('printAge').textContent = patient.age?.toLocaleString('en-US') || '-';
-  document.getElementById('printPhone').textContent = patient.phone || '-';
-  document.getElementById('printExamDate').textContent = formatDate(exam.createdAt || exam.archivedAt);
-  
-  ['Right','Left'].forEach(eye => {
-    const prefix = eye === 'Right' ? 'right' : 'left';
-    document.getElementById(`print${eye}Sph`).textContent = exam[`${prefix}Eye`]?.sph || '0.00';
-    document.getElementById(`print${eye}Cyl`).textContent = exam[`${prefix}Eye`]?.cyl || '0.00';
-    document.getElementById(`print${eye}Axis`).textContent = exam[`${prefix}Eye`]?.axis?.toLocaleString('en-US') || '0';
-    document.getElementById(`print${eye}Add`).textContent = exam[`${prefix}Eye`]?.add || '+0.00';
-    document.getElementById(`print${eye}VA`).textContent = exam[`${prefix}Eye`]?.va || '-';
-  });
-  
-  document.getElementById('printPD').textContent = exam.pd?.toLocaleString('en-US') || '0';
-  document.getElementById('printNextVisit').textContent = exam.nextVisit || '-';
-  
-  const notesSection = document.getElementById('printNotesSection');
-  if (exam.notes) {
-    document.getElementById('printNotes').textContent = exam.notes;
-    notesSection.style.display = 'block';
-  } else {
-    notesSection.style.display = 'none';
-  }
-  
+  populatePrintData(exam);
   console.log('🖨️ جاري طباعة الفحص...');
   setTimeout(() => window.print(), 100);
+  closeHistoryModal();
 }
 
 // ========== Delete Patient ==========
 function deletePatient(id) {
-  if (!confirm('⚠️ هل أنت متأكد من حذف هذا المريض نهائيًا؟')) return;
+  if (!confirm('⚠️ هل أنت متأكد من حذف هذا المريض وجميع فحوصاته نهائيًا؟')) return;
   
   allPatients = allPatients.filter(p => p.id !== id);
   localStorage.setItem('patients', JSON.stringify(allPatients));
@@ -1963,16 +2220,24 @@ function deletePatient(id) {
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') {
       closeModal();
+      closeEditModal();
+      closeWhatsAppModal();
       closeHistoryModal();
+      closePrintPreview();
       if (document.getElementById('sidebar')?.classList.contains('open')) toggleSidebar();
     }
   });
   
-  document.getElementById('patientModal')?.addEventListener('click', e => {
-    if (e.target.id === 'patientModal') closeModal();
-  });
-  document.getElementById('historyModal')?.addEventListener('click', e => {
-    if (e.target.id === 'historyModal') closeHistoryModal();
+  ['patientModal','editModal','whatsappModal','historyModal','printPreviewModal'].forEach(id => {
+    document.getElementById(id)?.addEventListener('click', e => {
+      if (e.target.id === id) {
+        if(id==='patientModal') closeModal();
+        else if(id==='editModal') closeEditModal();
+        else if(id==='whatsappModal') closeWhatsAppModal();
+        else if(id==='historyModal') closeHistoryModal();
+        else if(id==='printPreviewModal') closePrintPreview();
+      }
+    });
   });
   
   document.getElementById('sidebarOverlay')?.addEventListener('click', toggleSidebar);

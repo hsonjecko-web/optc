@@ -5,48 +5,59 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>عيادة الأثير للبصريات - لوحة التحكم</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
 <style>
 /* ========== The Sovereign Ledger - Premium Design System ========== */
 :root {
-  --bg-page: #e6ecf132;
-  --bg-surface: #ffffff;
-  --bg-surface-hover: #f1f5f9;
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
-  --text-muted: #94a3b8;
-  --border-light: #e2e8f0;
-  --border-normal: #cbd5e1;
-  
-  /* ألوان البطاقات المميزة - نفس النمط الأصلي */
-  --grad-cyan: linear-gradient(135deg, #06b5d4, #0891b2);
-  --grad-purple: linear-gradient(135deg, #8b5cf6, #7c3aed);
-  --grad-gold: linear-gradient(135deg, #eab308, #ca8a04);
-  --grad-red: linear-gradient(135deg, #ef4444, #dc2626);
-  --grad-green: linear-gradient(135deg, #10b981, #059669);
-  --grad-brand: linear-gradient(135deg, #6366f1, #8b5cf6, #3b82f6);
-  
-  --shadow-card: 0 10px 25px rgba(0,0,0,0.12);
-  --shadow-hover: 0 18px 40px rgba(0,0,0,0.18);
-  --shadow-sm: 0 4px 12px rgba(0,0,0,0.06);
-  --radius-sm: 10px;
-  --radius-md: 16px;
-  --radius-lg: 20px;
-  --radius-xl: 24px;
-  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
+  /* Dark Mode */
+  --bg-page: #0f172a;
+  --bg-surface: #1e293b;
+  --bg-card: #1e293b;
+  --bg-input: #334155;
 
-[data-theme="dark"] {
-  --bg-page: #0b1120;
-  --bg-surface: #111827;
-  --bg-surface-hover: #1f2937;
-  --text-primary: #f8fafc;
+  --text-primary: #f1f5f9;
   --text-secondary: #94a3b8;
   --text-muted: #64748b;
-  --border-light: #1e293b;
-  --border-normal: #334155;
-  --shadow-card: 0 10px 25px rgba(0,0,0,0.4);
-  --shadow-hover: 0 18px 40px rgba(0,0,0,0.55);
-  --shadow-sm: 0 4px 12px rgba(0,0,0,0.3);
+
+  --border-light: #334155;
+  --border-normal: #475569;
+
+  --accent-primary: #3b82f6;
+  --accent-hover: #2563eb;
+  --accent-light: rgba(59,130,246,0.1);
+
+  --success: #10b981;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+  --shadow-lg: 0 10px 15px rgba(0,0,0,0.15);
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+
+  --transition: all 0.15s ease-in-out;
+}
+
+/* Light Mode */
+[data-theme="light"] {
+  --bg-page: #f8fafc;
+  --bg-surface: #ffffff;
+  --bg-card: #ffffff;
+  --bg-input: #f1f5f9;
+
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+
+  --border-light: #e2e8f0;
+  --border-normal: #cbd5e1;
+
+  --accent-primary: #2563eb;
+  --accent-hover: #1d4ed8;
+  --accent-light: rgba(37,99,235,0.08);
 }
 
 /* ========== Base ========== */
@@ -68,11 +79,12 @@ body::before {
   content:'';
   position:fixed;
   inset:0;
-  background:radial-gradient(ellipse at 20% 80%, rgba(22, 231, 238, 0.104) 0%, transparent 50%),
-            radial-gradient(ellipse at 80% 20%, rgba(30, 194, 197, 0.103) 0%, transparent 50%);
+  background:radial-gradient(ellipse at 20% 80%, rgba(6,181,212,0.08) 0%, transparent 50%),
+            radial-gradient(ellipse at 80% 20%, rgba(99,102,241,0.08) 0%, transparent 50%);
   pointer-events:none;
   z-index:-1;
 }
+
 
 /* ========== Header ========== */
 .header {
@@ -265,155 +277,40 @@ body::before {
 }
 
 /* ========== Content ========== */
-.content {
-  padding:18px;
-  max-width:1100px;
-  margin:0 auto;
-}
-
-/* ========== بطاقات الإحصائيات - نفس ألوان The Sovereign Ledger ========== */
 .stats-grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));
-  gap:16px;
-  margin-bottom:24px;
-  
-}
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 12px; padding: 16px;
+    }
+
 .stat-card {
-  position:relative;
-  overflow:hidden;
-  background:var(--bg-surface);
-  border:1px solid var(--border-light);
-  border-radius:var(--radius-lg);
-  padding:20px 18px;
-  text-align:center;
-  box-shadow:var(--shadow-card);
-  transition:var(--transition);
-  cursor:pointer;
-}
-.stat-card:hover {
-  transform:translateY(-4px);
-  box-shadow:var(--shadow-hover);
-}
-.stat-card::before {
-  content:'';
-  position:absolute;
-  top:-30%;
-  right:-20%;
-  width:80px;
-  height:80px;
-  border-radius:50%;
-  background:rgba(255,255,255,0.2);
-  filter:blur(10px);
-  transition:var(--transition);
-}
-.stat-card:hover::before { transform:scale(1.3); }
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+        display: flex; flex-direction: column; gap: 10px;
 
-/* حدود علوية ملونة لكل بطاقة - نفس النمط الأصلي */
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+  position: relative;
+      overflow: hidden;
+}
+
+/* Gradient خفيف */
 .stat-card.cyan {
-  border-top:4px solid #06b5d4;
-  background: linear-gradient(135deg, rgba(59,130,246,0.06) 0%, rgba(2, 208, 240, 0.099) 100%);
+  background: linear-gradient(135deg, rgba(6,182,212,0.08), transparent);
 }
-.stat-card.cyan .icon { color:#06b5d4; }
-.stat-card.cyan .value {
-  background:var(--grad-cyan);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-clip:text;
-  
-}
-
 .stat-card.purple {
-  border-top:4px solid #8b5cf6;
-  background: linear-gradient(135deg, rgba(146, 2, 249, 0) 0%, rgba(116, 2, 246, 0.112) 100%);
+  background: linear-gradient(135deg, rgba(139,92,246,0.08), transparent);
 }
-.stat-card.purple .icon { color:#8b5cf6; }
-.stat-card.purple .value {
-  background:var(--grad-purple);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-clip:text;
-}
-
 .stat-card.gold {
-  border-top:4px solid #eab308;
-  background: linear-gradient(135deg, rgba(59,130,246,0.06) 0%, rgba(244, 200, 2, 0.1) 100%);
+  background: linear-gradient(135deg, rgba(245,158,11,0.08), transparent);
 }
-.stat-card.gold .icon { color:#eab308; }
-.stat-card.gold .value {
-  background:var(--grad-gold);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-clip:text;
-}
-
 .stat-card.red {
-  border-top:4px solid #ef4444;
-  background: linear-gradient(135deg, rgba(59,130,246,0.06) 0%, rgba(252, 3, 3, 0.064) 100%);
+  background: linear-gradient(135deg, rgba(239,68,68,0.08), transparent);
 }
-.stat-card.red .icon { color:#ef4444; }
-.stat-card.red .value {
-  background:var(--grad-red);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-clip:text;
-}
-
 .stat-card.green {
-  border-top:4px solid #1810b9;
-  background: linear-gradient(135deg, rgba(3, 254, 32, 0) 0%, rgba(16, 4, 252, 0.05) 100%);
+  background: linear-gradient(135deg, rgba(16,185,129,0.08), transparent);
 }
-.stat-card.green .icon { color:#1610b9; }
-.stat-card.green .value {
-  background:var(--grad-green);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-clip:text;
-}
-
-.stat-card.sale {
-  border-top:4px solid var(--grad-sale);
-  background: linear-gradient(135deg, rgba(16,185,129,0.08) 0%, rgba(5,150,105,0.06) 100%);
-}
-.stat-card.sale .icon { color:#10b981; }
-.stat-card.sale .value {
-  background:var(--grad-sale);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-clip:text;
-}
-
-.stat-card .icon {
-  font-size:1.8rem;
-  margin-bottom:1px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-.stat-card .value {
-  font-size:1.5rem;
-  font-weight:800;
-  margin-bottom:4px;
-  line-height:1.2;
-}
-.stat-card .label {
-  font-size:0.8rem;
-  color:var(--text-secondary);
-  font-weight:500;
-}
-.stat-card .trend {
-  display:inline-flex;
-  align-items:center;
-  gap:4px;
-  font-size:0.75rem;
-  margin-top:8px;
-  padding:4px 10px;
-  border-radius:20px;
-  background:var(--bg-surface-hover);
-}
-.stat-card .trend.up { color:#10b981; }
-.stat-card .trend.down { color:#ef4444; }
-
 /* ========== العمليات الأخيرة ========== */
 .transaction-list {
   display:flex;
@@ -493,7 +390,7 @@ body::before {
 }
 .fab:hover {
   transform:translateY(-3px) scale(1.05);
-  box-shadow:0 12px 35px rgba(99,102,241,0.55);
+  box-shadow:0 12px 35px rgba(99, 101, 241, 0.399);
 }
 .fab:active { transform:scale(0.95); }
 
@@ -507,9 +404,23 @@ body::before {
   border-top:1px solid var(--border-light);
   display:flex;
   z-index:100;
-  padding:7px 0 env(safe-area-inset-bottom, 10px);
-  box-shadow:0 -4px 20px rgba(0,0,0,0.098);
+  padding:10px 0 env(safe-area-inset-bottom, 10px);
+  box-shadow:0 -4px 20px rgba(0, 0, 0, 0.068);
 }
+.nav-item.active {
+  color: var(--accent-primary);
+}
+
+.nav-item.active::after {
+  content: "";
+  width: 20px;
+  height: 3px;
+  background: var(--accent-primary);
+  position: absolute;
+  bottom: 4px;
+  border-radius: 2px;
+}
+ 
 .nav-item {
   flex:1;
   display:flex;
@@ -608,20 +519,18 @@ a:focus-visible {
     <button class="sidebar-close" onclick="toggleSidebar()" aria-label="إغلاق">✕</button>
   </div>
   <nav class="sidebar-nav">
-<a href="home.html" class="sidebar-item active" id="nav-home"><span class="icon">🏠</span>الرئيسية</a>
-    <a href="add-patient.html" class="sidebar-item" id="nav-addPatient"><span class="icon">➕</span>إضافة مريض</a>
-    <a href="archive.html" class="sidebar-item" id="nav-archive"><span class="icon">📁</span>أرشيف المرضى</a>
-    <a href="expenses.html" class="sidebar-item" id="nav-expenses"><span class="icon">💰</span>إضافة مصروف</a>
-    <a href="inventory.html" class="sidebar-item" id="nav-inventory"><span class="icon">📦</span>الجرد والمواد</a>
-    <a href="sales-invoice.html" class="sidebar-item" id="nav-sales"><span class="icon">🧾</span>فاتورة بيع</a>
-    <a href="add-material.html" class="sidebar-item" id="nav-addMaterial"><span class="icon">📥</span>إضافة مواد</a>
-    <a href="reports.html" class="sidebar-item" id="nav-reports"><span class="icon">📊</span>التقارير</a>
-    <a href="support.html" class="sidebar-item" id="nav-support"><span class="icon">❓</span>الدعم الفني</a>
-    <!-- <a href="dashboard.html" class="sidebar-item" id="nav-dashboard"><span class="icon">📊</span>لوحة التحكم</a> -->
+    <a href="home.html" class="sidebar-item active"><span class="icon">🏠</span>الرئيسية</a>
+    <a href="add-patient.html" class="sidebar-item"><span class="icon">➕</span>إضافة مريض</a>
+    <a href="archive.html" class="sidebar-item"><span class="icon">📁</span>أرشيف المرضى</a>
+    <a href="expenses.html" class="sidebar-item"><span class="icon">💰</span>إضافة مصروف</a>
+    <a href="inventory.html" class="sidebar-item"><span class="icon">📦</span>الجرد والمواد</a>
+    <a href="add-material.html" class="sidebar-item"><span class="icon">📥</span>إضافة مواد</a>
+    <a href="reports.html" class="sidebar-item"><span class="icon">📊</span>التقارير</a>
+    <a href="support.html" class="sidebar-item"><span class="icon">❓</span>الدعم الفني</a>
+    <a href="export-excel.html" class="sidebar-item"><span class="icon">📤</span>تصدير Excel</a>
     <div class="sidebar-divider"></div>
-    <a href="settings.html" class="sidebar-item" id="nav-settings"><span class="icon">⚙️</span>الإعدادات</a>
-    <a href="export-excel.html" class="sidebar-item" id="nav-export"><span class="icon">📤</span>تصدير Excel</a>
-    <a href="index.html" class="sidebar-item sidebar-logout" id="nav-logout"><span class="icon">🚪</span>تسجيل الخروج</a>
+    <a href="settings.html" class="sidebar-item"><span class="icon">⚙️</span>الإعدادات</a>
+    <a href="index.html" class="sidebar-item sidebar-logout"><span class="icon">🚪</span>تسجيل الخروج</a>
   </nav>
  
 </aside>
@@ -663,13 +572,6 @@ a:focus-visible {
       <div class="value" id="monthExpenses">0</div>
       <div class="label">مصروفات الشهر</div>
       <div class="trend down">📉 -3%</div>
-    </div>
-    
-    <div class="stat-card sale" onclick="window.location.href='sales-invoice.html'">
-      <div class="icon">🧾</div>
-      <div class="value" id="todayInvoices">0</div>
-      <div class="label">فواتير اليوم</div>
-      <div class="trend up">💰 مبيعات سريعة</div>
     </div>
     
     <div class="stat-card green" style="grid-column:span 2;" onclick="viewSection('monthly')">
@@ -715,59 +617,8 @@ function toggleTheme() {
   html.setAttribute('data-theme', next);
   btn.textContent = next === 'light' ? '🌙' : '☀️';
   localStorage.setItem('theme', next);
+  // ✅ تم إزالة استدعاء showToast حسب الطلب
 }
-
-// ========== Dashboard Controls ==========
-function applyDashboardControls() {
-  const controls = JSON.parse(localStorage.getItem('dashboardControls') || '{}');
-  
-  // Hide/show nav items
-  Object.keys(controls).forEach(key => {
-    const navItem = document.getElementById('nav-' + key);
-    if(navItem) {
-      if(!controls[key]) {
-        navItem.style.display = 'none';
-      } else {
-        navItem.style.display = '';
-      }
-    }
-  });
-  
-  // Check sidebar items visibility
-  const visibleNavs = Array.from(document.querySelectorAll('.sidebar-item')).filter(item => item.style.display !== 'none').length;
-  if(visibleNavs === 0) {
-    document.querySelector('.sidebar-nav').innerHTML = '<div style="padding:40px;text-align:center;color:var(--text-muted);"><span style="font-size:2rem;">🔒</span><p>لا توجد صفحات مفعلة</p><a href="dashboard.html" style="color:#3b82f6;">تفعيل من لوحة التحكم</a></div>';
-  }
-}
-
-// Init with controls
-(function init() {
-  const saved = localStorage.getItem('theme') || 'light';
-  document.documentElement.setAttribute('data-theme', saved);
-  document.getElementById('themeBtn').textContent = saved === 'light' ? '🌙' : '☀️';
-  
-  // Apply dashboard controls
-  applyDashboardControls();
-  
-  // Rest of init code...
-  if (!localStorage.getItem('patients')) {
-    const mockPatients = [
-      {id:'p1',fullName:'أحمد محمد',phone:'07501234567',createdAt:new Date().toISOString()},
-      {id:'p2',fullName:'سارة علي',phone:'07709876543',createdAt:new Date(Date.now()-86400000).toISOString()},
-      {id:'p3',fullName:'حسين كريم',phone:'07805551234',createdAt:new Date(Date.now()-172800000).toISOString()}
-    ];
-    localStorage.setItem('patients', JSON.stringify(mockPatients));
-  }
-  
-  calculateStats();
-  loadTransactions();
-  
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && document.getElementById('sidebar')?.classList.contains('open')) toggleSidebar();
-  });
-  document.getElementById('sidebarOverlay')?.addEventListener('click', toggleSidebar);
-})();
-
 
 // ========== Sidebar Toggle ==========
 function toggleSidebar() {
@@ -805,7 +656,6 @@ function openAddPatient() {
 function calculateStats() {
   const patients = JSON.parse(localStorage.getItem('patients') || '[]');
   const expenses = JSON.parse(localStorage.getItem('expenses') || '[]');
-  const sales = JSON.parse(localStorage.getItem('sales') || '[]');
   
   document.getElementById('totalCustomers').textContent = patients.length.toLocaleString('en-US');
   
@@ -815,9 +665,6 @@ function calculateStats() {
   
   const todayRevenue = todayPatients.length * 250;
   document.getElementById('todayRevenue').textContent = todayRevenue.toLocaleString('en-US');
-  
-  const todaySalesCount = sales.filter(s => new Date(s.date).toDateString() === today).length;
-  document.getElementById('todayInvoices').textContent = todaySalesCount.toLocaleString('en-US');
   
   const currentMonth = new Date().getMonth();
   const currentYear = new Date().getFullYear();
