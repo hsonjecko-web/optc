@@ -2,444 +2,144 @@
 <html lang="ar" dir="rtl">
 <head>
   <!-- ========================================
-       🔧 إعدادات الصفحة - إضافة فاتورة بيع
+       🔧 إعدادات الصفحة - إضافة فاتورة بصرية
        ======================================== -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <meta name="theme-color" content="#0f172a">
-  <title>نظام التميز - إضافة فاتورة بيع</title>
-  
-  <!-- 🎨 خطوط وأيقونات خارجية -->
+  <title>نظام التميز - إضافة فاتورة بصرية</title>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   
   <style>
     /* ========================================
-       🎨 متغيرات التصميم الأساسية
+       🎨 متغيرات التصميم (نفس نظام التميز)
        ======================================== */
     :root {
-      /* 🌙 الوضع الليلي (الافتراضي) */
-      --bg-page: #0b0f19; 
-      --bg-main: linear-gradient(135deg, #111827 0%, #0f172a 100%);
-      --glass-bg: rgba(30, 41, 59, 0.4); 
-      --glass-border: rgba(255, 255, 255, 0.1);
+      --bg-page: #0b0f19; --bg-main: linear-gradient(135deg, #111827 0%, #0f172a 100%);
+      --glass-bg: rgba(30, 41, 59, 0.4); --glass-border: rgba(255, 255, 255, 0.1);
       --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
-      --text-primary: #f8fafc; 
-      --text-secondary: #94a3b8; 
-      --text-muted: #64748b;
-      
-      /* 🎨 ألوان التمييز للأقسام */
-      --accent-blue: #3b82f6;
-      --accent-green: #22c55e;
-      --accent-cyan: #06b6d4;
-      --accent-purple: #a855f7;
-      --accent-red: #ef4444;
-      --accent-amber: #f59e0b;
-      --accent-teal: #14b8a6;
-      
-      /* 📐 أبعاد ثابتة */
-      --header-height: 64px; 
-      --footer-height: 70px; 
-      --sidebar-width: 280px;
-      --safe-top: env(safe-area-inset-top, 0px); 
-      --safe-bottom: env(safe-area-inset-bottom, 0px);
-      --touch-target: 44px; /* حجم اللمس الموصى به للموبايل */
+      --text-primary: #f8fafc; --text-secondary: #94a3b8; --text-muted: #64748b;
+      --accent-blue: #3b82f6; --accent-green: #22c55e; --accent-cyan: #06b6d4;
+      --accent-purple: #a855f7; --accent-red: #ef4444; --accent-amber: #f59e0b; --accent-teal: #14b8a6;
+      --header-height: 64px; --footer-height: 70px; --sidebar-width: 280px;
+      --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
+      --transition: all 0.2s ease; --radius-sm: 10px; --radius-md: 12px; --radius-lg: 16px; --radius-xl: 20px;
+      --touch-target: 44px;
     }
-    
-    /* ☀️ الوضع النهاري */
     html.light-mode {
-      --bg-page: #f0f9ff; 
-      --bg-main: radial-gradient(circle at 50% -20%, #f0f9ff 0%, #e0f2fe 100%) !important;
-      --glass-bg: rgba(255,255,255,0.75) !important; 
-      --glass-border: rgba(59,130,246,0.2) !important;
+      --bg-page: #f0f9ff; --bg-main: radial-gradient(circle at 50% -20%, #f0f9ff 0%, #e0f2fe 100%) !important;
+      --glass-bg: rgba(255,255,255,0.75) !important; --glass-border: rgba(59,130,246,0.2) !important;
       --glass-shadow: 0 4px 15px rgba(59,130,246,0.08), inset 0 1px 1px rgba(59,130,246,0.1) !important;
-      --text-primary: #1e293b !important; 
-      --text-secondary: #64748b !important; 
-      --text-muted: rgba(30,41,59,0.5) !important;
+      --text-primary: #1e293b !important; --text-secondary: #64748b !important; --text-muted: rgba(30,41,59,0.5) !important;
     }
-    
-    /* ========================================
-       🧹 إعادة تعيين وتنسيقات عامة
-       ======================================== */
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; font-family: 'Cairo', sans-serif; }
     html, body { height: 100%; background: var(--bg-main); color: var(--text-primary); overflow-x: hidden; }
-    body { 
-      padding-top: calc(var(--header-height) + var(--safe-top)); 
-      padding-bottom: calc(var(--footer-height) + var(--safe-bottom) + 20px); 
-      transition: var(--transition);
-      -webkit-text-size-adjust: 100%; /* منع تغيير حجم النص تلقائياً على الموبايل */
-    }
-    
-    /* ========================================
-       📱 الهيدر العلوي - محسّن للموبايل
-       ======================================== */
-    .app-header { 
-      position: fixed; top: 0; left: 0; right: 0; 
-      height: var(--header-height); padding: 0 12px; padding-top: var(--safe-top); 
-      display: flex; align-items: center; justify-content: space-between; 
-      background: rgba(15,23,42,0.85); backdrop-filter: blur(12px); 
-      border-bottom: 1px solid var(--glass-border); z-index: 100; 
-    }
-    html.light-mode .app-header { 
-      background: rgba(240,245,250,0.8) !important; 
-      border-bottom-color: rgba(59,130,246,0.15) !important; 
-    }
-    
-    .menu-toggle, .back-btn { 
-      width: var(--touch-target); height: var(--touch-target); 
-      display: flex; align-items: center; justify-content: center; 
-      background: transparent; border: none; color: var(--text-primary); 
-      cursor: pointer; border-radius: 10px; 
-      min-width: var(--touch-target); min-height: var(--touch-target); /* ضمان حجم اللمس */
-    }
-    .menu-toggle:active, .back-btn:active { background: var(--glass-bg); }
-    
-    .header-title { 
-      font-size: 1rem; font-weight: 700; display: flex; align-items: center; gap: 6px; 
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 60%;
-    }
+    body { padding-top: calc(var(--header-height) + var(--safe-top)); padding-bottom: calc(var(--footer-height) + var(--safe-bottom) + 20px); transition: var(--transition); -webkit-text-size-adjust: 100%; }
+    ::-webkit-scrollbar { width: 6px; height: 6px; } ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
+    html.light-mode ::-webkit-scrollbar-thumb { background: rgba(59,130,246,0.3); }
+
+    /* 📱 الهيدر والسايدبار (مطابق للنظام) */
+    .app-header { position: fixed; top: 0; left: 0; right: 0; height: var(--header-height); padding: 0 12px; padding-top: var(--safe-top); display: flex; align-items: center; justify-content: space-between; background: rgba(15,23,42,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--glass-border); z-index: 100; }
+    html.light-mode .app-header { background: rgba(240,245,250,0.8) !important; border-bottom-color: rgba(59,130,246,0.15) !important; }
+    .back-btn { width: var(--touch-target); height: var(--touch-target); display: flex; align-items: center; justify-content: center; background: transparent; border: none; color: var(--text-primary); cursor: pointer; border-radius: var(--radius-sm); }
+    .header-title { font-size: 1rem; font-weight: 700; display: flex; align-items: center; gap: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 60%; }
     @media (min-width: 768px) { .header-title { font-size: 1.1rem; max-width: none; } }
-    
-    .header-controls { display: flex; align-items: center; gap: 8px; }
-    .theme-btn { 
-      display: flex; align-items: center; justify-content: center; 
-      background: var(--glass-bg); border: 1px solid var(--glass-border); 
-      border-radius: 10px; padding: 6px; min-width: var(--touch-target); min-height: var(--touch-target);
-      cursor: pointer; 
-    }
-    .theme-btn:active { transform: scale(0.95); }
-    
-    .light-mode-icon { display: none; } 
-    html.light-mode .light-mode-icon { display: inline-block !important; } 
-    html.light-mode .dark-mode-icon { display: none !important; }
-    
-    /* ========================================
-       🧭 الشريط الجانبي - محسّن للموبايل
-       ======================================== */
-    .sidebar-overlay { 
-      position: fixed; inset: 0; background: rgba(0,0,0,0.6); 
-      z-index: 190; opacity: 0; visibility: hidden; transition: 0.3s; 
-    }
+    .theme-btn { display: flex; align-items: center; justify-content: center; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: var(--radius-sm); padding: 6px; min-width: var(--touch-target); min-height: var(--touch-target); cursor: pointer; }
+    .light-mode-icon { display: none; } html.light-mode .light-mode-icon { display: inline-block !important; } html.light-mode .dark-mode-icon { display: none !important; }
+
+    .sidebar-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 190; opacity: 0; visibility: hidden; transition: 0.3s; }
     .sidebar-overlay.active { opacity: 1; visibility: visible; }
-    html.light-mode .sidebar-overlay { background: rgba(30,41,59,0.4); }
-    
-    .sidebar { 
-      position: fixed; top: 0; right: 0; bottom: 0; width: var(--sidebar-width); 
-      background: var(--glass-bg); backdrop-filter: blur(16px); 
-      border-left: 1px solid var(--glass-border); transform: translateX(100%); 
-      transition: transform 0.3s ease; z-index: 200; 
-      display: flex; flex-direction: column; padding-top: calc(var(--safe-top) + 16px); 
-      max-width: 85vw; /* منع الخروج عن الشاشة على الموبايل */
-    }
-    html.light-mode .sidebar { 
-      background: linear-gradient(165deg, rgba(219,234,254,0.8) 0%, rgba(240,249,255,0.7) 100%) !important; 
-      border-left-color: rgba(59,130,246,0.25) !important; 
-    }
+    .sidebar { position: fixed; top: 0; right: 0; bottom: 0; width: var(--sidebar-width); background: var(--glass-bg); backdrop-filter: blur(16px); border-left: 1px solid var(--glass-border); transform: translateX(100%); transition: transform 0.3s ease; z-index: 200; display: flex; flex-direction: column; padding-top: calc(var(--safe-top) + 16px); max-width: 85vw; }
+    html.light-mode .sidebar { background: linear-gradient(165deg, rgba(219,234,254,0.8) 0%, rgba(240,249,255,0.7) 100%) !important; border-left-color: rgba(59,130,246,0.25) !important; }
     .sidebar.active { transform: translateX(0); }
-    
-    .sidebar-header { 
-      padding: 16px 20px; border-bottom: 1px solid var(--glass-border); 
-      display: flex; align-items: center; gap: 10px; 
-    }
+    .sidebar-header { padding: 16px 20px; border-bottom: 1px solid var(--glass-border); display: flex; align-items: center; gap: 10px; }
     .sidebar-header h2 { font-size: 1.1rem; font-weight: 700; flex: 1; }
-    .sidebar-header .material-icons-round { color: var(--accent-blue); font-size: 24px; }
-    
-    .sidebar-nav { flex: 1; overflow-y: auto; padding: 16px 12px; -webkit-overflow-scrolling: touch; }
-    
-    .nav-btn-3d { 
-      display: flex; align-items: center; gap: 12px; width: 100%; 
-      padding: 12px 14px; margin-bottom: 6px; 
-      background: linear-gradient(145deg, rgba(30,41,59,0.9), rgba(15,23,42,0.8)); 
-      border: 1px solid var(--glass-border); border-radius: 12px; 
-      color: var(--text-primary); text-decoration: none; cursor: pointer; 
-      font-weight: 500; transition: all 0.2s; 
-      min-height: var(--touch-target); /* حجم لمس مناسب */
-    }
-    html.light-mode .nav-btn-3d { 
-      background: linear-gradient(145deg, rgba(255,255,255,0.8), rgba(241,245,249,0.6)) !important; 
-      border-color: rgba(59,130,246,0.2) !important; color: #1e293b !important; 
-    }
-    .nav-btn-3d:active { transform: scale(0.98); }
-    .nav-btn-3d .material-icons-round { font-size: 22px; }
-    .nav-btn-3d .expand-icon { margin-right: auto; transition: transform 0.3s; }
-    .nav-btn-3d.expanded .expand-icon { transform: rotate(180deg); }
-    
-    .submenu { padding-right: 16px; overflow: hidden; transition: max-height 0.3s ease; max-height: 0; }
-    .submenu:not(.hidden) { max-height: 500px; }
-    
-    .sub-link { 
-      display: flex; align-items: center; gap: 10px; padding: 10px 12px; 
-      color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; 
-      border-radius: 8px; margin-bottom: 4px; border: 1px solid transparent; 
-      min-height: var(--touch-target);
-    }
-    .sub-link:active { background: var(--glass-bg); }
-    .sub-link.active-submenu { 
-      background: var(--accent-purple); color: #fff !important; 
-      border-color: rgba(168,85,247,0.4); box-shadow: 0 0 12px rgba(168,85,247,0.4); 
-    }
-    html.light-mode .sub-link { color: #64748b !important; }
-    html.light-mode .sub-link.active-submenu { 
-      background: #000 !important; color: #fff !important; 
-      border-color: rgba(0,0,0,0.5) !important; box-shadow: 0 0 15px rgba(0,0,0,0.3) !important; 
-    }
-    
-    /* 🎨 ألوان الأزرار حسب القسم */
-    .btn-blue { border-color: rgba(59,130,246,0.3) !important; }
-    .btn-purple { border-color: rgba(168,85,247,0.3) !important; }
-    .btn-green { border-color: rgba(34,197,94,0.3) !important; }
-    .btn-cyan { border-color: rgba(6,182,212,0.3) !important; }
-    .btn-amber { border-color: rgba(245,158,11,0.3) !important; }
-    .btn-red { border-color: rgba(239,68,68,0.3) !important; }
-    .btn-teal { border-color: rgba(20,184,166,0.3) !important; }
-    
-    /* ========================================
-       📄 المحتوى الرئيسي - محسّن للموبايل
-       ======================================== */
+    .sidebar-nav { flex: 1; overflow-y: auto; padding: 16px 12px; }
+    .nav-btn-3d { display: flex; align-items: center; gap: 12px; width: 100%; padding: 12px 14px; margin-bottom: 6px; background: linear-gradient(145deg, rgba(30,41,59,0.9), rgba(15,23,42,0.8)); border: 1px solid var(--glass-border); border-radius: var(--radius-md); color: var(--text-primary); text-decoration: none; cursor: pointer; font-weight: 500; transition: var(--transition); min-height: var(--touch-target); }
+    .nav-btn-3d:active { transform: scale(0.98); } .nav-btn-3d .material-icons-round { font-size: 22px; }
+    .btn-purple { border-color: rgba(168,85,247,0.3) !important; } .btn-amber { border-color: rgba(245,158,11,0.3) !important; } .btn-red { border-color: rgba(239,68,68,0.3) !important; }
+
+    /* 📄 المحتوى الرئيسي */
     main { padding: 12px; max-width: 900px; margin: 0 auto; }
     @media (min-width: 768px) { main { padding: 16px; } }
     
-    .form-card { 
-      background: var(--glass-bg); border: 1px solid var(--glass-border); 
-      border-radius: var(--radius-xl); padding: 16px; margin-bottom: 20px; 
-      backdrop-filter: blur(10px); box-shadow: var(--glass-shadow); 
-      border-top: 4px solid var(--accent-purple); 
-    }
-    html.light-mode .form-card { 
-      background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(240,248,255,0.9) 100%) !important; 
-      border-color: rgba(59,130,246,0.2) !important; 
-    }
-    .form-card h3 { 
-      font-size: 1.1rem; font-weight: 700; margin-bottom: 16px; 
-      display: flex; align-items: center; gap: 10px; 
-    }
-    .form-card h3::before { content:''; width: 4px; height: 18px; border-radius: 2px; background: var(--accent-purple); }
+    .form-card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: var(--radius-xl); padding: 16px; margin-bottom: 20px; backdrop-filter: blur(10px); box-shadow: var(--glass-shadow); border-top: 4px solid var(--accent-teal); }
+    html.light-mode .form-card { background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(240,248,255,0.9) 100%) !important; border-color: rgba(59,130,246,0.2) !important; }
+    .form-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+    .form-card h3::before { content:''; width: 4px; height: 18px; border-radius: 2px; background: var(--accent-teal); }
     
     .form-grid { display: grid; gap: 14px; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    
-    /* 📱 تحسينات الموبايل للنموذج */
-    @media (max-width: 640px) { 
-      .form-row { grid-template-columns: 1fr; }
-      .form-card { padding: 14px; }
-      .form-input, .form-select { padding: 10px 12px; font-size: 0.9rem; }
-      .form-group label { font-size: 0.8rem; }
-    }
+    @media (max-width: 640px) { .form-row { grid-template-columns: 1fr; } .form-card { padding: 14px; } }
     
     .form-group { text-align: right; }
     .form-group label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px; color: var(--text-secondary); }
-    .form-input, .form-select { 
-      width: 100%; padding: 12px 14px; background: rgba(255,255,255,0.05); 
-      border: 1px solid var(--glass-border); border-radius: var(--radius-md); 
-      font-family: 'Cairo', sans-serif; font-size: 0.95rem; color: var(--text-primary); 
-      outline: none; transition: var(--transition); 
-      min-height: var(--touch-target); /* حجم لمس مناسب */
-    }
-    html.light-mode .form-input, html.light-mode .form-select { 
-      background: rgba(59,130,246,0.05) !important; border-color: rgba(59,130,246,0.2) !important; color: #1e293b !important; 
-    }
-    .form-input:focus, .form-select:focus { border-color: var(--accent-purple); box-shadow: 0 0 0 3px rgba(168,85,247,0.2); }
-    .form-textarea { min-height: 100px; resize: vertical; }
-    
-    /* 📊 جدول الأصناف - محسّن للموبايل */
-    .items-table-wrapper { 
-      overflow-x: auto; border: 1px solid var(--glass-border); 
-      border-radius: var(--radius-md); margin: 14px 0; 
-      -webkit-overflow-scrolling: touch; /* تمرير سلس على الموبايل */
-      position: relative;
-    }
-    /* مؤشر بصري للتمرير الأفقي */
-    .items-table-wrapper::after {
-      content: '← اسحب للتمرير';
-      position: absolute; bottom: 4px; left: 8px;
-      font-size: 0.65rem; color: var(--text-muted);
-      background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 4px;
-      pointer-events: none; animation: fadeOut 3s forwards;
-    }
-    @keyframes fadeOut { to { opacity: 0; } }
-    
-    .items-table { 
-      width: 100%; border-collapse: collapse; 
-      min-width: 500px; /* تقليل العرض الأدنى للموبايل */
-    }
-    @media (max-width: 480px) { .items-table { min-width: 420px; } }
-    
-    .items-table th, .items-table td { 
-      padding: 10px 8px; text-align: center; border-bottom: 1px solid var(--glass-border); 
-      font-size: 0.85rem;
-    }
-    .items-table th { 
-      background: rgba(255,255,255,0.03); color: var(--text-secondary); font-weight: 600; 
-      white-space: nowrap;
-    }
-    .items-table input { 
-      width: 100%; padding: 8px; background: transparent; 
-      border: 1px solid transparent; border-radius: 6px; 
-      color: var(--text-primary); text-align: center; outline: none; 
-      min-height: var(--touch-target); font-size: 0.9rem;
-    }
-    .items-table input:focus { border-color: var(--accent-purple); background: rgba(255,255,255,0.05); }
-    .items-table .remove-btn { 
-      background: transparent; border: none; color: var(--accent-red); 
-      cursor: pointer; font-size: 20px; min-width: var(--touch-target); min-height: var(--touch-target);
-      display: flex; align-items: center; justify-content: center;
-    }
-    
-    .add-row-btn { 
-      display: flex; align-items: center; justify-content: center; gap: 6px; 
-      padding: 12px 14px; background: rgba(255,255,255,0.05); 
-      border: 1px dashed var(--glass-border); border-radius: var(--radius-md); 
-      color: var(--text-secondary); cursor: pointer; width: 100%; 
-      margin-bottom: 14px; transition: var(--transition); 
-      min-height: var(--touch-target); font-size: 0.9rem;
-    }
-    .add-row-btn:active { background: var(--accent-purple); color: #fff; border-color: var(--accent-purple); }
-    
-    /* 💰 قسم المجاميع - محسّن للموبايل */
-    .totals-section { 
-      background: rgba(255,255,255,0.03); border-radius: var(--radius-md); 
-      padding: 16px; display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); 
-      gap: 12px; margin-top: 10px; 
-    }
-    @media (max-width: 480px) { 
-      .totals-section { grid-template-columns: 1fr 1fr; }
-      .total-item:nth-child(3) { grid-column: span 2; } /* جعل الإجمالي بعرض كامل */
-    }
-    
+    .form-input, .form-select { width: 100%; padding: 12px 14px; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); border-radius: var(--radius-md); font-family: 'Cairo', sans-serif; font-size: 0.95rem; color: var(--text-primary); outline: none; transition: var(--transition); min-height: var(--touch-target); }
+    html.light-mode .form-input, html.light-mode .form-select { background: rgba(59,130,246,0.05) !important; border-color: rgba(59,130,246,0.2) !important; color: #1e293b !important; }
+    .form-input:focus { border-color: var(--accent-teal); box-shadow: 0 0 0 3px rgba(20,184,166,0.2); }
+    .form-textarea { min-height: 80px; resize: vertical; }
+
+    /* 💰 قسم المجاميع */
+    .totals-section { background: rgba(255,255,255,0.03); border-radius: var(--radius-md); padding: 16px; display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 12px; margin-top: 10px; }
+    @media (max-width: 480px) { .totals-section { grid-template-columns: 1fr 1fr; } .total-item:nth-child(3), .total-item:nth-child(5) { grid-column: span 2; } }
     .total-item { text-align: center; }
     .total-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 4px; }
     .total-value { font-size: 1.1rem; font-weight: 700; }
-    .grand-total { font-size: 1.3rem; color: var(--accent-purple); }
-    
-    /* 🔘 أزرار الإجراءات - محسّنة للمس */
+    .remaining { color: var(--accent-red); }
+    .remaining.paid { color: var(--accent-green); }
+
+    /* 🔘 الأزرار */
     .action-buttons { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
-    .action-btn { 
-      flex: 1; min-width: 120px; padding: 14px; border: none; 
-      border-radius: var(--radius-md); font-family: 'Cairo', sans-serif; 
-      font-size: 0.95rem; font-weight: 700; cursor: pointer; 
-      transition: var(--transition); display: flex; align-items: center; 
-      justify-content: center; gap: 8px; min-height: var(--touch-target);
-    }
-    .action-btn.save { background: var(--accent-purple); color: #fff; box-shadow: 0 4px 15px rgba(168,85,247,0.3); }
+    .action-btn { flex: 1; min-width: 120px; padding: 14px; border: none; border-radius: var(--radius-md); font-family: 'Cairo', sans-serif; font-size: 0.95rem; font-weight: 700; cursor: pointer; transition: var(--transition); display: flex; align-items: center; justify-content: center; gap: 8px; min-height: var(--touch-target); }
+    .action-btn.save { background: var(--accent-teal); color: #fff; box-shadow: 0 4px 15px rgba(20,184,166,0.3); }
     .action-btn.preview { background: rgba(255,255,255,0.05); color: var(--text-primary); border: 1px solid var(--glass-border); }
-    .action-btn:active { transform: scale(0.98); }
-    
-    @media (max-width: 480px) {
-      .action-buttons { flex-direction: column; }
-      .action-btn { width: 100%; }
-    }
-    
-    /* ✅ مؤشر النجاح */
-    .success-indicator { 
-      display: none; align-items: center; gap: 8px; padding: 12px 16px; 
-      margin-bottom: 16px; background: rgba(34,197,94,0.15); 
-      border: 1px solid rgba(34,197,94,0.4); border-radius: var(--radius-md); 
-      color: var(--accent-green); font-size: 0.9rem; font-weight: 600; 
-      animation: fadeIn 0.3s ease; 
-    }
+    @media (max-width: 480px) { .action-buttons { flex-direction: column; } .action-btn { width: 100%; } }
+
+    .success-indicator { display: none; align-items: center; gap: 8px; padding: 12px 16px; margin-bottom: 16px; background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.4); border-radius: var(--radius-md); color: var(--accent-green); font-size: 0.9rem; font-weight: 600; animation: fadeIn 0.3s ease; }
     .success-indicator.show { display: flex; }
     @keyframes fadeIn { from{opacity:0; transform:translateY(-10px);} to{opacity:1; transform:translateY(0);} }
-    
-    /* 📱 الفوتر المتنقل - محسّن */
-    .mobile-footer { 
-      position: fixed; bottom: 0; left: 0; right: 0; 
-      height: var(--footer-height); padding-bottom: var(--safe-bottom); 
-      background: rgba(15,23,42,0.9); backdrop-filter: blur(12px); 
-      border-top: 1px solid var(--glass-border); 
-      display: flex; align-items: center; justify-content: space-around; z-index: 90; 
-    }
-    html.light-mode .mobile-footer { 
-      background: rgba(240,245,250,0.9) !important; 
-      border-top-color: rgba(59,130,246,0.15) !important; 
-    }
-    .footer-btn { 
-      display: flex; flex-direction: column; align-items: center; justify-content: center; 
-      gap: 4px; text-decoration: none; color: var(--text-muted); 
-      padding: 8px 6px; border-radius: var(--radius-md); transition: var(--transition); 
-      flex: 1; max-width: 20%; min-height: var(--touch-target);
-    }
-    .footer-btn .material-icons-round { font-size: 22px; transition: transform 0.2s; }
-    .footer-btn span:last-child { font-size: 0.65rem; font-weight: 500; white-space: nowrap; }
-    .footer-btn:active { transform: scale(0.95); background: var(--glass-bg); }
-    .footer-btn.active { color: var(--accent-blue); }
-    .footer-btn.active .material-icons-round { transform: translateY(-2px); }
-    
-    /* 🖨️ أنماط الطباعة - محسّنة */
-    @media print {
-      body * { visibility: hidden; }
-      #print-area, #print-area * { visibility: visible; }
-      #print-area { 
-        position: absolute; left: 0; top: 0; width: 100%; 
-        background: #fff !important; color: #000 !important; 
-        padding: 15mm; box-sizing: border-box; font-family: 'Cairo', sans-serif; 
-      }
-      .no-print { display: none !important; }
-    }
-    #print-area { 
-      display: none; padding: 20px; border: 2px solid #000; 
-      background: #fff; color: #000; max-width: 148mm; margin: 0 auto;
-    }
-    #print-area .inv-header { text-align: center; border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 15px; }
-    #print-area table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 10px; }
-    #print-area th, #print-area td { border: 1px solid #333; padding: 6px; text-align: center; }
-    #print-area th { background: #f0f0f0; }
-    #print-area .totals { text-align: left; margin-top: 10px; font-weight: bold; font-size: 11px; }
-    
-    /* 🌙 تنسيقات إضافية للوضع النهاري */
-    html.light-mode .card-accent-blue { border-color: rgba(59,130,246,0.4) !important; background: radial-gradient(circle at 30% 30%, rgba(59,130,246,0.15) 0%, rgba(59,130,246,0.05) 40%, transparent 70%), linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(219,234,254,0.7) 100%) !important; }
-    
-    /* 🔄 شريط التمرير */
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
-    html.light-mode ::-webkit-scrollbar-thumb { background: rgba(59,130,246,0.3); }
+
+    /* 🖨️ الطباعة */
+    @media print { body * { visibility: hidden; } #print-area, #print-area * { visibility: visible; } #print-area { position: absolute; left: 0; top: 0; width: 100%; background: #fff !important; color: #000 !important; padding: 15mm; } .no-print { display: none !important; } }
+    #print-area { display: none; padding: 20px; background: #fff; color: #000; max-width: 148mm; margin: 0 auto; font-family: 'Cairo', sans-serif; }
+    #print-area .header { text-align: center; border-bottom: 2px solid #000; padding-bottom: 8px; margin-bottom: 12px; }
+    #print-area .item-row { display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px dashed #ccc; font-size: 12px; }
+    #print-area .totals { text-align: left; margin-top: 15px; font-size: 13px; }
+    #print-area .footer { margin-top: 30px; text-align: center; font-size: 10px; color: #555; border-top: 1px solid #ccc; padding-top: 8px; }
+
+    /* 📱 الفوتر */
+    .mobile-footer { position: fixed; bottom: 0; left: 0; right: 0; height: var(--footer-height); padding-bottom: var(--safe-bottom); background: rgba(15,23,42,0.9); backdrop-filter: blur(12px); border-top: 1px solid var(--glass-border); display: flex; align-items: center; justify-content: space-around; z-index: 90; }
+    html.light-mode .mobile-footer { background: rgba(240,245,250,0.9) !important; border-top-color: rgba(59,130,246,0.15) !important; }
+    .footer-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: var(--text-muted); padding: 8px 6px; border-radius: var(--radius-md); transition: var(--transition); flex: 1; max-width: 20%; min-height: var(--touch-target); }
+    .footer-btn .material-icons-round { font-size: 22px; } .footer-btn span:last-child { font-size: 0.65rem; }
+    .footer-btn:active { transform: scale(0.95); background: var(--glass-bg); } .footer-btn.active { color: var(--accent-teal); } .footer-btn.active .material-icons-round { transform: translateY(-2px); }
   </style>
 </head>
 <body>
 
-  <!-- ========================================
-       📱 الهيدر العلوي
-       ======================================== -->
+  <!-- 📱 الهيدر -->
   <header class="app-header">
-    <button class="back-btn" onclick="history.back()" aria-label="رجوع">
-      <span class="material-icons-round">arrow_back</span>
-    </button>
-    <h1 class="header-title">
-      <span class="material-icons-round" style="color:var(--accent-purple);">shopping_cart</span>
-      <span>إضافة فاتورة بيع</span>
-    </h1>
-    <div class="header-controls">
-      <button class="theme-btn" onclick="toggleDarkMode()" aria-label="تبديل الوضع">
-        <span class="material-icons-round dark-mode-icon">light_mode</span>
-        <span class="material-icons-round light-mode-icon">dark_mode</span>
-      </button>
+    <button class="back-btn" onclick="history.back()"><span class="material-icons-round">arrow_back</span></button>
+    <h1 class="header-title"><span class="material-icons-round" style="color:var(--accent-teal);">shopping_cart</span> فاتورة بصرية</h1>
+    <div style="display:flex;gap:8px">
+      <button class="theme-btn" onclick="toggleDarkMode()"><span class="material-icons-round dark-mode-icon">light_mode</span><span class="material-icons-round light-mode-icon">dark_mode</span></button>
     </div>
   </header>
 
-  <!-- ========================================
-       🧭 الشريط الجانبي
-       ======================================== -->
+  <!-- 🧭 السايدبار -->
   <div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar()"></div>
   <aside class="sidebar" id="sidebar">
-    <div class="sidebar-header">
-      <span class="material-icons-round">shield</span>
-      <span class="material-icons-round">account_balance</span>
-      <span class="material-icons-round">trending_up</span>
-      <h2 id="clinicNameSidebar">نظام التميز</h2>
-    </div>
+    <div class="sidebar-header"><span class="material-icons-round">shield</span><span class="material-icons-round">account_balance</span><span class="material-icons-round">trending_up</span><h2 id="clinicNameSidebar">نظام التميز</h2></div>
     <nav class="sidebar-nav">
-      <a href="home.html" class="nav-btn-3d btn-blue">
-        <span class="material-icons-round">home</span><span>الرئيسية</span>
-      </a>
+      <a href="home.html" class="nav-btn-3d btn-purple"><span class="material-icons-round">home</span><span>الرئيسية</span></a>
       <div class="submenu-container">
-        <button onclick="toggleSubmenu('invoices-submenu')" class="nav-btn-3d btn-purple active-link">
-          <span class="material-icons-round">receipt</span><span>الفواتير</span>
-          <span class="material-icons-round expand-icon">expand_more</span>
+        <button onclick="toggleSubmenu('inv-sub')" class="nav-btn-3d btn-purple" style="border-color:rgba(168,85,247,0.3)">
+          <span class="material-icons-round">receipt</span><span>الفواتير</span><span class="material-icons-round expand-icon">expand_more</span>
         </button>
-        <div id="invoices-submenu" class="submenu">
-          <a href="invoices_list.html" class="sub-link"><span class="material-icons-round">receipt_long</span>الفواتير</a>
-          <a href="add_sales_invoice.html" class="sub-link active-submenu"><span class="material-icons-round">shopping_cart</span>إضافة فاتورة بيع</a>
-          <a href="add_purchase_invoice.html" class="sub-link"><span class="material-icons-round">shopping_bag</span>إضافة فاتورة مشتريات</a>
+        <div id="inv-sub" class="submenu">
+          <a href="invoices_list.html" class="nav-btn-3d"><span class="material-icons-round">receipt_long</span><span>قائمة الفواتير</span></a>
         </div>
       </div>
       <a href="settings.html" class="nav-btn-3d btn-amber"><span class="material-icons-round">settings</span><span>الإعدادات</span></a>
@@ -447,385 +147,266 @@
     </nav>
   </aside>
 
-  <!-- ========================================
-       📄 المحتوى الرئيسي
-       ======================================== -->
+  <!-- 📄 المحتوى -->
   <main>
-    <div class="success-indicator" id="successIndicator" role="alert">
-      <span class="material-icons-round">check_circle</span>
-      <span id="successMsg">تم حفظ الفاتورة بنجاح</span>
-    </div>
-    
+    <div class="success-indicator" id="successMsg"><span class="material-icons-round">check_circle</span> تم الحفظ بنجاح ونقص المخزون</div>
     <div class="form-card">
-      <h3>
-        <span class="material-icons-round" style="color:var(--accent-purple);">receipt</span>
-        بيانات فاتورة البيع
-      </h3>
-      
+      <h3><span class="material-icons-round" style="color:var(--accent-teal);">local_pharmacy</span> بيانات الفاتورة البصرية</h3>
       <div class="form-grid">
-        <!-- بيانات العميل والتاريخ -->
+        
+        <!-- 👤 المريض -->
+        <div class="form-group">
+          <label>اسم المريض (اختياري)</label>
+          <input list="patientsList" id="patientInput" class="form-input" placeholder="اختر من القائمة أو اكتب يدوياً..." oninput="fillPatientPhone()">
+          <datalist id="patientsList"></datalist>
+          <input type="text" id="patientPhone" class="form-input" placeholder="رقم الهاتف (تلقائي/يدوي)" style="margin-top:8px">
+        </div>
+
+        <!-- 🖼️ الإطار -->
         <div class="form-row">
           <div class="form-group">
-            <label for="custName">اسم العميل *</label>
-            <input type="text" id="custName" class="form-input" placeholder="اسم المريض أو العميل" required>
+            <label>الإطار (من المواد أو يدوي)</label>
+            <input list="framesList" id="frameInput" class="form-input" placeholder="اسم الإطار..." onchange="autoFillPrice('frame')">
+            <datalist id="framesList"></datalist>
           </div>
+          <div class="form-group"><label>سعر الإطار</label><input type="number" id="framePrice" class="form-input" placeholder="0" min="0" oninput="calcTotals()"></div>
+        </div>
+
+        <!-- 👁️ العدسات -->
+        <div class="form-group"><label>العدسات (يمين/يسار)</label></div>
+        <div class="form-row">
           <div class="form-group">
-            <label for="invDate">التاريخ</label>
-            <input type="date" id="invDate" class="form-input">
+            <input list="lensesList" id="lensRInput" class="form-input" placeholder="عدسة يمنى..." onchange="autoFillPrice('lensR')">
+            <datalist id="lensesList"></datalist>
           </div>
+          <div class="form-group"><input type="number" id="lensRPrice" class="form-input" placeholder="سعر اليمين" min="0" oninput="calcTotals()"></div>
         </div>
-        
-        <!-- جدول الأصناف -->
-        <div class="form-group">
-          <label>أصناف الفاتورة</label>
-          <div class="items-table-wrapper" role="region" aria-label="جدول الأصناف قابل للتمرير">
-            <table class="items-table" role="table">
-              <thead>
-                <tr>
-                  <th style="width:35%">الخدمة / المنتج</th>
-                  <th>الكمية</th>
-                  <th>السعر</th>
-                  <th>المجموع</th>
-                  <th aria-label="حذف"></th>
-                </tr>
-              </thead>
-              <tbody id="itemsBody"></tbody>
-            </table>
+        <div class="form-row">
+          <div class="form-group">
+            <input list="lensesList" id="lensLInput" class="form-input" placeholder="عدسة يسرى..." onchange="autoFillPrice('lensL')">
           </div>
-          <button class="add-row-btn" onclick="addRow()">
-            <span class="material-icons-round">add</span> إضافة صنف
-          </button>
+          <div class="form-group"><input type="number" id="lensLPrice" class="form-input" placeholder="سعر اليسار" min="0" oninput="calcTotals()"></div>
         </div>
-        
-        <!-- المجاميع وحالة الدفع -->
+
+        <!-- 🔍 الفحص والملاحظات -->
+        <div class="form-row">
+          <div class="form-group"><label>سعر الفحص</label><input type="number" id="examFee" class="form-input" placeholder="0" min="0" oninput="calcTotals()"></div>
+          <div class="form-group"><label>ملاحظات</label><input type="text" id="invNotes" class="form-input" placeholder="اختياري..."></div>
+        </div>
+
+        <!-- 💰 المجاميع والدفع -->
         <div class="totals-section">
-          <div class="total-item">
-            <div class="total-label">المجموع الفرعي</div>
-            <div class="total-value" id="subtotal">0 د.ع</div>
-          </div>
-          <div class="total-item">
-            <div class="total-label">الخصم</div>
-            <input type="number" id="discount" class="form-input" value="0" min="0" oninput="calcTotals()" placeholder="0">
-          </div>
-          <div class="total-item">
-            <div class="total-label">المبلغ النهائي</div>
-            <div class="total-value grand-total" id="grandTotal">0 د.ع</div>
-          </div>
-          <div class="total-item">
-            <label style="font-size:0.75rem;color:var(--text-muted);margin-bottom:4px;">حالة الدفع</label>
-            <select id="payStatus" class="form-select">
-              <option value="paid">✅ مدفوع</option>
-              <option value="pending">⏳ معلق</option>
-            </select>
-          </div>
+          <div class="total-item"><div class="total-label">المجموع الفرعي</div><div class="total-value" id="subtotal">0</div></div>
+          <div class="total-item"><div class="total-label">الخصم</div><input type="number" id="discount" class="form-input" value="0" min="0" oninput="calcTotals()"></div>
+          <div class="total-item"><div class="total-label">الإجمالي النهائي</div><div class="total-value grand-total" id="grandTotal">0 د.ع</div></div>
+          <div class="total-item"><div class="total-label">المبلغ المدفوع الآن</div><input type="number" id="paidAmount" class="form-input" value="0" min="0" oninput="calcTotals()"></div>
+          <div class="total-item"><div class="total-label">المتبقي</div><div class="total-value remaining" id="remainingAmount">0 د.ع</div></div>
         </div>
-        
-        <!-- ملاحظات -->
-        <div class="form-group">
-          <label for="invNotes">ملاحظات (اختياري)</label>
-          <textarea id="invNotes" class="form-input form-textarea" placeholder="تفاصيل إضافية..."></textarea>
-        </div>
-        
-        <!-- أزرار الإجراءات -->
+
         <div class="action-buttons">
-          <button class="action-btn preview" onclick="previewInvoice()">
-            <span class="material-icons-round">preview</span> معاينة وطباعة
-          </button>
-          <button class="action-btn save" onclick="saveInvoice('sales')">
-            <span class="material-icons-round">save</span> حفظ الفاتورة
-          </button>
+          <button class="action-btn preview" onclick="previewInvoice()"><span class="material-icons-round">preview</span> معاينة</button>
+          <button class="action-btn save" onclick="saveInvoice()"><span class="material-icons-round">save</span> حفظ ونقص المخزون</button>
         </div>
       </div>
     </div>
   </main>
 
-  <!-- ========================================
-       🖨️ منطقة الطباعة المخفية
-       ======================================== -->
-  <div id="print-area" class="no-print">
-    <div class="inv-header">
-      <h2 style="margin:0; color:#000; font-size:18px;">فاتورة مبيعات</h2>
-      <p style="margin:5px 0; color:#333; font-size:10px;">نظام التميز | <span id="pDate"></span></p>
-    </div>
-    <p style="font-size:11px;"><strong>العميل:</strong> <span id="pCust"></span></p>
-    <table>
-      <thead>
-        <tr><th>الصنف</th><th>الكمية</th><th>السعر</th><th>المجموع</th></tr>
-      </thead>
-      <tbody id="pItems"></tbody>
-    </table>
-    <div class="totals">
-      <p>المجموع الفرعي: <span id="pSub"></span></p>
-      <p>الخصم: <span id="pDisc"></span></p>
-      <p style="font-size:13px; border-top:1px dashed #333; padding-top:5px;">
-        <strong>الإجمالي: <span id="pTotal"></span></strong>
-      </p>
-    </div>
-    <p style="margin-top:10px; font-size:9px;">ملاحظات: <span id="pNotes"></span></p>
-    <p style="margin-top:20px; text-align:left; font-size:10px;">توقيع المسؤول: _______________</p>
+  <!-- 🖨️ منطقة الطباعة -->
+  <div id="print-area">
+    <div class="header"><h2 id="pClinic">عيادة الأثير للبصريات</h2><div id="pContact" style="font-size:10px;color:#333"></div></div>
+    <div style="margin:8px 0;font-size:12px;"><strong>المريض:</strong> <span id="pName">-</span> | <strong>التاريخ:</strong> <span id="pDate">-</span></div>
+    <div id="pItems" style="margin:10px 0;"></div>
+    <div class="totals" id="pTotals"></div>
+    <div class="footer">جميع الحقوق محفوظة | نظام التميز</div>
   </div>
 
-  <!-- ========================================
-       📱 الفوتر المتنقل
-       ======================================== -->
+  <!-- 📱 الفوتر -->
   <footer class="mobile-footer">
-    <a href="home.html" class="footer-btn">
-      <span class="material-icons-round">home</span><span>الرئيسية</span>
-    </a>
-    <a href="add-patient.html" class="footer-btn">
-      <span class="material-icons-round">person_add</span><span>مريض</span>
-    </a>
-    <a href="add_sales_invoice.html" class="footer-btn active">
-      <span class="material-icons-round">shopping_cart</span><span>فاتورة</span>
-    </a>
-    <a href="patients_archive.html" class="footer-btn">
-      <span class="material-icons-round">archive</span><span>الأرشيف</span>
-    </a>
-    <a href="expenses_list.html" class="footer-btn">
-      <span class="material-icons-round">payments</span><span>مصروفات</span>
-    </a>
+    <a href="home.html" class="footer-btn"><span class="material-icons-round">home</span><span>الرئيسية</span></a>
+    <a href="add-patient.html" class="footer-btn"><span class="material-icons-round">person_add</span><span>مريض</span></a>
+    <a href="add_optical_invoice.html" class="footer-btn active"><span class="material-icons-round">shopping_cart</span><span>فاتورة</span></a>
+    <a href="archive.html" class="footer-btn"><span class="material-icons-round">archive</span><span>الأرشيف</span></a>
+    <a href="expenses_list.html" class="footer-btn"><span class="material-icons-round">payments</span><span>مصروفات</span></a>
   </footer>
 
-  <!-- ========================================
-       ⚙️ كود الجافاسكريبت
-       ======================================== -->
   <script>
     // ========================================
-    // 🔄 تهيئة الصفحة
+    // 📦 تحميل البيانات والقوائم
     // ========================================
-    document.addEventListener('DOMContentLoaded', () => {
-      // تحميل وضع الإضاءة/الظلام
-      if(localStorage.getItem('darkMode') === 'false') {
-        document.documentElement.classList.add('light-mode');
-      }
+    let patients = [], materials = [];
+    function loadData() {
+      patients = JSON.parse(localStorage.getItem('patients') || '[]');
+      materials = JSON.parse(localStorage.getItem('materials') || '[]');
       
-      // تحديث الأيقونات والصفحة النشطة
-      updateDarkModeIcon();
-      checkActivePage();
+      // ملء قوائم المرضى
+      const pList = document.getElementById('patientsList');
+      pList.innerHTML = patients.map(p => `<option value="${p.fullName}" data-phone="${p.phone||''}">`).join('');
       
-      // تعيين تاريخ اليوم كافتراضي
-      document.getElementById('invDate').value = new Date().toISOString().split('T')[0];
+      // ملء قوائم الإطارات (يبحث عن كلمة "إطار" أو "frame" في التصنيف أو الاسم)
+      const frames = materials.filter(m => /إطار|frame|نظارة/i.test(m.name + ' ' + m.category));
+      document.getElementById('framesList').innerHTML = frames.map(m => `<option value="${m.name}" data-price="${m.price}">`).join('');
       
-      // إضافة صفين افتراضيين للجدول
-      addRow();
-      addRow();
+      // ملء قوائم العدسات
+      const lenses = materials.filter(m => /عدسة|lens/i.test(m.name + ' ' + m.category));
+      document.getElementById('lensesList').innerHTML = lenses.map(m => `<option value="${m.name}" data-price="${m.price}">`).join('');
       
-      // تحميل اسم العيادة من الإعدادات
-      loadClinicSettings();
-    });
-
-    // ========================================
-    // 🧭 دوال التنقل
-    // ========================================
-    function toggleSidebar() {
-      document.getElementById('sidebar').classList.toggle('active');
-      document.getElementById('sidebar-overlay').classList.toggle('active');
-    }
-    
-    const allSubmenus = ['invoices-submenu'];
-    function toggleSubmenu(id) {
-      const sub = document.getElementById(id);
-      if(!sub) return;
-      const hidden = sub.classList.contains('hidden');
-      allSubmenus.forEach(s => {
-        const m = document.getElementById(s);
-        if(m && s !== id) m.classList.add('hidden');
-      });
-      sub.classList.toggle('hidden', !hidden);
-      const btn = sub.previousElementSibling;
-      if(btn) btn.classList.toggle('expanded', hidden);
-    }
-    
-    function checkActivePage() {
-      const page = window.location.pathname.split('/').pop() || 'add_sales_invoice.html';
-      document.querySelectorAll('.nav-btn-3d, .sub-link, .footer-btn').forEach(el => {
-        if(el.getAttribute('href') === page) {
-          el.classList.add('active');
-          if(el.classList.contains('sub-link')) el.classList.add('active-submenu');
-        }
-      });
-    }
-
-    // ========================================
-    // 🌙 الوضع الليلي/النهاري
-    // ========================================
-    function toggleDarkMode() {
-      const html = document.documentElement;
-      html.classList.toggle('light-mode');
-      localStorage.setItem('darkMode', html.classList.contains('light-mode') ? 'false' : 'true');
-      updateDarkModeIcon();
-    }
-    
-    function updateDarkModeIcon() {
-      const darkIcon = document.querySelector('.dark-mode-icon');
-      const lightIcon = document.querySelector('.light-mode-icon');
-      if(document.documentElement.classList.contains('light-mode')) {
-        if(darkIcon) darkIcon.classList.remove('hidden');
-        if(lightIcon) lightIcon.classList.add('hidden');
-      } else {
-        if(darkIcon) darkIcon.classList.add('hidden');
-        if(lightIcon) lightIcon.classList.remove('hidden');
-      }
-    }
-
-    // ========================================
-    // 👤 المستخدم وتسجيل الخروج
-    // ========================================
-    function handleLogout() {
-      if(confirm('هل أنت متأكد من تسجيل الخروج؟')) {
-        localStorage.removeItem('userName');
-        localStorage.removeItem('userPhone');
-        localStorage.removeItem('isLoggedIn');
-        window.location.href = 'login.html';
-      }
-    }
-    
-    function loadClinicSettings() {
+      // تحميل إعدادات العيادة
       const settings = JSON.parse(localStorage.getItem('clinicSettings') || '{}');
-      if(settings.name) {
-        document.getElementById('clinicNameSidebar').textContent = settings.name;
-      }
+      if(settings.name) document.getElementById('clinicNameSidebar').textContent = settings.name;
     }
 
     // ========================================
-    // 💰 دوال الفاتورة
+    // 🧮 الحسابات والتعبئة التلقائية
     // ========================================
-    function formatCurrency(n) {
-      return new Intl.NumberFormat('en-US').format(n) + ' د.ع';
-    }
-    
-    // إضافة صف جديد للجدول
-    function addRow() {
-      const tbody = document.getElementById('itemsBody');
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
-        <td><input type="text" class="item-name" placeholder="اسم الخدمة" aria-label="اسم الخدمة"></td>
-        <td><input type="number" class="item-qty" value="1" min="1" oninput="calcTotals()" aria-label="الكمية"></td>
-        <td><input type="number" class="item-price" value="0" min="0" oninput="calcTotals()" aria-label="السعر"></td>
-        <td class="item-total">0</td>
-        <td>
-          <button class="remove-btn" onclick="removeRow(this)" aria-label="حذف الصف">
-            <span class="material-icons-round">close</span>
-          </button>
-        </td>
-      `;
-      tbody.appendChild(tr);
+    function autoFillPrice(type) {
+      const input = document.getElementById(type === 'frame' ? 'frameInput' : type === 'lensR' ? 'lensRInput' : 'lensLInput');
+      const priceInput = document.getElementById(type === 'frame' ? 'framePrice' : type === 'lensR' ? 'lensRPrice' : 'lensLPrice');
+      const selected = input.value.trim();
+      
+      // البحث عن المادة في القائمة وتعبئة السعر تلقائياً
+      const found = materials.find(m => m.name.toLowerCase() === selected.toLowerCase());
+      if(found && found.price) priceInput.value = found.price;
       calcTotals();
     }
-    
-    // حذف صف من الجدول
-    function removeRow(btn) {
-      const row = btn.closest('tr');
-      row.remove();
-      calcTotals();
+
+    function fillPatientPhone() {
+      const val = document.getElementById('patientInput').value.trim();
+      const found = patients.find(p => p.fullName.toLowerCase() === val.toLowerCase());
+      if(found) document.getElementById('patientPhone').value = found.phone || '';
     }
-    
-    // حساب المجاميع
+
     function calcTotals() {
-      let subtotal = 0;
-      document.querySelectorAll('#itemsBody tr').forEach(row => {
-        const q = parseFloat(row.querySelector('.item-qty').value) || 0;
-        const p = parseFloat(row.querySelector('.item-price').value) || 0;
-        const t = q * p;
-        row.querySelector('.item-total').textContent = formatCurrency(t);
-        subtotal += t;
-      });
+      const f = parseFloat(document.getElementById('framePrice').value) || 0;
+      const lr = parseFloat(document.getElementById('lensRPrice').value) || 0;
+      const ll = parseFloat(document.getElementById('lensLPrice').value) || 0;
+      const ex = parseFloat(document.getElementById('examFee').value) || 0;
       const disc = parseFloat(document.getElementById('discount').value) || 0;
-      document.getElementById('subtotal').textContent = formatCurrency(subtotal);
-      document.getElementById('grandTotal').textContent = formatCurrency(Math.max(0, subtotal - disc));
+      
+      const sub = f + lr + ll + ex;
+      const total = Math.max(0, sub - disc);
+      const paid = parseFloat(document.getElementById('paidAmount').value) || 0;
+      const rem = Math.max(0, total - paid);
+      
+      document.getElementById('subtotal').textContent = sub.toLocaleString() + ' د.ع';
+      document.getElementById('grandTotal').textContent = total.toLocaleString() + ' د.ع';
+      
+      const remEl = document.getElementById('remainingAmount');
+      remEl.textContent = rem.toLocaleString() + ' د.ع';
+      remEl.className = rem === 0 ? 'total-value remaining paid' : 'total-value remaining';
     }
-    
-    // معاينة وطباعة الفاتورة
-    function previewInvoice() {
-      // تعبئة بيانات المعاينة
-      document.getElementById('pDate').textContent = document.getElementById('invDate').value;
-      document.getElementById('pCust').textContent = document.getElementById('custName').value || 'غير محدد';
-      document.getElementById('pNotes').textContent = document.getElementById('invNotes').value || '-';
-      document.getElementById('pSub').textContent = document.getElementById('subtotal').textContent;
-      document.getElementById('pDisc').textContent = formatCurrency(parseFloat(document.getElementById('discount').value) || 0);
-      document.getElementById('pTotal').textContent = document.getElementById('grandTotal').textContent;
-      
-      // تعبئة جدول الأصناف
-      const tbody = document.getElementById('pItems');
-      tbody.innerHTML = '';
-      document.querySelectorAll('#itemsBody tr').forEach(row => {
-        const n = row.querySelector('.item-name').value || '-';
-        const q = row.querySelector('.item-qty').value;
-        const p = row.querySelector('.item-price').value;
-        const t = row.querySelector('.item-total').textContent;
-        if(n !== '-' && parseFloat(q) > 0) {
-          tbody.innerHTML += `<tr><td>${n}</td><td>${q}</td><td>${p}</td><td>${t}</td></tr>`;
-        }
-      });
-      
-      // فتح نافذة الطباعة
-      window.print();
-    }
-    
-    // حفظ الفاتورة
-    function saveInvoice(type) {
-      const cust = document.getElementById('custName').value.trim();
-      const date = document.getElementById('invDate').value;
-      const disc = parseFloat(document.getElementById('discount').value) || 0;
-      const status = document.getElementById('payStatus').value;
-      const notes = document.getElementById('invNotes').value.trim();
-      
-      // التحقق من الحقول المطلوبة
-      if(!cust) {
-        alert('يرجى إدخال اسم العميل');
-        document.getElementById('custName').focus();
-        return;
-      }
-      
-      // جمع الأصناف
+
+    // ========================================
+    // 💾 الحفظ ونقص المخزون
+    // ========================================
+    function saveInvoice() {
+      const patient = document.getElementById('patientInput').value.trim() || 'عميل نقدي';
       const items = [];
-      document.querySelectorAll('#itemsBody tr').forEach(row => {
-        const n = row.querySelector('.item-name').value.trim();
-        const q = parseFloat(row.querySelector('.item-qty').value) || 0;
-        const p = parseFloat(row.querySelector('.item-price').value) || 0;
-        if(n && q > 0 && p > 0) {
-          items.push({ name: n, qty: q, price: p, total: q * p });
-        }
-      });
+      const deductions = []; // لتتبع ما سينقص من المخزون
       
-      if(items.length === 0) {
-        alert('أضف صنف واحد على الأقل');
-        return;
+      // جمع العناصر المدخلة
+      const addItem = (name, price, type) => {
+        if(!name || price <= 0) return;
+        items.push({ name, price, type });
+        deductions.push(name);
+      };
+
+      addItem(document.getElementById('frameInput').value, parseFloat(document.getElementById('framePrice').value)||0, 'إطار');
+      addItem(document.getElementById('lensRInput').value, parseFloat(document.getElementById('lensRPrice').value)||0, 'عدسة يمنى');
+      addItem(document.getElementById('lensLInput').value, parseFloat(document.getElementById('lensLPrice').value)||0, 'عدسة يسرى');
+      
+      if(items.length === 0 && (parseFloat(document.getElementById('examFee').value)||0) === 0) {
+        alert('يرجى إضافة عنصر واحد على الأقل أو إدخال سعر الفحص'); return;
       }
-      
-      // حساب المجاميع النهائية
-      const subtotal = items.reduce((a, i) => a + i.total, 0);
-      const grandTotal = Math.max(0, subtotal - disc);
-      
+
+      // إضافة الفحص كعنصر إذا كان له سعر
+      const examFee = parseFloat(document.getElementById('examFee').value) || 0;
+      if(examFee > 0) items.push({ name: 'فحص بصري', price: examFee, type: 'خدمة' });
+
+      const total = parseFloat(document.getElementById('grandTotal').textContent.replace(/[^0-9]/g,'')) || 0;
+      const paid = parseFloat(document.getElementById('paidAmount').value) || 0;
+      const remaining = Math.max(0, total - paid);
+
       // إنشاء كائن الفاتورة
       const inv = {
         id: Date.now().toString(),
-        type: type,
-        customer: cust,
-        date: date,
-        items: items,
-        subtotal: subtotal,
-        discount: disc,
-        grandTotal: grandTotal,
-        status: status,
-        notes: notes,
+        type: 'optical',
+        patient,
+        phone: document.getElementById('patientPhone').value,
+        date: new Date().toISOString().split('T')[0],
+        items,
+        subtotal: total + (parseFloat(document.getElementById('discount').value)||0),
+        discount: parseFloat(document.getElementById('discount').value)||0,
+        grandTotal: total,
+        paid,
+        remaining,
+        status: remaining === 0 ? 'paid' : 'partial',
+        notes: document.getElementById('invNotes').value,
         createdAt: new Date().toISOString()
       };
-      
-      // الحفظ في الذاكرة المحلية
-      let list = JSON.parse(localStorage.getItem('sales_invoices') || '[]');
-      list.push(inv);
-      localStorage.setItem('sales_invoices', JSON.stringify(list));
-      
-      // عرض رسالة النجاح
-      document.getElementById('successMsg').textContent = `✅ تم حفظ فاتورة بيع بقيمة ${formatCurrency(grandTotal)}`;
-      document.getElementById('successIndicator').classList.add('show');
-      
-      // التوجيه بعد الحفظ
-      setTimeout(() => {
-        window.location.href = 'invoices_list.html';
-      }, 1500);
+
+      // حفظ الفاتورة
+      const invoices = JSON.parse(localStorage.getItem('sales_invoices') || '[]');
+      invoices.push(inv);
+      localStorage.setItem('sales_invoices', JSON.stringify(invoices));
+
+      // ✅ نقص المخزون تلقائياً
+      let updated = false;
+      materials.forEach(m => {
+        if(deductions.includes(m.name) && m.stock > 0) {
+          m.stock -= 1;
+          m.lastUpdated = new Date().toISOString();
+          updated = true;
+        }
+      });
+      if(updated) localStorage.setItem('materials', JSON.stringify(materials));
+
+      // عرض النجاح والتوجيه
+      document.getElementById('successMsg').classList.add('show');
+      setTimeout(() => window.location.href = 'invoices_list.html', 1500);
     }
+
+    // ========================================
+    // 🖨️ المعاينة والطباعة
+    // ========================================
+    function previewInvoice() {
+      const settings = JSON.parse(localStorage.getItem('clinicSettings') || '{}');
+      document.getElementById('pClinic').textContent = settings.name || 'عيادة الأثير للبصريات';
+      document.getElementById('pContact').textContent = [settings.address, settings.phone, settings.social1].filter(Boolean).join(' | ');
+      document.getElementById('pName').textContent = document.getElementById('patientInput').value || 'عميل نقدي';
+      document.getElementById('pDate').textContent = new Date().toLocaleDateString('ar-IQ');
+      
+      let html = '';
+      const items = [];
+      const f = document.getElementById('frameInput').value, fp = document.getElementById('framePrice').value;
+      if(f && fp) items.push({n:f, p:fp});
+      const lr = document.getElementById('lensRInput').value, lrp = document.getElementById('lensRPrice').value;
+      if(lr && lrp) items.push({n:lr, p:lrp});
+      const ll = document.getElementById('lensLInput').value, llp = document.getElementById('lensLPrice').value;
+      if(ll && llp) items.push({n:ll, p:llp});
+      const ex = document.getElementById('examFee').value;
+      if(ex) items.push({n:'فحص بصري', p:ex});
+
+      html = items.map(i => `<div class="item-row"><span>${i.n}</span><span>${parseFloat(i.p).toLocaleString()} د.ع</span></div>`).join('');
+      html += `<div class="item-row" style="border-bottom:none;margin-top:5px;"><span>الخصم</span><span>-${document.getElementById('discount').value || 0} د.ع</span></div>`;
+      document.getElementById('pItems').innerHTML = html;
+      
+      const total = document.getElementById('grandTotal').textContent;
+      const paid = document.getElementById('paidAmount').value;
+      const rem = document.getElementById('remainingAmount').textContent;
+      document.getElementById('pTotals').innerHTML = `<strong>الإجمالي:</strong> ${total}<br><strong>المدفوع:</strong> ${paid} د.ع<br><strong>المتبقي:</strong> <span style="color:${rem==='0 د.ع'?'green':'red'}">${rem}</span>`;
+      
+      window.print();
+    }
+
+    // ========================================
+    // 🧭 دوال التنقل والوضع
+    // ========================================
+    function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); document.getElementById('sidebar-overlay').classList.toggle('active'); }
+    function toggleSubmenu(id) { const s=document.getElementById(id); if(!s) return; const h=s.classList.contains('hidden'); s.classList.toggle('hidden', !h); }
+    function toggleDarkMode() { const h=document.documentElement; h.classList.toggle('light-mode'); localStorage.setItem('darkMode', h.classList.contains('light-mode')?'false':'true'); }
+    function handleLogout() { if(confirm('هل أنت متأكد من تسجيل الخروج؟')){ localStorage.clear(); window.location.href='login.html'; } }
+    
+    document.addEventListener('DOMContentLoaded', loadData);
   </script>
 </body>
 </html>
