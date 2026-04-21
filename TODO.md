@@ -1,17 +1,1 @@
-# خطة تطوير الدعم + داشبورد + إعدادات الفواتير
-
-## الخطوات المكتملة (المهمة السابقة)
-- [x] إضافة بحث + VA + ملاحظات في add-patient ✅
-
-## الخطوات الجديدة
-1. [x] إنشاء TODO.md ✅
-2. [x] **إنشاء support.html** ✅
-3. [x] **إنشاء dashboard.html** ✅
-4. [x] **تحديث home.html** - داشبورد ✅
-5. [x] **إضافة dashboard controls** للصفحات ✅
-6. [x] **ربط settings مع الفواتير** - بيانات عيادة ✅
-7. [x] **اختبار كامل** ✅
-
-**الحالة:** موافق عليها ✅
-**اختبار:** `start support.html` & `start dashboard.html`
-
+# TODO: Standardize Sidebar Content Across All Pages\n\n1. Extract sidebar HTML/JS from home.html\n2. Compare with other pages\n3. Create plan\n4. Get user approval\n5. Update all sidebar files with home.html's content\n6. Test toggle functionality\n7. Complete task

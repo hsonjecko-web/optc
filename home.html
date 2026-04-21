@@ -1,903 +1,1031 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>عيادة الأثير للبصريات - لوحة التحكم</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-/* ========== The Sovereign Ledger - Premium Design System ========== */
-:root {
-  --bg-page: #e6ecf132;
-  --bg-surface: #ffffff;
-  --bg-surface-hover: #f1f5f9;
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
-  --text-muted: #94a3b8;
-  --border-light: #e2e8f0;
-  --border-normal: #cbd5e1;
+  <!-- ========================================
+       🔧 إعدادات الصفحة - لوحة المعلومات
+       ======================================== -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#0f172a">
+  <title>نظام التميز - لوحة المعلومات</title>
   
-  /* ألوان البطاقات المميزة - نفس النمط الأصلي */
-  --grad-cyan: linear-gradient(135deg, #06b5d4, #0891b2);
-  --grad-purple: linear-gradient(135deg, #8b5cf6, #7c3aed);
-  --grad-gold: linear-gradient(135deg, #eab308, #ca8a04);
-  --grad-red: linear-gradient(135deg, #ef4444, #dc2626);
-  --grad-green: linear-gradient(135deg, #10b981, #059669);
-  --grad-brand: linear-gradient(135deg, #6366f1, #8b5cf6, #3b82f6);
+  <!-- 🎨 خطوط وأيقونات خارجية -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   
-  --shadow-card: 0 10px 25px rgba(0,0,0,0.12);
-  --shadow-hover: 0 18px 40px rgba(0,0,0,0.18);
-  --shadow-sm: 0 4px 12px rgba(0,0,0,0.06);
-  --radius-sm: 10px;
-  --radius-md: 16px;
-  --radius-lg: 20px;
-  --radius-xl: 24px;
-  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-[data-theme="dark"] {
-  --bg-page: #0b1120;
-  --bg-surface: #111827;
-  --bg-surface-hover: #1f2937;
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
-  --border-light: #1e293b;
-  --border-normal: #334155;
-  --shadow-card: 0 10px 25px rgba(0,0,0,0.4);
-  --shadow-hover: 0 18px 40px rgba(0,0,0,0.55);
-  --shadow-sm: 0 4px 12px rgba(0,0,0,0.3);
-}
-
-/* ========== Base ========== */
-* { margin:0; padding:0; box-sizing:border-box; }
-body {
-  font-family:'Cairo',sans-serif;
-  background:var(--bg-page);
-  color:var(--text-primary);
-  line-height:1.5;
-  min-height:100vh;
-  padding-bottom:80px;
-  transition:var(--transition);
-  position:relative;
-  overflow-x:hidden;
-}
-
-/* خلفية متدرجة ناعمة */
-body::before {
-  content:'';
-  position:fixed;
-  inset:0;
-  background:radial-gradient(ellipse at 20% 80%, rgba(22, 231, 238, 0.104) 0%, transparent 50%),
-            radial-gradient(ellipse at 80% 20%, rgba(30, 194, 197, 0.103) 0%, transparent 50%);
-  pointer-events:none;
-  z-index:-1;
-}
-
-/* ========== Header ========== */
-.header {
-  position:sticky;
-  top:0;
-  z-index:100;
-  background:var(--bg-surface);
-  border-bottom:1px solid var(--border-light);
-  padding:14px 18px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  box-shadow:var(--shadow-sm);
-}
-.header-right { display:flex; align-items:center; gap:10px; }
-.menu-btn {
-  background:transparent;
-  border:1px solid var(--border-normal);
-  border-radius:var(--radius-sm);
-  padding:8px 10px;
-  font-size:1.2rem;
-  cursor:pointer;
-  color:var(--text-primary);
-  transition:var(--transition);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  width:40px;
-  height:40px;
-}
-.menu-btn:hover {
-  background:var(--bg-surface-hover);
-  border-color:#3b82f6;
-  color:#2563eb;
-}
-.header-title {
-  font-size:1.1rem;
-  font-weight:700;
-  display:flex;
-  align-items:center;
-  gap:8px;
-  color:var(--text-primary);
-}
-.header-title::before { content:'👁️'; font-size:1.2rem; }
-.header-left { display:flex; align-items:center; gap:6px; }
-.header-btn {
-  background:transparent;
-  border:1px solid var(--border-normal);
-  border-radius:var(--radius-sm);
-  padding:8px 10px;
-  font-size:1.1rem;
-  cursor:pointer;
-  color:var(--text-primary);
-  transition:var(--transition);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  width:40px;
-  height:40px;
-}
-.header-btn:hover {
-  background:var(--bg-surface-hover);
-  border-color:#3b82f6;
-  color:#2563eb;
-}
-
-/* ========== Sidebar ========== */
-.sidebar-overlay {
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.35);
-  backdrop-filter:blur(3px);
-  z-index:200;
-  display:none;
-  opacity:0;
-  transition:opacity 0.25s;
-}
-.sidebar-overlay.show { display:block; opacity:1; }
-.sidebar {
-  position:fixed;
-  top:0;
-  right:-290px;
-  width:280px;
-  height:100vh;
-  background:var(--bg-surface);
-  border-left:1px solid var(--border-light);
-  z-index:300;
-  transition:right 0.3s ease;
-  overflow-y:auto;
-  display:flex;
-  flex-direction:column;
-  box-shadow:0 0 30px rgba(0,0,0,0.2);
-}
-[dir="ltr"] .sidebar { right:auto; left:-290px; border-left:none; border-right:1px solid var(--border-light); }
-[dir="ltr"] .sidebar.open { left:0; }
-.sidebar.open { right:0; }
-.sidebar-header {
-  padding:18px 16px;
-  border-bottom:1px solid var(--border-light);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-.sidebar-brand {
-  font-size:1.1rem;
-  font-weight:700;
-  color:#2563eb;
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-.sidebar-close {
-  background:transparent;
-  border:none;
-  font-size:1.3rem;
-  cursor:pointer;
-  color:var(--text-muted);
-  padding:4px;
-  border-radius:8px;
-  transition:var(--transition);
-  width:36px;
-  height:36px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-.sidebar-close:hover {
-  background:var(--bg-surface-hover);
-  color:var(--text-primary);
-}
-.sidebar-nav { padding:10px 0; flex:1; }
-.sidebar-item {
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:11px 16px;
-  margin:3px 10px;
-  border-radius:var(--radius-md);
-  text-decoration:none;
-  color:var(--text-secondary);
-  font-size:0.9rem;
-  font-weight:500;
-  transition:var(--transition);
-  border:1px solid transparent;
-}
-.sidebar-item:hover {
-  background:#eff6ff;
-  color:#2563eb;
-}
-[data-theme="dark"] .sidebar-item:hover {
-  background:rgba(59,130,246,0.15);
-}
-.sidebar-item.active {
-  background:#2563eb;
-  color:#fff;
-  border-color:#2563eb;
-}
-.sidebar-item .icon {
-  font-size:1.1rem;
-  width:22px;
-  text-align:center;
-}
-.sidebar-divider {
-  height:1px;
-  background:var(--border-light);
-  margin:10px 14px;
-}
-.sidebar-footer {
-  padding:12px 14px 18px;
-  border-top:1px solid var(--border-light);
-  margin-top:auto;
-}
-.sidebar-logout {
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:11px 16px;
-  border-radius:var(--radius-md);
-  text-decoration:none;
-  color:#ef4444;
-  font-size:0.9rem;
-  font-weight:500;
-  transition:var(--transition);
-}
-.sidebar-logout:hover {
-  background:#fef2f2;
-}
-[data-theme="dark"] .sidebar-logout:hover {
-  background:rgba(239,68,68,0.1);
-}
-
-/* ========== Content ========== */
-.content {
-  padding:18px;
-  max-width:1100px;
-  margin:0 auto;
-}
-
-/* ========== بطاقات الإحصائيات - نفس ألوان The Sovereign Ledger ========== */
-.stats-grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));
-  gap:16px;
-  margin-bottom:24px;
-  
-}
-.stat-card {
-  position:relative;
-  overflow:hidden;
-  background:var(--bg-surface);
-  border:1px solid var(--border-light);
-  border-radius:var(--radius-lg);
-  padding:20px 18px;
-  text-align:center;
-  box-shadow:var(--shadow-card);
-  transition:var(--transition);
-  cursor:pointer;
-}
-.stat-card:hover {
-  transform:translateY(-4px);
-  box-shadow:var(--shadow-hover);
-}
-.stat-card::before {
-  content:'';
-  position:absolute;
-  top:-30%;
-  right:-20%;
-  width:80px;
-  height:80px;
-  border-radius:50%;
-  background:rgba(255,255,255,0.2);
-  filter:blur(10px);
-  transition:var(--transition);
-}
-.stat-card:hover::before { transform:scale(1.3); }
-
-/* حدود علوية ملونة لكل بطاقة - نفس النمط الأصلي */
-.stat-card.cyan {
-  border-top:4px solid #06b5d4;
-  background: linear-gradient(135deg, rgba(59,130,246,0.06) 0%, rgba(2, 208, 240, 0.099) 100%);
-}
-.stat-card.cyan .icon { color:#06b5d4; }
-.stat-card.cyan .value {
-  background:var(--grad-cyan);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-clip:text;
-  
-}
-
-.stat-card.purple {
-  border-top:4px solid #8b5cf6;
-  background: linear-gradient(135deg, rgba(146, 2, 249, 0) 0%, rgba(116, 2, 246, 0.112) 100%);
-}
-.stat-card.purple .icon { color:#8b5cf6; }
-.stat-card.purple .value {
-  background:var(--grad-purple);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-clip:text;
-}
-
-.stat-card.gold {
-  border-top:4px solid #eab308;
-  background: linear-gradient(135deg, rgba(59,130,246,0.06) 0%, rgba(244, 200, 2, 0.1) 100%);
-}
-.stat-card.gold .icon { color:#eab308; }
-.stat-card.gold .value {
-  background:var(--grad-gold);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-clip:text;
-}
-
-.stat-card.red {
-  border-top:4px solid #ef4444;
-  background: linear-gradient(135deg, rgba(59,130,246,0.06) 0%, rgba(252, 3, 3, 0.064) 100%);
-}
-.stat-card.red .icon { color:#ef4444; }
-.stat-card.red .value {
-  background:var(--grad-red);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-clip:text;
-}
-
-.stat-card.green {
-  border-top:4px solid #1810b9;
-  background: linear-gradient(135deg, rgba(3, 254, 32, 0) 0%, rgba(16, 4, 252, 0.05) 100%);
-}
-.stat-card.green .icon { color:#1610b9; }
-.stat-card.green .value {
-  background:var(--grad-green);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-clip:text;
-}
-
-.stat-card.sale {
-  border-top:4px solid var(--grad-sale);
-  background: linear-gradient(135deg, rgba(16,185,129,0.08) 0%, rgba(5,150,105,0.06) 100%);
-}
-.stat-card.sale .icon { color:#10b981; }
-.stat-card.sale .value {
-  background:var(--grad-sale);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-clip:text;
-}
-
-.stat-card .icon {
-  font-size:1.8rem;
-  margin-bottom:1px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-.stat-card .value {
-  font-size:1.5rem;
-  font-weight:800;
-  margin-bottom:4px;
-  line-height:1.2;
-}
-.stat-card .label {
-  font-size:0.8rem;
-  color:var(--text-secondary);
-  font-weight:500;
-}
-.stat-card .trend {
-  display:inline-flex;
-  align-items:center;
-  gap:4px;
-  font-size:0.75rem;
-  margin-top:8px;
-  padding:4px 10px;
-  border-radius:20px;
-  background:var(--bg-surface-hover);
-}
-.stat-card .trend.up { color:#10b981; }
-.stat-card .trend.down { color:#ef4444; }
-
-/* ========== العمليات الأخيرة ========== */
-.transaction-list {
-  display:flex;
-  flex-direction:column;
-  gap:14px;
-}
-.transaction-card {
-  position:relative;
-  overflow:hidden;
-  background:var(--bg-surface);
-  border:1px solid var(--border-light);
-  border-radius:var(--radius-lg);
-  padding:18px;
-  box-shadow:var(--shadow-card);
-  transition:var(--transition);
-  display:flex;
-  align-items:center;
-  gap:16px;
-  border-right:4px solid #06b5d4;
-  cursor:pointer;
-}
-.transaction-card:hover {
-  transform:translateY(-4px);
-  box-shadow:var(--shadow-hover);
-}
-.tx-avatar {
-  width:52px;
-  height:52px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:1.3rem;
-  font-weight:700;
-  color:#fff;
-  flex-shrink:0;
-  box-shadow:0 4px 14px rgba(0,0,0,0.2);
-  background:var(--grad-cyan);
-}
-.tx-info { flex:1; min-width:0; }
-.tx-name {
-  font-size:1.05rem;
-  font-weight:700;
-  color:var(--text-primary);
-  margin-bottom:4px;
-}
-.tx-date {
-  font-size:0.82rem;
-  color:var(--text-secondary);
-}
-.tx-amount {
-  font-size:1rem;
-  font-weight:700;
-  color:#10b981;
-  white-space:nowrap;
-}
-
-/* ========== FAB ========== */
-.fab {
-  position:fixed;
-  bottom:90px;
-  left:20px;
-  width:56px;
-  height:56px;
-  border-radius:50%;
-  background:var(--grad-brand);
-  color:#fff;
-  border:none;
-  font-size:1.8rem;
-  cursor:pointer;
-  box-shadow:0 8px 25px rgba(99,102,241,0.4);
-  z-index:90;
-  transition:var(--transition);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-.fab:hover {
-  transform:translateY(-3px) scale(1.05);
-  box-shadow:0 12px 35px rgba(99,102,241,0.55);
-}
-.fab:active { transform:scale(0.95); }
-
-/* ========== شريط التنقل السفلي - نفس تنسيق الفوتر الأصلي ========== */
-.bottom-nav {
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  background:var(--bg-surface);
-  border-top:1px solid var(--border-light);
-  display:flex;
-  z-index:100;
-  padding:7px 0 env(safe-area-inset-bottom, 10px);
-  box-shadow:0 -4px 20px rgba(0,0,0,0.098);
-}
-.nav-item {
-  flex:1;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:4px;
-  text-decoration:none;
-  color:var(--text-muted);
-  font-size:0.72rem;
-  font-weight:500;
-  padding:4px 4px;
-  transition:var(--transition);
-  position:relative;
-  border-radius:14px;
-  margin:0 2px;
-}
-.nav-item::before {
-  content:'';
-  position:absolute;
-  top:-1px;
-  left:50%;
-  transform:translateX(-50%);
-  width:0;
-  height:3px;
-  background:linear-gradient(90deg, #3b82f6, #8b5cf6);
-  border-radius:0 0 6px 6px;
-  box-shadow:0 2px 10px rgba(59,130,246,0.7), 0 0 16px rgba(139,92,246,0.5);
-  opacity:0;
-  transition:width 0.3s ease, opacity 0.3s ease;
-}
-.nav-item:hover::before,
-.nav-item.active::before {
-  width:34px;
-  opacity:1;
-}
-.nav-item:hover,
-.nav-item.active {
-  color:#2563eb;
-}
-.nav-icon {
-  font-size:1.3rem;
-  padding:6px;
-  border-radius:12px;
-  transition:var(--transition);
-}
-.nav-item:hover .nav-icon,
-.nav-item.active .nav-icon {
-  background:rgba(37,99,235,0.1);
-  box-shadow:0 0 12px rgba(37,99,235,0.4);
-  transform:translateY(-2px);
-}
-[data-theme="dark"] .nav-item:hover .nav-icon,
-[data-theme="dark"] .nav-item.active .nav-icon {
-  background:rgba(59,130,246,0.25);
-  box-shadow:0 0 15px rgba(59,130,246,0.6), 0 0 25px rgba(139,92,246,0.3);
-}
-
-/* ========== Responsive ========== */
-@media(min-width:768px) {
-  .content { padding:22px 28px; }
-}
-@media(max-width:640px) {
-  .stats-grid { grid-template-columns:repeat(2,1fr); }
-  .transaction-card { flex-wrap:wrap; }
-  .header-title { font-size:1rem; }
-}
-button:focus-visible,
-a:focus-visible {
-  outline:2px solid #3b82f6;
-  outline-offset:2px;
-  border-radius:4px;
-}
-</style>
+  <style>
+    /* ========================================
+       🎨 متغيرات التصميم الأساسية
+       ======================================== */
+    :root {
+      /* 🌙 الوضع الليلي (الافتراضي) */
+      --bg-page: #0b0f19; 
+      --bg-main: linear-gradient(135deg, #111827 0%, #0f172a 100%);
+      --glass-bg: rgba(30, 41, 59, 0.4); 
+      --glass-border: rgba(255, 255, 255, 0.1);
+      --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+      --text-primary: #f8fafc; 
+      --text-secondary: #94a3b8; 
+      --text-muted: #64748b;
+      
+      /* 🎨 ألوان التمييز للأقسام */
+      --accent-blue: #3b82f6;    /* المرضى */
+      --accent-green: #22c55e;   /* الفحوصات */
+      --accent-cyan: #06b6d4;    /* التجديد */
+      --accent-purple: #a855f7;  /* المواعيد */
+      --accent-red: #ef4444;     /* المصروفات */
+      --accent-amber: #f59e0b;   /* الفواتير */
+      --accent-lime: #84cc16;    /* المخزن */
+      --accent-magenta: #ec4899; /* الإيرادات */
+      --accent-teal: #14b8a6;    /* المواد */
+      
+      /* 📐 أبعاد ثابتة */
+      --header-height: 64px; 
+      --footer-height: 70px; 
+      --sidebar-width: 280px;
+      --safe-top: env(safe-area-inset-top, 0px); 
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    
+    /* ☀️ الوضع النهاري - يتم تفعيله بإضافة class="light-mode" لـ html */
+    html.light-mode {
+      --bg-page: #f0f9ff; 
+      --bg-main: radial-gradient(circle at 50% -20%, #f0f9ff 0%, #e0f2fe 100%) !important;
+      --glass-bg: rgba(255,255,255,0.75) !important; 
+      --glass-border: rgba(59,130,246,0.2) !important;
+      --glass-shadow: 0 4px 15px rgba(59,130,246,0.08), inset 0 1px 1px rgba(59,130,246,0.1) !important;
+      --text-primary: #1e293b !important; 
+      --text-secondary: #64748b !important; 
+      --text-muted: rgba(30,41,59,0.5) !important;
+    }
+    
+    /* ========================================
+       🧹 إعادة تعيين وتنسيقات عامة
+       ======================================== */
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; font-family: 'Cairo', sans-serif; }
+    html, body { height: 100%; background: var(--bg-main); color: var(--text-primary); overflow-x: hidden; }
+    body { padding-top: calc(var(--header-height) + var(--safe-top)); padding-bottom: calc(var(--footer-height) + var(--safe-bottom) + 20px); }
+    
+    /* ========================================
+       📱 الهيدر العلوي
+       ======================================== */
+    .app-header { 
+      position: fixed; top: 0; left: 0; right: 0; 
+      height: var(--header-height); padding: 0 16px; padding-top: var(--safe-top); 
+      display: flex; align-items: center; justify-content: space-between; 
+      background: rgba(15,23,42,0.85); backdrop-filter: blur(12px); 
+      border-bottom: 1px solid var(--glass-border); z-index: 100; 
+    }
+    html.light-mode .app-header { 
+      background: rgba(240,245,250,0.8) !important; 
+      border-bottom-color: rgba(59,130,246,0.15) !important; 
+    }
+    
+    .menu-toggle { 
+      width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; 
+      background: transparent; border: none; color: var(--text-primary); 
+      cursor: pointer; border-radius: 10px; 
+    }
+    .menu-toggle:active { background: var(--glass-bg); }
+    
+    .header-search { 
+      flex: 1; max-width: 300px; margin: 0 12px; position: relative; display: none; 
+    }
+    @media (min-width: 640px) { .header-search { display: flex; } }
+    .header-search input { 
+      width: 100%; padding: 8px 12px 8px 36px; 
+      background: var(--glass-bg); border: 1px solid var(--glass-border); 
+      border-radius: 10px; color: var(--text-primary); outline: none; 
+    }
+    .header-search .material-icons-round { 
+      position: absolute; left: 10px; top: 50%; transform: translateY(-50%); 
+      color: var(--text-muted); font-size: 20px; 
+    }
+    
+    .header-controls { display: flex; align-items: center; gap: 12px; }
+    .lang-toggle { font-size: 0.8rem; color: var(--text-secondary); cursor: pointer; display: none; }
+    @media (min-width: 768px) { .lang-toggle { display: block; } }
+    
+    .theme-btn, .user-info { 
+      display: flex; align-items: center; justify-content: center; 
+      background: var(--glass-bg); border: 1px solid var(--glass-border); 
+      border-radius: 10px; padding: 6px 10px; cursor: pointer; 
+    }
+    .user-info { flex-direction: column; align-items: flex-end; background: transparent; border: none; padding: 0; cursor: pointer; }
+    .user-info span { font-weight: 600; font-size: 0.9rem; }
+    .user-info small { font-size: 0.7rem; color: var(--text-muted); }
+    .user-info:hover span { text-decoration: underline; }
+    
+    /* ========================================
+       🧭 الشريط الجانبي
+       ======================================== */
+    .sidebar-overlay { 
+      position: fixed; inset: 0; background: rgba(0,0,0,0.6); 
+      z-index: 190; opacity: 0; visibility: hidden; transition: 0.3s; 
+    }
+    .sidebar-overlay.active { opacity: 1; visibility: visible; }
+    html.light-mode .sidebar-overlay { background: rgba(30,41,59,0.4); }
+    
+    .sidebar { 
+      position: fixed; top: 0; right: 0; bottom: 0; width: var(--sidebar-width); 
+      background: var(--glass-bg); backdrop-filter: blur(16px); 
+      border-left: 1px solid var(--glass-border); transform: translateX(100%); 
+      transition: transform 0.3s ease; z-index: 200; 
+      display: flex; flex-direction: column; padding-top: calc(var(--safe-top) + 16px); 
+    }
+    html.light-mode .sidebar { 
+      background: linear-gradient(165deg, rgba(219,234,254,0.8) 0%, rgba(240,249,255,0.7) 100%) !important; 
+      border-left-color: rgba(59,130,246,0.25) !important; 
+    }
+    .sidebar.active { transform: translateX(0); }
+    
+    .sidebar-header { 
+      padding: 16px 20px; border-bottom: 1px solid var(--glass-border); 
+      display: flex; align-items: center; gap: 10px; 
+    }
+    .sidebar-header h2 { font-size: 1.1rem; font-weight: 700; flex: 1; }
+    .sidebar-header .material-icons-round { color: var(--accent-blue); font-size: 24px; }
+    
+    .sidebar-nav { flex: 1; overflow-y: auto; padding: 16px 12px; }
+    
+    .nav-btn-3d { 
+      display: flex; align-items: center; gap: 12px; width: 100%; 
+      padding: 12px 14px; margin-bottom: 6px; 
+      background: linear-gradient(145deg, rgba(30,41,59,0.9), rgba(15,23,42,0.8)); 
+      border: 1px solid var(--glass-border); border-radius: 12px; 
+      color: var(--text-primary); text-decoration: none; cursor: pointer; 
+      font-weight: 500; transition: all 0.2s; 
+    }
+    html.light-mode .nav-btn-3d { 
+      background: linear-gradient(145deg, rgba(255,255,255,0.8), rgba(241,245,249,0.6)) !important; 
+      border-color: rgba(59,130,246,0.2) !important; color: #1e293b !important; 
+    }
+    .nav-btn-3d:active { transform: scale(0.98); }
+    .nav-btn-3d .material-icons-round { font-size: 22px; }
+    .nav-btn-3d .expand-icon { margin-right: auto; transition: transform 0.3s; }
+    .nav-btn-3d.expanded .expand-icon { transform: rotate(180deg); }
+    
+    .submenu { padding-right: 16px; overflow: hidden; transition: max-height 0.3s ease; max-height: 0; }
+    .submenu:not(.hidden) { max-height: 500px; }
+    
+    .sub-link { 
+      display: flex; align-items: center; gap: 10px; padding: 10px 12px; 
+      color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; 
+      border-radius: 8px; margin-bottom: 4px; border: 1px solid transparent; 
+    }
+    .sub-link:active { background: var(--glass-bg); }
+    .sub-link.active-submenu { 
+      background: var(--accent-blue); color: #fff !important; 
+      border-color: rgba(59,130,246,0.4); box-shadow: 0 0 12px rgba(59,130,246,0.4); 
+    }
+    html.light-mode .sub-link { color: #64748b !important; }
+    html.light-mode .sub-link.active-submenu { 
+      background: #000 !important; color: #fff !important; 
+      border-color: rgba(0,0,0,0.5) !important; box-shadow: 0 0 15px rgba(0,0,0,0.3) !important; 
+    }
+    
+    /* 🎨 ألوان الأزرار حسب القسم */
+    .btn-blue { border-color: rgba(59,130,246,0.3) !important; }
+    .btn-purple { border-color: rgba(168,85,247,0.3) !important; }
+    .btn-green { border-color: rgba(34,197,94,0.3) !important; }
+    .btn-cyan { border-color: rgba(6,182,212,0.3) !important; }
+    .btn-amber { border-color: rgba(245,158,11,0.3) !important; }
+    .btn-red { border-color: rgba(239,68,68,0.3) !important; }
+    .btn-teal { border-color: rgba(20,184,166,0.3) !important; }
+    
+    /* ========================================
+       📄 المحتوى الرئيسي
+       ======================================== */
+    main { padding: 16px; max-width: 1200px; margin: 0 auto; }
+    
+    .section-title { 
+      font-size: 1.1rem; font-weight: 700; margin-bottom: 16px; 
+      display: flex; align-items: center; justify-content: space-between; 
+    }
+    .section-title span { font-size: 0.8rem; font-weight: 400; color: var(--text-secondary); }
+    
+    /* 📊 شبكة بطاقات الإحصائيات */
+    .stats-grid { 
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 24px; 
+    }
+    @media (min-width: 768px) { .stats-grid { grid-template-columns: repeat(4, 1fr); } }
+    
+    .glass-premium { 
+      background: var(--glass-bg); border: 1px solid var(--glass-border); 
+      border-radius: 16px; padding: 16px; 
+      box-shadow: var(--glass-shadow); backdrop-filter: blur(10px); 
+      display: flex; flex-direction: column; gap: 6px; transition: transform 0.2s; 
+    }
+    .glass-premium:active { transform: scale(0.98); }
+    
+    .card-icon { 
+      width: 34px; height: 34px; border-radius: 10px; 
+      display: flex; align-items: center; justify-content: center; 
+      font-size: 20px; margin-bottom: 4px; 
+    }
+    .card-label { font-size: 0.8rem; color: var(--text-secondary); }
+    .card-value { font-size: 1.2rem; font-weight: 700; }
+    .card-value span { font-size: 0.8rem; font-weight: 500; margin-right: 4px; opacity: 0.8; }
+    
+    /* 🎨 تأثيرات البطاقات الملونة */
+    .card-accent-blue { border-color: rgba(59,130,246,0.3); background: radial-gradient(circle at 30% 30%, rgba(59,130,246,0.2), transparent 70%), var(--glass-bg); }
+    .card-accent-green { border-color: rgba(34,197,94,0.3); background: radial-gradient(circle at 30% 30%, rgba(34,197,94,0.2), transparent 70%), var(--glass-bg); }
+    .card-accent-cyan { border-color: rgba(6,182,212,0.3); background: radial-gradient(circle at 30% 30%, rgba(6,182,212,0.2), transparent 70%), var(--glass-bg); }
+    .card-accent-purple { border-color: rgba(168,85,247,0.3); background: radial-gradient(circle at 30% 30%, rgba(168,85,247,0.2), transparent 70%), var(--glass-bg); }
+    .card-accent-red { border-color: rgba(239,68,68,0.3); background: radial-gradient(circle at 30% 30%, rgba(239,68,68,0.2), transparent 70%), var(--glass-bg); }
+    .card-accent-amber { border-color: rgba(245,158,11,0.3); background: radial-gradient(circle at 30% 30%, rgba(245,158,11,0.2), transparent 70%), var(--glass-bg); }
+    .card-accent-magenta { border-color: rgba(236,72,153,0.3); background: radial-gradient(circle at 30% 30%, rgba(236,72,153,0.2), transparent 70%), var(--glass-bg); }
+    .card-accent-teal { border-color: rgba(20,184,166,0.3); background: radial-gradient(circle at 30% 30%, rgba(20,184,166,0.2), transparent 70%), var(--glass-bg); }
+    
+    /* 📋 قوائم العمليات والمواعيد */
+    .list-container { 
+      background: var(--glass-bg); border: 1px solid var(--glass-border); 
+      border-radius: 16px; padding: 4px; margin-bottom: 24px; overflow: hidden; 
+    }
+    .list-item { 
+      display: flex; flex-direction: column; padding: 14px; 
+      border-bottom: 1px solid var(--glass-border); gap: 6px; cursor: pointer;
+      transition: background 0.2s;
+    }
+    .list-item:hover { background: rgba(255,255,255,0.05); }
+    .list-item:last-child { border-bottom: none; }
+    .list-header { display: flex; justify-content: space-between; align-items: flex-start; }
+    .list-title { font-size: 0.95rem; font-weight: 600; }
+    .list-meta { font-size: 0.75rem; color: var(--text-muted); }
+    .list-footer { display: flex; justify-content:space-between; align-items: center; margin-top: 4px; }
+    .amount { font-weight: 700; font-size: 1rem; }
+    .amount.success { color: var(--accent-green); }
+    .amount.pending { color: var(--text-secondary); }
+    .amount.edit { color: var(--accent-amber); }
+    
+    .badge { 
+      font-size: 0.7rem; padding: 4px 10px; border-radius: 20px; 
+      background: rgba(255,255,255,0.08); color: var(--text-secondary); font-weight: 600; 
+    }
+    .badge.success { background: rgba(34,197,94,0.2); color: var(--accent-green); }
+    .badge.add { background: rgba(59,130,246,0.2); color: var(--accent-blue); }
+    .badge.edit { background: rgba(245,158,11,0.2); color: var(--accent-amber); }
+    
+    .view-all { 
+      display: block; text-align: center; padding: 12px; 
+      color: var(--accent-blue); font-weight: 600; text-decoration: none; 
+      border-top: 1px solid var(--glass-border); background: rgba(255,255,255,0.02); 
+    }
+    .view-all:active { background: rgba(255,255,255,0.05); }
+    
+    /* ⏰ قائمة المواعيد */
+    .installment-item { 
+      display: flex; align-items: center; gap: 12px; padding: 12px; 
+      border-bottom: 1px solid var(--glass-border); cursor: pointer;
+      transition: background 0.2s;
+    }
+    .installment-item:hover { background: rgba(255,255,255,0.05); }
+    .installment-item:last-child { border-bottom: none; }
+    .status-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+    .status-dot.urgent { background: var(--accent-red); box-shadow: 0 0 8px rgba(239,68,68,0.6); }
+    .status-dot.close { background: var(--accent-amber); box-shadow: 0 0 8px rgba(245,158,11,0.6); }
+    .status-dot.normal { background: var(--accent-cyan); box-shadow: 0 0 8px rgba(6,182,212,0.4); }
+    .inst-details { flex: 1; }
+    .inst-name { font-weight: 600; font-size: 0.95rem; margin-bottom: 2px; }
+    .inst-time { font-size: 0.75rem; color: var(--text-muted); }
+    .inst-amount { font-weight: 700; font-size: 1rem; white-space: nowrap; }
+    
+    /* 📱 الفوتر المتنقل */
+    .mobile-footer { 
+      position: fixed; bottom: 0; left: 0; right: 0; 
+      height: var(--footer-height); padding-bottom: var(--safe-bottom); 
+      background: rgba(15,23,42,0.9); backdrop-filter: blur(12px); 
+      border-top: 1px solid var(--glass-border); 
+      display: flex; align-items: center; justify-content: space-around; z-index: 90; 
+    }
+    html.light-mode .mobile-footer { 
+      background: rgba(240,245,250,0.9) !important; 
+      border-top-color: rgba(59,130,246,0.15) !important; 
+    }
+    .footer-btn { 
+      display: flex; flex-direction: column; align-items: center; justify-content: center; 
+      gap: 4px; text-decoration: none; color: var(--text-muted); 
+      padding: 8px 12px; border-radius: 12px; transition: all 0.2s; 
+      flex: 1; max-width: 20%; 
+    }
+    .footer-btn .material-icons-round { font-size: 24px; transition: transform 0.2s; }
+    .footer-btn span:last-child { font-size: 0.7rem; font-weight: 500; }
+    .footer-btn:active { transform: scale(0.9); background: var(--glass-bg); }
+    .footer-btn.active { color: var(--accent-blue); }
+    .footer-btn.active .material-icons-round { transform: translateY(-2px); }
+    
+    /* 🌙 تنسيقات إضافية للوضع النهاري */
+    html.light-mode .card-accent-blue { border-color: rgba(59,130,246,0.4) !important; background: radial-gradient(circle at 30% 30%, rgba(59,130,246,0.15) 0%, rgba(59,130,246,0.05) 40%, transparent 70%), linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(219,234,254,0.7) 100%) !important; box-shadow: 0 0 40px rgba(59,130,246,0.25), inset 0 0 20px rgba(59,130,246,0.1) !important; }
+    html.light-mode .card-accent-green { border-color: rgba(34,197,94,0.4) !important; background: radial-gradient(circle at 30% 30%, rgba(34,197,94,0.15) 0%, rgba(34,197,94,0.05) 40%, transparent 70%), linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(220,252,231,0.7) 100%) !important; box-shadow: 0 0 40px rgba(34,197,94,0.25), inset 0 0 20px rgba(34,197,94,0.1) !important; }
+    html.light-mode .card-accent-cyan { border-color: rgba(6,182,212,0.4) !important; background: radial-gradient(circle at 30% 30%, rgba(6,182,212,0.15) 0%, rgba(6,182,212,0.05) 40%, transparent 70%), linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(207,250,254,0.7) 100%) !important; box-shadow: 0 0 40px rgba(6,182,212,0.25), inset 0 0 20px rgba(6,182,212,0.1) !important; }
+    html.light-mode .card-accent-purple { border-color: rgba(168,85,247,0.4) !important; background: radial-gradient(circle at 30% 30%, rgba(168,85,247,0.15) 0%, rgba(168,85,247,0.05) 40%, transparent 70%), linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(243,232,255,0.7) 100%) !important; box-shadow: 0 0 40px rgba(168,85,247,0.25), inset 0 0 20px rgba(168,85,247,0.1) !important; }
+    html.light-mode .card-accent-red { border-color: rgba(239,68,68,0.4) !important; background: radial-gradient(circle at 30% 30%, rgba(239,68,68,0.15) 0%, rgba(239,68,68,0.05) 40%, transparent 70%), linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(254,226,226,0.7) 100%) !important; box-shadow: 0 0 40px rgba(239,68,68,0.25), inset 0 0 20px rgba(239,68,68,0.1) !important; }
+    html.light-mode .card-accent-amber { border-color: rgba(245,158,11,0.4) !important; background: radial-gradient(circle at 30% 30%, rgba(245,158,11,0.15) 0%, rgba(245,158,11,0.05) 40%, transparent 70%), linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(254,243,199,0.7) 100%) !important; box-shadow: 0 0 40px rgba(245,158,11,0.25), inset 0 0 20px rgba(245,158,11,0.1) !important; }
+    html.light-mode .card-accent-magenta { border-color: rgba(236,72,153,0.4) !important; background: radial-gradient(circle at 30% 30%, rgba(236,72,153,0.15) 0%, rgba(236,72,153,0.05) 40%, transparent 70%), linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(252,231,243,0.7) 100%) !important; box-shadow: 0 0 40px rgba(236,72,153,0.25), inset 0 0 20px rgba(236,72,153,0.1) !important; }
+    html.light-mode .badge { background: rgba(59,130,246,0.08) !important; color: #1e293b !important; }
+    html.light-mode .badge.success { background: rgba(34,197,94,0.1) !important; }
+    html.light-mode .badge.add { background: rgba(59,130,246,0.1) !important; }
+    html.light-mode .badge.edit { background: rgba(245,158,11,0.1) !important; }
+    html.light-mode .view-all { color: #3b82f6 !important; border-top-color: rgba(59,130,246,0.15) !important; }
+    html.light-mode a { color: #3b82f6 !important; }
+    
+    .light-mode-icon { display: none; }
+    html.light-mode .light-mode-icon { display: inline-block !important; }
+    html.light-mode .dark-mode-icon { display: none !important; }
+    
+    /* 🔄 شريط التمرير */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
+    html.light-mode ::-webkit-scrollbar-thumb { background: rgba(59,130,246,0.3); }
+  </style>
 </head>
 <body>
 
-<!-- Header - ✅ تم حذف زر التحديث -->
-<header class="header">
-  <div class="header-right">
-    <button class="menu-btn" onclick="toggleSidebar()" aria-label="القائمة">☰</button>
-    <h1 class="header-title">لوحة التحكم</h1>
-  </div>
-  <div class="header-left">
-    <button class="header-btn" onclick="toggleTheme()" id="themeBtn" title="تبديل النمط">🌙</button>
-    <!-- ✅ زر التحديث محذوف حسب الطلب -->
-  </div>
-</header>
-
-<!-- Sidebar Overlay -->
-<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
-
-<!-- Sidebar -->
-<aside class="sidebar" id="sidebar">
-  <div class="sidebar-header">
-    <div class="sidebar-brand">👁️ عيادة الأثير</div>
-    <button class="sidebar-close" onclick="toggleSidebar()" aria-label="إغلاق">✕</button>
-  </div>
-  <nav class="sidebar-nav">
-<a href="home.html" class="sidebar-item active" id="nav-home"><span class="icon">🏠</span>الرئيسية</a>
-    <a href="add-patient.html" class="sidebar-item" id="nav-addPatient"><span class="icon">➕</span>إضافة مريض</a>
-    <a href="archive.html" class="sidebar-item" id="nav-archive"><span class="icon">📁</span>أرشيف المرضى</a>
-    <a href="expenses.html" class="sidebar-item" id="nav-expenses"><span class="icon">💰</span>إضافة مصروف</a>
-    <a href="inventory.html" class="sidebar-item" id="nav-inventory"><span class="icon">📦</span>الجرد والمواد</a>
-    <a href="sales-invoice.html" class="sidebar-item" id="nav-sales"><span class="icon">🧾</span>فاتورة بيع</a>
-    <a href="add-material.html" class="sidebar-item" id="nav-addMaterial"><span class="icon">📥</span>إضافة مواد</a>
-    <a href="reports.html" class="sidebar-item" id="nav-reports"><span class="icon">📊</span>التقارير</a>
-    <a href="support.html" class="sidebar-item" id="nav-support"><span class="icon">❓</span>الدعم الفني</a>
-    <!-- <a href="dashboard.html" class="sidebar-item" id="nav-dashboard"><span class="icon">📊</span>لوحة التحكم</a> -->
-    <div class="sidebar-divider"></div>
-    <a href="settings.html" class="sidebar-item" id="nav-settings"><span class="icon">⚙️</span>الإعدادات</a>
-    <a href="export-excel.html" class="sidebar-item" id="nav-export"><span class="icon">📤</span>تصدير Excel</a>
-    <a href="index.html" class="sidebar-item sidebar-logout" id="nav-logout"><span class="icon">🚪</span>تسجيل الخروج</a>
-  </nav>
- 
-</aside>
-
-<!-- Main Content -->
-<main class="content">
-  
-  <!-- Welcome -->
-  <div style="margin-bottom:24px; text-align:center;">
-    <p style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:4px;">أهلاً بك مجدداً في</p>
-    <h2 style="font-size:1.8rem; font-weight:800; color:var(--text-primary);">عيادة الأثير للبصريات</h2>
-  </div>
-
-  <!-- Stats Grid - نفس ألوان البطاقات من The Sovereign Ledger -->
-  <div class="stats-grid">
-    <div class="stat-card cyan" onclick="viewSection('customers')">
-      <div class="icon">👥</div>
-      <div class="value" id="totalCustomers">0</div>
-      <div class="label">إجمالي الزبائن</div>
-      <div class="trend up">📈 +12% هذا الشهر</div>
+  <!-- ========================================
+       📱 الهيدر العلوي
+       ======================================== -->
+  <header class="app-header">
+    <!-- زر القائمة الجانبية -->
+    <button class="menu-toggle" onclick="toggleSidebar()">
+      <span class="material-icons-round">menu</span>
+    </button>
+    
+    <!-- شريط البحث (يظهر على الشاشات الكبيرة) -->
+    <div class="header-search">
+      <span class="material-icons-round">search</span>
+      <input type="text" placeholder="بحث سريع..." id="globalSearch" onkeyup="handleGlobalSearch(event)">
     </div>
     
-    <div class="stat-card purple" onclick="viewSection('exams')">
-      <div class="icon">👁️</div>
-      <div class="value" id="todayExams">0</div>
-      <div class="label">فحوصات اليوم</div>
-      <div class="trend">⏳ 8 مواعيد</div>
+    <!-- عناصر التحكم: تبديل اللغة/الوضع/المستخدم -->
+    <div class="header-controls">
+      <div class="lang-toggle" onclick="toggleLanguage()">العربية | EN</div>
+      <button class="theme-btn" onclick="toggleDarkMode()" title="تبديل الوضع">
+        <span class="material-icons-round dark-mode-icon">light_mode</span>
+        <span class="material-icons-round light-mode-icon">dark_mode</span>
+      </button>
+      <div class="user-info" onclick="handleLogout()" title="تسجيل الخروج">
+        <span id="userNameDisplay">جاري التحميل...</span>
+        <small id="userRoleDisplay">...</small>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================
+       🧭 الشريط الجانبي (القائمة)
+       ======================================== -->
+  <div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar()"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <span class="material-icons-round">shield</span>
+      <span class="material-icons-round">account_balance</span>
+      <span class="material-icons-round">trending_up</span>
+      <h2 id="clinicNameSidebar">نظام التميز</h2>
+    </div>
+    <nav class="sidebar-nav">
+      
+      <!-- الرئيسية -->
+      <a href="home.html" class="nav-btn-3d btn-blue active-link">
+        <span class="material-icons-round">home</span><span>الرئيسية</span>
+      </a>
+      
+      <!-- قسم المرضى -->
+      <div class="submenu-container">
+        <button onclick="toggleSubmenu('patients-submenu')" class="nav-btn-3d btn-green">
+          <span class="material-icons-round">person</span><span>المرضى</span>
+          <span class="material-icons-round expand-icon">expand_more</span>
+        </button>
+        <div id="patients-submenu" class="submenu hidden">
+          <a href="archive.html" class="sub-link"><span class="material-icons-round">archive</span>أرشيف المرضى</a>
+          <a href="add-patient.html" class="sub-link"><span class="material-icons-round">person_add</span>إضافة مريض</a>
+        </div>
+      </div>
+      
+      <!-- مواعيد تجديد الفحص -->
+      <a href="renewal_appointments.html" class="nav-btn-3d btn-cyan">
+        <span class="material-icons-round">event_repeat</span><span>مواعيد تجديد الفحص</span>
+      </a>
+      
+      <!-- قسم المصاريف -->
+      <div class="submenu-container">
+        <button onclick="toggleSubmenu('expenses-submenu')" class="nav-btn-3d btn-amber">
+          <span class="material-icons-round">payments</span><span>المصاريف</span>
+          <span class="material-icons-round expand-icon">expand_more</span>
+        </button>
+        <div id="expenses-submenu" class="submenu hidden">
+          <a href="add_expense.html" class="sub-link"><span class="material-icons-round">add</span>إضافة مصروف</a>
+          <a href="expenses_list.html" class="sub-link"><span class="material-icons-round">receipt_long</span>المصروفات</a>
+        </div>
+      </div>
+      
+      <!-- قسم المواد والمخزن -->
+      <div class="submenu-container">
+        <button onclick="toggleSubmenu('materials-submenu')" class="nav-btn-3d btn-teal">
+          <span class="material-icons-round">inventory_2</span><span>المواد</span>
+          <span class="material-icons-round expand-icon">expand_more</span>
+        </button>
+        <div id="materials-submenu" class="submenu hidden">
+          <a href="warehouse.html" class="sub-link"><span class="material-icons-round">warehouse</span>المخزن</a>
+          <a href="inventory.html" class="sub-link"><span class="material-icons-round">list_alt</span>الجرد</a>
+          <a href="materials_list.html" class="sub-link"><span class="material-icons-round">category</span>المواد</a>
+          <a href="add_material.html" class="sub-link"><span class="material-icons-round">add_box</span>إضافة مواد</a>
+        </div>
+      </div>
+      
+      <!-- قسم الفواتير -->
+      <div class="submenu-container">
+        <button onclick="toggleSubmenu('invoices-submenu')" class="nav-btn-3d btn-purple">
+          <span class="material-icons-round">receipt</span><span>الفواتير</span>
+          <span class="material-icons-round expand-icon">expand_more</span>
+        </button>
+        <div id="invoices-submenu" class="submenu hidden">
+          <a href="invoices_list.html" class="sub-link"><span class="material-icons-round">receipt_long</span>الفواتير</a>
+          <a href="add_sales_invoice.html" class="sub-link"><span class="material-icons-round">shopping_cart</span>إضافة فاتورة بيع</a>
+          <a href="add_purchase_invoice.html" class="sub-link"><span class="material-icons-round">shopping_bag</span>إضافة فاتورة مشتريات</a>
+        </div>
+      </div>
+      
+      <!-- قسم التقارير -->
+      <div class="submenu-container">
+        <button onclick="toggleSubmenu('reports-submenu')" class="nav-btn-3d btn-red">
+          <span class="material-icons-round">analytics</span><span>التقارير</span>
+          <span class="material-icons-round expand-icon">expand_more</span>
+        </button>
+        <div id="reports-submenu" class="submenu hidden">
+          <a href="general_report.html" class="sub-link"><span class="material-icons-round">dashboard</span>تقرير عام</a>
+          <a href="sales_report.html" class="sub-link"><span class="material-icons-round">shopping_cart</span>تقرير المبيعات</a>
+          <a href="patients_report.html" class="sub-link"><span class="material-icons-round">person</span>تقرير المرضى</a>
+          <a href="purchases_report.html" class="sub-link"><span class="material-icons-round">shopping_bag</span>تقرير المشتريات</a>
+          <a href="expenses_report.html" class="sub-link"><span class="material-icons-round">payments</span>تقرير المصروفات</a>
+        </div>
+      </div>
+      
+      <!-- أزرار إضافية -->
+      <a href="settings.html" class="nav-btn-3d btn-amber"><span class="material-icons-round">settings</span><span>الإعدادات</span></a>
+      <a href="support.html" class="nav-btn-3d btn-cyan"><span class="material-icons-round">support_agent</span><span>الدعم الفني</span></a>
+      <a href="#" onclick="handleLogout()" class="nav-btn-3d btn-red"><span class="material-icons-round">logout</span><span>تسجيل خروج</span></a>
+    </nav>
+  </aside>
+
+  <!-- ========================================
+       📄 المحتوى الرئيسي - لوحة المعلومات
+       ======================================== -->
+  <main>
+    
+    <!-- 📊 بطاقات الإحصائيات (تُحدَّث ديناميكياً من البيانات) -->
+    <div class="stats-grid">
+      <!-- بطاقة: إجمالي المرضى -->
+      <div class="glass-premium card-accent-blue" onclick="location.href='patients_archive.html'" style="cursor:pointer">
+        <div class="card-icon" style="background:rgba(59,130,246,0.15);color:var(--accent-blue)">
+          <span class="material-icons-round">person</span>
+        </div>
+        <div class="card-label">إجمالي المرضى</div>
+        <div class="card-value" id="statPatients">-- <span>مريض</span></div>
+      </div>
+      
+      <!-- بطاقة: الفحوصات المكتملة اليوم -->
+      <div class="glass-premium card-accent-green" onclick="location.href='patients_archive.html?filter=today'" style="cursor:pointer">
+        <div class="card-icon" style="background:rgba(34,197,94,0.15);color:var(--accent-green)">
+          <span class="material-icons-round">check_circle</span>
+        </div>
+        <div class="card-label">فحوصات اليوم</div>
+        <div class="card-value" id="statExamsToday">--</div>
+      </div>
+      
+      <!-- بطاقة: مواعيد التجديد القريبة -->
+      <div class="glass-premium card-accent-cyan" onclick="location.href='renewal_appointments.html'" style="cursor:pointer">
+        <div class="card-icon" style="background:rgba(6,182,212,0.15);color:var(--accent-cyan)">
+          <span class="material-icons-round">event_repeat</span>
+        </div>
+        <div class="card-label">مواعيد التجديد</div>
+        <div class="card-value" id="statRenewals">--</div>
+      </div>
+      
+      <!-- بطاقة: مبيعات اليوم (بدلاً من مواعيد اليوم) -->
+      <div class="glass-premium card-accent-purple" onclick="location.href='invoices_list.html?filter=today&type=sales'" style="cursor:pointer">
+        <div class="card-icon" style="background:rgba(168,85,247,0.15);color:var(--accent-purple)">
+          <span class="material-icons-round">shopping_cart</span>
+        </div>
+        <div class="card-label">مبيعات اليوم</div>
+        <div class="card-value" id="statSalesToday">-- <span>د.ع</span></div>
+      </div>
+      
+      <!-- بطاقة: إجمالي الفواتير -->
+      <div class="glass-premium card-accent-amber" onclick="location.href='invoices_list.html'" style="cursor:pointer">
+        <div class="card-icon" style="background:rgba(245,158,11,0.15);color:var(--accent-amber)">
+          <span class="material-icons-round">receipt</span>
+        </div>
+        <div class="card-label">إجمالي الفواتير</div>
+        <div class="card-value" id="statInvoices">-- <span>فاتورة</span></div>
+      </div>
+      
+      <!-- بطاقة: المصروفات الشهرية -->
+      <div class="glass-premium card-accent-red" onclick="location.href='expenses_list.html'" style="cursor:pointer">
+        <div class="card-icon" style="background:rgba(239,68,68,0.15);color:var(--accent-red)">
+          <span class="material-icons-round">payments</span>
+        </div>
+        <div class="card-label">المصروفات الشهرية</div>
+        <div class="card-value" id="statExpenses">-- <span>د.ع</span></div>
+      </div>
+      
+      <!-- بطاقة: المواد بالمخزن -->
+      <div class="glass-premium card-accent-magenta" onclick="location.href='warehouse.html'" style="cursor:pointer">
+        <div class="card-icon" style="background:rgba(236,72,153,0.15);color:var(--accent-magenta)">
+          <span class="material-icons-round">inventory_2</span>
+        </div>
+        <div class="card-label">المواد بالمخزن</div>
+        <div class="card-value" id="statMaterials">-- <span>صنف</span></div>
+      </div>
+      
+      <!-- بطاقة: الإيرادات الشهرية -->
+      <div class="glass-premium card-accent-teal" onclick="location.href='sales_report.html'" style="cursor:pointer">
+        <div class="card-icon" style="background:rgba(20,184,166,0.15);color:var(--accent-teal)">
+          <span class="material-icons-round">trending_up</span>
+        </div>
+        <div class="card-label">الإيرادات الشهرية</div>
+        <div class="card-value" id="statRevenue">-- <span>د.ع</span></div>
+      </div>
     </div>
     
-    <div class="stat-card gold" onclick="viewSection('revenue')">
-      <div class="icon">💰</div>
-      <div class="value" id="todayRevenue">0</div>
-      <div class="label">إيرادات اليوم</div>
-      <div class="trend up">📈 +8%</div>
+    <!-- 📋 قسم: آخر عمليات اليوم (قابل للنقر للانتقال للقسم) -->
+    <h2 class="section-title">آخر عمليات اليوم <span>انقر للانتقال للقسم</span></h2>
+    <div class="list-container" id="todayOperations">
+      <!-- سيتم ملء هذا القسم ديناميكياً بالجافاسكريبت -->
+      <div style="padding:20px;text-align:center;color:var(--text-muted)">جاري تحميل بيانات اليوم...</div>
     </div>
     
-    <div class="stat-card red" onclick="viewSection('expenses')">
-      <div class="icon">🧾</div>
-      <div class="value" id="monthExpenses">0</div>
-      <div class="label">مصروفات الشهر</div>
-      <div class="trend down">📉 -3%</div>
+    <!-- ⏰ قسم: مواعيد تجديد الفحص القريبة -->
+    <h2 class="section-title">مواعيد تجديد الفحص القريبة</h2>
+    <div class="list-container" id="upcomingRenewals">
+      <!-- سيتم ملء هذا القسم ديناميكياً بالجافاسكريبت -->
+      <div style="padding:20px;text-align:center;color:var(--text-muted)">جاري تحميل المواعيد...</div>
     </div>
     
-    <div class="stat-card sale" onclick="window.location.href='sales-invoice.html'">
-      <div class="icon">🧾</div>
-      <div class="value" id="todayInvoices">0</div>
-      <div class="label">فواتير اليوم</div>
-      <div class="trend up">💰 مبيعات سريعة</div>
-    </div>
+  </main>
+
+  <!-- ========================================
+       📱 الفوتر المتنقل (للجوال)
+       ======================================== -->
+  <footer class="mobile-footer">
+    <a href="home.html" class="footer-btn active">
+      <span class="material-icons-round">home</span><span>الرئيسية</span>
+    </a>
+    <a href="add-patient.html" class="footer-btn">
+      <span class="material-icons-round">person_add</span><span>إضافة مريض</span>
+    </a>
+    <a href="add_sales_invoice.html" class="footer-btn">
+      <span class="material-icons-round">shopping_cart</span><span>فاتورة بيع</span>
+    </a>
+    <a href="patients_archive.html" class="footer-btn">
+      <span class="material-icons-round">archive</span><span>الأرشيف</span>
+    </a>
+    <a href="expenses_list.html" class="footer-btn">
+      <span class="material-icons-round">payments</span><span>المصروفات</span>
+    </a>
+  </footer>
+
+  <!-- ========================================
+       ⚙️ كود الجافاسكريبت - المنطق والوظائف
+       ======================================== -->
+  <script>
+    // ========================================
+    // 🔄 تهيئة الصفحة عند التحميل
+    // ========================================
+    document.addEventListener('DOMContentLoaded', function() {
+      // 1. تحميل وضع الإضاءة/الظلام من الذاكرة
+      if(localStorage.getItem('darkMode') === 'false') {
+        document.documentElement.classList.add('light-mode');
+      }
+      
+      // 2. تحميل بيانات المستخدم وعرضها
+      loadUserInfo();
+      
+      // 3. تحديث أيقونة الوضع الليلي/النهاري
+      updateDarkModeIcon();
+      
+      // 4. تحديد الصفحة النشطة في القائمة
+      checkActivePage();
+      
+      // 5. تحميل بيانات العيادة من الإعدادات (لإظهار الاسم في الهيدر والسايدبار)
+      loadClinicSettings();
+      
+      // 6. تحديث جميع الإحصائيات والبيانات الديناميكية
+      updateDashboardData();
+    });
+
+    // ========================================
+    // 🧭 دوال التنقل والقائمة الجانبية
+    // ========================================
     
-    <div class="stat-card green" style="grid-column:span 2;" onclick="viewSection('monthly')">
-      <div class="icon">📊</div>
-      <div class="value" id="monthRevenue">0</div>
-      <div class="label">إيرادات الشهر</div>
-      <div class="trend up">📈 +15% نمو</div>
-    </div>
-  </div>
-
-  <!-- Recent Transactions -->
-  <div style="margin-bottom:24px;">
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
-      <h3 style="font-size:1.1rem; font-weight:700; color:var(--text-primary);">📋 آخر العمليات</h3>
-      <a href="archive.html" style="font-size:0.85rem; color:#3b82f6; text-decoration:none; font-weight:600;">عرض الكل ←</a>
-    </div>
+    // فتح/إغلاق القائمة الجانبية
+    function toggleSidebar() {
+      document.getElementById('sidebar').classList.toggle('active');
+      document.getElementById('sidebar-overlay').classList.toggle('active');
+    }
     
-    <div class="transaction-list" id="transactionList"></div>
-  </div>
+    // فتح/إغلاق القوائم الفرعية في الشريط الجانبي
+    const allSubmenus = ['patients-submenu','expenses-submenu','materials-submenu','invoices-submenu','reports-submenu'];
+    function toggleSubmenu(id) {
+      const sub = document.getElementById(id); 
+      if(!sub) return;
+      const hidden = sub.classList.contains('hidden');
+      
+      // إغلاق جميع القوائم الأخرى
+      allSubmenus.forEach(s => { 
+        const m = document.getElementById(s); 
+        if(m && s !== id) m.classList.add('hidden'); 
+      });
+      
+      // تبديل حالة القائمة المطلوبة
+      sub.classList.toggle('hidden', !hidden);
+      const btn = sub.previousElementSibling; 
+      if(btn) btn.classList.toggle('expanded', hidden);
+    }
+    
+    // تحديد الصفحة النشطة وتظليلها في القائمة
+    function checkActivePage() {
+      const page = window.location.pathname.split('/').pop() || 'home.html';
+      document.querySelectorAll('.nav-btn-3d, .sub-link, .footer-btn').forEach(el => {
+        if(el.getAttribute('href') === page) { 
+          el.classList.add('active'); 
+          if(el.classList.contains('sub-link')) el.classList.add('active-submenu'); 
+        }
+      });
+      
+      // فتح القائمة الفرعية إذا كانت هناك صفحة فرعية نشطة
+      document.querySelectorAll('.sub-link.active-submenu').forEach(link => {
+        const parent = link.closest('.submenu'); 
+        if(parent) { 
+          parent.classList.remove('hidden'); 
+          parent.previousElementSibling.classList.add('expanded'); 
+        }
+      });
+    }
 
-</main>
-
-<!-- FAB -->
-<!-- <button class="fab" onclick="openAddPatient()" aria-label="إضافة مريض جديد">➕</button> -->
-
-<!-- Bottom Navigation - نفس تنسيق الفوتر الأصلي -->
-<nav class="bottom-nav">
-  <a href="home.html" class="nav-item active" aria-current="page"><span class="nav-icon">🏠</span>الرئيسية</a>
-  <a href="add-patient.html" class="nav-item"><span class="nav-icon">➕</span>مريض</a>
-  <a href="archive.html" class="nav-item"><span class="nav-icon">📁</span>الأرشيف</a>
-  <a href="expenses.html" class="nav-item"><span class="nav-icon">💰</span>المصروفات</a>
-  <a href="reports.html" class="nav-item"><span class="nav-icon">📊</span>التقارير</a>
-</nav>
-
-<script>
-// ========== Theme Toggle ==========
-function toggleTheme() {
-  const html = document.documentElement;
-  const btn = document.getElementById('themeBtn');
-  const current = html.getAttribute('data-theme');
-  const next = current === 'light' ? 'dark' : 'light';
-  
-  html.setAttribute('data-theme', next);
-  btn.textContent = next === 'light' ? '🌙' : '☀️';
-  localStorage.setItem('theme', next);
-}
-
-// ========== Dashboard Controls ==========
-function applyDashboardControls() {
-  const controls = JSON.parse(localStorage.getItem('dashboardControls') || '{}');
-  
-  // Hide/show nav items
-  Object.keys(controls).forEach(key => {
-    const navItem = document.getElementById('nav-' + key);
-    if(navItem) {
-      if(!controls[key]) {
-        navItem.style.display = 'none';
-      } else {
-        navItem.style.display = '';
+    // ========================================
+    // 🌙 دوال الوضع الليلي/النهاري
+    // ========================================
+    
+    // تبديل بين الوضع الليلي والنهاري
+    function toggleDarkMode() {
+      const html = document.documentElement;
+      html.classList.toggle('light-mode');
+      // حفظ التفضيل في الذاكرة المحلية
+      localStorage.setItem('darkMode', html.classList.contains('light-mode') ? 'false' : 'true');
+      updateDarkModeIcon();
+    }
+    
+    // تحديث أيقونة الوضع (شمس/قمر) حسب الحالة الحالية
+    function updateDarkModeIcon() {
+      const darkIcon = document.querySelector('.dark-mode-icon');
+      const lightIcon = document.querySelector('.light-mode-icon');
+      
+      if(document.documentElement.classList.contains('light-mode')) { 
+        // الوضع النهاري: أظهر أيقونة القمر
+        if(darkIcon) darkIcon.classList.remove('hidden'); 
+        if(lightIcon) lightIcon.classList.add('hidden'); 
+      } else { 
+        // الوضع الليلي: أظهر أيقونة الشمس
+        if(darkIcon) darkIcon.classList.add('hidden'); 
+        if(lightIcon) lightIcon.classList.remove('hidden'); 
       }
     }
-  });
-  
-  // Check sidebar items visibility
-  const visibleNavs = Array.from(document.querySelectorAll('.sidebar-item')).filter(item => item.style.display !== 'none').length;
-  if(visibleNavs === 0) {
-    document.querySelector('.sidebar-nav').innerHTML = '<div style="padding:40px;text-align:center;color:var(--text-muted);"><span style="font-size:2rem;">🔒</span><p>لا توجد صفحات مفعلة</p><a href="dashboard.html" style="color:#3b82f6;">تفعيل من لوحة التحكم</a></div>';
-  }
-}
 
-// Init with controls
-(function init() {
-  const saved = localStorage.getItem('theme') || 'light';
-  document.documentElement.setAttribute('data-theme', saved);
-  document.getElementById('themeBtn').textContent = saved === 'light' ? '🌙' : '☀️';
-  
-  // Apply dashboard controls
-  applyDashboardControls();
-  
-  // Rest of init code...
-  if (!localStorage.getItem('patients')) {
-    const mockPatients = [
-      {id:'p1',fullName:'أحمد محمد',phone:'07501234567',createdAt:new Date().toISOString()},
-      {id:'p2',fullName:'سارة علي',phone:'07709876543',createdAt:new Date(Date.now()-86400000).toISOString()},
-      {id:'p3',fullName:'حسين كريم',phone:'07805551234',createdAt:new Date(Date.now()-172800000).toISOString()}
-    ];
-    localStorage.setItem('patients', JSON.stringify(mockPatients));
-  }
-  
-  calculateStats();
-  loadTransactions();
-  
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && document.getElementById('sidebar')?.classList.contains('open')) toggleSidebar();
-  });
-  document.getElementById('sidebarOverlay')?.addEventListener('click', toggleSidebar);
-})();
-
-
-// ========== Sidebar Toggle ==========
-function toggleSidebar() {
-  const sb = document.getElementById('sidebar');
-  const ov = document.getElementById('sidebarOverlay');
-  sb.classList.toggle('open');
-  ov.classList.toggle('show');
-  document.body.style.overflow = sb.classList.contains('open') ? 'hidden' : '';
-}
-
-// ✅ تم حذف نظام Toast بالكامل حسب الطلب
-
-// ========== View Section ==========
-function viewSection(section) {
-  const sections = {
-    customers: '👥 جاري عرض قائمة الزبائن...',
-    exams: '👁️ جاري عرض جدول الفحوصات...',
-    revenue: '💰 جاري عرض تفاصيل الإيرادات...',
-    expenses: '🧾 جاري عرض تفاصيل المصروفات...',
-    monthly: '📊 جاري عرض التقرير الشهري...'
-  };
-  // ✅ تم إزالة التنبيهات - يمكن إضافة منطق آخر هنا
-  console.log(sections[section] || 'جاري التحميل...');
-}
-
-// ========== Add Patient ==========
-function openAddPatient() {
-  // ✅ تم إزالة showToast
-  console.log('➕ جاري فتح نموذج إضافة مريض...');
-}
-
-// ✅ تم حذف دالة refreshData مع زر التحديث
-
-// ========== Calculate Stats ==========
-function calculateStats() {
-  const patients = JSON.parse(localStorage.getItem('patients') || '[]');
-  const expenses = JSON.parse(localStorage.getItem('expenses') || '[]');
-  const sales = JSON.parse(localStorage.getItem('sales') || '[]');
-  
-  document.getElementById('totalCustomers').textContent = patients.length.toLocaleString('en-US');
-  
-  const today = new Date().toDateString();
-  const todayPatients = patients.filter(p => new Date(p.createdAt).toDateString() === today);
-  document.getElementById('todayExams').textContent = todayPatients.length.toLocaleString('en-US');
-  
-  const todayRevenue = todayPatients.length * 250;
-  document.getElementById('todayRevenue').textContent = todayRevenue.toLocaleString('en-US');
-  
-  const todaySalesCount = sales.filter(s => new Date(s.date).toDateString() === today).length;
-  document.getElementById('todayInvoices').textContent = todaySalesCount.toLocaleString('en-US');
-  
-  const currentMonth = new Date().getMonth();
-  const currentYear = new Date().getFullYear();
-  const monthPatients = patients.filter(p => {
-    const d = new Date(p.createdAt);
-    return d.getMonth() === currentMonth && d.getFullYear() === currentYear;
-  });
-  
-  const monthRevenue = monthPatients.length * 250;
-  document.getElementById('monthRevenue').textContent = monthRevenue.toLocaleString('en-US');
-  
-  const monthExpenses = expenses.filter(e => {
-    const d = new Date(e.date);
-    return d.getMonth() === currentMonth && d.getFullYear() === currentYear;
-  }).reduce((sum, e) => sum + (parseFloat(e.amount) || 0), 0);
-  
-  document.getElementById('monthExpenses').textContent = monthExpenses.toLocaleString('en-US');
-}
-
-// ========== Load Recent Transactions ==========
-function loadTransactions() {
-  const patients = JSON.parse(localStorage.getItem('patients') || '[]');
-  const container = document.getElementById('transactionList');
-  
-  const recent = patients.slice(-5).reverse();
-  
-  if (recent.length === 0) {
-    container.innerHTML = `<div style="text-align:center;padding:40px;color:var(--text-muted);background:var(--bg-surface);border:1px solid var(--border-light);border-radius:var(--radius-lg);">
-      <div style="font-size:2.5rem;margin-bottom:12px">👁️</div>
-      <p style="font-size:0.95rem">لا توجد عمليات حديثة</p>
-    </div>`;
-    return;
-  }
-  
-  container.innerHTML = recent.map(p => {
-    const initials = p.fullName ? p.fullName.charAt(0).toUpperCase() : '?';
-    const date = new Date(p.createdAt).toLocaleDateString('ar-IQ');
-    const phone = p.phone || '';
+    // ========================================
+    // 👤 دوال معلومات المستخدم وتسجيل الخروج
+    // ========================================
     
-    return `
-    <div class="transaction-card" onclick="viewPatient('${p.id||''}')">
-      <div class="tx-avatar">${initials}</div>
-      <div class="tx-info">
-        <div class="tx-name">${p.fullName||'مريض جديد'}</div>
-        <div class="tx-date">📅 ${date} • 📞 ${phone||'-'}</div>
-      </div>
-      <div class="tx-amount">250 د.ع</div>
-    </div>
-    `;
-  }).join('');
-}
+    // تحميل وعرض بيانات المستخدم المحفوظة
+    function loadUserInfo() {
+      const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+      
+      if(isLoggedIn) {
+        const userName = localStorage.getItem('userName') || 'مستخدم';
+        const userPhone = localStorage.getItem('userPhone') || 'غير محدد';
+        document.getElementById('userNameDisplay').textContent = userName;
+        document.getElementById('userRoleDisplay').textContent = userPhone;
+      } else {
+        // إذا لم يكن مسجلاً للدخول، يمكن السماح بالوصول أو إعادة التوجيه
+        // ملاحظة: يمكن تفعيل السطر التالي إذا أردت إجبار تسجيل الدخول
+        // window.location.href = 'login.html';
+      }
+    }
+    
+    // معالجة تسجيل الخروج
+    function handleLogout() {
+      if(confirm('هل أنت متأكد من تسجيل الخروج؟')) {
+        // مسح بيانات الجلسة من الذاكرة
+        localStorage.removeItem('userName');
+        localStorage.removeItem('userPhone');
+        localStorage.removeItem('isLoggedIn');
+        // إعادة التوجيه لصفحة الدخول
+        window.location.href = 'login.html';
+      }
+    }
 
-function viewPatient(id) {
-  if (id) console.log('👁️ جاري عرض تفاصيل المريض:', id);
-}
+    // ========================================
+    // 🏥 دوال إعدادات العيادة (لإظهار الاسم في الهيدر والسايدبار)
+    // ========================================
+    
+    // تحميل بيانات العيادة من الإعدادات وتحديث الواجهة
+    function loadClinicSettings() {
+      const settings = JSON.parse(localStorage.getItem('clinicSettings') || '{}');
+      
+      // تحديث اسم العيادة في الشريط الجانبي
+      if(settings.name) {
+        document.getElementById('clinicNameSidebar').textContent = settings.name;
+        document.title = settings.name + ' - لوحة المعلومات';
+      }
+      
+      // تحديث اسم الفاحص/الطبيب في الهيدر (إذا لم يكن هناك مستخدم مسجل)
+      if(settings.examiner && !localStorage.getItem('isLoggedIn')) {
+        document.getElementById('userNameDisplay').textContent = settings.examiner;
+        document.getElementById('userRoleDisplay').textContent = 'طبيب/فاحص';
+      }
+    }
 
-// ========== Initialize ==========
-(function init() {
-  const saved = localStorage.getItem('theme') || 'light';
-  document.documentElement.setAttribute('data-theme', saved);
-  document.getElementById('themeBtn').textContent = saved === 'light' ? '🌙' : '☀️';
-  
-  if (!localStorage.getItem('patients')) {
-    const mockPatients = [
-      {id:'p1',fullName:'أحمد محمد',phone:'07501234567',createdAt:new Date().toISOString()},
-      {id:'p2',fullName:'سارة علي',phone:'07709876543',createdAt:new Date(Date.now()-86400000).toISOString()},
-      {id:'p3',fullName:'حسين كريم',phone:'07805551234',createdAt:new Date(Date.now()-172800000).toISOString()}
-    ];
-    localStorage.setItem('patients', JSON.stringify(mockPatients));
-  }
-  
-  calculateStats();
-  loadTransactions();
-  // ✅ تم إزالة showToast من التهيئة
-  
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && document.getElementById('sidebar')?.classList.contains('open')) toggleSidebar();
-  });
-  document.getElementById('sidebarOverlay')?.addEventListener('click', toggleSidebar);
-})();
-</script>
+    // ========================================
+    // 📊 دوال تحديث بيانات لوحة المعلومات (الأساسية)
+    // ========================================
+    
+    // دالة مساعدة: تنسيق الأرقام كعملة (دينار عراقي)
+    function formatCurrency(amount) {
+      return new Intl.NumberFormat('en-US').format(amount) + ' د.ع';
+    }
+    
+    // دالة مساعدة: حساب الفرق بالأيام بين تاريخين
+    function daysUntil(dateString) {
+      if(!dateString) return 999;
+      const today = new Date(); today.setHours(0,0,0,0);
+      const target = new Date(dateString); target.setHours(0,0,0,0);
+      return Math.ceil((target - today) / (1000 * 60 * 60 * 24));
+    }
+    
+    // دالة مساعدة: الحصول على تاريخ اليوم بصيغة YYYY-MM-DD
+    function getTodayString() {
+      return new Date().toISOString().split('T')[0];
+    }
+    
+    // الدالة الرئيسية: تحديث جميع الإحصائيات والبيانات في اللوحة
+    function updateDashboardData() {
+      // 📦 تحميل جميع البيانات من الذاكرة المحلية
+      const patients = JSON.parse(localStorage.getItem('patients') || '[]');
+      const expenses = JSON.parse(localStorage.getItem('expenses') || '[]');
+      const sales = JSON.parse(localStorage.getItem('sales_invoices') || '[]');
+      const purchases = JSON.parse(localStorage.getItem('purchase_invoices') || '[]');
+      const materials = JSON.parse(localStorage.getItem('materials') || '[]');
+      
+      const today = getTodayString();
+      const thisMonth = today.substring(0, 7); // YYYY-MM
+      
+      // 🔢 حساب الإحصائيات الأساسية
+      
+      // إجمالي المرضى
+      const totalPatients = patients.length;
+      
+      // فحوصات اليوم المكتملة (المرضى الذين تم فحصهم اليوم)
+      const examsToday = patients.filter(p => p.examDate === today).length;
+      
+      // مواعيد التجديد خلال 30 يوم القادمة
+      const renewalsDue = patients.filter(p => {
+        const days = daysUntil(p.nextVisit);
+        return days >= 0 && days <= 30;
+      }).length;
+      
+      // مبيعات اليوم (فواتير البيع المدفوعة اليوم)
+      const salesToday = sales
+        .filter(i => i.date === today && i.status === 'paid')
+        .reduce((sum, i) => sum + (parseFloat(i.grandTotal) || 0), 0);
+      
+      // إجمالي الفواتير (بيع + مشتريات)
+      const totalInvoices = sales.length + purchases.length;
+      
+      // المصروفات الشهرية
+      const monthlyExpenses = expenses
+        .filter(e => e.date && e.date.startsWith(thisMonth))
+        .reduce((sum, e) => sum + (parseFloat(e.amount) || 0), 0);
+      
+      // المواد بالمخزن
+      const totalMaterials = materials.length;
+      
+      // الإيرادات الشهرية (من المبيعات المدفوعة)
+      const monthlyRevenue = sales
+        .filter(i => i.date && i.date.startsWith(thisMonth) && i.status === 'paid')
+        .reduce((sum, i) => sum + (parseFloat(i.grandTotal) || 0), 0);
+      
+      // 🎯 تحديث بطاقات الإحصائيات في الواجهة
+      document.getElementById('statPatients').innerHTML = `${totalPatients.toLocaleString()} <span>مريض</span>`;
+      document.getElementById('statExamsToday').textContent = examsToday.toLocaleString();
+      document.getElementById('statRenewals').textContent = renewalsDue.toLocaleString();
+      document.getElementById('statSalesToday').innerHTML = `${formatCurrency(salesToday).replace('د.ع','').trim()} <span>د.ع</span>`;
+      document.getElementById('statInvoices').innerHTML = `${totalInvoices.toLocaleString()} <span>فاتورة</span>`;
+      document.getElementById('statExpenses').innerHTML = `${formatCurrency(monthlyExpenses).replace('د.ع','').trim()} <span>د.ع</span>`;
+      document.getElementById('statMaterials').innerHTML = `${totalMaterials.toLocaleString()} <span>صنف</span>`;
+      document.getElementById('statRevenue').innerHTML = `${formatCurrency(monthlyRevenue).replace('د.ع','').trim()} <span>د.ع</span>`;
+      
+      // 📋 تحديث قائمة "آخر عمليات اليوم"
+      updateTodayOperations(patients, expenses, sales, purchases, materials);
+      
+      // ⏰ تحديث قائمة "مواعيد التجديد القريبة"
+      updateUpcomingRenewals(patients);
+    }
+    
+    // تحديث قائمة آخر عمليات اليوم (مع روابط للانتقال للقسم)
+    function updateTodayOperations(patients, expenses, sales, purchases, materials) {
+      const container = document.getElementById('todayOperations');
+      const operations = [];
+      const today = getTodayString();
+      
+      // جمع عمليات المرضى اليوم
+      patients.forEach(p => {
+        if(p.examDate === today || (p.createdAt && p.createdAt.startsWith(today))) {
+          operations.push({
+            type: 'patient',
+            title: `مريض: ${p.fullName || 'بدون اسم'}`,
+            time: p.examDate || new Date(p.createdAt).toLocaleTimeString('ar-IQ', {hour:'2-digit', minute:'2-digit'}),
+            amount: p.examDate ? 'فحص مكتمل' : 'مريض جديد',
+            badge: p.examDate ? 'success' : 'add',
+            badgeText: p.examDate ? 'فحص' : 'إضافة',
+            targetPage: 'archive.html',
+            targetId: p.id
+          });
+        }
+      });
+      
+      // جمع عمليات المصروفات اليوم
+      expenses.forEach(e => {
+        if(e.date === today || (e.createdAt && e.createdAt.startsWith(today))) {
+          operations.push({
+            type: 'expense',
+            title: `مصروف: ${e.name}`,
+            time: e.date || new Date(e.createdAt).toLocaleTimeString('ar-IQ', {hour:'2-digit', minute:'2-digit'}),
+            amount: `-${formatCurrency(e.amount)}`,
+            badge: 'edit',
+            badgeText: 'مصروف',
+            targetPage: 'expenses_list.html',
+            targetId: e.id
+          });
+        }
+      });
+      
+      // جمع فواتير البيع اليوم
+      sales.forEach(i => {
+        if(i.date === today || (i.createdAt && i.createdAt.startsWith(today))) {
+          operations.push({
+            type: 'sale',
+            title: `بيع: ${i.customer}`,
+            time: i.date || new Date(i.createdAt).toLocaleTimeString('ar-IQ', {hour:'2-digit', minute:'2-digit'}),
+            amount: `+${formatCurrency(i.grandTotal)}`,
+            badge: i.status === 'paid' ? 'success' : 'pending',
+            badgeText: i.status === 'paid' ? 'مدفوع' : 'معلق',
+            targetPage: 'invoices_list.html',
+            targetId: i.id
+          });
+        }
+      });
+      
+      // جمع فواتير المشتريات اليوم
+      purchases.forEach(i => {
+        if(i.date === today || (i.createdAt && i.createdAt.startsWith(today))) {
+          operations.push({
+            type: 'purchase',
+            title: `شراء: ${i.customer}`,
+            time: i.date || new Date(i.createdAt).toLocaleTimeString('ar-IQ', {hour:'2-digit', minute:'2-digit'}),
+            amount: `-${formatCurrency(i.grandTotal)}`,
+            badge: 'edit',
+            badgeText: 'شراء',
+            targetPage: 'invoices_list.html',
+            targetId: i.id
+          });
+        }
+      });
+      
+      // جمع تحديثات المواد اليوم
+      materials.forEach(m => {
+        if(m.lastUpdated && m.lastUpdated.startsWith(today)) {
+          operations.push({
+            type: 'material',
+            title: `مادة: ${m.name}`,
+            time: new Date(m.lastUpdated).toLocaleTimeString('ar-IQ', {hour:'2-digit', minute:'2-digit'}),
+            amount: `${m.stock} ${m.unit || 'وحدة'}`,
+            badge: 'add',
+            badgeText: 'مخزن',
+            targetPage: 'warehouse.html',
+            targetId: m.id
+          });
+        }
+      });
+      
+      // ترتيب العمليات حسب الأحدث أولاً (بالوقت)
+      operations.sort((a, b) => {
+        const timeA = a.time.includes(':') ? a.time : '00:00';
+        const timeB = b.time.includes(':') ? b.time : '00:00';
+        return timeB.localeCompare(timeA);
+      });
+      
+      // عرض آخر 6 عمليات فقط
+      const recent = operations.slice(0, 6);
+      
+      if(recent.length === 0) {
+        container.innerHTML = '<div style="padding:20px;text-align:center;color:var(--text-muted)">لا توجد عمليات اليوم</div>';
+        return;
+      }
+      
+      // إنشاء عناصر القائمة مع روابط النقر
+      container.innerHTML = recent.map(op => `
+        <div class="list-item" onclick="navigateToOperation('${op.targetPage}', '${op.targetId || ''}')">
+          <div class="list-header">
+            <span class="list-title">${op.title}</span>
+            <span class="list-meta">${op.time}</span>
+          </div>
+          <div class="list-footer">
+            <span class="amount ${op.type === 'sale' ? 'success' : op.type === 'expense' || op.type === 'purchase' ? '' : 'pending'}">${op.amount}</span>
+            <span class="badge ${op.badge}">${op.badgeText}</span>
+          </div>
+        </div>
+      `).join('') + '<a href="#" onclick="showAllTodayOperations(); return false;" class="view-all">عرض جميع عمليات اليوم →</a>';
+    }
+    
+    // دالة التنقل عند النقر على عملية
+    function navigateToOperation(page, id) {
+      if(id) {
+        // إذا كان هناك معرف، نوجه للصفحة مع المعرف للبحث عنه
+        window.location.href = `${page}?id=${id}`;
+      } else {
+        // otherwise just go to the page
+        window.location.href = page;
+      }
+    }
+    
+    // دالة عرض جميع عمليات اليوم (تفتح صفحة مع فلتر اليوم)
+    function showAllTodayOperations() {
+      // نوجه لصفحة التقارير العامة مع فلتر اليوم
+      window.location.href = 'general_report.html?filter=today';
+    }
+    
+    // تحديث قائمة مواعيد التجديد القريبة
+    function updateUpcomingRenewals(patients) {
+      const container = document.getElementById('upcomingRenewals');
+      const today = getTodayString();
+      
+      // فلترة المرضى الذين لديهم موعد تجديد خلال 10 أيام القادمة
+      const upcoming = patients
+        .filter(p => {
+          if(!p.nextVisit) return false;
+          const days = daysUntil(p.nextVisit);
+          return days >= 0 && days <= 10;
+        })
+        .sort((a, b) => new Date(a.nextVisit) - new Date(b.nextVisit))
+        .slice(0, 5); // عرض أول 5 مواعيد فقط
+      
+      if(upcoming.length === 0) {
+        container.innerHTML = '<div style="padding:20px;text-align:center;color:var(--text-muted)">لا توجد مواعيد تجديد قريبة</div>';
+        return;
+      }
+      
+      container.innerHTML = upcoming.map(p => {
+        const days = daysUntil(p.nextVisit);
+        let statusClass = 'normal', statusText = `متبقي: ${days} أيام`;
+        if(days <= 1) { statusClass = 'urgent'; statusText = 'عاجل: اليوم/غداً'; }
+        else if(days <= 3) { statusClass = 'close'; statusText = `متبقي: ${days} أيام`; }
+        
+        // حساب قيمة الفحص التقديرية (يمكن تعديلها حسب نظام التسعير)
+        const estimatedAmount = 50000; // قيمة افتراضية للفحص
+        
+        return `
+          <div class="installment-item" onclick="navigateToOperation('archive.html', '${p.id}')">
+            <div class="status-dot ${statusClass}"></div>
+            <div class="inst-details">
+              <div class="inst-name">${p.fullName || 'بدون اسم'} - تجديد فحص</div>
+              <div class="inst-time">${statusText}</div>
+            </div>
+            <div class="inst-amount">${formatCurrency(estimatedAmount)}</div>
+          </div>
+        `;
+      }).join('') + '<a href="renewal_appointments.html" class="view-all">عرض جميع المواعيد →</a>';
+    }
+    
+    // ========================================
+    // 🔍 دوال البحث العالمي (اختياري)
+    // ========================================
+    function handleGlobalSearch(event) {
+      const query = event.target.value.toLowerCase().trim();
+      if(query.length < 2) return; // لا تبحث إلا إذا كان النص طويلاً بما يكفي
+      
+      // يمكن تطوير هذه الدالة للبحث في جميع البيانات وتوجيه المستخدم للنتائج
+      // حالياً نوجه لصفحة الأرشيف مع تمرير مصطلح البحث
+      if(event.key === 'Enter') {
+        window.location.href = `archive.html?search=${encodeURIComponent(query)}`;
+      }
+    }
+    
+    // ========================================
+    // 🌐 دوال اللغة (مستقبلي)
+    // ========================================
+    function toggleLanguage() {
+      // يمكن إضافة دعم اللغة الإنجليزية مستقبلاً
+      alert('دعم اللغة الإنجليزية قيد التطوير');
+    }
+  </script>
 </body>
 </html>

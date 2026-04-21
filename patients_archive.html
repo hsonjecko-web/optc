@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <!-- ========================================
+       🔧 إعدادات الصفحة - أرشيف المرضى
+       ======================================== -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#0f172a">
+  <title>نظام التميز - أرشيف المرضى</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  
+  <style>
+    /* ========================================
+       🎨 متغيرات التصميم - هوية نظام التميز
+       ======================================== */
+    :root {
+      --bg-page: #0b0f19;
+      --bg-main: linear-gradient(135deg, #111827 0%, #0f172a 100%);
+      --glass-bg: rgba(30, 41, 59, 0.4);
+      --glass-border: rgba(255, 255, 255, 0.1);
+      --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --accent-blue: #3b82f6;
+      --accent-green: #22c55e;
+      --accent-cyan: #06b6d4;
+      --accent-purple: #a855f7;
+      --accent-red: #ef4444;
+      --accent-amber: #f59e0b;
+      --accent-teal: #14b8a6;
+      --header-height: 64px;
+      --footer-height: 70px;
+      --sidebar-width: 280px;
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+      --transition: all 0.2s ease;
+      --radius-sm: 10px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 20px;
+    }
+
+    /* 🌞 الوضع النهاري */
+    html.light-mode {
+      --bg-page: #f0f9ff;
+      --bg-main: radial-gradient(circle at 50% -20%, #f0f9ff 0%, #e0f2fe 100%) !important;
+      --glass-bg: rgba(255,255,255,0.75) !important;
+      --glass-border: rgba(59,130,246,0.2) !important;
+      --glass-shadow: 0 4px 15px rgba(59,130,246,0.08), inset 0 1px 1px rgba(59,130,246,0.1) !important;
+      --text-primary: #1e293b !important;
+      --text-secondary: #64748b !important;
+      --text-muted: rgba(30,41,59,0.5) !important;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; font-family: 'Cairo', sans-serif; }
+    html, body { height: 100%; background: var(--bg-main); color: var(--text-primary); overflow-x: hidden; }
+    body { padding-top: calc(var(--header-height) + var(--safe-top)); padding-bottom: calc(var(--footer-height) + var(--safe-bottom) + 20px); transition: var(--transition); }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
+    html.light-mode ::-webkit-scrollbar-thumb { background: rgba(59,130,246,0.3); }
+
+    /* ========================================
+       📱 الهيدر العلوي
+       ======================================== */
+    .app-header {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: var(--header-height); padding: 0 16px; padding-top: var(--safe-top);
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(15,23,42,0.85); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--glass-border); z-index: 100;
+    }
+    html.light-mode .app-header {
+      background: rgba(240,245,250,0.8) !important;
+      border-bottom-color: rgba(59,130,246,0.15) !important;
+    }
+    .menu-toggle, .back-btn {
+      width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
+      background: transparent; border: none; color: var(--text-primary);
+      cursor: pointer; border-radius: var(--radius-sm); transition: var(--transition);
+    }
+    .menu-toggle:active, .back-btn:active { background: var(--glass-bg); }
+    .header-title { font-size: 1.1rem; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+    .header-controls { display: flex; align-items: center; gap: 12px; }
+    .theme-btn {
+      display: flex; align-items: center; justify-content: center;
+      background: var(--glass-bg); border: 1px solid var(--glass-border);
+      border-radius: var(--radius-sm); padding: 6px 10px; cursor: pointer; transition: var(--transition);
+    }
+    .theme-btn:active { transform: scale(0.95); }
+    .light-mode-icon { display: none; }
+    html.light-mode .light-mode-icon { display: inline-block !important; }
+    html.light-mode .dark-mode-icon { display: none !important; }
+
+    /* ========================================
+       🧭 الشريط الجانبي
+       ======================================== */
+    .sidebar-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.6);
+      z-index: 190; opacity: 0; visibility: hidden; transition: 0.3s;
+    }
+    .sidebar-overlay.active { opacity: 1; visibility: visible; }
+    html.light-mode .sidebar-overlay { background: rgba(30,41,59,0.4); }
+    .sidebar {
+      position: fixed; top: 0; right: 0; bottom: 0; width: var(--sidebar-width);
+      background: var(--glass-bg); backdrop-filter: blur(16px);
+      border-left: 1px solid var(--glass-border); transform: translateX(100%);
+      transition: transform 0.3s ease; z-index: 200;
+      display: flex; flex-direction: column; padding-top: calc(var(--safe-top) + 16px);
+    }
+    html.light-mode .sidebar {
+      background: linear-gradient(165deg, rgba(219,234,254,0.8) 0%, rgba(240,249,255,0.7) 100%) !important;
+      border-left-color: rgba(59,130,246,0.25) !important;
+    }
+    .sidebar.active { transform: translateX(0); }
+    .sidebar-header {
+      padding: 16px 20px; border-bottom: 1px solid var(--glass-border);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .sidebar-header h2 { font-size: 1.1rem; font-weight: 700; flex: 1; }
+    .sidebar-header .material-icons-round { color: var(--accent-blue); font-size: 24px; }
+    .sidebar-nav { flex: 1; overflow-y: auto; padding: 16px 12px; }
+    .nav-btn-3d {
+      display: flex; align-items: center; gap: 12px; width: 100%;
+      padding: 12px 14px; margin-bottom: 6px;
+      background: linear-gradient(145deg, rgba(30,41,59,0.9), rgba(15,23,42,0.8));
+      border: 1px solid var(--glass-border); border-radius: var(--radius-md);
+      color: var(--text-primary); text-decoration: none; cursor: pointer;
+      font-weight: 500; transition: var(--transition);
+    }
+    html.light-mode .nav-btn-3d {
+      background: linear-gradient(145deg, rgba(255,255,255,0.8), rgba(241,245,249,0.6)) !important;
+      border-color: rgba(59,130,246,0.2) !important; color: #1e293b !important;
+    }
+    .nav-btn-3d:active { transform: scale(0.98); }
+    .nav-btn-3d .material-icons-round { font-size: 22px; }
+    .nav-btn-3d .expand-icon { margin-right: auto; transition: transform 0.3s; }
+    .nav-btn-3d.expanded .expand-icon { transform: rotate(180deg); }
+    .submenu { padding-right: 16px; overflow: hidden; transition: max-height 0.3s ease; max-height: 0; }
+    .submenu:not(.hidden) { max-height: 500px; }
+    .sub-link {
+      display: flex; align-items: center; gap: 10px; padding: 10px 12px;
+      color: var(--text-secondary); text-decoration: none; font-size: 0.9rem;
+      border-radius: var(--radius-sm); margin-bottom: 4px; border: 1px solid transparent; transition: var(--transition);
+    }
+    .sub-link:active { background: var(--glass-bg); }
+    .sub-link.active-submenu {
+      background: var(--accent-blue); color: #fff !important;
+      border-color: rgba(59,130,246,0.4); box-shadow: 0 0 12px rgba(59,130,246,0.4);
+    }
+    html.light-mode .sub-link { color: #64748b !important; }
+    html.light-mode .sub-link.active-submenu {
+      background: #000 !important; color: #fff !important;
+      border-color: rgba(0,0,0,0.5) !important; box-shadow: 0 0 15px rgba(0,0,0,0.3) !important;
+    }
+    .btn-blue { border-color: rgba(59,130,246,0.3) !important; }
+    .btn-green { border-color: rgba(34,197,94,0.3) !important; }
+    .btn-cyan { border-color: rgba(6,182,212,0.3) !important; }
+    .btn-purple { border-color: rgba(168,85,247,0.3) !important; }
+    .btn-amber { border-color: rgba(245,158,11,0.3) !important; }
+    .btn-red { border-color: rgba(239,68,68,0.3) !important; }
+    .btn-teal { border-color: rgba(20,184,166,0.3) !important; }
+
+    /* ========================================
+       📄 المحتوى الرئيسي
+       ======================================== */
+    main { padding: 16px; max-width: 1200px; margin: 0 auto; }
+    
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px;
+    }
+    @media (min-width: 768px) { .stats-grid { grid-template-columns: repeat(4, 1fr); } }
+    
+    .glass-premium {
+      background: var(--glass-bg); border: 1px solid var(--glass-border);
+      border-radius: var(--radius-lg); padding: 16px;
+      box-shadow: var(--glass-shadow); backdrop-filter: blur(10px);
+      display: flex; flex-direction: column; gap: 6px; transition: var(--transition);
+    }
+    .glass-premium:active { transform: scale(0.98); }
+    .card-icon {
+      width: 34px; height: 34px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; margin-bottom: 4px;
+    }
+    .card-label { font-size: 0.8rem; color: var(--text-secondary); }
+    .card-value { font-size: 1.2rem; font-weight: 700; }
+    .card-accent-blue { border-color: rgba(59,130,246,0.3); background: radial-gradient(circle at 30% 30%, rgba(59,130,246,0.2), transparent 70%), var(--glass-bg); }
+    .card-accent-cyan { border-color: rgba(6,182,212,0.3); background: radial-gradient(circle at 30% 30%, rgba(6,182,212,0.2), transparent 70%), var(--glass-bg); }
+    .card-accent-amber { border-color: rgba(245,158,11,0.3); background: radial-gradient(circle at 30% 30%, rgba(245,158,11,0.2), transparent 70%), var(--glass-bg); }
+    .card-accent-green { border-color: rgba(34,197,94,0.3); background: radial-gradient(circle at 30% 30%, rgba(34,197,94,0.2), transparent 70%), var(--glass-bg); }
+
+    /* 🔍 شريط البحث والفلترة */
+    .filter-bar {
+      background: var(--glass-bg); border: 1px solid var(--glass-border);
+      border-radius: var(--radius-lg); padding: 14px; margin-bottom: 20px;
+      backdrop-filter: blur(10px); display: flex; flex-wrap: wrap; gap: 12px; align-items: center;
+    }
+    .filter-bar input[type="text"], .filter-bar input[type="date"] {
+      padding: 10px 14px; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border);
+      border-radius: var(--radius-sm); color: var(--text-primary); font-family: 'Cairo', sans-serif;
+      font-size: 0.9rem; outline: none; flex: 1; min-width: 150px;
+    }
+    .filter-btn {
+      padding: 10px 16px; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border);
+      border-radius: var(--radius-sm); color: var(--text-primary); cursor: pointer;
+      transition: var(--transition); font-size: 0.85rem;
+    }
+    .filter-btn.active, .filter-btn:active { background: var(--accent-blue); border-color: var(--accent-blue); color: #fff; }
+
+    /* 📋 شريط الأدوات */
+    .action-bar {
+      background: var(--glass-bg); border: 1px solid var(--glass-border);
+      border-radius: var(--radius-lg); padding: 12px 16px; margin-bottom: 20px;
+      display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between;
+    }
+    .selection-info { font-size: 0.9rem; color: var(--text-secondary); }
+    .selection-info strong { color: var(--accent-cyan); }
+    .action-buttons { display: flex; gap: 8px; flex-wrap: wrap; }
+    .btn-tool {
+      padding: 8px 16px; border: none; border-radius: var(--radius-sm);
+      font-family: 'Cairo', sans-serif; font-size: 0.85rem; font-weight: 600;
+      cursor: pointer; transition: var(--transition); display: flex; align-items: center; gap: 6px;
+    }
+    .btn-tool.select-all { background: rgba(59,130,246,0.15); color: var(--accent-blue); border: 1px solid rgba(59,130,246,0.4); }
+    .btn-tool.clear { background: rgba(255,255,255,0.05); color: var(--text-secondary); border: 1px solid var(--glass-border); }
+    .btn-tool.whatsapp { background: rgba(34,197,94,0.15); color: var(--accent-green); border: 1px solid rgba(34,197,94,0.4); }
+    .btn-tool:active { transform: scale(0.98); }
+
+    /* 📋 قائمة المرضى */
+    .patients-list { display: flex; flex-direction: column; gap: 10px; }
+    .patient-card {
+      background: var(--glass-bg); border: 1px solid var(--glass-border);
+      border-radius: var(--radius-lg); padding: 14px; display: flex; align-items: center; gap: 12px;
+      transition: var(--transition); position: relative; cursor: pointer;
+    }
+    .patient-card:active { transform: scale(0.99); }
+    .patient-card.selected { border-color: var(--accent-cyan); box-shadow: 0 0 0 2px rgba(6,182,212,0.3); }
+    .patient-card.urgent { border-right: 4px solid var(--accent-red); }
+    .patient-card.soon { border-right: 4px solid var(--accent-amber); }
+    .patient-card.normal { border-right: 4px solid var(--accent-cyan); }
+    
+    .patient-checkbox {
+      width: 24px; height: 24px; border-radius: 6px; border: 2px solid var(--glass-border);
+      background: rgba(255,255,255,0.05); cursor: pointer; display: flex;
+      align-items: center; justify-content: center; transition: var(--transition); flex-shrink: 0;
+    }
+    .patient-checkbox.checked { background: var(--accent-cyan); border-color: var(--accent-cyan); }
+    .patient-checkbox.checked::after { content: '✓'; color: #fff; font-size: 14px; font-weight: 700; }
+    
+    .patient-avatar {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-weight: 700; font-size: 1.1rem; flex-shrink: 0;
+    }
+    .patient-info { flex: 1; min-width: 0; }
+    .patient-name { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+    .patient-phone { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 4px; }
+    .patient-dates { display: flex; gap: 12px; font-size: 0.75rem; color: var(--text-secondary); }
+    .patient-actions { display: flex; gap: 6px; }
+    .icon-btn {
+      width: 36px; height: 36px; border-radius: var(--radius-sm);
+      border: 1px solid var(--glass-border); background: var(--glass-bg);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-secondary); cursor: pointer; transition: var(--transition);
+    }
+    .icon-btn:active { background: var(--accent-blue); color: #fff; transform: scale(0.95); }
+
+    .renewal-badge {
+      position: absolute; top: 10px; left: 12px;
+      font-size: 0.7rem; padding: 3px 8px; border-radius: 20px;
+      font-weight: 600; white-space: nowrap; background: rgba(255,255,255,0.08); color: var(--text-muted);
+    }
+    .renewal-badge.urgent { background: rgba(239,68,68,0.2); color: var(--accent-red); }
+    .renewal-badge.soon { background: rgba(245,158,11,0.2); color: var(--accent-amber); }
+
+    /* 🏷️ الأوسمة */
+    .badge { font-size: 0.7rem; padding: 4px 10px; border-radius: 20px; background: rgba(255,255,255,0.08); color: var(--text-secondary); font-weight: 600; }
+    html.light-mode .badge { background: rgba(59,130,246,0.08) !important; color: #1e293b !important; }
+
+    /* 💬 النوافذ المنبثقة (Modals) */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(8px); z-index: 500;
+      display: none; align-items: center; justify-content: center; padding: 16px;
+    }
+    .modal-overlay.active { display: flex; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
+    .modal-card {
+      background: var(--glass-bg); border: 1px solid var(--glass-border);
+      border-radius: var(--radius-xl); padding: 20px; width: 100%; max-width: 600px;
+      max-height: 90vh; overflow-y: auto; box-shadow: var(--glass-shadow);
+      backdrop-filter: blur(16px); position: relative; animation: scaleIn 0.25s ease;
+    }
+    @keyframes scaleIn { from{transform:scale(0.95);opacity:0;} to{transform:scale(1);opacity:1;} }
+    .modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--glass-border); }
+    .modal-title { font-size: 1.1rem; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+    .modal-close {
+      width: 36px; height: 36px; border-radius: var(--radius-sm); border: none;
+      background: transparent; color: var(--text-secondary); cursor: pointer;
+      display: flex; align-items: center; justify-content: center; transition: var(--transition);
+    }
+    .modal-close:active { background: var(--glass-bg); color: var(--text-primary); }
+    .modal-body { display: flex; flex-direction: column; gap: 14px; }
+    .modal-footer { display: flex; gap: 10px; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--glass-border); }
+    .modal-btn {
+      flex: 1; padding: 12px; border: none; border-radius: var(--radius-md);
+      font-family: 'Cairo', sans-serif; font-size: 0.9rem; font-weight: 700;
+      cursor: pointer; transition: var(--transition); display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .modal-btn.cancel { background: rgba(255,255,255,0.05); color: var(--text-secondary); border: 1px solid var(--glass-border); }
+    .modal-btn.confirm { background: var(--accent-blue); color: #fff; }
+    .modal-btn.whatsapp { background: var(--accent-green); color: #fff; }
+    .modal-btn:active { transform: scale(0.98); }
+
+    /* 📝 حقول النماذج داخل المودال */
+    .form-input, .form-textarea {
+      width: 100%; padding: 12px; background: rgba(255,255,255,0.05);
+      border: 1px solid var(--glass-border); border-radius: var(--radius-md);
+      color: var(--text-primary); font-family: 'Cairo', sans-serif; outline: none;
+    }
+    .form-textarea { min-height: 80px; resize: vertical; }
+    .form-input:focus, .form-textarea:focus { border-color: var(--accent-blue); }
+
+    /* 📱 الفوتر المتنقل */
+    .mobile-footer {
+      position: fixed; bottom: 0; left: 0; right: 0; height: var(--footer-height);
+      padding-bottom: var(--safe-bottom); background: rgba(15,23,42,0.9);
+      backdrop-filter: blur(12px); border-top: 1px solid var(--glass-border);
+      display: flex; align-items: center; justify-content: space-around; z-index: 90;
+    }
+    html.light-mode .mobile-footer {
+      background: rgba(240,245,250,0.9) !important; border-top-color: rgba(59,130,246,0.15) !important;
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 4px; text-decoration: none; color: var(--text-muted); padding: 8px 12px;
+      border-radius: var(--radius-md); transition: var(--transition); flex: 1; max-width: 20%;
+    }
+    .footer-btn .material-icons-round { font-size: 24px; transition: transform 0.2s; }
+    .footer-btn span:last-child { font-size: 0.7rem; font-weight: 500; }
+    .footer-btn:active { transform: scale(0.9); background: var(--glass-bg); }
+    .footer-btn.active { color: var(--accent-blue); }
+    .footer-btn.active .material-icons-round { transform: translateY(-2px); }
+
+    .empty-state { text-align: center; padding: 40px 20px; color: var(--text-muted); }
+    .empty-state .material-icons-round { font-size: 48px; margin-bottom: 12px; opacity: 0.5; }
+
+    /* 🖨️ أنماط الطباعة */
+    @media print {
+      @page { size: A5; margin: 10mm; }
+      body * { visibility: hidden; }
+      #print-area, #print-area * { visibility: visible; }
+      #print-area { position: absolute; left: 0; top: 0; width: 100%; background: white !important; color: black !important; font-family: 'Cairo', sans-serif; padding: 15mm; box-sizing: border-box; }
+    }
+    .a5-card { width: 148mm; min-height: 210mm; background: white; color: #1e293b; padding: 15mm; box-sizing: border-box; border: 2px solid var(--accent-cyan); display: none; }
+    html.light-mode .a5-card, .a5-card { border-color: #06b6d4; }
+    @media print { .a5-card { display: block; } }
+    .a5-card .header { text-align: center; padding-bottom: 12px; margin-bottom: 15px; border-bottom: 2px solid #06b6d4; }
+    .a5-card .clinic-name { font-size: 18px; font-weight: 800; color: #06b6d4; }
+    .a5-card .clinic-info { font-size: 10px; color: #64748b; margin-top: 4px; }
+    .a5-card .patient-section { padding: 10px; border-radius: 8px; margin-bottom: 12px; background: #f8fafc; border-right: 3px solid #06b6d4; }
+    .a5-card .patient-row { font-size: 9px; display: flex; justify-content: space-between; margin: 2px 0; }
+    .a5-card .prescription-table { width: 100%; border-collapse: collapse; font-size: 9px; margin: 10px 0; }
+    .a5-card .prescription-table th { padding: 6px 4px; border: 1px solid #cbd5e1; background: #06b6d4; color: white; }
+    .a5-card .prescription-table td { padding: 6px 4px; border: 1px solid #cbd5e1; text-align: center; }
+    .a5-card .footer { text-align: center; font-size: 8px; color: #64748b; margin-top: 20px; padding-top: 10px; border-top: 1px dashed #cbd5e1; }
+
+    @media (max-width: 640px) {
+      .filter-bar, .action-bar { flex-direction: column; align-items: stretch; }
+      .patient-card { flex-wrap: wrap; }
+      .patient-info { min-width: calc(100% - 84px); }
+      .patient-actions { width: 100%; justify-content: flex-end; margin-top: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 📱 الهيدر -->
+  <header class="app-header">
+    <button class="menu-toggle" onclick="toggleSidebar()"><span class="material-icons-round">menu</span></button>
+    <h1 class="header-title"><span class="material-icons-round" style="color:var(--accent-cyan);">archive</span> أرشيف المرضى</h1>
+    <div class="header-controls">
+      <button class="theme-btn" onclick="toggleDarkMode()" title="تبديل الوضع">
+        <span class="material-icons-round dark-mode-icon">light_mode</span>
+        <span class="material-icons-round light-mode-icon">dark_mode</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- 🧭 الشريط الجانبي -->
+  <div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar()"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <span class="material-icons-round">shield</span><span class="material-icons-round">account_balance</span>
+      <span class="material-icons-round">trending_up</span><h2>نظام التميز</h2>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="home.html" class="nav-btn-3d btn-blue"><span class="material-icons-round">home</span><span>الرئيسية</span></a>
+      <div class="submenu-container">
+        <button onclick="toggleSubmenu('patients-submenu')" class="nav-btn-3d btn-green">
+          <span class="material-icons-round">person</span><span>المرضى</span>
+          <span class="material-icons-round expand-icon">expand_more</span>
+        </button>
+        <div id="patients-submenu" class="submenu">
+          <a href="patients_archive.html" class="sub-link active-submenu"><span class="material-icons-round">archive</span>أرشيف المرضى</a>
+          <a href="add-patient.html" class="sub-link"><span class="material-icons-round">person_add</span>إضافة مريض</a>
+        </div>
+      </div>
+      <a href="renewal_appointments.html" class="nav-btn-3d btn-cyan"><span class="material-icons-round">event_repeat</span><span>مواعيد تجديد الفحص</span></a>
+      <div class="submenu-container">
+        <button onclick="toggleSubmenu('expenses-submenu')" class="nav-btn-3d btn-amber">
+          <span class="material-icons-round">payments</span><span>المصاريف</span>
+          <span class="material-icons-round expand-icon">expand_more</span>
+        </button>
+        <div id="expenses-submenu" class="submenu hidden">
+          <a href="add_expense.html" class="sub-link"><span class="material-icons-round">add</span>إضافة مصروف</a>
+          <a href="expenses_list.html" class="sub-link"><span class="material-icons-round">receipt_long</span>المصروفات</a>
+        </div>
+      </div>
+      <div class="submenu-container">
+        <button onclick="toggleSubmenu('materials-submenu')" class="nav-btn-3d btn-teal">
+          <span class="material-icons-round">inventory_2</span><span>المواد</span>
+          <span class="material-icons-round expand-icon">expand_more</span>
+        </button>
+        <div id="materials-submenu" class="submenu hidden">
+          <a href="warehouse.html" class="sub-link"><span class="material-icons-round">warehouse</span>المخزن</a>
+          <a href="inventory.html" class="sub-link"><span class="material-icons-round">list_alt</span>الجرد</a>
+        </div>
+      </div>
+      <a href="settings.html" class="nav-btn-3d btn-amber"><span class="material-icons-round">settings</span><span>الإعدادات</span></a>
+      <a href="#" onclick="handleLogout()" class="nav-btn-3d btn-red"><span class="material-icons-round">logout</span><span>تسجيل خروج</span></a>
+    </nav>
+  </aside>
+
+  <!-- 📄 المحتوى الرئيسي -->
+  <main>
+    <!-- 📊 الإحصائيات -->
+    <div class="stats-grid">
+      <div class="glass-premium card-accent-blue">
+        <div class="card-icon" style="background:rgba(59,130,246,0.15);color:var(--accent-blue)"><span class="material-icons-round">people</span></div>
+        <div class="card-label">إجمالي المرضى</div>
+        <div class="card-value" id="totalPatients">0</div>
+      </div>
+      <div class="glass-premium card-accent-cyan">
+        <div class="card-icon" style="background:rgba(6,182,212,0.15);color:var(--accent-cyan)"><span class="material-icons-round">search</span></div>
+        <div class="card-label">النتائج المعروضة</div>
+        <div class="card-value" id="displayedPatients">0</div>
+      </div>
+      <div class="glass-premium card-accent-amber">
+        <div class="card-icon" style="background:rgba(245,158,11,0.15);color:var(--accent-amber)"><span class="material-icons-round">schedule</span></div>
+        <div class="card-label">يحتاجون تجديد</div>
+        <div class="card-value" id="needRenewal">0</div>
+      </div>
+      <div class="glass-premium card-accent-green">
+        <div class="card-icon" style="background:rgba(34,197,94,0.15);color:var(--accent-green)"><span class="material-icons-round">check_circle</span></div>
+        <div class="card-label">مواعيد اليوم</div>
+        <div class="card-value" id="todayAppointments">0</div>
+      </div>
+    </div>
+
+    <!-- 🔍 الفلترة -->
+    <div class="filter-bar">
+      <input type="text" id="searchInput" placeholder="🔍 بحث بالاسم أو الهاتف..." oninput="filterPatients()">
+      <button class="filter-btn active" onclick="setFilter('all', this)">الكل</button>
+      <button class="filter-btn" onclick="setFilter('today', this)">اليوم</button>
+      <button class="filter-btn" onclick="setFilter('week', this)">هذا الأسبوع</button>
+      <button class="filter-btn" onclick="setFilter('month', this)">هذا الشهر</button>
+      <input type="date" id="dateFrom" onchange="filterPatients()" title="من تاريخ">
+      <input type="date" id="dateTo" onchange="filterPatients()" title="إلى تاريخ">
+    </div>
+
+    <!-- 📋 شريط الأدوات -->
+    <div class="action-bar">
+      <div class="selection-info"><span id="selectedCount">0</span> محدد من <strong id="totalCount">0</strong></div>
+      <div class="action-buttons">
+        <button class="btn-tool select-all" onclick="toggleSelectAll()"><span class="material-icons-round" style="font-size:18px;">checklist</span> تحديد الكل</button>
+        <button class="btn-tool clear" onclick="clearSelection()"><span class="material-icons-round" style="font-size:18px;">clear</span> إلغاء</button>
+        <button class="btn-tool whatsapp" onclick="openWhatsAppModal()"><span class="material-icons-round" style="font-size:18px;">message</span> واتساب</button>
+      </div>
+    </div>
+
+    <!-- 📋 القائمة -->
+    <div class="patients-list" id="patientsList"></div>
+    <div class="empty-state" id="emptyState" style="display:none;">
+      <span class="material-icons-round">search_off</span>
+      <p>لا توجد نتائج مطابقة للبحث أو الفلترة</p>
+    </div>
+  </main>
+
+  <!-- 🖨️ منطقة الطباعة (مخفية) -->
+  <div id="print-area">
+    <div class="a5-card">
+      <div class="header">
+        <div style="font-size:24px;margin-bottom:8px;">👁️</div>
+        <div class="clinic-name" id="printClinicName">نظام التميز للبصريات</div>
+        <div class="clinic-info" id="printClinicInfo">📍 بغداد - المنصور • 📞 07XX XXX XXXX</div>
+      </div>
+      <div class="patient-section">
+        <div style="font-size:12px;font-weight:700;margin-bottom:6px;">👤 معلومات المريض</div>
+        <div class="patient-row"><span>الاسم:</span><span id="printName">-</span></div>
+        <div class="patient-row"><span>العمر:</span><span id="printAge">-</span></div>
+        <div class="patient-row"><span>الهاتف:</span><span id="printPhone">-</span></div>
+        <div class="patient-row"><span>تاريخ الفحص:</span><span id="printDate">-</span></div>
+      </div>
+      <table class="prescription-table">
+        <thead><tr><th>العين</th><th>SPH</th><th>CYL</th><th>AXIS</th><th>ADD</th><th>VA</th></tr></thead>
+        <tbody>
+          <tr><td>👁️ يمنى</td><td id="pRS">-</td><td id="pRC">-</td><td id="pRA">-</td><td id="pRAdd">-</td><td id="pRV">-</td></tr>
+          <tr><td>👁️ يسرى</td><td id="pLS">-</td><td id="pLC">-</td><td id="pLA">-</td><td id="pLAdd">-</td><td id="pLV">-</td></tr>
+        </tbody>
+      </table>
+      <div style="margin:8px 0;padding:8px;background:#f8fafc;border-radius:6px;font-size:9px;text-align:center;">
+        <strong>📏 PD:</strong> <span id="printPD">-</span> mm
+      </div>
+      <div class="footer" id="printFooter">✨ نظام التميز - جميع الحقوق محفوظة ✨</div>
+    </div>
+  </div>
+
+  <!-- 💬 مودال الواتساب -->
+  <div class="modal-overlay" id="waModal" onclick="closeIfOverlay(event, 'waModal')">
+    <div class="modal-card">
+      <div class="modal-header"><h3 class="modal-title"><span class="material-icons-round" style="color:var(--accent-green);">message</span> إرسال واتساب</h3><button class="modal-close" onclick="closeModal('waModal')"><span class="material-icons-round">close</span></button></div>
+      <div class="modal-body">
+        <div class="recipients-preview" id="waRecipients" style="background:rgba(255,255,255,0.03);padding:10px;border-radius:var(--radius-md);font-size:0.85rem;color:var(--text-secondary);"></div>
+        <textarea id="waMessage" class="form-textarea" placeholder="اكتب الرسالة..." oninput="updateWaPreview()">مرحباً [الاسم]، نود تذكيرك بموعد تجديد فحصك في [التاريخ]. مع تحيات نظام التميز 👁️✨</textarea>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;">
+          <button class="btn-tool" style="background:rgba(255,255,255,0.05);color:var(--text-secondary);padding:6px 12px;font-size:0.75rem;" onclick="setWaTemplate('reminder')">📅 تذكير</button>
+          <button class="btn-tool" style="background:rgba(255,255,255,0.05);color:var(--text-secondary);padding:6px 12px;font-size:0.75rem;" onclick="setWaTemplate('urgent')">⚠️ عاجل</button>
+        </div>
+        <div style="background:rgba(34,197,94,0.08);padding:10px;border-radius:var(--radius-md);font-size:0.85rem;line-height:1.5;white-space:pre-wrap;" id="waPreview"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="modal-btn cancel" onclick="closeModal('waModal')">إغلاق</button>
+        <button class="modal-btn whatsapp" onclick="sendWhatsApp()">إرسال 🚀</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 📋 مودال تفاصيل المريض -->
+  <div class="modal-overlay" id="detailsModal" onclick="closeIfOverlay(event, 'detailsModal')">
+    <div class="modal-card">
+      <div class="modal-header"><h3 class="modal-title"><span class="material-icons-round">badge</span> تفاصيل المريض</h3><button class="modal-close" onclick="closeModal('detailsModal')"><span class="material-icons-round">close</span></button></div>
+      <div class="modal-body" id="detailsContent"></div>
+      <div class="modal-footer">
+        <button class="modal-btn cancel" onclick="closeModal('detailsModal')">إغلاق</button>
+        <button class="modal-btn confirm" onclick="editCurrentPatient()"><span class="material-icons-round">edit</span> تعديل</button>
+        <button class="modal-btn whatsapp" onclick="printCurrentPatient()"><span class="material-icons-round">print</span> طباعة</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 📱 الفوتر -->
+  <footer class="mobile-footer">
+    <a href="home.html" class="footer-btn"><span class="material-icons-round">home</span><span>الرئيسية</span></a>
+    <a href="add-patient.html" class="footer-btn"><span class="material-icons-round">person_add</span><span>إضافة مريض</span></a>
+    <a href="add_sales_invoice.html" class="footer-btn"><span class="material-icons-round">shopping_cart</span><span>فاتورة بيع</span></a>
+    <a href="patients_archive.html" class="footer-btn active"><span class="material-icons-round">archive</span><span>الأرشيف</span></a>
+    <a href="expenses_list.html" class="footer-btn"><span class="material-icons-round">payments</span><span>المصروفات</span></a>
+  </footer>
+
+  <script>
+    // ========================================
+    // 🔄 تهيئة الصفحة والمتغيرات العامة
+    // ========================================
+    let allPatients = [];
+    let selectedPatients = new Set();
+    let currentFilter = 'all';
+    let currentPatientId = null;
+
+    document.addEventListener('DOMContentLoaded', function() {
+      if(localStorage.getItem('darkMode')==='false') document.documentElement.classList.add('light-mode');
+      updateDarkModeIcon(); checkActivePage(); loadPatients(); updateWaPreview();
+    });
+
+    // ========================================
+    // 🧭 التنقل والواجهة
+    // ========================================
+    function toggleSidebar() {
+      document.getElementById('sidebar').classList.toggle('active');
+      document.getElementById('sidebar-overlay').classList.toggle('active');
+    }
+    const allSubmenus = ['patients-submenu','expenses-submenu','materials-submenu','reports-submenu'];
+    function toggleSubmenu(id) {
+      const sub = document.getElementById(id); if(!sub) return;
+      const hidden = sub.classList.contains('hidden');
+      allSubmenus.forEach(s => { const m=document.getElementById(s); if(m && s!==id) m.classList.add('hidden'); });
+      sub.classList.toggle('hidden', !hidden);
+      const btn = sub.previousElementSibling; if(btn) btn.classList.toggle('expanded', hidden);
+    }
+    function toggleDarkMode() {
+      const h = document.documentElement; h.classList.toggle('light-mode');
+      localStorage.setItem('darkMode', h.classList.contains('light-mode') ? 'false' : 'true');
+      updateDarkModeIcon();
+    }
+    function updateDarkModeIcon() {
+      const d = document.querySelector('.dark-mode-icon'), l = document.querySelector('.light-mode-icon');
+      if(document.documentElement.classList.contains('light-mode')) { if(d)d.classList.add('hidden'); if(l)l.classList.remove('hidden'); }
+      else { if(d)d.classList.remove('hidden'); if(l)l.classList.add('hidden'); }
+    }
+    function checkActivePage() {
+      const page = window.location.pathname.split('/').pop() || 'archive.html';
+      document.querySelectorAll('.nav-btn-3d, .sub-link, .footer-btn').forEach(el => {
+        if(el.getAttribute('href')===page) { el.classList.add('active'); if(el.classList.contains('sub-link')) el.classList.add('active-submenu'); }
+      });
+    }
+    function handleLogout() { if(confirm('هل أنت متأكد من تسجيل الخروج؟')) { localStorage.clear(); window.location.href='login.html'; } }
+
+    // ========================================
+    // 📦 تحميل وعرض المرضى
+    // ========================================
+    function loadPatients() {
+      allPatients = JSON.parse(localStorage.getItem('patients') || '[]').sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt));
+      filterPatients();
+    }
+    function filterPatients() {
+      const query = document.getElementById('searchInput').value.toLowerCase().trim();
+      const dFrom = document.getElementById('dateFrom').value;
+      const dTo = document.getElementById('dateTo').value;
+      const today = new Date(); today.setHours(0,0,0,0);
+
+      let filtered = allPatients.filter(p => {
+        if(query && !p.fullName?.toLowerCase().includes(query) && !p.phone?.includes(query)) return false;
+        if(dFrom && p.nextVisit && new Date(p.nextVisit) < new Date(dFrom)) return false;
+        if(dTo && p.nextVisit && new Date(p.nextVisit) > new Date(dTo)) return false;
+        const days = p.nextVisit ? Math.ceil((new Date(p.nextVisit) - today) / 864e5) : 999;
+        if(currentFilter==='today' && days > 0) return false;
+        if(currentFilter==='week' && days > 7) return false;
+        if(currentFilter==='month' && days > 30) return false;
+        return true;
+      });
+
+      renderPatients(filtered);
+      updateStats(filtered);
+    }
+    function setFilter(type, btn) { currentFilter = type; document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); filterPatients(); }
+    function renderPatients(list) {
+      const container = document.getElementById('patientsList');
+      document.getElementById('totalCount').textContent = list.length;
+      document.getElementById('displayedPatients').textContent = list.length;
+      if(list.length===0) { container.innerHTML=''; document.getElementById('emptyState').style.display='block'; return; }
+      document.getElementById('emptyState').style.display='none';
+      const today = new Date(); today.setHours(0,0,0,0);
+      container.innerHTML = list.map(p => {
+        const days = p.nextVisit ? Math.ceil((new Date(p.nextVisit) - today) / 864e5) : null;
+        let cls = 'normal', badge = '';
+        if(days!==null) { if(days<=1) { cls='urgent'; badge='عاجل'; } else if(days<=3) { cls='soon'; badge=`${days} أيام`; } }
+        const sel = selectedPatients.has(p.id);
+        return `
+        <div class="patient-card ${cls} ${sel?'selected':''}" data-id="${p.id}" onclick="openDetails('${p.id}', event)">
+          <span class="renewal-badge ${cls}">${badge}</span>
+          <div class="patient-checkbox ${sel?'checked':''}" onclick="togglePatient('${p.id}', this)"></div>
+          <div class="patient-avatar">${(p.fullName||'?').charAt(0).toUpperCase()}</div>
+          <div class="patient-info">
+            <div class="patient-name">${p.fullName||'بدون اسم'}</div>
+            <div class="patient-phone">📞 ${p.phone||'غير محدد'}</div>
+            <div class="patient-dates"><span>📅 آخر فحص: ${p.examDate||'-'}</span>${p.nextVisit?`<span>⏰ التجديد: ${p.nextVisit}</span>`:''}</div>
+          </div>
+          <div class="patient-actions">
+            <button class="icon-btn" onclick="openDetails('${p.id}', event)"><span class="material-icons-round">visibility</span></button>
+          </div>
+        </div>`;
+      }).join('');
+    }
+    function updateStats(list) {
+      const today = new Date(); today.setHours(0,0,0,0);
+      document.getElementById('totalPatients').textContent = allPatients.length;
+      document.getElementById('needRenewal').textContent = list.filter(p=>{ const d=p.nextVisit?Math.ceil((new Date(p.nextVisit)-today)/864e5):999; return d<=30; }).length;
+      document.getElementById('todayAppointments').textContent = list.filter(p=>p.nextVisit && new Date(p.nextVisit).toDateString()===today.toDateString()).length;
+    }
+
+    // ========================================
+    // ✅ التحديد
+    // ========================================
+    function togglePatient(id, el) {
+      if(selectedPatients.has(id)) { selectedPatients.delete(id); el.classList.remove('checked'); el.closest('.patient-card').classList.remove('selected'); }
+      else { selectedPatients.add(id); el.classList.add('checked'); el.closest('.patient-card').classList.add('selected'); }
+      document.getElementById('selectedCount').textContent = selectedPatients.size;
+    }
+    function toggleSelectAll() {
+      const visible = document.querySelectorAll('.patient-card:not([style*="display:none"])');
+      if(selectedPatients.size === visible.length) clearSelection();
+      else { visible.forEach(c=>{ const id=c.dataset.id; if(!selectedPatients.has(id)) togglePatient(id, c.querySelector('.patient-checkbox')); }); }
+    }
+    function clearSelection() { selectedPatients.clear(); document.querySelectorAll('.patient-checkbox').forEach(c=>c.classList.remove('checked')); document.querySelectorAll('.patient-card').forEach(c=>c.classList.remove('selected')); document.getElementById('selectedCount').textContent='0'; }
+
+    // ========================================
+    // 💬 الواتساب
+    // ========================================
+    function openWhatsAppModal() {
+      const modal = document.getElementById('waModal');
+      const rec = document.getElementById('waRecipients');
+      let targets = selectedPatients.size>0 ? allPatients.filter(p=>selectedPatients.has(p.id)) : allPatients;
+      if(targets.length===0) { alert('لا يوجد مرضى لإرسال الرسالة لهم'); return; }
+      rec.innerHTML = targets.length<=5 ? targets.map(t=>`<strong>${t.fullName}</strong>`).join(', ') : `<strong>${targets.slice(0,3).map(t=>t.fullName).join(', ')}</strong> و ${targets.length-3} آخرين...`;
+      modal.classList.add('active'); updateWaPreview();
+    }
+    function updateWaPreview() {
+      const txt = document.getElementById('waMessage').value;
+      document.getElementById('waPreview').textContent = txt.replace('[الاسم]','أحمد').replace('[التاريخ]','2024-02-15');
+    }
+    function setWaTemplate(t) {
+      const temp = t==='urgent' ? '⚠️ تنبيه عاجل: [الاسم]، موعد تجديد فحصك غداً [التاريخ]. يرجى الحضور. نظام التميز 🏥' : 'مرحباً [الاسم]، نود تذكيرك بموعد تجديد فحصك في [التاريخ]. ننتظر زيارتك. نظام التميز 👁️✨';
+      document.getElementById('waMessage').value = temp; updateWaPreview();
+    }
+    function sendWhatsApp() {
+      const msg = document.getElementById('waMessage').value;
+      const targets = selectedPatients.size>0 ? allPatients.filter(p=>selectedPatients.has(p.id)) : allPatients;
+      if(!msg.trim()) { alert('اكتب الرسالة أولاً'); return; }
+      targets.forEach((p,i) => {
+        setTimeout(()=>{
+          if(!p.phone) return;
+          const phone = p.phone.replace(/[^0-9+]/g,'');
+          const finalMsg = msg.replace('[الاسم]',p.fullName||'عزيزي العميل').replace('[التاريخ]',p.nextVisit||'قريباً');
+          window.open(`https://wa.me/${phone}?text=${encodeURIComponent(finalMsg)}`, '_blank');
+        }, i*800);
+      });
+      closeModal('waModal'); clearSelection(); alert(`✅ تم فتح ${targets.length} محادثة واتساب. يرجى تأكيد الإرسال يدوياً.`);
+    }
+
+    // ========================================
+    // 📋 التفاصيل والطباعة
+    // ========================================
+    function openDetails(id, e) {
+      if(e && e.target.closest('.patient-checkbox')) return;
+      currentPatientId = id;
+      const p = allPatients.find(x=>x.id===id); if(!p) return;
+      document.getElementById('detailsContent').innerHTML = `
+        <div style="text-align:center;margin-bottom:16px;"><div class="patient-avatar" style="width:64px;height:64px;margin:0 auto 8px;font-size:1.4rem;">${(p.fullName||'?').charAt(0).toUpperCase()}</div><h3 style="margin:0;">${p.fullName||'بدون اسم'}</h3><p style="color:var(--text-muted);font-size:0.9rem;">📞 ${p.phone||'-'} • 📅 ${p.examDate||'-'}</p></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
+          <div style="background:rgba(6,182,212,0.1);padding:10px;border-radius:var(--radius-md);border-right:3px solid var(--accent-cyan);">
+            <div style="font-weight:700;color:var(--accent-cyan);margin-bottom:6px;">👁️ يمنى</div>
+            <div style="font-size:0.85rem;">SPH: ${p.rightEye?.sph||0} | CYL: ${p.rightEye?.cyl||0} | AXIS: ${p.rightEye?.axis||0}</div>
+          </div>
+          <div style="background:rgba(168,85,247,0.1);padding:10px;border-radius:var(--radius-md);border-right:3px solid var(--accent-purple);">
+            <div style="font-weight:700;color:var(--accent-purple);margin-bottom:6px;">👁️ يسرى</div>
+            <div style="font-size:0.85rem;">SPH: ${p.leftEye?.sph||0} | CYL: ${p.leftEye?.cyl||0} | AXIS: ${p.leftEye?.axis||0}</div>
+          </div>
+        </div>
+        <div style="background:rgba(255,255,255,0.03);padding:10px;border-radius:var(--radius-md);font-size:0.9rem;">📏 PD: ${p.pd||'-'} mm | ${p.notes?'📝 '+p.notes:'لا توجد ملاحظات'}</div>
+      `;
+      document.getElementById('detailsModal').classList.add('active');
+    }
+    function editCurrentPatient() { closeModal('detailsModal'); window.location.href='add-patient.html'; }
+    function printCurrentPatient() {
+      const p = allPatients.find(x=>x.id===currentPatientId); if(!p) return;
+      document.getElementById('printName').textContent=p.fullName||'-';
+      document.getElementById('printAge').textContent=p.age||'-';
+      document.getElementById('printPhone').textContent=p.phone||'-';
+      document.getElementById('printDate').textContent=p.examDate||'-';
+      ['R','L'].forEach(side=>{
+        const k=side==='R'?'rightEye':'leftEye';
+        document.getElementById(`p${side}S`).textContent=p[k]?.sph||0;
+        document.getElementById(`p${side}C`).textContent=p[k]?.cyl||0;
+        document.getElementById(`p${side}A`).textContent=p[k]?.axis||0;
+        document.getElementById(`p${side}Add`).textContent=p[k]?.add||0;
+        document.getElementById(`p${side}V`).textContent=p[k]?.va||'-';
+      });
+      document.getElementById('printPD').textContent=p.pd||'-';
+      document.getElementById('printClinicName').textContent = JSON.parse(localStorage.getItem('clinicSettings')||'{}').clinicName || 'عيادة الأثير للبصريات';
+      setTimeout(()=>window.print(), 200);
+    }
+
+    // ========================================
+    // 🧩 أدوات المودال العامة
+    // ========================================
+    function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+    function closeIfOverlay(e, id) { if(e.target.id===id) closeModal(id); }
+  </script>
+</body>
+</html>

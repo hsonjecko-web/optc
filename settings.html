@@ -1,1871 +1,524 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>عيادة الأثير للبصريات - الإعدادات</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-/* ========== The Sovereign Ledger - Premium Design System ========== */
-:root {
-  --bg-page: #f8fafc;
-  --bg-surface: #ffffff;
-  --bg-surface-hover: #f1f5f9;
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
-  --text-muted: #94a3b8;
-  --border-light: #e2e8f0;
-  --border-normal: #cbd5e1;
-  
-  /* ألوان التدرج المميزة - نفس القالب الأصلي */
-  --grad-cyan: linear-gradient(135deg, #06b5d4, #0891b2);
-  --grad-purple: linear-gradient(135deg, #8b5cf6, #7c3aed);
-  --grad-gold: linear-gradient(135deg, #eab308, #ca8a04);
-  --grad-red: linear-gradient(135deg, #ef4444, #dc2626);
-  --grad-green: linear-gradient(135deg, #10b981, #059669);
-  --grad-brand: linear-gradient(135deg, #6366f1, #8b5cf6, #3b82f6);
-  --grad-pink: linear-gradient(135deg, #ec4899, #db2777);
-  
-  --shadow-card: 0 10px 25px rgba(0,0,0,0.12);
-  --shadow-hover: 0 18px 40px rgba(0,0,0,0.18);
-  --shadow-sm: 0 4px 12px rgba(0,0,0,0.06);
-  --radius-sm: 10px;
-  --radius-md: 16px;
-  --radius-lg: 20px;
-  --radius-xl: 24px;
-  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#0f172a">
+  <title>نظام التميز - الإعدادات</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  <style>
+    /* ========================================
+       🎨 متغيرات التصميم (نفس نظام التميز)
+       ======================================== */
+    :root {
+      --bg-page: #0b0f19; --bg-main: linear-gradient(135deg, #111827 0%, #0f172a 100%);
+      --glass-bg: rgba(30, 41, 59, 0.4); --glass-border: rgba(255, 255, 255, 0.1);
+      --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+      --text-primary: #f8fafc; --text-secondary: #94a3b8; --text-muted: #64748b;
+      --accent-blue: #3b82f6; --accent-green: #22c55e; --accent-cyan: #06b6d4;
+      --accent-purple: #a855f7; --accent-red: #ef4444; --accent-amber: #f59e0b; --accent-teal: #14b8a6;
+      --header-height: 64px; --footer-height: 70px; --sidebar-width: 280px;
+      --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
+      --transition: all 0.2s ease; --radius-sm: 10px; --radius-md: 12px; --radius-lg: 16px; --radius-xl: 20px;
+    }
+    html.light-mode {
+      --bg-page: #f0f9ff; --bg-main: radial-gradient(circle at 50% -20%, #f0f9ff 0%, #e0f2fe 100%) !important;
+      --glass-bg: rgba(255,255,255,0.75) !important; --glass-border: rgba(59,130,246,0.2) !important;
+      --glass-shadow: 0 4px 15px rgba(59,130,246,0.08), inset 0 1px 1px rgba(59,130,246,0.1) !important;
+      --text-primary: #1e293b !important; --text-secondary: #64748b !important; --text-muted: rgba(30,41,59,0.5) !important;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; font-family: 'Cairo', sans-serif; }
+    html, body { height: 100%; background: var(--bg-main); color: var(--text-primary); overflow-x: hidden; }
+    body { padding-top: calc(var(--header-height) + var(--safe-top)); padding-bottom: calc(var(--footer-height) + var(--safe-bottom) + 20px); transition: var(--transition); }
+    ::-webkit-scrollbar { width: 6px; } ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
+    html.light-mode ::-webkit-scrollbar-thumb { background: rgba(59,130,246,0.3); }
 
-[data-theme="dark"] {
-  --bg-page: #0b1120;
-  --bg-surface: #111827;
-  --bg-surface-hover: #1f2937;
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
-  --border-light: #1e293b;
-  --border-normal: #334155;
-  --shadow-card: 0 10px 25px rgba(0,0,0,0.4);
-  --shadow-hover: 0 18px 40px rgba(0,0,0,0.55);
-  --shadow-sm: 0 4px 12px rgba(0,0,0,0.3);
-}
+    /* 📱 الهيدر والشريط الجانبي */
+    .app-header { position: fixed; top: 0; left: 0; right: 0; height: var(--header-height); padding: 0 16px; padding-top: var(--safe-top); display: flex; align-items: center; justify-content: space-between; background: rgba(15,23,42,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--glass-border); z-index: 100; }
+    html.light-mode .app-header { background: rgba(240,245,250,0.8) !important; border-bottom-color: rgba(59,130,246,0.15) !important; }
+    .menu-toggle { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: transparent; border: none; color: var(--text-primary); cursor: pointer; border-radius: var(--radius-sm); transition: var(--transition); }
+    .menu-toggle:active { background: var(--glass-bg); }
+    .header-title { font-size: 1.1rem; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+    .header-controls { display: flex; align-items: center; gap: 12px; }
+    .theme-btn { display: flex; align-items: center; justify-content: center; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: var(--radius-sm); padding: 6px 10px; cursor: pointer; transition: var(--transition); }
+    .theme-btn:active { transform: scale(0.95); }
+    .light-mode-icon { display: none; } html.light-mode .light-mode-icon { display: inline-block !important; } html.light-mode .dark-mode-icon { display: none !important; }
 
-/* ========== Base ========== */
-* { margin:0; padding:0; box-sizing:border-box; }
-body {
-  font-family:'Cairo',sans-serif;
-  background:var(--bg-page);
-  color:var(--text-primary);
-  line-height:1.5;
-  min-height:100vh;
-  padding-bottom:80px;
-  transition:var(--transition);
-  position:relative;
-  overflow-x:hidden;
-}
+    .sidebar-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 190; opacity: 0; visibility: hidden; transition: 0.3s; }
+    .sidebar-overlay.active { opacity: 1; visibility: visible; } html.light-mode .sidebar-overlay { background: rgba(30,41,59,0.4); }
+    .sidebar { position: fixed; top: 0; right: 0; bottom: 0; width: var(--sidebar-width); background: var(--glass-bg); backdrop-filter: blur(16px); border-left: 1px solid var(--glass-border); transform: translateX(100%); transition: transform 0.3s ease; z-index: 200; display: flex; flex-direction: column; padding-top: calc(var(--safe-top) + 16px); }
+    html.light-mode .sidebar { background: linear-gradient(165deg, rgba(219,234,254,0.8) 0%, rgba(240,249,255,0.7) 100%) !important; border-left-color: rgba(59,130,246,0.25) !important; }
+    .sidebar.active { transform: translateX(0); }
+    .sidebar-header { padding: 16px 20px; border-bottom: 1px solid var(--glass-border); display: flex; align-items: center; gap: 10px; }
+    .sidebar-header h2 { font-size: 1.1rem; font-weight: 700; flex: 1; } .sidebar-header .material-icons-round { color: var(--accent-blue); font-size: 24px; }
+    .sidebar-nav { flex: 1; overflow-y: auto; padding: 16px 12px; }
+    .nav-btn-3d { display: flex; align-items: center; gap: 12px; width: 100%; padding: 12px 14px; margin-bottom: 6px; background: linear-gradient(145deg, rgba(30,41,59,0.9), rgba(15,23,42,0.8)); border: 1px solid var(--glass-border); border-radius: var(--radius-md); color: var(--text-primary); text-decoration: none; cursor: pointer; font-weight: 500; transition: var(--transition); }
+    html.light-mode .nav-btn-3d { background: linear-gradient(145deg, rgba(255,255,255,0.8), rgba(241,245,249,0.6)) !important; border-color: rgba(59,130,246,0.2) !important; color: #1e293b !important; }
+    .nav-btn-3d:active { transform: scale(0.98); } .nav-btn-3d .material-icons-round { font-size: 22px; }
+    .nav-btn-3d .expand-icon { margin-right: auto; transition: transform 0.3s; } .nav-btn-3d.expanded .expand-icon { transform: rotate(180deg); }
+    .submenu { padding-right: 16px; overflow: hidden; transition: max-height 0.3s ease; max-height: 0; } .submenu:not(.hidden) { max-height: 500px; }
+    .sub-link { display: flex; align-items: center; gap: 10px; padding: 10px 12px; color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; border-radius: var(--radius-sm); margin-bottom: 4px; border: 1px solid transparent; transition: var(--transition); }
+    .sub-link:active { background: var(--glass-bg); } .sub-link.active-submenu { background: var(--accent-amber); color: #fff !important; border-color: rgba(245,158,11,0.4); box-shadow: 0 0 12px rgba(245,158,11,0.4); }
+    html.light-mode .sub-link { color: #64748b !important; } html.light-mode .sub-link.active-submenu { background: #000 !important; color: #fff !important; border-color: rgba(0,0,0,0.5) !important; box-shadow: 0 0 15px rgba(0,0,0,0.3) !important; }
+    .btn-blue { border-color: rgba(59,130,246,0.3) !important; } .btn-green { border-color: rgba(34,197,94,0.3) !important; } .btn-cyan { border-color: rgba(6,182,212,0.3) !important; } .btn-purple { border-color: rgba(168,85,247,0.3) !important; } .btn-amber { border-color: rgba(245,158,11,0.3) !important; } .btn-red { border-color: rgba(239,68,68,0.3) !important; } .btn-teal { border-color: rgba(20,184,166,0.3) !important; }
 
-/* خلفية متدرجة ناعمة - نفس النمط الأصلي */
-body::before {
-  content:'';
-  position:fixed;
-  inset:0;
-  background:radial-gradient(ellipse at 20% 80%, rgba(6,181,212,0.08) 0%, transparent 50%),
-            radial-gradient(ellipse at 80% 20%, rgba(99,102,241,0.08) 0%, transparent 50%);
-  pointer-events:none;
-  z-index:-1;
-}
+    /* 📄 المحتوى الرئيسي */
+    main { padding: 16px; max-width: 1000px; margin: 0 auto; }
+    
+    .form-card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: var(--radius-xl); padding: 20px; margin-bottom: 20px; backdrop-filter: blur(10px); box-shadow: var(--glass-shadow); }
+    .form-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+    .form-grid { display: grid; gap: 14px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 640px) { .form-row { grid-template-columns: 1fr; } }
+    .form-group { text-align: right; }
+    .form-group label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px; color: var(--text-secondary); }
+    .form-input, .form-select, .form-textarea { width: 100%; padding: 12px 14px; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); border-radius: var(--radius-md); font-family: 'Cairo', sans-serif; font-size: 0.95rem; color: var(--text-primary); outline: none; transition: var(--transition); }
+    html.light-mode .form-input, html.light-mode .form-select { background: rgba(59,130,246,0.05) !important; border-color: rgba(59,130,246,0.2) !important; color: #1e293b !important; }
+    .form-input:focus, .form-select:focus { border-color: var(--accent-amber); box-shadow: 0 0 0 3px rgba(245,158,11,0.2); }
+    .form-textarea { min-height: 100px; resize: vertical; }
 
-/* جزيئات خلفية متحركة - نفس النمط الأصلي */
-.particle {
-  position:fixed;
-  width:4px;
-  height:4px;
-  border-radius:50%;
-  background:rgba(6,182,212,0.4);
-  animation:float 6s ease-in-out infinite;
-  pointer-events:none;
-  z-index:-1;
-}
-.particle:nth-child(1){top:20%;left:10%;animation-delay:0s;}
-.particle:nth-child(2){top:60%;left:85%;animation-delay:1s;background:rgba(99,102,241,0.4);}
-.particle:nth-child(3){top:80%;left:25%;animation-delay:2s;}
-.particle:nth-child(4){top:15%;left:70%;animation-delay:3s;background:rgba(16,185,129,0.4);}
-@keyframes float {
-  0%,100%{transform:translateY(0) scale(1);opacity:0.4;}
-  50%{transform:translateY(-20px) scale(1.3);opacity:0.7;}
-}
+    /* 🎨 اختيار القوالب */
+    .templates-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 16px 0; }
+    .template-option { position: relative; cursor: pointer; }
+    .template-option input { position: absolute; opacity: 0; width: 0; height: 0; }
+    .template-preview { padding: 16px; background: rgba(255,255,255,0.05); border: 2px solid var(--glass-border); border-radius: var(--radius-md); text-align: center; transition: var(--transition); }
+    .template-option input:checked + .template-preview { border-color: var(--accent-amber); background: rgba(245,158,11,0.1); box-shadow: 0 0 0 2px rgba(245,158,11,0.3); }
+    .template-preview span { font-weight: 700; margin-top: 10px; display: block; }
+    .template-preview .material-icons-round { font-size: 36px; color: var(--accent-amber); margin-bottom: 10px; }
 
-/* ========== Header - نفس النمط الأصلي ========== */
-.header {
-  position:sticky;
-  top:0;
-  z-index:100;
-  background:var(--bg-surface);
-  border-bottom:1px solid var(--border-light);
-  padding:14px 18px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  box-shadow:var(--shadow-sm);
-}
-.header-right { display:flex; align-items:center; gap:10px; }
-.menu-btn, .back-btn {
-  background:transparent;
-  border:1px solid var(--border-normal);
-  border-radius:var(--radius-sm);
-  padding:8px 10px;
-  font-size:1.2rem;
-  cursor:pointer;
-  color:var(--text-primary);
-  transition:var(--transition);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  width:40px;
-  height:40px;
-}
-.menu-btn:hover, .back-btn:hover {
-  background:var(--bg-surface-hover);
-  border-color:#3b82f6;
-  color:#2563eb;
-}
-.header-title {
-  font-size:1.1rem;
-  font-weight:700;
-  display:flex;
-  align-items:center;
-  gap:8px;
-  color:var(--text-primary);
-}
-.header-title::before { content:'⚙️'; font-size:1.2rem; }
-.header-left { display:flex; align-items:center; gap:6px; }
-.header-btn {
-  background:transparent;
-  border:1px solid var(--border-normal);
-  border-radius:var(--radius-sm);
-  padding:8px 10px;
-  font-size:1.1rem;
-  cursor:pointer;
-  color:var(--text-primary);
-  transition:var(--transition);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  width:40px;
-  height:40px;
-}
-.header-btn:hover {
-  background:var(--bg-surface-hover);
-  border-color:#3b82f6;
-  color:#2563eb;
-}
+    /* 🔘 أزرار الإجراءات */
+    .action-btn { width: 100%; padding: 14px; border: none; border-radius: var(--radius-md); font-family: 'Cairo', sans-serif; font-size: 1rem; font-weight: 700; cursor: pointer; transition: var(--transition); display: flex; align-items: center; justify-content: center; gap: 10px; background: var(--accent-amber); color: #fff; box-shadow: 0 4px 15px rgba(245,158,11,0.3); }
+    .action-btn:active { transform: scale(0.98); }
+    .success-indicator { display: none; align-items: center; gap: 8px; padding: 12px 16px; margin-bottom: 16px; background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.4); border-radius: var(--radius-md); color: var(--accent-green); font-size: 0.9rem; font-weight: 600; animation: fadeIn 0.3s ease; }
+    .success-indicator.show { display: flex; }
+    @keyframes fadeIn { from{opacity:0; transform:translateY(-10px);} to{opacity:1; transform:translateY(0);} }
 
-/* ========== Sidebar - نفس النمط الأصلي ========== */
-.sidebar-overlay {
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.35);
-  backdrop-filter:blur(3px);
-  z-index:200;
-  display:none;
-  opacity:0;
-  transition:opacity 0.25s;
-}
-.sidebar-overlay.show { display:block; opacity:1; }
-.sidebar {
-  position:fixed;
-  top:0;
-  right:-290px;
-  width:280px;
-  height:100vh;
-  background:var(--bg-surface);
-  border-left:1px solid var(--border-light);
-  z-index:300;
-  transition:right 0.3s ease;
-  overflow-y:auto;
-  display:flex;
-  flex-direction:column;
-  box-shadow:0 0 30px rgba(0,0,0,0.2);
-}
-[dir="ltr"] .sidebar { right:auto; left:-290px; border-left:none; border-right:1px solid var(--border-light); }
-[dir="ltr"] .sidebar.open { left:0; }
-.sidebar.open { right:0; }
-.sidebar-header {
-  padding:18px 16px;
-  border-bottom:1px solid var(--border-light);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-.sidebar-brand {
-  font-size:1.1rem;
-  font-weight:700;
-  color:#2563eb;
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-.sidebar-close {
-  background:transparent;
-  border:none;
-  font-size:1.3rem;
-  cursor:pointer;
-  color:var(--text-muted);
-  padding:4px;
-  border-radius:8px;
-  transition:var(--transition);
-  width:36px;
-  height:36px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-.sidebar-close:hover {
-  background:var(--bg-surface-hover);
-  color:var(--text-primary);
-}
-.sidebar-nav { padding:10px 0; flex:1; }
-.sidebar-item {
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:11px 16px;
-  margin:3px 10px;
-  border-radius:var(--radius-md);
-  text-decoration:none;
-  color:var(--text-secondary);
-  font-size:0.9rem;
-  font-weight:500;
-  transition:var(--transition);
-  border:1px solid transparent;
-}
-.sidebar-item:hover {
-  background:#eff6ff;
-  color:#2563eb;
-}
-[data-theme="dark"] .sidebar-item:hover {
-  background:rgba(59,130,246,0.15);
-}
-.sidebar-item.active {
-  background:#2563eb;
-  color:#fff;
-  border-color:#2563eb;
-}
-.sidebar-item .icon {
-  font-size:1.1rem;
-  width:22px;
-  text-align:center;
-}
-.sidebar-divider {
-  height:1px;
-  background:var(--border-light);
-  margin:10px 14px;
-}
-.sidebar-footer {
-  padding:12px 14px 18px;
-  border-top:1px solid var(--border-light);
-  margin-top:auto;
-}
-.sidebar-logout {
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:11px 16px;
-  border-radius:var(--radius-md);
-  text-decoration:none;
-  color:#ef4444;
-  font-size:0.9rem;
-  font-weight:500;
-  transition:var(--transition);
-}
-.sidebar-logout:hover {
-  background:#fef2f2;
-}
-[data-theme="dark"] .sidebar-logout:hover {
-  background:rgba(239,68,68,0.1);
-}
+    /* 🖨️ منطقة المعاينة */
+    #print-preview-area { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 2000; justify-content: center; align-items: center; padding: 20px; overflow: auto; backdrop-filter: blur(5px); }
+    #print-preview-area.active { display: flex; }
+    .preview-container { background: #fff; width: 148mm; min-height: 210mm; padding: 12mm; box-sizing: border-box; color: #000; position: relative; box-shadow: 0 10px 40px rgba(0,0,0,0.5); border-radius: 8px; }
+    
+    @media print {
+      body * { visibility: hidden; }
+      #print-preview-area, #print-preview-area * { visibility: visible; }
+      #print-preview-area { position: absolute; background: #fff !important; padding: 0; }
+      .preview-container { box-shadow: none; width: 100%; padding: 15mm; border-radius: 0; }
+      @page { size: A5; margin: 0; }
+      .no-print { display: none !important; }
+    }
 
-/* ========== Content ========== */
-.content {
-  padding:18px;
-  max-width:900px;
-  margin:0 auto;
-}
+    /* 📱 الفوتر المتنقل */
+    .mobile-footer { position: fixed; bottom: 0; left: 0; right: 0; height: var(--footer-height); padding-bottom: var(--safe-bottom); background: rgba(15,23,42,0.9); backdrop-filter: blur(12px); border-top: 1px solid var(--glass-border); display: flex; align-items: center; justify-content: space-around; z-index: 90; }
+    html.light-mode .mobile-footer { background: rgba(240,245,250,0.9) !important; border-top-color: rgba(59,130,246,0.15) !important; }
+    .footer-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: var(--text-muted); padding: 8px 12px; border-radius: var(--radius-md); transition: var(--transition); flex: 1; max-width: 20%; }
+    .footer-btn .material-icons-round { font-size: 24px; transition: transform 0.2s; } .footer-btn span:last-child { font-size: 0.7rem; font-weight: 500; }
+    .footer-btn:active { transform: scale(0.9); background: var(--glass-bg); } .footer-btn.active { color: var(--accent-blue); } .footer-btn.active .material-icons-round { transform: translateY(-2px); }
 
-/* ========== Settings Card - نفس نمط البطاقات الأصلي ========== */
-.settings-card {
-  background:var(--bg-surface);
-  border:1px solid var(--border-light);
-  border-radius:var(--radius-xl);
-  padding:24px;
-  box-shadow:var(--shadow-card);
-  margin-bottom:20px;
-  transition:var(--transition);
-  position:relative;
-  overflow:hidden;
-}
-.settings-card::before {
-  content:'';
-  position:absolute;
-  top:-30%;
-  right:-20%;
-  width:80px;
-  height:80px;
-  border-radius:50%;
-  background:rgba(255,255,255,0.2);
-  filter:blur(10px);
-  transition:var(--transition);
-}
-.settings-card:hover {
-  transform:translateY(-4px);
-  box-shadow:var(--shadow-hover);
-}
-.settings-card:hover::before { transform:scale(1.3); }
-
-.settings-card.clinic { border-top:4px solid var(--grad-cyan); }
-.settings-card.social { border-top:4px solid var(--grad-pink); }
-.settings-card.interval { border-top:4px solid var(--grad-gold); }
-.settings-card.templates { border-top:4px solid var(--grad-purple); }
-.settings-card.data { border-top:4px solid var(--grad-green); }
-.settings-card.support { border-top:4px solid var(--grad-brand); }
-.settings-card.appearance { border-top:4px solid var(--grad-brand); }
-
-.settings-card h3 {
-  font-size:1.2rem;
-  font-weight:700;
-  margin-bottom:20px;
-  display:flex;
-  align-items:center;
-  gap:10px;
-  color:var(--text-primary);
-}
-.settings-card.clinic h3::before { content:''; width:4px; height:18px; border-radius:2px; background:var(--grad-cyan); }
-.settings-card.social h3::before { content:''; width:4px; height:18px; border-radius:2px; background:var(--grad-pink); }
-.settings-card.interval h3::before { content:''; width:4px; height:18px; border-radius:2px; background:var(--grad-gold); }
-.settings-card.templates h3::before { content:''; width:4px; height:18px; border-radius:2px; background:var(--grad-purple); }
-.settings-card.data h3::before { content:''; width:4px; height:18px; border-radius:2px; background:var(--grad-green); }
-.settings-card.support h3::before { content:''; width:4px; height:18px; border-radius:2px; background:var(--grad-brand); }
-.settings-card.appearance h3::before { content:''; width:4px; height:18px; border-radius:2px; background:var(--grad-brand); }
-
-/* Form Fields - نفس تنسيق الحقول الأصلي */
-.form-grid { display:grid; gap:16px; }
-.form-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-.form-group { text-align:right; }
-.form-group label {
-  display:block;
-  font-size:0.85rem;
-  font-weight:600;
-  margin-bottom:6px;
-  color:var(--text-secondary);
-}
-.form-input, .form-select {
-  width:100%;
-  padding:12px 14px;
-  border:1px solid var(--border-normal);
-  border-radius:var(--radius-md);
-  font-family:'Cairo',sans-serif;
-  font-size:0.95rem;
-  background:var(--bg-surface-hover);
-  color:var(--text-primary);
-  outline:none;
-  transition:var(--transition);
-}
-.form-input:focus, .form-select:focus {
-  border-color:#3b82f6;
-  box-shadow:0 0 0 3px rgba(59,130,246,0.15);
-  background:var(--bg-surface);
-}
-
-/* Social Input */
-.social-input {
-  display:flex;
-  align-items:center;
-  gap:12px;
-  padding:10px 14px;
-  border:1px solid var(--border-normal);
-  border-radius:var(--radius-md);
-  background:var(--bg-surface-hover);
-  transition:var(--transition);
-}
-.social-input:focus-within {
-  border-color:#3b82f6;
-  box-shadow:0 0 0 3px rgba(59,130,246,0.15);
-  background:var(--bg-surface);
-}
-.social-icon {
-  width:40px;
-  height:40px;
-  border-radius:var(--radius-sm);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:1.1rem;
-  color:#fff;
-  flex-shrink:0;
-}
-.social-icon.instagram { background:linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
-.social-icon.facebook { background:#1877f2; }
-.social-icon.tiktok { background:#000; border:1px solid #333; }
-.social-input input {
-  flex:1;
-  border:none;
-  background:transparent;
-  outline:none;
-  font-family:'Cairo',sans-serif;
-  font-size:0.95rem;
-  color:var(--text-primary);
-}
-
-/* Interval Selection */
-.interval-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-.interval-option {
-  background:var(--bg-surface-hover);
-  border:2px solid var(--border-light);
-  border-radius:var(--radius-md);
-  padding:16px;
-  text-align:center;
-  cursor:pointer;
-  transition:var(--transition);
-}
-.interval-option:hover {
-  border-color:#3b82f6;
-  background:#eff6ff;
-}
-.interval-option.active {
-  border-color:#3b82f6;
-  background:#eff6ff;
-  box-shadow:0 0 0 3px rgba(59,130,246,0.15);
-}
-.interval-option .value {
-  font-size:1.8rem;
-  font-weight:800;
-  margin-bottom:4px;
-}
-.interval-option.cyan .value { color:#06b6d4; }
-.interval-option.purple .value { color:#8b5cf6; }
-.interval-option .label {
-  font-size:0.8rem;
-  color:var(--text-secondary);
-}
-
-/* Template Selection */
-.template-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
-.template-option {
-  background:var(--bg-surface-hover);
-  border:2px solid var(--border-light);
-  border-radius:var(--radius-md);
-  padding:12px;
-  text-align:center;
-  cursor:pointer;
-  transition:var(--transition);
-}
-.template-option:hover {
-  border-color:#3b82f6;
-  background:#eff6ff;
-}
-.template-option.active {
-  border-color:#3b82f6;
-  background:#eff6ff;
-  box-shadow:0 0 0 3px rgba(59,130,246,0.15);
-}
-.template-preview {
-  width:100%;
-  aspect-ratio:3/4;
-  border-radius:var(--radius-sm);
-  margin-bottom:8px;
-  border:2px solid;
-  position:relative;
-  overflow:hidden;
-}
-.template-preview::after {
-  content:'A5';
-  position:absolute;
-  bottom:4px;
-  right:4px;
-  font-size:0.6rem;
-  font-weight:700;
-  color:var(--text-muted);
-}
-.template-preview.cyan { 
-  background:linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 50%, #80deea 100%); 
-  border-color:#06b6d4; 
-}
-.template-preview.classic { 
-  background:linear-gradient(135deg, #fffef9 0%, #f5f5f4 50%, #e7e5e4 100%); 
-  border-color:#64748b; 
-}
-.template-preview.minimal { 
-  background:linear-gradient(135deg, #faf5ff 0%, #f3e8ff 50%, #e9d5ff 100%); 
-  border-color:#8b5cf6; 
-}
-.template-preview.medical { 
-  background:linear-gradient(135deg, #fef2f2 0%, #fecaca 50%, #fca5a5 100%); 
-  border-color:#ef4444; 
-}
-.template-option .label {
-  font-size:0.8rem;
-  font-weight:600;
-  color:var(--text-primary);
-}
-
-/* A5 Preview Container */
-.a5-preview-container {
-  width:100%;
-  max-width:400px;
-  margin:0 auto;
-  border:2px dashed var(--border-normal);
-  border-radius:var(--radius-lg);
-  padding:16px;
-  cursor:pointer;
-  transition:var(--transition);
-  background:var(--bg-surface-hover);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-.a5-preview-container:hover {
-  border-color:#3b82f6;
-  background:#eff6ff;
-}
-
-/* ========== REAL A5 CARD STYLES FOR PRINTING ========== */
-.a5-card-real {
-  width:148mm;
-  height:210mm;
-  background:white;
-  color:#1e293b;
-  padding:15mm;
-  box-sizing:border-box;
-  font-family:'Cairo',sans-serif;
-  position:relative;
-  margin:0 auto;
-}
-
-/* Common A5 Elements */
-.a5-card-real .header {
-  text-align:center;
-  padding-bottom:12px;
-  margin-bottom:15px;
-}
-.a5-card-real .clinic-name {
-  font-size:18px;
-  font-weight:800;
-  margin-bottom:4px;
-}
-.a5-card-real .clinic-info {
-  font-size:10px;
-  color:#64748b;
-  line-height:1.4;
-}
-.a5-card-real .optics-icon {
-  width:40px;
-  height:40px;
-  margin:0 auto 8px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#fff;
-  font-size:20px;
-}
-.a5-card-real .patient-section {
-  padding:10px;
-  border-radius:8px;
-  margin-bottom:12px;
-  background:#f8fafc;
-  border-right:3px solid;
-}
-.a5-card-real .patient-title {
-  font-size:12px;
-  font-weight:700;
-  margin-bottom:6px;
-  color:#334155;
-}
-.a5-card-real .patient-row {
-  font-size:9px;
-  display:flex;
-  justify-content:space-between;
-  margin:2px 0;
-  color:#475569;
-}
-.a5-card-real .prescription-table {
-  width:100%;
-  border-collapse:collapse;
-  font-size:9px;
-  margin:10px 0;
-}
-.a5-card-real .prescription-table th {
-  padding:6px 4px;
-  border:1px solid #cbd5e1;
-  font-weight:600;
-}
-.a5-card-real .prescription-table td {
-  padding:6px 4px;
-  border:1px solid #cbd5e1;
-  text-align:center;
-}
-.a5-card-real .pd-section {
-  text-align:center;
-  padding:8px;
-  border-radius:6px;
-  margin:10px 0;
-  font-size:10px;
-  font-weight:600;
-}
-.a5-card-real .notes-section {
-  padding:10px;
-  border-radius:8px;
-  margin:10px 0;
-  background:#fffbeb;
-  border-right:3px solid #f59e0b;
-}
-.a5-card-real .notes-title {
-  font-size:10px;
-  font-weight:700;
-  margin-bottom:4px;
-  color:#92400e;
-}
-.a5-card-real .notes-content {
-  font-size:9px;
-  color:#64748b;
-  line-height:1.4;
-}
-.a5-card-real .footer {
-  text-align:center;
-  font-size:8px;
-  color:#64748b;
-  margin-top:20px;
-  padding-top:10px;
-}
-.a5-card-real .signature {
-  margin-top:25px;
-  text-align:left;
-}
-.a5-card-real .signature-line {
-  border-top:1px solid #334155;
-  width:120px;
-  margin-top:20px;
-  padding-top:4px;
-}
-.a5-card-real .signature-text {
-  font-size:9px;
-  color:#64748b;
-  margin-top:4px;
-}
-
-/* ========== TEMPLATE 1: MODERN CYAN (REAL) ========== */
-.template-1.a5-card-real { border:2px solid #06b6d4; }
-.template-1 .header { border-bottom:2px solid #06b6d4; }
-.template-1 .clinic-name { color:#06b6d4; }
-.template-1 .optics-icon { background:linear-gradient(135deg, #06b6d4, #7c3aed); }
-.template-1 .patient-section { border-color:#06b6d4; }
-.template-1 .prescription-table th { background:#06b6d4; color:white; border-color:#06b6d4; }
-.template-1 .pd-section { background:#f0fdfa; color:#047857; }
-.template-1 .footer { border-top:1px dashed #cbd5e1; }
-
-/* ========== TEMPLATE 2: CLASSIC ELEGANT (REAL) ========== */
-.template-2.a5-card-real { border:3px double #1e293b; background:#fffef9; }
-.template-2 .header { border-bottom:3px double #1e293b; }
-.template-2 .clinic-name { color:#1e293b; font-family:serif; }
-.template-2 .optics-icon { background:linear-gradient(135deg, #1e293b, #475569); border:2px solid #cbd5e1; }
-.template-2 .patient-section { background:#fffef9; border-color:#1e293b; }
-.template-2 .prescription-table { border:2px solid #1e293b; }
-.template-2 .prescription-table th { background:#1e293b; color:white; border-color:#1e293b; }
-.template-2 .pd-section { background:#fffef9; border:1px solid #1e293b; color:#1e293b; }
-.template-2 .footer { border-top:2px solid #1e293b; color:#1e293b; }
-
-/* ========== TEMPLATE 3: MINIMAL PURPLE (REAL) ========== */
-.template-3.a5-card-real { border:none; background:linear-gradient(180deg, #faf5ff 0%, white 100%); }
-.template-3 .header { border-bottom:none; }
-.template-3 .clinic-name { color:#7c3aed; }
-.template-3 .optics-icon { background:linear-gradient(135deg, #7c3aed, #a78bfa); }
-.template-3 .patient-section { background:white; border-color:#7c3aed; box-shadow:0 2px 8px rgba(124,58,237,0.1); }
-.template-3 .prescription-table th { background:linear-gradient(135deg, #7c3aed, #a78bfa); color:white; border:none; }
-.template-3 .prescription-table td { border-color:#e9d5ff; }
-.template-3 .pd-section { background:white; border:1px solid #e9d5ff; color:#7c3aed; }
-.template-3 .footer { border-top:1px solid #e9d5ff; color:#7c3aed; }
-
-/* ========== TEMPLATE 4: BOLD MEDICAL (REAL) ========== */
-.template-4.a5-card-real { border:4px solid #ef4444; background:white; }
-.template-4 .header { border-bottom:4px solid #ef4444; background:#fef2f2; padding:15px; margin:-15mm -15mm 15mm -15mm; border-radius:4px 4px 0 0; }
-.template-4 .clinic-name { color:#ef4444; font-size:20px; }
-.template-4 .optics-icon { background:#ef4444; width:50px; height:50px; }
-.template-4 .patient-section { background:#fef2f2; border-color:#ef4444; border-right-width:4px; }
-.template-4 .prescription-table th { background:#ef4444; color:white; border-color:#ef4444; font-weight:700; }
-.template-4 .prescription-table td { border-color:#fecaca; font-weight:600; }
-.template-4 .pd-section { background:#fef2f2; border:2px solid #ef4444; color:#ef4444; font-weight:700; }
-.template-4 .footer { border-top:3px solid #ef4444; color:#ef4444; font-weight:700; }
-
-/* Preview (scaled down for display) */
-.a5-card-preview {
-  transform:scale(0.32);
-  transform-origin:top center;
-  transition:transform 0.3s ease;
-}
-.a5-preview-container:hover .a5-card-preview {
-  transform:scale(0.35);
-}
-
-/* Data Management Buttons */
-.data-btn {
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:14px 16px;
-  background:var(--bg-surface-hover);
-  border:1px solid var(--border-light);
-  border-radius:var(--radius-md);
-  cursor:pointer;
-  transition:var(--transition);
-}
-.data-btn:hover {
-  border-color:#3b82f6;
-  background:#eff6ff;
-}
-.data-btn .info { display:flex; align-items:center; gap:12px; }
-.data-btn .icon {
-  width:40px;
-  height:40px;
-  border-radius:var(--radius-sm);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:1.1rem;
-  color:#fff;
-  flex-shrink:0;
-}
-.data-btn.export .icon { background:var(--grad-green); }
-.data-btn.import .icon { background:var(--grad-brand); }
-.data-btn.delete .icon { background:var(--grad-red); }
-.data-btn .text { text-align:right; }
-.data-btn .title {
-  font-size:0.95rem;
-  font-weight:600;
-  color:var(--text-primary);
-}
-.data-btn .desc {
-  font-size:0.8rem;
-  color:var(--text-muted);
-}
-
-/* Support Links */
-.support-link {
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:12px 16px;
-  border-radius:var(--radius-md);
-  cursor:pointer;
-  transition:var(--transition);
-}
-.support-link:hover { background:var(--bg-surface-hover); }
-.support-link .info { display:flex; align-items:center; gap:10px; }
-.support-link .icon { font-size:1.2rem; }
-.support-link.cyan .icon { color:#06b6d4; }
-.support-link.purple .icon { color:#8b5cf6; }
-.support-link.amber .icon { color:#eab308; }
-.support-link .label {
-  font-size:0.95rem;
-  color:var(--text-primary);
-}
-
-/* Toggle Switch */
-.toggle-switch {
-  width:52px;
-  height:30px;
-  background:var(--border-normal);
-  border-radius:100px;
-  position:relative;
-  cursor:pointer;
-  transition:var(--transition);
-  border:2px solid transparent;
-}
-.toggle-switch::before {
-  content:'';
-  position:absolute;
-  inset:-2px;
-  border-radius:100px;
-  background:var(--grad-green);
-  opacity:0;
-  transition:opacity 0.3s ease;
-}
-.toggle-switch.active { background:var(--grad-green); }
-.toggle-switch.active::before { opacity:1; }
-.toggle-switch .knob {
-  width:24px;
-  height:24px;
-  background:#fff;
-  border-radius:50%;
-  position:absolute;
-  top:3px;
-  right:3px;
-  transition:right 0.3s ease;
-  box-shadow:0 2px 6px rgba(0,0,0,0.2);
-}
-[dir="ltr"] .toggle-switch .knob { right:auto; left:3px; }
-.toggle-switch.active .knob { right:25px; }
-[dir="ltr"] .toggle-switch.active .knob { right:auto; left:25px; }
-
-/* Save Button - نفس نمط الأزرار الأصلي */
-.btn-save {
-  width:100%;
-  padding:14px;
-  background:var(--grad-brand);
-  color:#fff;
-  border:none;
-  border-radius:var(--radius-md);
-  font-family:'Cairo',sans-serif;
-  font-size:0.95rem;
-  font-weight:700;
-  cursor:pointer;
-  transition:var(--transition);
-  box-shadow:0 6px 18px rgba(99,102,241,0.35);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-  position:relative;
-  overflow:hidden;
-}
-.btn-save::before {
-  content:'';
-  position:absolute;
-  top:0;
-  left:-100%;
-  width:100%;
-  height:100%;
-  background:linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
-  transition:left 0.5s ease;
-}
-.btn-save:hover::before { left:100%; }
-.btn-save:hover {
-  filter:brightness(1.05);
-  box-shadow:0 8px 24px rgba(99,102,241,0.5);
-  transform:translateY(-2px);
-}
-.btn-save:active { transform:translateY(0) scale(0.98); }
-
-/* Test Print Button */
-.btn-test-print {
-  width:100%;
-  padding:12px;
-  background:var(--bg-surface-hover);
-  border:2px dashed var(--border-normal);
-  border-radius:var(--radius-md);
-  font-family:'Cairo',sans-serif;
-  font-size:0.9rem;
-  font-weight:600;
-  color:var(--text-primary);
-  cursor:pointer;
-  transition:var(--transition);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-}
-.btn-test-print:hover {
-  border-color:#3b82f6;
-  background:#eff6ff;
-  color:#2563eb;
-}
-
-/* ========== Full Preview Modal ========== */
-.preview-modal {
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.45);
-  backdrop-filter:blur(4px);
-  z-index:500;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-  overflow:auto;
-}
-.preview-modal.show { display:flex; animation:fadeIn 0.2s ease; }
-@keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
-
-.preview-modal .a5-card-full {
-  transform:scale(1) !important;
-  box-shadow:0 20px 60px rgba(0,0,0,0.3);
-}
-
-/* ========== Legal Modal ========== */
-.legal-overlay {
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.45);
-  backdrop-filter:blur(4px);
-  z-index:500;
-  display:none;
-  align-items:flex-end;
-  justify-content:center;
-}
-.legal-overlay.show { display:flex; animation:fadeIn 0.2s ease; }
-
-.legal-modal {
-  background:var(--bg-surface);
-  border-radius:var(--radius-lg) var(--radius-lg) 0 0;
-  padding:22px;
-  width:100%;
-  max-width:520px;
-  max-height:85vh;
-  overflow-y:auto;
-  box-shadow:0 -10px 40px rgba(0,0,0,0.25);
-  animation:slideUp 0.3s ease;
-  position:relative;
-}
-@keyframes slideUp { from{transform:translateY(100%);} to{transform:translateY(0);} }
-
-.legal-modal h3 {
-  font-size:1.15rem;
-  font-weight:700;
-  margin-bottom:18px;
-  text-align:center;
-  color:var(--text-primary);
-}
-.legal-modal .content {
-  font-size:0.9rem;
-  color:var(--text-secondary);
-  line-height:1.6;
-}
-.legal-modal .content p { margin-bottom:10px; }
-.legal-close {
-  position:absolute;
-  top:16px;
-  left:16px;
-  background:transparent;
-  border:none;
-  font-size:1.3rem;
-  cursor:pointer;
-  color:var(--text-muted);
-  padding:4px;
-  border-radius:var(--radius-sm);
-  transition:var(--transition);
-  width:36px;
-  height:36px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-.legal-close:hover {
-  background:var(--bg-surface-hover);
-  color:var(--text-primary);
-}
-
-/* ========== FAB Button - نفس النمط الأصلي ========== */
-.fab {
-  position:fixed;
-  bottom:90px;
-  left:20px;
-  width:56px;
-  height:56px;
-  border-radius:50%;
-  background:var(--grad-brand);
-  color:#fff;
-  border:none;
-  font-size:1.8rem;
-  cursor:pointer;
-  box-shadow:0 8px 25px rgba(99,102,241,0.4);
-  z-index:90;
-  transition:var(--transition);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-.fab:hover {
-  transform:translateY(-3px) scale(1.05);
-  box-shadow:0 12px 35px rgba(99,102,241,0.55);
-}
-.fab:active { transform:scale(0.95); }
-
-/* ========== GLOWING BOTTOM NAV - نفس تنسيق الفوتر الأصلي ========== */
-.bottom-nav {
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  background:var(--bg-surface);
-  border-top:1px solid var(--border-light);
-  display:flex;
-  z-index:100;
-  padding:7px 0 env(safe-area-inset-bottom, 10px);
-  box-shadow:0 -4px 20px rgba(0,0,0,0.098);
-}
-.nav-item {
-  flex:1;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:4px;
-  text-decoration:none;
-  color:var(--text-muted);
-  font-size:0.72rem;
-  font-weight:500;
-  padding:4px 4px;
-  transition:var(--transition);
-  position:relative;
-  border-radius:14px;
-  margin:0 2px;
-}
-.nav-item::before {
-  content:'';
-  position:absolute;
-  top:-1px;
-  left:50%;
-  transform:translateX(-50%);
-  width:0;
-  height:3px;
-  background:linear-gradient(90deg, #3b82f6, #8b5cf6);
-  border-radius:0 0 6px 6px;
-  box-shadow:0 2px 10px rgba(59,130,246,0.7), 0 0 16px rgba(139,92,246,0.5);
-  opacity:0;
-  transition:width 0.3s ease, opacity 0.3s ease;
-}
-.nav-item:hover::before,
-.nav-item.active::before {
-  width:34px;
-  opacity:1;
-}
-.nav-item:hover,
-.nav-item.active {
-  color:#2563eb;
-}
-.nav-icon {
-  font-size:1.3rem;
-  padding:6px;
-  border-radius:12px;
-  transition:var(--transition);
-}
-.nav-item:hover .nav-icon,
-.nav-item.active .nav-icon {
-  background:rgba(37,99,235,0.1);
-  box-shadow:0 0 12px rgba(37,99,235,0.4);
-  transform:translateY(-2px);
-}
-[data-theme="dark"] .nav-item:hover .nav-icon,
-[data-theme="dark"] .nav-item.active .nav-icon {
-  background:rgba(59,130,246,0.25);
-  box-shadow:0 0 15px rgba(59,130,246,0.6), 0 0 25px rgba(139,92,246,0.3);
-}
-
-/* ========== Success Indicator (بديل بسيط للتنبيهات) ========== */
-.success-indicator {
-  display:none;
-  align-items:center;
-  gap:8px;
-  padding:12px 16px;
-  background:rgba(16,185,129,0.1);
-  border:1px solid var(--grad-green);
-  border-radius:var(--radius-md);
-  color:var(--text-primary);
-  font-size:0.9rem;
-  font-weight:500;
-  margin-bottom:16px;
-  animation:fadeIn 0.3s ease;
-  position:sticky;
-  top:70px;
-  z-index:95;
-}
-.success-indicator.show { display:flex; }
-
-/* ========== PRINT STYLES - A5 FORMAT ========== */
-@media print {
-  @page { size: A5 portrait; margin: 0; }
-  body * { visibility: hidden; }
-  #print-area, #print-area * { visibility: visible; }
-  #print-area {
-    position: absolute; left: 0; top: 0; width: 100%; height: 100%;
-    margin: 0; padding: 0;
-  }
-  .a5-card-real {
-    transform: scale(1) !important;
-    box-shadow: none !important;
-    border: none !important;
-    width: 148mm !important;
-    height: 210mm !important;
-    page-break-after: always;
-  }
-  .no-print { display: none !important; }
-}
-
-/* ========== Responsive ========== */
-@media(min-width:768px) {
-  .content { padding:22px 28px; }
-}
-@media(max-width:640px) {
-  .form-row { grid-template-columns:1fr; }
-  .interval-grid { grid-template-columns:1fr; }
-  .template-grid { grid-template-columns:1fr; }
-  .header-title { font-size:1rem; }
-}
-button:focus-visible,
-input:focus-visible,
-select:focus-visible {
-  outline:2px solid #3b82f6;
-  outline-offset:2px;
-  border-radius:4px;
-}
-</style>
+    /* أزرار التحكم في المعاينة */
+    .preview-controls { position: fixed; top: 20px; left: 20px; display: flex; gap: 12px; z-index: 2001; }
+    .prev-btn { padding: 10px 16px; background: rgba(255,255,255,0.9); border: none; border-radius: var(--radius-sm); font-weight: 700; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.3); display: flex; align-items: center; gap: 6px; transition: 0.2s; color: #333; }
+    .prev-btn:hover { transform: scale(1.05); }
+    .prev-btn.close { background: rgba(239,68,68,0.9); color: #fff; }
+    .prev-btn.print { background: var(--accent-green); color: #fff; }
+  </style>
 </head>
 <body>
 
-<!-- جزيئات الخلفية -->
-<div class="particle"></div>
-<div class="particle"></div>
-<div class="particle"></div>
-<div class="particle"></div>
+  <!-- 📱 الهيدر -->
+  <header class="app-header">
+    <button class="menu-toggle" onclick="toggleSidebar()"><span class="material-icons-round">menu</span></button>
+    <h1 class="header-title"><span class="material-icons-round" style="color:var(--accent-amber);">settings</span> إعدادات النظام</h1>
+    <div class="header-controls">
+      <button class="theme-btn" onclick="toggleDarkMode()"><span class="material-icons-round dark-mode-icon">light_mode</span><span class="material-icons-round light-mode-icon">dark_mode</span></button>
+    </div>
+  </header>
 
-<!-- Success Indicator (بديل بسيط للتنبيهات) -->
-<div class="success-indicator" id="successIndicator">
-  <span>✅</span>
-  <span id="successMsg">تم الحفظ بنجاح</span>
-</div>
+  <!-- 🧭 الشريط الجانبي -->
+  <div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar()"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header"><span class="material-icons-round">shield</span><span class="material-icons-round">account_balance</span><span class="material-icons-round">trending_up</span><h2>نظام التميز</h2></div>
+    <nav class="sidebar-nav">
+      <a href="home.html" class="nav-btn-3d btn-blue"><span class="material-icons-round">home</span><span>الرئيسية</span></a>
+      <a href="settings.html" class="nav-btn-3d btn-amber active-link"><span class="material-icons-round">settings</span><span>الإعدادات</span></a>
+      <a href="support.html" class="nav-btn-3d btn-cyan"><span class="material-icons-round">support_agent</span><span>الدعم الفني</span></a>
+      <a href="#" onclick="handleLogout()" class="nav-btn-3d btn-red"><span class="material-icons-round">logout</span><span>تسجيل خروج</span></a>
+    </nav>
+  </aside>
 
-<!-- Header -->
-<header class="header">
-  <div class="header-right">
-    <button class="menu-btn" onclick="toggleSidebar()" aria-label="القائمة">☰</button>
-    <h1 class="header-title">الإعدادات</h1>
-  </div>
-  <div class="header-left">
-    <button class="header-btn" onclick="toggleTheme()" id="themeBtn" title="تبديل النمط">🌙</button>
-  </div>
-</header>
+  <!-- 📄 المحتوى الرئيسي -->
+  <main>
+    <div class="success-indicator" id="successIndicator"><span class="material-icons-round">check_circle</span><span id="successMsg">✅ تم الحفظ بنجاح</span></div>
 
-<!-- Sidebar Overlay -->
-<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
-
-<!-- Sidebar -->
-<aside class="sidebar" id="sidebar">
-  <div class="sidebar-header">
-    <div class="sidebar-brand">👁️ عيادة الأثير</div>
-    <button class="sidebar-close" onclick="toggleSidebar()" aria-label="إغلاق">✕</button>
-  </div>
-  <nav class="sidebar-nav">
-    <a href="home.html" class="sidebar-item"><span class="icon">🏠</span>الرئيسية</a>
-    <a href="add-patient.html" class="sidebar-item"><span class="icon">➕</span>إضافة مريض</a>
-    <a href="archive.html" class="sidebar-item"><span class="icon">📁</span>أرشيف المرضى</a>
-    <a href="expenses.html" class="sidebar-item"><span class="icon">💰</span>إضافة مصروف</a>
-    <a href="inventory.html" class="sidebar-item"><span class="icon">📦</span>الجرد والمواد</a>
-    <a href="add-material.html" class="sidebar-item"><span class="icon">📥</span>إضافة مواد</a>
-    <a href="reports.html" class="sidebar-item"><span class="icon">📊</span>التقارير</a>
-    <a href="support.html" class="sidebar-item"><span class="icon">❓</span>الدعم الفني</a>
-    <a href="export-excel.html" class="sidebar-item"><span class="icon">📤</span>تصدير Excel</a>
-    <div class="sidebar-divider"></div>
-    <a href="settings.html" class="sidebar-item active"><span class="icon">⚙️</span>الإعدادات</a>
-    <a href="logout.html" class="sidebar-item sidebar-logout"><span class="icon">🚪</span>تسجيل الخروج</a>
-  </nav>
-  <div class="sidebar-footer">
-    <a href="logout.html" class="sidebar-logout"><span class="icon">🚪</span>تسجيل الخروج</a>
-  </div>
-</aside>
-
-<!-- Main Content -->
-<main class="content">
-  
-  <!-- Welcome Section -->
-  <div style="margin-bottom:24px; text-align:center;">
-    <p style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:4px;">إدارة النظام</p>
-    <h2 style="font-size:1.8rem; font-weight:800; color:var(--text-primary);">الإعدادات</h2>
-  </div>
-
-  <!-- Clinic Info Card -->
-  <div class="settings-card clinic">
-    <h3>🏢 معلومات العيادة</h3>
-    <div class="form-grid">
-      <div class="form-group">
-        <label for="clinicName">اسم العيادة *</label>
-        <input type="text" id="clinicName" class="form-input" value="عيادة الأثير للبصريات">
-      </div>
-      <div class="form-group">
-        <label for="clinicAddress">العنوان</label>
-        <input type="text" id="clinicAddress" class="form-input" value="بغداد - المنصور - شارع 14 رمضان">
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label for="clinicPhone">رقم الهاتف</label>
-          <input type="tel" id="clinicPhone" class="form-input" value="0770 123 4567">
+    <!-- 🏥 بيانات العيادة -->
+    <div class="form-card">
+      <h3><span class="material-icons-round" style="color:var(--accent-amber);">local_hospital</span> بيانات العيادة والمعلومات الأساسية</h3>
+      <div class="form-grid">
+        <div class="form-row">
+          <div class="form-group"><label for="clinicName">اسم العيادة *</label><input type="text" id="clinicName" class="form-input" placeholder="عيادة الأثير للبصريات"></div>
+          <div class="form-group"><label for="examinerName">اسم الفاحص / الطبيب *</label><input type="text" id="examinerName" class="form-input" placeholder="د. أحمد البصري"></div>
         </div>
-        <div class="form-group">
-          <label for="currency">العملة</label>
-          <select id="currency" class="form-select" disabled>
-            <option value="IQD">الدينار العراقي (IQD)</option>
-          </select>
+        <div class="form-row">
+          <div class="form-group"><label for="clinicAddr">العنوان</label><input type="text" id="clinicAddr" class="form-input" placeholder="بغداد - المنصور"></div>
+          <div class="form-group"><label for="clinicPhone">رقم الهاتف</label><input type="text" id="clinicPhone" class="form-input" placeholder="0770 123 4567"></div>
         </div>
+        <div class="form-row">
+          <div class="form-group"><label for="clinicSocial1">واتساب / فيسبوك</label><input type="text" id="clinicSocial1" class="form-input" placeholder="@ethereal_optics"></div>
+          <div class="form-group"><label for="clinicSocial2">إنستغرام / تيك توك</label><input type="text" id="clinicSocial2" class="form-input" placeholder="instagram.com/ethereal"></div>
+        </div>
+        <button class="action-btn" onclick="saveClinicInfo()"><span class="material-icons-round">save</span> حفظ معلومات العيادة</button>
       </div>
     </div>
-  </div>
 
-  <!-- Social Media Card -->
-  <div class="settings-card social">
-    <h3>📱 مواقع التواصل الاجتماعي</h3>
-    <div class="form-grid">
-      <div class="form-group">
-        <label>إنستغرام</label>
-        <div class="social-input">
-          <div class="social-icon instagram">📷</div>
-          <input type="text" id="instagram" placeholder="@username" value="@ethereal_optics">
-        </div>
-      </div>
-      <div class="form-group">
-        <label>فيسبوك</label>
-        <div class="social-input">
-          <div class="social-icon facebook">📘</div>
-          <input type="text" id="facebook" placeholder="صفحة الفيسبوك">
-        </div>
-      </div>
-      <div class="form-group">
-        <label>تيك توك</label>
-        <div class="social-input">
-          <div class="social-icon tiktok">🎵</div>
-          <input type="text" id="tiktok" placeholder="@username">
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Follow-up Interval Card -->
-  <div class="settings-card interval">
-    <h3>📅 موعد الفحص القادم</h3>
-    <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:16px;">حدد الفترة الافتراضية بين الفحوصات للمرضى:</p>
-    <div class="interval-grid">
-      <div class="interval-option cyan active" id="interval-3" onclick="selectInterval('3')">
-        <div class="value">3</div>
-        <div class="label">أشهر</div>
-      </div>
-      <div class="interval-option purple" id="interval-6" onclick="selectInterval('6')">
-        <div class="value">6</div>
-        <div class="label">أشهر</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Invoice Templates Card -->
-  <div class="settings-card templates">
-    <h3>🎨 تصاميم كارت المريض (A5)</h3>
-    <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:12px;">اختر التصميم وسيتم استخدامه عند الطباعة:</p>
-    
-    <div class="template-grid">
-      <div class="template-option active" id="template-1" onclick="selectTemplate('1')">
-        <div class="template-preview cyan"></div>
-        <div class="label">عصري</div>
-      </div>
-      <div class="template-option" id="template-2" onclick="selectTemplate('2')">
-        <div class="template-preview classic"></div>
-        <div class="label">كلاسيكي</div>
-      </div>
-      <div class="template-option" id="template-3" onclick="selectTemplate('3')">
-        <div class="template-preview minimal"></div>
-        <div class="label">مينيمال</div>
-      </div>
-      <div class="template-option" id="template-4" onclick="selectTemplate('4')">
-        <div class="template-preview medical"></div>
-        <div class="label">طبي</div>
-      </div>
-    </div>
-    
-    <!-- A5 Preview (Clickable for full preview) -->
-    <div style="margin-top:20px; text-align:center;">
-      <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:12px;">🔍 اضغط للمعاينة الكاملة</p>
-      <div class="a5-preview-container template-1" id="a5PreviewContainer" onclick="openFullPreview()">
-        <div class="a5-card-preview template-1" id="a5Preview">
-          <div class="header">
-            <div class="optics-icon">👁️</div>
-            <div class="clinic-name" id="previewClinicName">عيادة الأثير للبصريات</div>
-            <div class="clinic-info" id="previewClinicInfo">
-              <div>📍 بغداد - المنصور - شارع 14 رمضان</div>
-              <div>📞 0770 123 4567</div>
-              <div>📱 @ethereal_optics</div>
-            </div>
+    <!-- 🖨️ اختيار قالب الطباعة -->
+    <div class="form-card">
+      <h3><span class="material-icons-round" style="color:var(--accent-blue);">print</span> اختيار نموذج طباعة الفحص (A5)</h3>
+      <p style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:12px;">اختر النموذج الذي تفضله. سيتم تطبيقه تلقائياً عند طباعة أي وصفة من النظام.</p>
+      
+      <div class="templates-grid">
+        <label class="template-option">
+          <input type="radio" name="printTemplate" value="1" checked>
+          <div class="template-preview">
+            <span class="material-icons-round">receipt_long</span>
+            <span>1. كلاسيكي احترافي</span>
           </div>
-          <div class="patient-section">
-            <div class="patient-title">👤 معلومات المريض</div>
-            <div class="patient-row"><span>الاسم:</span><span>محمد أحمد</span></div>
-            <div class="patient-row"><span>العمر:</span><span>28 سنة</span></div>
-            <div class="patient-row"><span>التاريخ:</span><span>2024/04/11</span></div>
-            <div class="patient-row"><span>الفحص القادم:</span><span>2024/07/11</span></div>
+        </label>
+        <label class="template-option">
+          <input type="radio" name="printTemplate" value="2">
+          <div class="template-preview">
+            <span class="material-icons-round">blur_circular</span>
+            <span>2. عصري بصري</span>
           </div>
-          <table class="prescription-table">
-            <thead><tr><th>العين</th><th>SPH</th><th>CYL</th><th>AXIS</th><th>ADD</th><th>VA</th></tr></thead>
+        </label>
+        <label class="template-option">
+          <input type="radio" name="printTemplate" value="3">
+          <div class="template-preview">
+            <span class="material-icons-round">table_chart</span>
+            <span>3. طبي تفصيلي</span>
+          </div>
+        </label>
+        <label class="template-option">
+          <input type="radio" name="printTemplate" value="4">
+          <div class="template-preview">
+            <span class="material-icons-round">waves</span>
+            <span>4. أنيق انكساري</span>
+          </div>
+        </label>
+      </div>
+      <button class="action-btn" style="background:var(--accent-blue)" onclick="previewTemplate()"><span class="material-icons-round">visibility</span> معاينة النموذج المختار</button>
+    </div>
+
+    <!-- 📜 سياسة الخصوصية والشروط -->
+    <div class="form-card">
+      <h3><span class="material-icons-round" style="color:var(--accent-green);">policy</span> سياسة الخصوصية والشروط والأحكام</h3>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="privacyPolicy">نص سياسة الخصوصية</label>
+          <textarea id="privacyPolicy" class="form-input form-textarea" placeholder="اكتب سياسة الخصوصية هنا..."></textarea>
+        </div>
+        <div class="form-group">
+          <label for="termsConditions">الشروط والأحكام</label>
+          <textarea id="termsConditions" class="form-input form-textarea" placeholder="اكتب الشروط والأحكام هنا..."></textarea>
+        </div>
+        <button class="action-btn" style="background:var(--accent-green)" onclick="saveLegalDocs()"><span class="material-icons-round">description</span> حفظ المستندات القانونية</button>
+      </div>
+    </div>
+
+    <!-- 🗄️ إدارة البيانات -->
+    <div class="form-card">
+      <h3><span class="material-icons-round" style="color:var(--accent-red);">backup</span> إدارة البيانات والنسخ الاحتياطي</h3>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <button class="btn-tool" style="background:rgba(34,197,94,0.15); color:var(--accent-green); border:1px solid rgba(34,197,94,0.4)" onclick="exportBackup()">📥 تصدير جميع البيانات</button>
+        <label class="btn-tool" style="background:rgba(59,130,246,0.15); color:var(--accent-blue); border:1px solid rgba(59,130,246,0.4); cursor:pointer;">📤 استيراد بيانات <input type="file" id="importFile" accept=".json" onchange="importBackup(this)" style="display:none"></label>
+        <button class="btn-tool" style="background:rgba(239,68,68,0.15); color:var(--accent-red); border:1px solid rgba(239,68,68,0.4)" onclick="clearAllData()">🗑️ مسح جميع البيانات</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- 🖨️ نافذة المعاينة والطباعة -->
+  <div id="print-preview-area">
+    <div class="preview-controls no-print">
+      <button class="prev-btn close" onclick="closePreview()"><span class="material-icons-round">close</span> إغلاق</button>
+      <button class="prev-btn print" onclick="window.print()"><span class="material-icons-round">print</span> طباعة الآن</button>
+    </div>
+    <div class="preview-container" id="preview-content">
+      <!-- سيتم حقن محتوى القالب هنا -->
+    </div>
+  </div>
+
+  <!-- 📱 الفوتر -->
+  <footer class="mobile-footer">
+    <a href="home.html" class="footer-btn"><span class="material-icons-round">home</span><span>الرئيسية</span></a>
+    <a href="add-patient.html" class="footer-btn"><span class="material-icons-round">person_add</span><span>إضافة مريض</span></a>
+    <a href="add_sales_invoice.html" class="footer-btn"><span class="material-icons-round">shopping_cart</span><span>فاتورة بيع</span></a>
+    <a href="archive.html" class="footer-btn"><span class="material-icons-round">archive</span><span>الأرشيف</span></a>
+    <a href="settings.html" class="footer-btn active"><span class="material-icons-round">settings</span><span>الإعدادات</span></a>
+  </footer>
+
+  <script>
+    // 🔄 تهيئة الصفحة
+    document.addEventListener('DOMContentLoaded', () => {
+      if(localStorage.getItem('darkMode')==='false') document.documentElement.classList.add('light-mode');
+      updateDarkModeIcon(); loadSettings();
+    });
+
+    // 🧭 دوال التنقل والوضع الليلي
+    function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); document.getElementById('sidebar-overlay').classList.toggle('active'); }
+    function toggleDarkMode() { const h=document.documentElement; h.classList.toggle('light-mode'); localStorage.setItem('darkMode', h.classList.contains('light-mode')?'false':'true'); updateDarkModeIcon(); }
+    function updateDarkModeIcon() { const d=document.querySelector('.dark-mode-icon'), l=document.querySelector('.light-mode-icon'); if(document.documentElement.classList.contains('light-mode')){ if(d)d.classList.add('hidden'); if(l)l.classList.remove('hidden'); } else { if(d)d.classList.remove('hidden'); if(l)l.classList.add('hidden'); } }
+    function handleLogout() { if(confirm('هل أنت متأكد من تسجيل الخروج؟')){ localStorage.clear(); window.location.href='login.html'; } }
+    function showSuccess(msg) { const el=document.getElementById('successIndicator'); el.querySelector('span:last-child').textContent=msg; el.classList.add('show'); setTimeout(()=>el.classList.remove('show'), 2500); }
+
+    // 💾 حفظ وتحميل الإعدادات
+    function loadSettings() {
+      const s = JSON.parse(localStorage.getItem('clinicSettings') || '{}');
+      document.getElementById('clinicName').value = s.name || 'عيادة الأثير للبصريات';
+      document.getElementById('examinerName').value = s.examiner || '';
+      document.getElementById('clinicAddr').value = s.address || '';
+      document.getElementById('clinicPhone').value = s.phone || '';
+      document.getElementById('clinicSocial1').value = s.social1 || '';
+      document.getElementById('clinicSocial2').value = s.social2 || '';
+      document.getElementById('privacyPolicy').value = s.privacy || '';
+      document.getElementById('termsConditions').value = s.terms || '';
+      if(s.template) document.querySelector(`input[name="printTemplate"][value="${s.template}"]`).checked = true;
+    }
+
+    function saveClinicInfo() {
+      const settings = JSON.parse(localStorage.getItem('clinicSettings') || '{}');
+      settings.name = document.getElementById('clinicName').value;
+      settings.examiner = document.getElementById('examinerName').value;
+      settings.address = document.getElementById('clinicAddr').value;
+      settings.phone = document.getElementById('clinicPhone').value;
+      settings.social1 = document.getElementById('clinicSocial1').value;
+      settings.social2 = document.getElementById('clinicSocial2').value;
+      localStorage.setItem('clinicSettings', JSON.stringify(settings));
+      showSuccess('✅ تم حفظ معلومات العيادة');
+    }
+
+    function saveLegalDocs() {
+      const settings = JSON.parse(localStorage.getItem('clinicSettings') || '{}');
+      settings.privacy = document.getElementById('privacyPolicy').value;
+      settings.terms = document.getElementById('termsConditions').value;
+      localStorage.setItem('clinicSettings', JSON.stringify(settings));
+      showSuccess('✅ تم حفظ المستندات القانونية');
+    }
+
+    // 🖨️ محرك القوالب (4 نماذج)
+    function previewTemplate() {
+      const settings = JSON.parse(localStorage.getItem('clinicSettings') || '{}');
+      const id = document.querySelector('input[name="printTemplate"]:checked').value;
+      settings.template = id;
+      localStorage.setItem('clinicSettings', JSON.stringify(settings));
+
+      // بيانات تجريبية للمعاينة
+      const patient = {
+        name: 'أحمد محمد علي', age: '34 سنة', date: new Date().toLocaleDateString('ar-IQ'),
+        re: { sph: '+1.25', cyl: '-0.50', axis: '180', add: '+0.00', va: '6/6' },
+        le: { sph: '+1.00', cyl: '-0.75', axis: '90', add: '+0.00', va: '6/9' },
+        pd: '63', notes: 'يحتاج إلى نظارة للقراءة بشكل مستمر. مراجعة بعد 6 أشهر.'
+      };
+
+      let html = '';
+      const clinicName = settings.name || 'عيادة الأثير للبصريات';
+      const clinicInfo = [settings.address, settings.phone, settings.social1].filter(Boolean).join(' | ');
+      const docName = settings.examiner || 'طبيب العيادة';
+
+      // --- نموذج 1: كلاسيكي ---
+      if (id === '1') {
+        html = `
+          <div style="text-align:center; border-bottom:3px double #333; padding-bottom:10px; margin-bottom:15px;">
+            <h1 style="font-size:24px; margin:0; font-family:'Cairo'">${clinicName}</h1>
+            <div style="font-size:12px; color:#555; margin-top:4px">${clinicInfo}</div>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-bottom:12px; font-size:14px;">
+            <span><strong>اسم المريض:</strong> ${patient.name}</span>
+            <span><strong>العمر:</strong> ${patient.age}</span>
+            <span><strong>التاريخ:</strong> ${patient.date}</span>
+          </div>
+          <table style="width:100%; border-collapse:collapse; margin-bottom:15px;">
+            <thead style="background:#f0f0f0;"><tr><th style="border:1px solid #333; padding:8px;">العين</th><th style="border:1px solid #333; padding:8px;">SPH</th><th style="border:1px solid #333; padding:8px;">CYL</th><th style="border:1px solid #333; padding:8px;">AXIS</th><th style="border:1px solid #333; padding:8px;">ADD</th><th style="border:1px solid #333; padding:8px;">VA</th></tr></thead>
             <tbody>
-              <tr><td>👁️ يمنى</td><td>+1.25</td><td>-0.50</td><td>90°</td><td>+1.50</td><td>6/6</td></tr>
-              <tr><td>👁️ يسرى</td><td>+1.00</td><td>-0.75</td><td>85°</td><td>+1.50</td><td>6/6</td></tr>
+              <tr><td style="border:1px solid #333; padding:8px; text-align:center;">👁️ يمنى (OD)</td><td style="border:1px solid #333; padding:8px; text-align:center;">${patient.re.sph}</td><td style="border:1px solid #333; padding:8px; text-align:center;">${patient.re.cyl}</td><td style="border:1px solid #333; padding:8px; text-align:center;">${patient.re.axis}</td><td style="border:1px solid #333; padding:8px; text-align:center;">${patient.re.add}</td><td style="border:1px solid #333; padding:8px; text-align:center;">${patient.re.va}</td></tr>
+              <tr><td style="border:1px solid #333; padding:8px; text-align:center;">👁️ يسرى (OS)</td><td style="border:1px solid #333; padding:8px; text-align:center;">${patient.le.sph}</td><td style="border:1px solid #333; padding:8px; text-align:center;">${patient.le.cyl}</td><td style="border:1px solid #333; padding:8px; text-align:center;">${patient.le.axis}</td><td style="border:1px solid #333; padding:8px; text-align:center;">${patient.le.add}</td><td style="border:1px solid #333; padding:8px; text-align:center;">${patient.le.va}</td></tr>
             </tbody>
           </table>
-          <div class="pd-section"><strong>📏 PD:</strong> 63 mm</div>
-          <div class="notes-section">
-            <div class="notes-title">📝 ملاحظات</div>
-            <div class="notes-content">عدسات مضادة للانعكاس - مراجعة سنوية</div>
+          <div style="font-size:14px; margin-bottom:15px;"><strong>📏 PD:</strong> ${patient.pd} mm</div>
+          <div style="border:1px dashed #999; padding:10px; margin-bottom:30px; min-height:40px;">
+            <strong>📝 ملاحظات:</strong><br>${patient.notes}
           </div>
-          <div class="signature">
-            <div class="signature-line">توقيع فاحص البصر</div>
-            <div class="signature-text">د. سارة البصري - أخصائية بصريات</div>
+          <div style="margin-top:40px; text-align:left;">
+            <strong>توقيع الطبيب:</strong><br><br>______________________<br>${docName}
           </div>
-          <div class="footer">
-            <div id="previewFooter">✨ عيادة الأثير للبصريات - جميع الحقوق محفوظة ✨</div>
-            <div style="margin-top:4px;" id="previewSocial">🌐 instagram.com/ethereal_optics</div>
+          <div style="text-align:center; font-size:10px; color:#777; margin-top:20px; border-top:1px solid #ddd; padding-top:5px;">${clinicName} - جميع الحقوق محفوظة</div>
+        `;
+      }
+      // --- نموذج 2: عصري بصري ---
+      else if (id === '2') {
+        html = `
+          <div style="background:#222; color:#fff; padding:15px; border-radius:10px; margin-bottom:15px; text-align:center;">
+            <h2 style="margin:0; font-size:20px;">👁️ ${clinicName}</h2>
+            <div style="font-size:10px; color:#ccc; margin-top:5px;">${clinicInfo}</div>
           </div>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Test Print Button -->
-    <button class="btn-test-print" style="margin-top:16px;" onclick="testPrint()">
-      <span>🖨️</span>
-      <span>اختبار طباعة النموذج الحالي</span>
-    </button>
-  </div>
-
-  <!-- Data Management Card -->
-  <div class="settings-card data">
-    <h3>💾 إدارة البيانات</h3>
-    <div style="display:flex; flex-direction:column; gap:10px;">
-      <div class="data-btn export" onclick="exportData()">
-        <div class="info">
-          <div class="icon">📤</div>
-          <div class="text">
-            <div class="title">تصدير إلى JSON</div>
-            <div class="desc">حفظ جميع البيانات</div>
+          <div style="display:flex; gap:10px; margin-bottom:15px;">
+            <div style="flex:1; background:#f9f9f9; padding:8px; border-radius:8px; border:1px solid #ddd; text-align:center;">
+              <div style="color:#888; font-size:10px;">المريض</div>
+              <div style="font-weight:bold;">${patient.name}</div>
+            </div>
+            <div style="flex:1; background:#f9f9f9; padding:8px; border-radius:8px; border:1px solid #ddd; text-align:center;">
+              <div style="color:#888; font-size:10px;">التاريخ</div>
+              <div style="font-weight:bold;">${patient.date}</div>
+            </div>
           </div>
-        </div>
-        <span style="color:var(--text-muted)">←</span>
-      </div>
-      <div class="data-btn import" onclick="document.getElementById('import-file').click()">
-        <div class="info">
-          <div class="icon">📥</div>
-          <div class="text">
-            <div class="title">استيراد من JSON</div>
-            <div class="desc">استعادة البيانات</div>
+          
+          <div style="display:flex; gap:10px; margin-bottom:15px;">
+            <!-- عين يمنى -->
+            <div style="flex:1; border:2px solid #06b6d4; border-radius:12px; padding:10px; position:relative;">
+              <div style="position:absolute; top:-10px; right:10px; background:#fff; padding:0 5px; color:#06b6d4; font-weight:bold;">👁️ OD</div>
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:5px; text-align:center; font-size:12px;">
+                <div><strong>SPH</strong><br>${patient.re.sph}</div>
+                <div><strong>CYL</strong><br>${patient.re.cyl}</div>
+                <div><strong>AXIS</strong><br>${patient.re.axis}</div>
+                <div><strong>VA</strong><br>${patient.re.va}</div>
+              </div>
+            </div>
+            <!-- عين يسرى -->
+            <div style="flex:1; border:2px solid #a855f7; border-radius:12px; padding:10px; position:relative;">
+              <div style="position:absolute; top:-10px; right:10px; background:#fff; padding:0 5px; color:#a855f7; font-weight:bold;">👁️ OS</div>
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:5px; text-align:center; font-size:12px;">
+                <div><strong>SPH</strong><br>${patient.le.sph}</div>
+                <div><strong>CYL</strong><br>${patient.le.cyl}</div>
+                <div><strong>AXIS</strong><br>${patient.le.axis}</div>
+                <div><strong>VA</strong><br>${patient.le.va}</div>
+              </div>
+            </div>
           </div>
-        </div>
-        <span style="color:var(--text-muted)">←</span>
-      </div>
-      <input type="file" id="import-file" class="hidden" accept=".json" onchange="importData(event)">
-      <div class="data-btn delete" onclick="clearAllData()">
-        <div class="info">
-          <div class="icon">🗑️</div>
-          <div class="text">
-            <div class="title">مسح جميع البيانات</div>
-            <div class="desc">حذف الأرشيف والإعدادات</div>
+
+          <div style="display:flex; justify-content:space-between; background:#eee; padding:8px; border-radius:6px; margin-bottom:15px; font-size:12px;">
+            <span><strong>ADD:</strong> ${patient.re.add}</span>
+            <span><strong>PD:</strong> ${patient.pd} mm</span>
           </div>
-        </div>
-        <span style="color:var(--text-muted)">←</span>
-      </div>
-    </div>
-  </div>
 
-  <!-- Support & Legal Card -->
-  <div class="settings-card support">
-    <h3>🛡️ الدعم والقوانين</h3>
-    <div style="display:flex; flex-direction:column; gap:4px;">
-      <a href="support.html" class="support-link cyan">
-        <div class="info">
-          <span class="icon">❓</span>
-          <span class="label">الدعم الفني والمساعدة</span>
-        </div>
-        <span style="color:var(--text-muted)">←</span>
-      </a>
-      <div class="support-link purple" onclick="showLegalModal('privacy')">
-        <div class="info">
-          <span class="icon">🔒</span>
-          <span class="label">سياسة الخصوصية</span>
-        </div>
-        <span style="color:var(--text-muted)">←</span>
-      </div>
-      <div class="support-link amber" onclick="showLegalModal('terms')">
-        <div class="info">
-          <span class="icon">⚖️</span>
-          <span class="label">الشروط والأحكام</span>
-        </div>
-        <span style="color:var(--text-muted)">←</span>
-      </div>
-    </div>
-  </div>
+          <div style="margin-top:auto; text-align:center; color:#555; border-top:1px solid #ddd; padding-top:10px; font-size:11px;">
+            ${clinicName}<br>${docName}
+          </div>
+        `;
+      }
+      // --- نموذج 3: طبي تفصيلي ---
+      else if (id === '3') {
+        html = `
+          <div style="border-bottom:2px solid #000; padding-bottom:8px; margin-bottom:15px; display:flex; justify-content:space-between; align-items:center;">
+            <div><h2 style="margin:0; font-size:20px;">${clinicName}</h2><small style="color:#555;">${clinicInfo}</small></div>
+            <div style="text-align:left; font-size:12px;"><strong>رقم الملف:</strong> #${Math.floor(Math.random()*1000)}</div>
+          </div>
+          <table style="width:100%; margin-bottom:15px; font-size:13px; border-collapse:collapse;">
+            <tr><td style="padding:4px; border-bottom:1px solid #ddd;"><strong>الاسم:</strong> ${patient.name}</td><td style="padding:4px; border-bottom:1px solid #ddd;"><strong>العمر:</strong> ${patient.age}</td></tr>
+            <tr><td style="padding:4px; border-bottom:1px solid #ddd;"><strong>التاريخ:</strong> ${patient.date}</td><td style="padding:4px; border-bottom:1px solid #ddd;"><strong>الطبيب:</strong> ${docName}</td></tr>
+          </table>
+          <div style="border:1px solid #000; padding:5px; margin-bottom:15px;">
+            <table style="width:100%; border-collapse:collapse; text-align:center; font-size:11px;">
+              <tr style="background:#eee;"><th>Eye</th><th>SPH</th><th>CYL</th><th>AXIS</th><th>ADD</th><th>VA</th></tr>
+              <tr><td style="border:1px solid #000; padding:4px;">OD</td><td style="border:1px solid #000; padding:4px;">${patient.re.sph}</td><td style="border:1px solid #000; padding:4px;">${patient.re.cyl}</td><td style="border:1px solid #000; padding:4px;">${patient.re.axis}</td><td style="border:1px solid #000; padding:4px;">${patient.re.add}</td><td style="border:1px solid #000; padding:4px;">${patient.re.va}</td></tr>
+              <tr><td style="border:1px solid #000; padding:4px;">OS</td><td style="border:1px solid #000; padding:4px;">${patient.le.sph}</td><td style="border:1px solid #000; padding:4px;">${patient.le.cyl}</td><td style="border:1px solid #000; padding:4px;">${patient.le.axis}</td><td style="border:1px solid #000; padding:4px;">${patient.le.add}</td><td style="border:1px solid #000; padding:4px;">${patient.le.va}</td></tr>
+            </table>
+          </div>
+          <div style="display:flex; gap:15px; margin-bottom:15px; font-size:13px;">
+            <span><strong>PD:</strong> ${patient.pd} mm</span>
+            <span><strong>ADD:</strong> ${patient.re.add}</span>
+          </div>
+          <div style="border:1px solid #000; padding:8px; min-height:60px; margin-bottom:30px; font-size:12px;">
+            <strong>التشخيص / ملاحظات:</strong><br>${patient.notes}
+          </div>
+          <div style="text-align:left; font-size:14px; margin-top:20px;">
+            <strong>التوقيع:</strong> ____________________
+          </div>
+        `;
+      }
+      // --- نموذج 4: أنيق انكساري ---
+      else {
+        html = `
+          <div style="text-align:center; margin-bottom:20px; position:relative;">
+            <div style="width:50px; height:2px; background:#333; margin:0 auto 10px;"></div>
+            <h1 style="margin:0; font-size:22px; font-weight:300; letter-spacing:1px;">${clinicName}</h1>
+            <div style="width:50px; height:2px; background:#333; margin:10px auto 0;"></div>
+            <div style="font-size:10px; margin-top:5px; color:#666;">${clinicInfo}</div>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-bottom:15px; border-bottom:1px solid #eee; padding-bottom:8px;">
+            <span>المريض: <strong>${patient.name}</strong></span>
+            <span>التاريخ: <strong>${patient.date}</strong></span>
+          </div>
+          <div style="margin-bottom:15px;">
+            <table style="width:100%; border-collapse:collapse;">
+              <thead style="border-bottom:2px solid #333;">
+                <tr>
+                  <th style="text-align:right; padding:5px;">العين</th>
+                  <th style="text-align:center; padding:5px;">SPH</th>
+                  <th style="text-align:center; padding:5px;">CYL</th>
+                  <th style="text-align:center; padding:5px;">AXIS</th>
+                  <th style="text-align:center; padding:5px;">ADD</th>
+                  <th style="text-align:center; padding:5px;">VA</th>
+                </tr>
+              </thead>
+              <tbody style="font-size:14px;">
+                <tr style="border-bottom:1px solid #eee;"><td style="padding:8px; font-weight:bold;">يمين</td><td style="text-align:center; padding:8px;">${patient.re.sph}</td><td style="text-align:center; padding:8px;">${patient.re.cyl}</td><td style="text-align:center; padding:8px;">${patient.re.axis}</td><td style="text-align:center; padding:8px;">${patient.re.add}</td><td style="text-align:center; padding:8px;">${patient.re.va}</td></tr>
+                <tr style="border-bottom:1px solid #eee;"><td style="padding:8px; font-weight:bold;">يسار</td><td style="text-align:center; padding:8px;">${patient.le.sph}</td><td style="text-align:center; padding:8px;">${patient.le.cyl}</td><td style="text-align:center; padding:8px;">${patient.le.axis}</td><td style="text-align:center; padding:8px;">${patient.le.add}</td><td style="text-align:center; padding:8px;">${patient.le.va}</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div style="background:#fafafa; padding:10px; border-radius:4px; margin-bottom:15px; font-size:12px;">
+            <strong>PD:</strong> ${patient.pd} mm | <strong>ADD:</strong> ${patient.re.add}
+          </div>
+          <div style="font-size:12px; margin-bottom:30px; color:#444;">
+            <em>${patient.notes}</em>
+          </div>
+          <div style="text-align:center; font-size:10px; color:#888;">
+            ${docName} - ${clinicName}
+          </div>
+        `;
+      }
 
-  <!-- Appearance Card -->
-  <div class="settings-card appearance">
-    <h3>🎨 المظهر</h3>
-    <div style="display:flex; align-items:center; justify-content:space-between;">
-      <div style="display:flex; align-items:center; gap:12px;">
-        <span style="font-size:1.2rem;">🌙</span>
-        <div>
-          <div style="font-size:0.95rem; font-weight:600; color:var(--text-primary);">الوضع الليلي</div>
-          <div style="font-size:0.8rem; color:var(--text-muted);">تفعيل المظهر الداكن</div>
-        </div>
-      </div>
-      <div class="toggle-switch active" id="darkModeToggle" onclick="toggleDarkMode()">
-        <div class="knob"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Save Button -->
-  <button class="btn-save" onclick="saveSettings()">
-    <span>💾</span>
-    <span>حفظ جميع الإعدادات</span>
-  </button>
-
-</main>
-
-<!-- Hidden Print Area - REAL A5 CARD FOR PRINTING -->
-<div id="print-area" style="display:none; position:fixed; left:-9999px; top:-9999px;">
-  <div class="a5-card-real" id="printCard">
-    <!-- Content will be populated by JavaScript -->
-  </div>
-</div>
-
-<!-- Full Preview Modal -->
-<div class="preview-modal" id="fullPreviewModal" onclick="closeFullPreview(event)">
-  <div class="a5-card-real" id="fullPreviewCard"></div>
-</div>
-
-<!-- Legal Modal -->
-<div class="legal-overlay" id="legalOverlay" onclick="closeLegalModal(event)">
-  <div class="legal-modal">
-    <button class="legal-close" onclick="closeLegalModal()">✕</button>
-    <h3 id="legalTitle">عنوان</h3>
-    <div class="content" id="legalContent"></div>
-  </div>
-</div>
-
-<!-- Bottom Navigation - نفس تنسيق الفوتر الأصلي -->
-<nav class="bottom-nav">
-  <a href="home.html" class="nav-item"><span class="nav-icon">🏠</span>الرئيسية</a>
-  <a href="add-patient.html" class="nav-item"><span class="nav-icon">➕</span>مريض</a>
-  <a href="archive.html" class="nav-item"><span class="nav-icon">📁</span>الأرشيف</a>
-  <a href="expenses.html" class="nav-item"><span class="nav-icon">💰</span>المصروفات</a>
-  <a href="settings.html" class="nav-item active" aria-current="page"><span class="nav-icon">⚙️</span>الإعدادات</a>
-</nav>
-
-<script>
-// ========== Theme Toggle ==========
-function toggleTheme() {
-  const html = document.documentElement;
-  const btn = document.getElementById('themeBtn');
-  const toggle = document.getElementById('darkModeToggle');
-  const current = html.getAttribute('data-theme');
-  const next = current === 'light' ? 'dark' : 'light';
-  
-  html.setAttribute('data-theme', next);
-  btn.textContent = next === 'light' ? '🌙' : '☀️';
-  toggle.classList.toggle('active', next === 'dark');
-  localStorage.setItem('theme', next);
-  // ✅ تم إزالة استدعاء نظام التنبيهات
-}
-
-function toggleDarkMode() {
-  toggleTheme();
-}
-
-// ========== Sidebar Toggle ==========
-function toggleSidebar() {
-  const sb = document.getElementById('sidebar');
-  const ov = document.getElementById('sidebarOverlay');
-  sb.classList.toggle('open');
-  ov.classList.toggle('show');
-  document.body.style.overflow = sb.classList.contains('open') ? 'hidden' : '';
-}
-
-// ✅ تم حذف نظام Toast بالكامل حسب الطلب
-// تم استبداله بمؤشر نجاح بسيط داخل الصفحة
-
-// ========== Show Success Indicator ==========
-function showSuccess(msg) {
-  const indicator = document.getElementById('successIndicator');
-  document.getElementById('successMsg').textContent = msg;
-  indicator.classList.add('show');
-  setTimeout(() => indicator.classList.remove('show'), 2500);
-}
-
-// ========== Interval Selection ==========
-function selectInterval(months) {
-  document.querySelectorAll('.interval-option').forEach(opt => opt.classList.remove('active'));
-  document.getElementById('interval-' + months).classList.add('active');
-  localStorage.setItem('followupInterval', months);
-  console.log(`⏰ تم تعيين الفترة إلى ${months} أشهر`);
-}
-
-// ========== Template Selection - REAL FUNCTIONALITY ==========
-function selectTemplate(num) {
-  // Update UI
-  document.querySelectorAll('.template-option').forEach(opt => opt.classList.remove('active'));
-  document.getElementById('template-' + num).classList.add('active');
-  
-  // Update preview container classes
-  const container = document.getElementById('a5PreviewContainer');
-  const preview = document.getElementById('a5Preview');
-  
-  // Remove all template classes
-  container.className = 'a5-preview-container';
-  preview.className = 'a5-card-preview';
-  
-  // Add selected template class
-  container.classList.add('template-' + num);
-  preview.classList.add('template-' + num);
-  
-  // Save to localStorage
-  localStorage.setItem('invoiceTemplate', num);
-  
-  // Update preview content with current settings
-  updatePreviewContent();
-  
-  console.log(`🎨 تم اختيار التصميم ${getTemplateName(num)} - سيتم استخدامه عند الطباعة`);
-}
-
-function getTemplateName(num) {
-  const names = { '1': 'العصري', '2': 'الكلاسيكي', '3': 'المينيمال', '4': 'الطبي' };
-  return names[num] || 'غير معروف';
-}
-
-// ========== Update Preview Content ==========
-function updatePreviewContent() {
-  const settings = JSON.parse(localStorage.getItem('clinicSettings') || '{}');
-  
-  // Update clinic info in preview
-  document.getElementById('previewClinicName').textContent = settings.clinicName || 'عيادة الأثير للبصريات';
-  document.getElementById('previewFooter').textContent = `✨ ${settings.clinicName || 'عيادة الأثير للبصريات'} - جميع الحقوق محفوظة ✨`;
-  
-  // Build social links
-  const social = [];
-  if (settings.instagram) social.push(`🌐 instagram.com/${settings.instagram.replace('@','')}`);
-  if (settings.facebook) social.push(`📘 fb.com/${settings.facebook}`);
-  document.getElementById('previewSocial').textContent = social.join(' | ') || '🌐 instagram.com/ethereal_optics';
-  
-  // Update clinic info block
-  document.getElementById('previewClinicInfo').innerHTML = `
-    <div>📍 ${settings.clinicAddress || 'عنوان العيادة'}</div>
-    <div>📞 ${settings.clinicPhone || 'رقم الهاتف'}</div>
-    <div>📱 ${settings.instagram || '@username'}</div>
-  `;
-}
-
-// ========== Full Preview Modal ==========
-function openFullPreview() {
-  const template = localStorage.getItem('invoiceTemplate') || '1';
-  const fullPreview = document.getElementById('fullPreviewCard');
-  
-  // Set template class
-  fullPreview.className = `a5-card-real template-${template}`;
-  
-  // Populate with current preview content
-  fullPreview.innerHTML = document.getElementById('a5Preview').innerHTML;
-  
-  // Show modal
-  document.getElementById('fullPreviewModal').classList.add('show');
-}
-
-function closeFullPreview(event) {
-  if (event.target.id === 'fullPreviewModal') {
-    document.getElementById('fullPreviewModal').classList.remove('show');
-  }
-}
-
-// ========== TEST PRINT - REAL PRINTING FUNCTIONALITY ==========
-function testPrint() {
-  const template = localStorage.getItem('invoiceTemplate') || '1';
-  const printCard = document.getElementById('printCard');
-  
-  // Set template class
-  printCard.className = `a5-card-real template-${template}`;
-  
-  // Populate with REAL sample data for testing
-  const settings = JSON.parse(localStorage.getItem('clinicSettings') || '{}');
-  
-  printCard.innerHTML = `
-    <div class="header">
-      <div class="optics-icon">👁️</div>
-      <div class="clinic-name">${settings.clinicName || 'عيادة الأثير للبصريات'}</div>
-      <div class="clinic-info">
-        <div>📍 ${settings.clinicAddress || 'عنوان العيادة'}</div>
-        <div>📞 ${settings.clinicPhone || 'رقم الهاتف'}</div>
-        <div>📱 ${settings.instagram || '@username'}</div>
-      </div>
-    </div>
-    <div class="patient-section">
-      <div class="patient-title">👤 معلومات المريض</div>
-      <div class="patient-row"><span>الاسم:</span><span>محمد أحمد</span></div>
-      <div class="patient-row"><span>العمر:</span><span>28 سنة</span></div>
-      <div class="patient-row"><span>التاريخ:</span><span>${new Date().toLocaleDateString('ar-IQ')}</span></div>
-      <div class="patient-row"><span>الفحص القادم:</span><span>${getNextVisitDate()}</span></div>
-    </div>
-    <table class="prescription-table">
-      <thead><tr><th>العين</th><th>SPH</th><th>CYL</th><th>AXIS</th><th>ADD</th><th>VA</th></tr></thead>
-      <tbody>
-        <tr><td>👁️ يمنى</td><td>+1.25</td><td>-0.50</td><td>90°</td><td>+1.50</td><td>6/6</td></tr>
-        <tr><td>👁️ يسرى</td><td>+1.00</td><td>-0.75</td><td>85°</td><td>+1.50</td><td>6/6</td></tr>
-      </tbody>
-    </table>
-    <div class="pd-section"><strong>📏 PD:</strong> 63 mm</div>
-    <div class="notes-section">
-      <div class="notes-title">📝 ملاحظات</div>
-      <div class="notes-content">عدسات مضادة للانعكاس - مراجعة سنوية</div>
-    </div>
-    <div class="signature">
-      <div class="signature-line">توقيع فاحص البصر</div>
-      <div class="signature-text">د. سارة البصري - أخصائية بصريات</div>
-    </div>
-    <div class="footer">
-      <div>✨ ${settings.clinicName || 'عيادة الأثير للبصريات'} - جميع الحقوق محفوظة ✨</div>
-      <div style="margin-top:4px;">${getSocialLinks()}</div>
-    </div>
-  `;
-  
-  // Trigger print
-  console.log('🖨️ جاري فتح نافذة الطباعة...');
-  setTimeout(() => {
-    window.print();
-  }, 500);
-}
-
-function getNextVisitDate() {
-  const months = parseInt(localStorage.getItem('followupInterval') || '3');
-  const date = new Date();
-  date.setMonth(date.getMonth() + months);
-  return date.toLocaleDateString('ar-IQ');
-}
-
-function getSocialLinks() {
-  const settings = JSON.parse(localStorage.getItem('clinicSettings') || '{}');
-  const social = [];
-  if (settings.instagram) social.push(`🌐 instagram.com/${settings.instagram.replace('@','')}`);
-  if (settings.facebook) social.push(`📘 fb.com/${settings.facebook}`);
-  return social.join(' | ') || '🌐 instagram.com/ethereal_optics';
-}
-
-// ========== REAL PRINT FUNCTION FOR OTHER PAGES ==========
-function printPatientCard(patientData) {
-  const template = localStorage.getItem('invoiceTemplate') || '1';
-  const settings = JSON.parse(localStorage.getItem('clinicSettings') || '{}');
-  const printCard = document.getElementById('printCard');
-  
-  // Set template class
-  printCard.className = `a5-card-real template-${template}`;
-  
-  // Populate with patient data
-  printCard.innerHTML = `
-    <div class="header">
-      <div class="optics-icon">👁️</div>
-      <div class="clinic-name">${settings.clinicName || 'عيادة الأثير للبصريات'}</div>
-      <div class="clinic-info">
-        <div>📍 ${settings.clinicAddress || 'عنوان العيادة'}</div>
-        <div>📞 ${settings.clinicPhone || 'رقم الهاتف'}</div>
-        <div>📱 ${settings.instagram || '@username'}</div>
-      </div>
-    </div>
-    <div class="patient-section">
-      <div class="patient-title">👤 معلومات المريض</div>
-      <div class="patient-row"><span>الاسم:</span><span>${patientData.fullName || '-'}</span></div>
-      <div class="patient-row"><span>العمر:</span><span>${patientData.age || '-'}</span></div>
-      <div class="patient-row"><span>التاريخ:</span><span>${new Date().toLocaleDateString('ar-IQ')}</span></div>
-      <div class="patient-row"><span>الفحص القادم:</span><span>${getNextVisitDate()}</span></div>
-    </div>
-    <table class="prescription-table">
-      <thead><tr><th>العين</th><th>SPH</th><th>CYL</th><th>AXIS</th><th>ADD</th><th>VA</th></tr></thead>
-      <tbody>
-        <tr>
-          <td>👁️ يمنى</td>
-          <td>${patientData.rightEye?.sph || '0.00'}</td>
-          <td>${patientData.rightEye?.cyl || '0.00'}</td>
-          <td>${patientData.rightEye?.axis || '0'}°</td>
-          <td>${patientData.rightEye?.add || '+0.00'}</td>
-          <td>${patientData.rightEye?.va || '-'}</td>
-        </tr>
-        <tr>
-          <td>👁️ يسرى</td>
-          <td>${patientData.leftEye?.sph || '0.00'}</td>
-          <td>${patientData.leftEye?.cyl || '0.00'}</td>
-          <td>${patientData.leftEye?.axis || '0'}°</td>
-          <td>${patientData.leftEye?.add || '+0.00'}</td>
-          <td>${patientData.leftEye?.va || '-'}</td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="pd-section"><strong>📏 PD:</strong> ${patientData.pd || '0'} mm</div>
-    ${patientData.notes ? `
-    <div class="notes-section">
-      <div class="notes-title">📝 ملاحظات</div>
-      <div class="notes-content">${patientData.notes}</div>
-    </div>` : ''}
-    <div class="signature">
-      <div class="signature-line">توقيع فاحص البصر</div>
-      <div class="signature-text">د. سارة البصري - أخصائية بصريات</div>
-    </div>
-    <div class="footer">
-      <div>✨ ${settings.clinicName || 'عيادة الأثير للبصريات'} - جميع الحقوق محفوظة ✨</div>
-      <div style="margin-top:4px;">${getSocialLinks()}</div>
-    </div>
-  `;
-  
-  // Trigger print
-  setTimeout(() => {
-    window.print();
-  }, 100);
-}
-
-// ========== Legal Modal ==========
-function showLegalModal(type) {
-  const overlay = document.getElementById('legalOverlay');
-  const title = document.getElementById('legalTitle');
-  const content = document.getElementById('legalContent');
-  
-  if (type === 'privacy') {
-    title.textContent = 'سياسة الخصوصية';
-    content.innerHTML = `
-      <p>1. نجمع فقط البيانات الضرورية لتقديم الخدمة الطبية.</p>
-      <p>2. بيانات المرضى محمية ولا تُشارك مع أطراف ثالثة.</p>
-      <p>3. يتم تخزين البيانات محلياً على جهازك فقط.</p>
-      <p>4. لك الحق في طلب حذف بياناتك في أي وقت.</p>
-      <p>5. نستخدم بيانات التواصل فقط لإرسال تذكيرات المواعيد.</p>
-    `;
-  } else {
-    title.textContent = 'الشروط والأحكام';
-    content.innerHTML = `
-      <p>1. هذا النظام مخصص للاستخدام الطبي المهني فقط.</p>
-      <p>2. المسؤول عن دقة البيانات المدخلة هو المستخدم.</p>
-      <p>3. لا نتحمل مسؤولية الأخطاء الناتجة عن إدخال بيانات غير صحيحة.</p>
-      <p>4. يحظر استخدام النظام لأغراض غير طبية.</p>
-      <p>5. باستخدامك للنظام توافق على هذه الشروط.</p>
-    `;
-  }
-  
-  overlay.classList.add('show');
-}
-
-function closeLegalModal(event) {
-  if (!event || event.target.id === 'legalOverlay') {
-    document.getElementById('legalOverlay').classList.remove('show');
-  }
-}
-
-// ========== Save Settings ==========
-function saveSettings() {
-  const settings = {
-    clinicName: document.getElementById('clinicName').value.trim(),
-    clinicAddress: document.getElementById('clinicAddress').value.trim(),
-    clinicPhone: document.getElementById('clinicPhone').value.trim(),
-    currency: document.getElementById('currency').value,
-    instagram: document.getElementById('instagram').value.trim(),
-    facebook: document.getElementById('facebook').value.trim(),
-    tiktok: document.getElementById('tiktok').value.trim(),
-    invoiceTemplate: localStorage.getItem('invoiceTemplate') || '1',
-    followupInterval: localStorage.getItem('followupInterval') || '3',
-    savedAt: new Date().toISOString()
-  };
-  
-  if (!settings.clinicName) {
-    console.log('❌ يرجى إدخال اسم العيادة');
-    return;
-  }
-  
-  localStorage.setItem('clinicSettings', JSON.stringify(settings));
-  
-  // Update preview
-  updatePreviewContent();
-  
-  showSuccess('✅ تم حفظ الإعدادات بنجاح - التصميم المحدد: ' + getTemplateName(settings.invoiceTemplate));
-}
-
-// ========== Load Settings ==========
-function loadSettings() {
-  const settings = JSON.parse(localStorage.getItem('clinicSettings') || '{}');
-  
-  // Load form values
-  if (settings.clinicName) {
-    document.getElementById('clinicName').value = settings.clinicName;
-  }
-  if (settings.clinicAddress) document.getElementById('clinicAddress').value = settings.clinicAddress;
-  if (settings.clinicPhone) document.getElementById('clinicPhone').value = settings.clinicPhone;
-  if (settings.instagram) document.getElementById('instagram').value = settings.instagram;
-  if (settings.facebook) document.getElementById('facebook').value = settings.facebook;
-  if (settings.tiktok) document.getElementById('tiktok').value = settings.tiktok;
-  
-  // Load template
-  const template = settings.invoiceTemplate || localStorage.getItem('invoiceTemplate') || '1';
-  selectTemplate(template);
-  
-  // Load interval
-  const interval = settings.followupInterval || localStorage.getItem('followupInterval') || '3';
-  selectInterval(interval);
-  
-  // Update preview
-  updatePreviewContent();
-}
-
-// ========== Export/Import Data ==========
-function exportData() {
-  const data = {
-    clinicSettings: JSON.parse(localStorage.getItem('clinicSettings') || '{}'),
-    patients: JSON.parse(localStorage.getItem('patients') || '[]'),
-    expenses: JSON.parse(localStorage.getItem('expenses') || '[]'),
-    materials: JSON.parse(localStorage.getItem('materials') || '[]'),
-    exportedAt: new Date().toISOString()
-  };
-  
-  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = `clinic_backup_${new Date().toISOString().split('T')[0]}.json`;
-  link.click();
-  
-  showSuccess('📤 تم تصدير البيانات بنجاح');
-}
-
-function importData(event) {
-  const file = event.target.files[0];
-  if (!file) return;
-  
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    try {
-      const data = JSON.parse(e.target.result);
-      if (data.clinicSettings) localStorage.setItem('clinicSettings', JSON.stringify(data.clinicSettings));
-      if (data.patients) localStorage.setItem('patients', JSON.stringify(data.patients));
-      if (data.expenses) localStorage.setItem('expenses', JSON.stringify(data.expenses));
-      if (data.materials) localStorage.setItem('materials', JSON.stringify(data.materials));
-      
-      showSuccess('📥 تم استيراد البيانات بنجاح');
-      loadSettings();
-    } catch(err) {
-      console.log('❌ خطأ في الملف: ' + err.message);
+      document.getElementById('preview-content').innerHTML = html;
+      document.getElementById('print-preview-area').classList.add('active');
     }
-  };
-  reader.readAsText(file);
-  event.target.value = '';
-}
 
-function clearAllData() {
-  if (confirm('⚠️ هل أنت متأكد من حذف جميع البيانات؟ لا يمكن التراجع!')) {
-    localStorage.clear();
-    showSuccess('🗑️ تم مسح جميع البيانات');
-    setTimeout(() => location.reload(), 1500);
-  }
-}
-
-// ========== Initialize ==========
-(function init() {
-  // Load saved theme
-  const saved = localStorage.getItem('theme') || 'light';
-  document.documentElement.setAttribute('data-theme', saved);
-  document.getElementById('themeBtn').textContent = saved === 'light' ? '🌙' : '☀️';
-  document.getElementById('darkModeToggle').classList.toggle('active', saved === 'dark');
-  
-  // Load settings
-  loadSettings();
-  
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') {
-      closeFullPreview();
-      closeLegalModal();
-      if (document.getElementById('sidebar')?.classList.contains('open')) toggleSidebar();
+    function closePreview() {
+      document.getElementById('print-preview-area').classList.remove('active');
     }
-  });
-  
-  document.getElementById('legalOverlay')?.addEventListener('click', closeLegalModal);
-  document.getElementById('fullPreviewModal')?.addEventListener('click', closeFullPreview);
-  document.getElementById('sidebarOverlay')?.addEventListener('click', toggleSidebar);
-})();
-</script>
+
+    // 💾 إدارة البيانات
+    function exportBackup() {
+      const data = {
+        clinicSettings: JSON.parse(localStorage.getItem('clinicSettings') || '{}'),
+        patients: JSON.parse(localStorage.getItem('patients') || '[]'),
+        sales: JSON.parse(localStorage.getItem('sales_invoices') || '[]'),
+        purchases: JSON.parse(localStorage.getItem('purchase_invoices') || '[]'),
+        expenses: JSON.parse(localStorage.getItem('expenses') || '[]'),
+        materials: JSON.parse(localStorage.getItem('materials') || '[]')
+      };
+      const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `tamayuz_backup_${new Date().toISOString().split('T')[0]}.json`; a.click();
+    }
+    function importBackup(input) {
+      const f = input.files[0]; if(!f) return;
+      const r = new FileReader();
+      r.onload = e => {
+        try {
+          const d = JSON.parse(e.target.result);
+          Object.keys(d).forEach(k => localStorage.setItem(k, JSON.stringify(d[k])));
+          alert('✅ تم استيراد البيانات بنجاح');
+          loadSettings();
+        } catch(err) { alert('❌ الملف تالف'); }
+      };
+      r.readAsText(f);
+    }
+    function clearAllData() {
+      if(confirm('⚠️ هل أنت متأكد؟ سيتم حذف جميع البيانات!')) {
+        if(prompt('اكتب "حذف نهائي" للتأكيد:') === 'حذف نهائي') {
+          localStorage.clear();
+          location.reload();
+        }
+      }
+    }
+  </script>
 </body>
 </html>
